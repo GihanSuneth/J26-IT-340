@@ -264,10 +264,35 @@ F = {
 # FOLDER SPECS  path -> (purpose, what lives here, rules, copilot prompt)
 # --------------------------------------------------------------------------- #
 D = {}
+README_FOLDERS = {
+    ".",
+    ".github",
+    "config",
+    "docs",
+    "shared",
+    "backend",
+    "backend/gateway",
+    "backend/comp1_trigger_validation",
+    "backend/comp2_recognition_tracking",
+    "backend/comp3_reco_navigation",
+    "backend/comp4_pattern_billing",
+    "frontend",
+    "frontend/trolley-display",
+    "frontend/mobile-app",
+    "firmware",
+    "firmware/trolley_esp32",
+    "data",
+    "ml",
+    "simulations",
+    "evaluation",
+    "scripts",
+    "tests",
+}
 
 
 def d(path, purpose, contains, rules, prompt):
     D[path] = (purpose, contains, rules, prompt)
+
 
 
 d(".", "Project root: entry README, build/dev tooling, containers, git hygiene.",
@@ -778,7 +803,7 @@ def build_readme(folder):
 def folder_guide():
     rows = ["# Folder guide", "", "> Index of every responsibility folder. Each folder has a README with rules and a Copilot prompt.",
             "", "| Folder | Owner | Responsibility |", "|---|---|---|"]
-    for k in sorted(D):
+    for k in sorted(README_FOLDERS):
         rows.append(f"| `{k}` | {owner_of(k if k != '.' else 'README.md')} | {D[k][0]} |")
     return "\n".join(rows) + "\n"
 
@@ -795,11 +820,12 @@ def main():
         if dsc is None:
             continue
         write(p, make_file(p, dsc))
-    # folder READMEs
-    for k in D:
+    # folder READMEs (primary responsibility folders only)
+    for k in README_FOLDERS:
         write(("README.md" if k == "." else f"{k}/README.md"), build_readme(k))
     write("docs/FOLDER_GUIDE.md", folder_guide())
-    print(f"Done: {len(F)} files, {len(D)} folder READMEs, {len(LEAF_DIRS)} leaf dirs.")
+    print(f"Done: {len(F)} files, {len(README_FOLDERS)} folder READMEs, {len(LEAF_DIRS)} leaf dirs.")
+
 
 
 if __name__ == "__main__":
