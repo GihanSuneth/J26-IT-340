@@ -1,0 +1,2 @@
+# release-main.yml - On merge to main: tag the release, attach build artifacts, publish CHANGELOG entry.
+# Owner: develop (shared - all four members review)

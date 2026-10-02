@@ -1,0 +1,2 @@
+# docker-compose.yml - DEV stack: Postgres + gateway + comp1..comp4 services + trolley-display frontend.
+# Owner: develop (shared - all four members review)

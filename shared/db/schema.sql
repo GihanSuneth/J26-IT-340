@@ -1,0 +1,2 @@
+-- schema.sql - Authoritative relational schema (products, carts, cart_items, bills, history, sessions).
+-- Owner: develop (shared - all four members review)
