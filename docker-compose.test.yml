@@ -1,0 +1,2 @@
+# docker-compose.test.yml - TEST/UAT overrides: real service URLs, test database, hardware-attached flags.
+# Owner: develop (shared - all four members review)
