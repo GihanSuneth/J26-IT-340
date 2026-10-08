@@ -1,0 +1,2 @@
+# requirements.txt - Python dependencies for Component 4 (fastapi, sqlalchemy, psycopg, pandas, scikit-learn).
+# Owner: comp4

@@ -1,0 +1,23 @@
+# .gitignore - Files git must never track: secrets, datasets, model weights, caches.
+# Owner: develop (shared - all four members review)
+
+.env
+*.env
+!*.env.example
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+dist/
+.ipynb_checkpoints/
+data/raw/*
+!data/raw/README.md
+data/processed/*
+data/datasets/*/*
+!data/datasets/*/.gitkeep
+ml/models/*
+!ml/models/README.md
+*.pt
+*.onnx
+*.pkl
+.pio/

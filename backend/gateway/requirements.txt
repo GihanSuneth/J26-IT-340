@@ -1,0 +1,2 @@
+# requirements.txt - Python dependencies of the gateway (fastapi, uvicorn, pydantic, httpx).
+# Owner: develop (shared - all four members review)
