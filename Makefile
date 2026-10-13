@@ -5,9 +5,9 @@
 setup:
 	bash scripts/bootstrap.sh
 lint:
-	ruff check backend shared tests
+	ruff check backend component3/backend shared tests
 test:
-	pytest backend tests/contract
+	pytest backend component3/backend tests/contract
 up:
 	docker compose up --build
 down:

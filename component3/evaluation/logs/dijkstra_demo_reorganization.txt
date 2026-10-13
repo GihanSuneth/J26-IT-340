@@ -1,0 +1,27 @@
+Component 3 Dijkstra Routing Demonstration
+==========================================
+Executed: 2026-10-13T23:50:18+05:30
+Python: 3.14.0
+Command: python3 -B -m component3.backend.comp3_reco_navigation.navigation.dijkstra_demo --output component3/evaluation/logs/dijkstra_demo_reorganization.txt
+Graph: /Users/arun/Documents/Research Project/R1/J26-IT-340/component3/data/store_map/store_graph.json
+
+[Entrance to Checkout]
+Start: ENT — Entrance
+Destination: CHK — Checkout
+Node sequence: ENT -> B4 -> B5 -> CHK
+Total walking distance: 8.69 m
+Route summary: Entrance -> Meat south access -> Frozen south access -> Checkout
+
+[Entrance to Produce]
+Start: ENT — Entrance
+Destination: B1 — Produce south access
+Node sequence: ENT -> B4 -> B3 -> B2 -> B1
+Total walking distance: 13.80 m
+Route summary: Entrance -> Meat south access -> Dairy south access -> Bakery south access -> Produce south access
+
+[Entrance to Frozen]
+Start: ENT — Entrance
+Destination: B5 — Frozen south access
+Node sequence: ENT -> B4 -> B5
+Total walking distance: 6.60 m
+Route summary: Entrance -> Meat south access -> Frozen south access

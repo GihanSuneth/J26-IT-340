@@ -1,0 +1,35 @@
+Component 3 Dijkstra Test Execution
+===================================
+Executed: 2026-10-13T23:14:48+0530
+Python: 3.14.0
+Command: python3 -B -m unittest -v backend.comp3_reco_navigation.tests.test_dijkstra
+Framework: Python standard-library unittest
+Environment note: pytest was unavailable (`No module named pytest`); no dependency was installed.
+
+[PASS] test_between_aisle_checkpoints
+[PASS] test_disconnected_graph
+[PASS] test_entrance_to_aisle_checkpoint
+[PASS] test_entrance_to_checkout
+[PASS] test_equal_cost_paths_use_lexical_tie_break
+[PASS] test_every_route_step_is_an_edge
+[PASS] test_graph_is_not_mutated
+[PASS] test_invalid_destination_node
+[PASS] test_invalid_start_node
+[PASS] test_repeatability
+[PASS] test_start_equals_destination
+[PASS] test_weighted_distance_not_hop_count
+[PASS] test_actual_graph_counts_and_undirected_edges
+[PASS] test_invalid_edge_reference_is_rejected
+[PASS] test_non_positive_edge_is_rejected
+
+Tests executed: 15
+Passed: 15
+Failed: 0
+Errors: 0
+Runtime reported by unittest: 0.001s
+Overall result: PASS
+
+Verified prototype routes:
+- ENT -> B4 -> B5 -> CHK = 8.69 m
+- ENT -> B4 -> B3 -> B2 -> B1 = 13.80 m
+- B1 -> B2 -> B3 -> B4 -> B5 = 14.40 m

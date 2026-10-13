@@ -3,13 +3,13 @@
 **Owner:** develop (shared - all four members review)
 
 ## Responsibility
-The one ESP32 firmware image: load-cell events (Component 1) and motion sensing (Component 3).
+The shared ESP32 application, load-cell task, protocol, and communication layer.
 
 ## What lives here
 platformio.ini, include/, src/ (main, tasks/, comms/).
 
 ## Rules
-Shared structure is develop-owned. loadcell_task.cpp is comp1's file, motion_task.cpp is comp3's. Frame format must match shared/contracts/esp32_serial_protocol.md.
+Shared structure is develop-owned. `loadcell_task.cpp` remains here; the Component 3 motion task is under `../../component3/firmware/motion_task.cpp`. Frame format must match `shared/contracts/esp32_serial_protocol.md`.
 
 ## Files in this folder
 - `platformio.ini` - PlatformIO build config: ESP32 board, Arduino framework, libs (HX711, IMU), serial 115200.

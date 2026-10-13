@@ -9,7 +9,7 @@ Code that runs on microcontrollers.
 trolley_esp32/ (single shared ESP32 image).
 
 ## Rules
-Only one firmware image exists because one ESP32 serves both Component 1 and Component 3.
+The shared ESP32 application and communication contract remain here. The Component 3-owned motion task is maintained under `../component3/firmware/`.
 
 ## Subfolders
 - `trolley_esp32/`

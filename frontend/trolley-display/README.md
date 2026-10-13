@@ -3,13 +3,13 @@
 **Owner:** develop (shared - all four members review)
 
 ## Responsibility
-React + Vite app shown on the trolley screen. One shared app, one feature folder per component.
+React + Vite app shown on the trolley screen. The application shell and other component features remain shared here.
 
 ## What lives here
 package.json, public/, src/ (app, api, components, features).
 
 ## Rules
-Do not create a separate frontend per component. Owners edit only their features/<x> folder; shared shell (app/, api/, components/) is develop-only.
+The shared shell (`app/`, `api/`, and `components/`) is develop-owned. Component 3 navigation views are maintained under `../../component3/frontend/navigation/`.
 
 ## Files in this folder
 - `package.json` - Frontend dependencies and scripts (React + Vite).

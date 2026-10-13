@@ -33,14 +33,14 @@ SHARED = "develop (shared - all four members review)"
 OWN = {
     "frontend/trolley-display/src/features/validation": "comp1",
     "frontend/trolley-display/src/features/cart": "comp2",
-    "frontend/trolley-display/src/features/navigation": "comp3",
+    "component3/frontend/navigation": "comp3",
     "frontend/trolley-display/src/features/billing": "comp4",
     "frontend/mobile-app": "comp4",
     "firmware/trolley_esp32/src/tasks/loadcell_task.cpp": "comp1",
-    "firmware/trolley_esp32/src/tasks/motion_task.cpp": "comp3",
+    "component3/firmware/motion_task.cpp": "comp3",
     "firmware/trolley_esp32/src/tasks": "comp1 (loadcell_task) + comp3 (motion_task)",
-    "data/store_map": "comp3",
-    "simulations": "comp3",
+    "component3/data/store_map": "comp3",
+    "component3/simulations": "comp3",
 }
 
 
@@ -87,7 +87,7 @@ F = {
     "docs/architecture/deployment.md": "How DEV, TEST and PROD environments are run and what hardware each needs.",
     "docs/components/comp1-trigger-validation.md": "Component 1 design: weight trigger, item validation, outputs and accuracy targets.",
     "docs/components/comp2-recognition-tracking.md": "Component 2 design: camera capture, chroma-key, YOLO recognition, cart state.",
-    "docs/components/comp3-reco-navigation.md": "Component 3 design: three-signal fusion, detour filter, Held-Karp routing, AprilTag/dead-reckoning.",
+    "component3/docs/comp3-reco-navigation.md": "Component 3 design: three-signal fusion, detour filter, Held-Karp routing, AprilTag/dead-reckoning.",
     "docs/components/comp4-pattern-billing.md": "Component 4 design: purchase history, monthly prediction, billing, mobile sync.",
     "docs/testing/test-plan.md": "What is tested at each level (unit, contract, integration, E2E, UAT) and pass criteria.",
     "docs/testing/integration-test-report.md": "Results of integration runs on the test branch (date, commit, pass/fail, defects).",
@@ -155,38 +155,37 @@ F = {
     "backend/comp2_recognition_tracking/tests/test_frame_diff.py": "Unit tests for add/remove detection using synthetic frames.",
     "backend/comp2_recognition_tracking/tests/test_cart_service.py": "Unit tests for cart add/remove/quantity logic.",
     # comp3
-    "backend/comp3_reco_navigation/requirements.txt": "Python dependencies for Component 3 (fastapi, scikit-learn, pandas, numpy, networkx/scipy, opencv-contrib-python, pyserial).",
-    "backend/comp3_reco_navigation/Dockerfile": "Container image for Component 3.",
-    "backend/comp3_reco_navigation/api/__init__.py": "Package marker.",
-    "backend/comp3_reco_navigation/api/recommend.py": "POST /recommend: basket + current position -> filtered recommendations.",
-    "backend/comp3_reco_navigation/api/route.py": "POST /route and /route/recompute: to-buy list -> ordered stops and path.",
-    "backend/comp3_reco_navigation/api/checkpoint.py": "POST /checkpoint: AprilTag hit and dead-reckoning updates from the trolley.",
-    "backend/comp3_reco_navigation/api/session.py": "Session-only to-buy list endpoints (add, remove, confirm suggestion, reset).",
-    "backend/comp3_reco_navigation/api/schemas.py": "Pydantic models for all Component 3 requests/responses.",
-    "backend/comp3_reco_navigation/recommendation/__init__.py": "Package marker.",
-    "backend/comp3_reco_navigation/recommendation/preprocess.py": "Cleans the POS CSV: drops user_id, fixes product keys, filters non-grocery categories, builds baskets.",
-    "backend/comp3_reco_navigation/recommendation/tfidf_category.py": "sklearn TF-IDF + cosine similarity over category/product text (signal 1).",
-    "backend/comp3_reco_navigation/recommendation/knn_cooccurrence.py": "KNN over basket co-occurrence vectors (signal 2).",
-    "backend/comp3_reco_navigation/recommendation/fusion.py": "Fuses the three signals into one ranked candidate list.",
-    "backend/comp3_reco_navigation/recommendation/detour_filter.py": "Relevance-vs-detour-cost filter: the novelty. Keeps a candidate only if its relevance justifies the extra route length.",
-    "backend/comp3_reco_navigation/navigation/__init__.py": "Package marker.",
-    "backend/comp3_reco_navigation/navigation/store_graph.py": "Loads data/store_map/store_graph.json into a graph (aisles, dual corridors, cross-aisles).",
-    "backend/comp3_reco_navigation/navigation/dijkstra.py": "Pairwise shortest-path distances between product stops.",
-    "backend/comp3_reco_navigation/navigation/held_karp.py": "Exact multi-stop TSP via Held-Karp DP over the Dijkstra distance matrix.",
-    "backend/comp3_reco_navigation/navigation/route_manager.py": "Owns the active route; recomputes only on deviation or to-buy-list change.",
-    "backend/comp3_reco_navigation/navigation/apriltag.py": "AprilTag detection with cv2.aruco; maps tag IDs to checkpoint nodes.",
-    "backend/comp3_reco_navigation/navigation/dead_reckoning.py": "Wheel-encoder + IMU position estimate between checkpoints.",
-    "backend/comp3_reco_navigation/navigation/deviation.py": "Adaptive deviation test: epsilon(d) = eps_base + sigma*d (eps_base=0.3 m, sigma=0.02).",
-    "backend/comp3_reco_navigation/cnn/__init__.py": "Package marker.",
-    "backend/comp3_reco_navigation/cnn/train.py": "Trains the ambient aisle/section classifier. Reads ml/configs/comp3_cnn.yaml; run from Colab.",
-    "backend/comp3_reco_navigation/cnn/infer.py": "Runs the aisle classifier on a frame between checkpoints.",
-    "backend/comp3_reco_navigation/session/__init__.py": "Package marker.",
-    "backend/comp3_reco_navigation/session/tobuy_list.py": "In-memory, session-only to-buy list (nothing persisted after reset).",
-    "backend/comp3_reco_navigation/tests/test_held_karp.py": "Held-Karp optimality tests against brute force on small instances.",
-    "backend/comp3_reco_navigation/tests/test_dijkstra.py": "Shortest-path tests on the mock store graph.",
-    "backend/comp3_reco_navigation/tests/test_fusion.py": "Tests for score fusion ordering and weights.",
-    "backend/comp3_reco_navigation/tests/test_detour_filter.py": "Tests that costly low-relevance detours are rejected and cheap relevant ones accepted.",
-    "backend/comp3_reco_navigation/tests/test_dead_reckoning.py": "Tests for position drift and the adaptive epsilon(d) deviation threshold.",
+    "component3/backend/comp3_reco_navigation/requirements.txt": "Python dependencies for Component 3 (fastapi, scikit-learn, pandas, numpy, networkx/scipy, opencv-contrib-python, pyserial).",
+    "component3/backend/comp3_reco_navigation/api/__init__.py": "Package marker.",
+    "component3/backend/comp3_reco_navigation/api/recommend.py": "POST /recommend: basket + current position -> filtered recommendations.",
+    "component3/backend/comp3_reco_navigation/api/route.py": "POST /route and /route/recompute: to-buy list -> ordered stops and path.",
+    "component3/backend/comp3_reco_navigation/api/checkpoint.py": "POST /checkpoint: AprilTag hit and dead-reckoning updates from the trolley.",
+    "component3/backend/comp3_reco_navigation/api/session.py": "Session-only to-buy list endpoints (add, remove, confirm suggestion, reset).",
+    "component3/backend/comp3_reco_navigation/api/schemas.py": "Pydantic models for all Component 3 requests/responses.",
+    "component3/backend/comp3_reco_navigation/recommendation/__init__.py": "Package marker.",
+    "component3/backend/comp3_reco_navigation/recommendation/preprocess.py": "Cleans the POS CSV: drops user_id, fixes product keys, filters non-grocery categories, builds baskets.",
+    "component3/backend/comp3_reco_navigation/recommendation/tfidf_category.py": "sklearn TF-IDF + cosine similarity over category/product text (signal 1).",
+    "component3/backend/comp3_reco_navigation/recommendation/knn_cooccurrence.py": "KNN over basket co-occurrence vectors (signal 2).",
+    "component3/backend/comp3_reco_navigation/recommendation/fusion.py": "Fuses the three signals into one ranked candidate list.",
+    "component3/backend/comp3_reco_navigation/recommendation/detour_filter.py": "Relevance-vs-detour-cost filter: the novelty. Keeps a candidate only if its relevance justifies the extra route length.",
+    "component3/backend/comp3_reco_navigation/navigation/__init__.py": "Package marker.",
+    "component3/backend/comp3_reco_navigation/navigation/store_graph.py": "Loads component3/data/store_map/store_graph.json into a graph (aisles, dual corridors, cross-aisles).",
+    "component3/backend/comp3_reco_navigation/navigation/dijkstra.py": "Pairwise shortest-path distances between product stops.",
+    "component3/backend/comp3_reco_navigation/navigation/held_karp.py": "Exact multi-stop TSP via Held-Karp DP over the Dijkstra distance matrix.",
+    "component3/backend/comp3_reco_navigation/navigation/route_manager.py": "Owns the active route; recomputes only on deviation or to-buy-list change.",
+    "component3/backend/comp3_reco_navigation/navigation/apriltag.py": "AprilTag detection with cv2.aruco; maps tag IDs to checkpoint nodes.",
+    "component3/backend/comp3_reco_navigation/navigation/dead_reckoning.py": "Wheel-encoder + IMU position estimate between checkpoints.",
+    "component3/backend/comp3_reco_navigation/navigation/deviation.py": "Adaptive deviation test: epsilon(d) = eps_base + sigma*d (eps_base=0.3 m, sigma=0.02).",
+    "component3/backend/comp3_reco_navigation/cnn/__init__.py": "Package marker.",
+    "component3/backend/comp3_reco_navigation/cnn/train.py": "Trains the ambient aisle/section classifier. Reads component3/ml/configs/comp3_cnn.yaml; run from Colab.",
+    "component3/backend/comp3_reco_navigation/cnn/infer.py": "Runs the aisle classifier on a frame between checkpoints.",
+    "component3/backend/comp3_reco_navigation/session/__init__.py": "Package marker.",
+    "component3/backend/comp3_reco_navigation/session/tobuy_list.py": "In-memory, session-only to-buy list (nothing persisted after reset).",
+    "component3/backend/comp3_reco_navigation/tests/test_held_karp.py": "Held-Karp optimality tests against brute force on small instances.",
+    "component3/backend/comp3_reco_navigation/tests/test_dijkstra.py": "Shortest-path tests on the mock store graph.",
+    "component3/backend/comp3_reco_navigation/tests/test_fusion.py": "Tests for score fusion ordering and weights.",
+    "component3/backend/comp3_reco_navigation/tests/test_detour_filter.py": "Tests that costly low-relevance detours are rejected and cheap relevant ones accepted.",
+    "component3/backend/comp3_reco_navigation/tests/test_dead_reckoning.py": "Tests for position drift and the adaptive epsilon(d) deviation threshold.",
     # comp4
     "backend/comp4_pattern_billing/requirements.txt": "Python dependencies for Component 4 (fastapi, sqlalchemy, psycopg, pandas, scikit-learn).",
     "backend/comp4_pattern_billing/Dockerfile": "Container image for Component 4.",
@@ -217,10 +216,10 @@ F = {
     "frontend/trolley-display/src/api/client.js": "Single fetch/WebSocket client to the gateway; all components call the backend through it.",
     "frontend/trolley-display/src/features/validation/ValidationPanel.jsx": "Shows item-validation status (accepted/rejected) from Component 1.",
     "frontend/trolley-display/src/features/cart/CartPanel.jsx": "Live cart list with add/remove confirmation from Component 2.",
-    "frontend/trolley-display/src/features/navigation/MapView.jsx": "Draws the store map and the trolley's current position.",
-    "frontend/trolley-display/src/features/navigation/RouteOverlay.jsx": "Draws the Held-Karp route and highlights the next stop.",
-    "frontend/trolley-display/src/features/navigation/ToBuyList.jsx": "Session to-buy list with check-off and add/remove.",
-    "frontend/trolley-display/src/features/navigation/SuggestionCard.jsx": "Shows a recommendation with detour cost; customer must confirm before it joins the route.",
+    "component3/frontend/navigation/MapView.jsx": "Draws the store map and the trolley's current position.",
+    "component3/frontend/navigation/RouteOverlay.jsx": "Draws the Held-Karp route and highlights the next stop.",
+    "component3/frontend/navigation/ToBuyList.jsx": "Session to-buy list with check-off and add/remove.",
+    "component3/frontend/navigation/SuggestionCard.jsx": "Shows a recommendation with detour cost; customer must confirm before it joins the route.",
     "frontend/trolley-display/src/features/billing/BillingPanel.jsx": "Checkout summary and bill from Component 4.",
     # firmware
     "firmware/trolley_esp32/platformio.ini": "PlatformIO build config: ESP32 board, Arduino framework, libs (HX711, IMU), serial 115200.",
@@ -228,24 +227,24 @@ F = {
     "firmware/trolley_esp32/include/protocol.h": "Frame types and field layout; must match shared/contracts/esp32_serial_protocol.md.",
     "firmware/trolley_esp32/src/main.cpp": "Boot, create FreeRTOS tasks (Core 0 motion 20 Hz, Core 1 load cell), start serial link.",
     "firmware/trolley_esp32/src/tasks/loadcell_task.cpp": "Core 1 task: reads HX711 load cells and emits weight events (Component 1).",
-    "firmware/trolley_esp32/src/tasks/motion_task.cpp": "Core 0 task: samples wheel encoders + IMU at 20 Hz and emits motion frames (Component 3).",
+    "component3/firmware/motion_task.cpp": "Core 0 task: samples wheel encoders + IMU at 20 Hz and emits motion frames (Component 3).",
     "firmware/trolley_esp32/src/comms/serial_link.cpp": "Thread-safe USB-UART writer/reader; serialises frames per the protocol.",
     # data
-    "data/store_map/store_graph.json": "Mock store graph: nodes, edges with metre lengths, aisle/product mapping (5-6 aisles).",
-    "data/store_map/apriltag_layout.json": "AprilTag ID -> checkpoint node and pose.",
+    "component3/data/store_map/store_graph.json": "Mock store graph: nodes, edges with metre lengths, aisle/product mapping (5-6 aisles).",
+    "component3/data/store_map/apriltag_layout.json": "AprilTag ID -> checkpoint node and pose.",
     # ml
     "ml/colab/comp1_validation_train.ipynb": "Colab launcher for Component 1 training (clone, mount Drive, run train.py).",
     "ml/colab/comp2_yolo_train.ipynb": "Colab launcher for Component 2 YOLO training.",
-    "ml/colab/comp3_cnn_train.ipynb": "Colab launcher for Component 3 aisle-classifier training.",
+    "component3/ml/colab/comp3_cnn_train.ipynb": "Colab launcher for Component 3 aisle-classifier training.",
     "ml/configs/comp1_validation.yaml": "Hyperparameters and paths for Component 1 training.",
     "ml/configs/comp2_yolo.yaml": "Hyperparameters, dataset path and augmentation for YOLO training.",
-    "ml/configs/comp3_cnn.yaml": "Hyperparameters and dataset path for the aisle classifier.",
-    "ml/configs/comp3_reco.yaml": "Recommendation settings: TF-IDF params, K for KNN, fusion weights, detour threshold.",
+    "component3/ml/configs/comp3_cnn.yaml": "Hyperparameters and dataset path for the aisle classifier.",
+    "component3/ml/configs/comp3_reco.yaml": "Recommendation settings: TF-IDF params, K for KNN, fusion weights, detour threshold.",
     "ml/configs/comp4_monthly.yaml": "Hyperparameters for the monthly-purchase predictor.",
     # simulations
-    "simulations/store_navigation_sim.html": "Interactive store navigation simulator (Held-Karp routing, dual corridors).",
-    "simulations/end_to_end_walkthrough.html": "Seven-stage end-to-end presentation walkthrough for the panel.",
-    "simulations/trolley_pipeline_sim.html": "Animated onboard-pipeline mock trolley with checkout/reset flow.",
+    "component3/simulations/store_navigation_sim.html": "Interactive store navigation simulator (Held-Karp routing, dual corridors).",
+    "component3/simulations/end_to_end_walkthrough.html": "Seven-stage end-to-end presentation walkthrough for the panel.",
+    "component3/simulations/trolley_pipeline_sim.html": "Animated onboard-pipeline mock trolley with checkout/reset flow.",
     # scripts
     "scripts/bootstrap.sh": "One-command dev setup: venvs, npm install, pre-commit install, .env copy.",
     "scripts/seed_db.py": "Loads shared/db/seed/*.csv into the database.",
@@ -274,7 +273,7 @@ README_FOLDERS = {
     "backend/gateway",
     "backend/comp1_trigger_validation",
     "backend/comp2_recognition_tracking",
-    "backend/comp3_reco_navigation",
+    "component3",
     "backend/comp4_pattern_billing",
     "frontend",
     "frontend/trolley-display",
@@ -283,7 +282,7 @@ README_FOLDERS = {
     "firmware/trolley_esp32",
     "data",
     "ml",
-    "simulations",
+    "component3/simulations",
     "evaluation",
     "scripts",
     "tests",
@@ -365,8 +364,8 @@ d("shared/common", "Reusable Python helpers imported by every backend service.",
   "No component-specific logic. Keep dependencies minimal and fully typed.",
   "Implement config.py with pydantic-settings reading environment variables (ENV, DB_URL, SERVICE_URLS, SERIAL_PORT, LOG_LEVEL), logging.py for JSON logs with session_id, and event_bus.py with publish(event) / subscribe(type, handler) over an in-process asyncio queue with a pluggable HTTP backend.")
 
-d("backend", "All server-side Python code: gateway plus one package per component.",
-  "gateway/, comp1_trigger_validation/, comp2_recognition_tracking/, comp3_reco_navigation/, comp4_pattern_billing/.",
+d("backend", "Shared gateway and root-level backend packages for Components 1, 2, and 4.",
+  "gateway/, comp1_trigger_validation/, comp2_recognition_tracking/, comp4_pattern_billing/. Component 3 lives under component3/backend/.",
   "A component imports only from shared/, never from another component. Each has its own requirements.txt and Dockerfile.",
   "Describe in README how to run the whole backend with uvicorn for development and how each component is mounted by the gateway.")
 
@@ -422,7 +421,7 @@ d(C2 + "/tests", "Unit tests for Component 2.",
   "Write pytest tests generating synthetic before/after frames to verify ADD, REMOVE and NONE detection, and cart tests for quantity increment/decrement.")
 
 # ---- comp3 ----
-C3 = "backend/comp3_reco_navigation"
+C3 = "component3/backend/comp3_reco_navigation"
 d(C3, "Component 3 - recommends extra items worth a detour and routes the trolley through the to-buy list.",
   "api/, recommendation/, navigation/, cnn/, session/, tests/, requirements.txt, Dockerfile.",
   "Owner: comp3. Population-level POS data only (no individual customer data); recommendations need customer confirmation before becoming route stops.",
@@ -433,16 +432,16 @@ d(C3 + "/api", "HTTP layer of Component 3.",
   "Create routers: POST /recommend, POST /route, POST /route/recompute, POST /checkpoint, /session/tobuy (GET, POST, DELETE), /session/reset. Define Pydantic v2 models for positions, stops, routes and suggestions.")
 d(C3 + "/recommendation", "Recommendation engine: three-signal fusion plus detour filter.",
   "preprocess, tfidf_category, knn_cooccurrence, fusion, detour_filter.",
-  "No individual user data: preprocess.py must drop user_id. Do not use product_id as a join key (one id maps to many names in the dataset); use cleaned product names or rebuilt ids. Parameters come from ml/configs/comp3_reco.yaml.",
-  "Implement preprocess.py (read data/raw CSV, drop user_id, drop non-grocery categories, build baskets, write data/processed), tfidf_category.py (sklearn TfidfVectorizer + cosine similarity), knn_cooccurrence.py (sklearn NearestNeighbors on basket vectors), fusion.py (weighted fusion of the signals described in docs/components/comp3-reco-navigation.md) and detour_filter.py (keep a candidate only when fused relevance justifies the added route length versus the current Held-Karp route; threshold configurable).")
+  "No individual user data: preprocess.py must drop user_id. Do not use product_id as a join key (one id maps to many names in the dataset); use cleaned product names or rebuilt ids. Parameters come from component3/ml/configs/comp3_reco.yaml.",
+  "Implement preprocess.py (read component3/data/raw CSV, drop user_id, drop non-grocery categories, build baskets, write component3/data/processed), tfidf_category.py (sklearn TfidfVectorizer + cosine similarity), knn_cooccurrence.py (sklearn NearestNeighbors on basket vectors), fusion.py (weighted fusion of the signals described in component3/docs/comp3-reco-navigation.md) and detour_filter.py (keep a candidate only when fused relevance justifies the added route length versus the current Held-Karp route; threshold configurable).")
 d(C3 + "/navigation", "Routing and localisation.",
   "store_graph, dijkstra, held_karp, route_manager, apriltag, dead_reckoning, deviation.",
   "Held-Karp is exact, so the stop count must stay small (mock store: 5-6 aisles). Recompute only on deviation or list change.",
   "Implement held_karp.py (bitmask DP returning order and total length from a distance matrix), dijkstra.py (pairwise distances over store_graph.json), apriltag.py (cv2.aruco detector returning tag id and pose), dead_reckoning.py (encoder + IMU pose integration at 20 Hz) and deviation.py (epsilon(d) = 0.3 + 0.02*d metres, returns whether to recompute).")
 d(C3 + "/cnn", "Ambient aisle/section classifier used between AprilTag checkpoints (not for checkpoint detection).",
   "train.py, infer.py.",
-  "Train on Colab; save weights to ml/models/comp3/<run_id>/ with metadata.json.",
-  "Write a small PyTorch CNN (or transfer learning with MobileNet) for aisle classification: train.py reads ml/configs/comp3_cnn.yaml and checkpoints each epoch; infer.py returns aisle label + confidence for one frame.")
+  "Train on Colab; save weights to component3/ml/models/comp3/<run_id>/ with metadata.json.",
+  "Write a small PyTorch CNN (or transfer learning with MobileNet) for aisle classification: train.py reads component3/ml/configs/comp3_cnn.yaml and checkpoints each epoch; infer.py returns aisle label + confidence for one frame.")
 d(C3 + "/session", "Session-only state for the shopper.",
   "tobuy_list.py.",
   "Nothing here may be written to disk or database; cleared on reset/checkout.",
@@ -496,7 +495,7 @@ d("frontend/trolley-display/src/features/cart", "Component 2 UI.",
   "CartPanel.jsx.",
   "Owner: comp2.",
   "Build CartPanel: live list of recognised items with quantity, a confirm/remove control, and total item count updating from cart_updated events.")
-d("frontend/trolley-display/src/features/navigation", "Component 3 UI: map, route, to-buy list, suggestions.",
+d("component3/frontend/navigation", "Component 3 UI: map, route, to-buy list, suggestions.",
   "MapView, RouteOverlay, ToBuyList, SuggestionCard.",
   "Owner: comp3. A suggestion must be confirmed by the customer before it is added to the route.",
   "Build MapView (SVG store map from store_graph.json with the trolley marker), RouteOverlay (polyline of the Held-Karp path, highlight next stop), ToBuyList (check-off, add/remove), SuggestionCard (shows item, aisle and detour metres with Accept/Dismiss).")
@@ -514,13 +513,13 @@ d("frontend/mobile-app/src/features", "Mobile feature modules (lists, recipes, b
   "For each feature folder create a screen, an API hook and a small test, following the mobile framework's conventions.")
 
 # ---- firmware ----
-d("firmware", "Code that runs on microcontrollers.",
+d("firmware", "Shared code that runs on microcontrollers.",
   "trolley_esp32/ (single shared ESP32 image).",
-  "Only one firmware image exists because one ESP32 serves both Component 1 and Component 3.",
+  "Shared protocol and application wiring stay here; Component 3 owns component3/firmware/motion_task.cpp.",
   "Explain how to build and flash with PlatformIO (pio run -t upload) and how to read the serial stream for debugging.")
-d("firmware/trolley_esp32", "The one ESP32 firmware image: load-cell events (Component 1) and motion sensing (Component 3).",
+d("firmware/trolley_esp32", "Shared ESP32 application, load-cell task, protocol, and communications.",
   "platformio.ini, include/, src/ (main, tasks/, comms/).",
-  "Shared structure is develop-owned. loadcell_task.cpp is comp1's file, motion_task.cpp is comp3's. Frame format must match shared/contracts/esp32_serial_protocol.md.",
+  "Shared structure is develop-owned. Component 3 motion code lives under component3/firmware/. Frame format must match shared/contracts/esp32_serial_protocol.md.",
   "Write a PlatformIO project for ESP32 (Arduino framework, 115200 baud) that creates two FreeRTOS tasks pinned to cores (Core 0 motion at 20 Hz, Core 1 load cell) and sends newline-delimited JSON frames over USB-UART via a mutex-protected serial writer.")
 d("firmware/trolley_esp32/include", "Headers shared by all firmware sources.",
   "pins.h (GPIO map), protocol.h (frame types/fields).",
@@ -530,8 +529,8 @@ d("firmware/trolley_esp32/src", "Firmware sources.",
   "main.cpp, tasks/, comms/.",
   "main.cpp only wires tasks; logic lives in tasks/ and comms/.",
   "Write main.cpp: initialise serial_link, pin motion_task to core 0 and loadcell_task to core 1 with xTaskCreatePinnedToCore, and a heartbeat frame every second.")
-d("firmware/trolley_esp32/src/tasks", "One FreeRTOS task per sensing responsibility.",
-  "loadcell_task.cpp (comp1), motion_task.cpp (comp3).",
+d("firmware/trolley_esp32/src/tasks", "Root-level ESP32 sensing tasks.",
+  "loadcell_task.cpp (comp1); Component 3 motion code is isolated under component3/firmware/.",
   "Never block on serial inside a task: push frames to the serial_link queue.",
   "Implement loadcell_task (HX711 read, tare, filtering, emit WEIGHT frame on change above threshold) and motion_task (read encoders + IMU at 20 Hz via vTaskDelayUntil, emit MOTION frame with ticks and yaw rate).")
 d("firmware/trolley_esp32/src/comms", "Communication with the host.",
@@ -540,38 +539,38 @@ d("firmware/trolley_esp32/src/comms", "Communication with the host.",
   "Implement serial_link with a FreeRTOS queue and a writer task that serialises frames as newline-delimited JSON, and a non-blocking reader for host commands (e.g., tare).")
 
 # ---- data ----
-d("data", "Datasets and map data.",
-  "raw/ (POS CSV), processed/ (cleaned outputs), store_map/ (graph + AprilTag layout), datasets/ (image datasets per component: comp1_objects, comp2_grocery_yolo, comp3_aisle_images).",
-  "Large/raw data is gitignored. Document its source and version in each folder README. store_map/ is small and versioned.",
-  "Write a data card for the POS CSV: columns, row counts, known issues (non-1:1 product_id/name mapping, user_id present, non-grocery categories, basket sizes 2-7, likely synthetic).")
-d("data/raw", "Immutable original datasets.",
-  "Retail_pos_basket_data.csv (1,991 baskets, 10,000 rows).",
+d("data", "Shared and non-Component-3 datasets.",
+  "raw/, processed/, and datasets/ for shared use and the other components. Component 3 data lives under component3/data/.",
+  "Large/raw data is gitignored. Document its source and version in the relevant dataset folder.",
+  "Maintain shared and non-Component-3 dataset documentation without moving component-owned data out of its workspace.")
+d("data/raw", "Immutable shared or non-Component-3 original datasets.",
+  "Component-owned POS data is under component3/data/raw/.",
   "Read-only: never edit or overwrite. Gitignored.",
   "Write a loader that reads the raw CSV with explicit dtypes and prints basic stats (rows, baskets, basket-size distribution, category counts) without modifying the file.")
 d("data/processed", "Derived datasets created by code.",
   "Cleaned baskets, co-occurrence matrices, train/test splits.",
   "Generated by recommendation/preprocess.py; gitignored; always reproducible from data/raw.",
   "Write preprocess code that regenerates every file here from data/raw deterministically and records a data version hash in a manifest.")
-d("data/store_map", "The mock-store map used by navigation and the UI.",
+d("component3/data/store_map", "The mock-store map used by navigation and the UI.",
   "store_graph.json, apriltag_layout.json.",
   "Owner: comp3. Coordinates in metres. 5-6 aisles with dual corridors and cross-aisles.",
   "Generate store_graph.json for a 5-6 aisle store: nodes (id, x_m, y_m, type), edges with length_m, aisle->product mapping, and apriltag_layout.json mapping tag ids to checkpoint nodes. Add a validator script that checks connectivity.")
-d("data/datasets", "Image datasets for training (comp1_objects, comp2_grocery_yolo, comp3_aisle_images).",
+d("data/datasets", "Shared and non-Component-3 image datasets.",
   "One subfolder per component, versioned v1, v2...",
   "Gitignored; stored on Google Drive; each subfolder needs a data card.",
   "Write a script that validates an image dataset folder (class counts, corrupted files, train/val/test split sizes) and prints a data card.")
 
 # ---- ml ----
-d("ml", "Machine-learning workspace for training outside the backend runtime (Google Colab).",
+d("ml", "Shared and non-Component-3 machine-learning workspace for Google Colab.",
   "colab/ (launcher notebooks), configs/ (YAML hyperparameters), notebooks/ (EDA), models/ (gitignored artifacts).",
-  "Training logic lives in each component's ml/train.py; this folder only configures and launches it.",
+  "Component 3 ML assets live under component3/ml/; this folder serves the other components.",
   "Explain the training workflow: Colab notebook clones the repo, mounts Drive, runs train.py with a YAML config, saves weights + metadata.json to Drive under runs/<component>/<run_id>/.")
-d("ml/colab", "Thin Colab launcher notebooks.",
-  "comp1_validation_train.ipynb, comp2_yolo_train.ipynb, comp3_cnn_train.ipynb.",
+d("ml/colab", "Thin Colab launcher notebooks for the other components.",
+  "comp1_validation_train.ipynb and comp2_yolo_train.ipynb.",
   "Notebooks contain no training logic, only setup + a call to train.py. Outputs stripped before commit (nbstripout).",
   "Create a 5-cell Colab notebook: install requirements, clone repo and checkout branch, mount Google Drive, run train.py with --config and --out on Drive, copy final weights and metadata.json to Drive.")
-d("ml/configs", "Versioned hyperparameters per model.",
-  "comp1_validation, comp2_yolo, comp3_cnn, comp3_reco, comp4_monthly (.yaml).",
+d("ml/configs", "Versioned hyperparameters for the other components.",
+  "comp1_validation, comp2_yolo, and comp4_monthly (.yaml).",
   "Every reported result must be reproducible from a config plus a commit hash.",
   "Write YAML configs with seed, dataset path, epochs, batch size, learning rate, augmentation and output directory, with comments explaining each key.")
 d("ml/notebooks", "Exploratory notebooks (EDA, experiments).",
@@ -584,12 +583,12 @@ d("ml/models", "Trained artefacts (weights, vectorisers).",
   "Write a helper that saves a model together with metadata.json (git commit hash, config, dataset hash, metrics) and a loader that verifies that metadata exists.")
 
 # ---- others ----
-d("simulations", "Standalone HTML simulations for the panel presentation.",
+d("component3/simulations", "Standalone Component 3 HTML simulations for the panel presentation.",
   "store_navigation_sim.html, end_to_end_walkthrough.html, trolley_pipeline_sim.html.",
   "Owner: comp3. Each file must be self-contained (inline CSS/JS) and visual/animated.",
   "Create a self-contained HTML page with an SVG store map, animated trolley following a Held-Karp route, controls for adding items, and a panel showing recommendation + detour cost.")
-d("evaluation", "Scripts and results that produce the numbers in the paper.",
-  "comp1/, comp2/, comp3/, comp4/, system/ (end-to-end).",
+d("evaluation", "Shared and other-component results used in the paper.",
+  "comp1/, comp2/, comp4/, and system/. Component 3 results live under component3/evaluation/.",
   "Each result file records commit hash and config used.",
   "Write an evaluation script that loads a trained model and test set, computes the metrics defined in the component design doc, and writes results.json plus a figure into this folder.")
 d("scripts", "Developer and demo helper scripts.",
@@ -624,8 +623,8 @@ LEAF_DIRS = [
     "frontend/trolley-display/src/components", "frontend/mobile-app/src/features/lists",
     "frontend/mobile-app/src/features/recipes", "frontend/mobile-app/src/features/billing",
     "frontend/mobile-app/src/features/notifications", "data/datasets/comp1_objects",
-    "data/datasets/comp2_grocery_yolo", "data/datasets/comp3_aisle_images",
-    "evaluation/comp1", "evaluation/comp2", "evaluation/comp3", "evaluation/comp4", "evaluation/system",
+    "data/datasets/comp2_grocery_yolo", "component3/data/datasets/comp3_aisle_images",
+    "evaluation/comp1", "evaluation/comp2", "component3/evaluation", "evaluation/comp4", "evaluation/system",
 ]
 
 CTX = ("Context: monorepo for SLIIT research project J26-IT-340 (IoT smart shopping trolley, four components). "
@@ -705,9 +704,9 @@ def notebook(path, desc):
     comp = re.search(r"comp(\d)", path).group(1)
     train = {"1": "backend/comp1_trigger_validation/ml/train.py",
              "2": "backend/comp2_recognition_tracking/ml/train.py",
-             "3": "backend/comp3_reco_navigation/cnn/train.py"}[comp]
+             "3": "component3/backend/comp3_reco_navigation/cnn/train.py"}[comp]
     cfg = {"1": "comp1_validation", "2": "comp2_yolo", "3": "comp3_cnn"}[comp]
-    req = os.path.dirname(os.path.dirname(train)) + "/requirements.txt" if comp != "3" else "backend/comp3_reco_navigation/requirements.txt"
+    req = os.path.dirname(os.path.dirname(train)) + "/requirements.txt" if comp != "3" else "component3/backend/comp3_reco_navigation/requirements.txt"
 
     def md(t):
         return {"cell_type": "markdown", "metadata": {}, "source": t.splitlines(True)}

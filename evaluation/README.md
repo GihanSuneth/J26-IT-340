@@ -6,7 +6,7 @@
 Scripts and results that produce the numbers in the paper.
 
 ## What lives here
-comp1/, comp2/, comp3/, comp4/, system/ (end-to-end).
+comp1/, comp2/, comp4/, and system/ (end-to-end). Component 3 results live under `../component3/evaluation/`.
 
 ## Rules
 Each result file records commit hash and config used.
@@ -14,7 +14,6 @@ Each result file records commit hash and config used.
 ## Subfolders
 - `comp1/`
 - `comp2/`
-- `comp3/`
 - `comp4/`
 - `system/`
 

@@ -3,10 +3,10 @@
 **Owner:** develop (shared - all four members review)
 
 ## Responsibility
-All server-side Python code: gateway plus one package per component.
+Shared gateway plus the root-level backend packages for Components 1, 2, and 4.
 
 ## What lives here
-gateway/, comp1_trigger_validation/, comp2_recognition_tracking/, comp3_reco_navigation/, comp4_pattern_billing/.
+gateway/, comp1_trigger_validation/, comp2_recognition_tracking/, and comp4_pattern_billing/. Component 3 is isolated under ../component3/backend/.
 
 ## Rules
 A component imports only from shared/, never from another component. Each has its own requirements.txt and Dockerfile.
@@ -14,7 +14,6 @@ A component imports only from shared/, never from another component. Each has it
 ## Subfolders
 - `comp1_trigger_validation/`
 - `comp2_recognition_tracking/`
-- `comp3_reco_navigation/`
 - `comp4_pattern_billing/`
 - `gateway/`
 

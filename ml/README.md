@@ -3,13 +3,13 @@
 **Owner:** develop (shared - all four members review)
 
 ## Responsibility
-Machine-learning workspace for training outside the backend runtime (Google Colab).
+Shared and non-Component-3 machine-learning workspace for training outside the backend runtime.
 
 ## What lives here
 colab/ (launcher notebooks), configs/ (YAML hyperparameters), notebooks/ (EDA), models/ (gitignored artifacts).
 
 ## Rules
-Training logic lives in each component's ml/train.py; this folder only configures and launches it.
+Component 3 ML files are grouped under `../component3/ml/`; other components continue to use this shared layout.
 
 ## Subfolders
 - `colab/`
