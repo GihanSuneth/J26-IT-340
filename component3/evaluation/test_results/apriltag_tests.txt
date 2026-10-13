@@ -1,0 +1,40 @@
+Component 3 Offline AprilTag Test Execution
+============================================
+Executed: 2026-10-14T00:51:09+05:30
+Python: 3.14.0
+OpenCV available: True
+Required detector: cv2.aruco.DICT_APRILTAG_36h11
+Command: /Users/arun/Documents/Research Project/R1/J26-IT-340/component3/.venv/bin/python -B -m component3.backend.comp3_reco_navigation.tests.test_apriltag --output component3/evaluation/test_results/apriltag_tests.txt
+Framework: Python standard-library unittest
+
+test_01_valid_layout_loading (__main__.CheckpointMappingTests.test_01_valid_layout_loading) ... ok
+test_02_eight_unique_checkpoint_ids (__main__.CheckpointMappingTests.test_02_eight_unique_checkpoint_ids) ... ok
+test_03_correct_tag_to_node_mapping (__main__.CheckpointMappingTests.test_03_correct_tag_to_node_mapping) ... ok
+test_04_correct_xy_coordinate_lookup (__main__.CheckpointMappingTests.test_04_correct_xy_coordinate_lookup) ... ok
+test_05_unknown_marker_id (__main__.CheckpointMappingTests.test_05_unknown_marker_id) ... ok
+test_06_no_detection_handling (__main__.CheckpointMappingTests.test_06_no_detection_handling) ... ok
+test_07_duplicate_detection_handling (__main__.CheckpointMappingTests.test_07_duplicate_detection_handling) ... ok
+test_08_invalid_layout_references (__main__.CheckpointMappingTests.test_08_invalid_layout_references) ... ok
+test_09_wrong_apriltag_family (__main__.CheckpointMappingTests.test_09_wrong_apriltag_family) ... ok
+test_17_missing_image (__main__.CheckpointMappingTests.test_17_missing_image) ... ok
+test_10_generated_valid_marker (__main__.OpenCVDetectionTests.test_10_generated_valid_marker) ... ok
+test_11_multiple_markers (__main__.OpenCVDetectionTests.test_11_multiple_markers) ... ok
+test_12_unknown_valid_tag_without_location (__main__.OpenCVDetectionTests.test_12_unknown_valid_tag_without_location) ... ok
+test_13_blank_image (__main__.OpenCVDetectionTests.test_13_blank_image) ... ok
+test_14_rotated_marker (__main__.OpenCVDetectionTests.test_14_rotated_marker) ... ok
+test_15_perspective_distorted_marker (__main__.OpenCVDetectionTests.test_15_perspective_distorted_marker) ... ok
+test_16_reduced_resolution_marker (__main__.OpenCVDetectionTests.test_16_reduced_resolution_marker) ... ok
+test_18_deterministic_repeatability (__main__.OpenCVDetectionTests.test_18_deterministic_repeatability) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.026s
+
+OK
+
+Tests executed: 18
+Passed: 18
+Skipped: 0
+Failed: 0
+Errors: 0
+Overall runnable-test result: PASS
+Detection evaluation status: READY

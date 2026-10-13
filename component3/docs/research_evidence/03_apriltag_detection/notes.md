@@ -1,14 +1,20 @@
 # AprilTag detection evidence notes
 
-- **Objective:** Document camera-based AprilTag checkpoint detection and pose mapping.
-- **Problem being solved:** Pending.
-- **Methodology:** Pending.
-- **Implementation details:** Pending.
-- **Tools and libraries:** Pending.
-- **Inputs and outputs:** Pending.
-- **Algorithms or models used:** Pending. AprilTag detection is not CNN aisle classification.
-- **Test procedure:** Pending.
-- **Observed results:** Pending; no result has been recorded.
-- **Limitations:** Pending.
-- **Screenshot references:** Pending; no screenshot is currently indexed.
-- **Research report relevance:** Pending.
+- **Objective:** Implement and evaluate offline `tag36h11` detection and checkpoint-to-store-node localization using reproducible synthetic fixtures.
+- **Problem being solved:** A detected marker ID must be validated against the eight Phase 1 checkpoints and converted to an existing store node and simulated metric coordinate. Unknown but valid AprilTag IDs must remain unassigned rather than becoming invented locations. Image detection and graph localization must remain separate.
+- **Checkpoint methodology:** `load_apriltag_layout` validates the JSON family, unique non-negative integer IDs, one-to-one graph-node references, finite coordinates, node-coordinate agreement, marker orientation, physical size, and location name. `localize_marker_ids` removes duplicate observations in first-seen order, maps known IDs, retains unknown IDs with `checkpoint=None`, and returns an empty tuple when nothing was detected.
+- **Marker family and IDs:** The existing layout uses `tag36h11` with IDs `100`, `101`, `110`, `111`, `112`, `113`, `114`, and `115`, mapped respectively to `ENT`, `CHK`, and `B1` through `B6`. No checkpoint ID was added.
+- **Detector interface:** `detect_apriltags` reads an existing file in grayscale, selects `cv2.aruco.DICT_APRILTAG_36h11`, supports current `ArucoDetector.detectMarkers` and legacy `aruco.detectMarkers`, and returns immutable marker IDs with four image-space corner coordinates. Missing or undecodable images and unavailable APIs produce explicit errors. Detection itself never assigns a store location.
+- **Environment setup:** Only CPython 3.14.0 was available; no 3.13, 3.12, or existing virtual environment was found. A Git-ignored `component3/.venv/` was created without changing system Python. Binary-only pip installation selected `opencv-contrib-python==5.0.0.93` (`cp37-abi3`, macOS 13 arm64) and its required `numpy==2.5.4` wheel. OpenCV reports version 5.0.0.
+- **Detector configuration:** Verified `cv2.aruco`, `DICT_APRILTAG_36h11` (dictionary constant 20), `ArucoDetector`, `DetectorParameters`, and `generateImageMarker`. OpenCV 5.0.0 exposes the current object API and does not expose the legacy module-level `detectMarkers` or `drawMarker`; the implementation retains compatibility fallbacks for older builds.
+- **Synthetic-image generation:** `generate_apriltag_test_images.py` generated clean 512×512 grayscale images for all eight existing IDs with 320-pixel markers and 96-pixel white margins. It also generated a three-marker image, unknown valid ID 42, blank image, clockwise 90-degree rotation, fixed perspective warp, and 80-pixel reduced marker. The manifest records 14 cases, settings, and `randomness_used=false`; no random seed is applicable.
+- **Test methodology:** Run `component3/.venv/bin/python -B -m component3.backend.comp3_reco_navigation.tests.test_apriltag --output component3/evaluation/test_results/apriltag_tests.txt`. The 18 cases cover layout and mapping invariants, unknown/no/duplicate detections, invalid layouts and families, all controlled image categories, missing images, and repeatability.
+- **Offline evaluation methodology:** `apriltag_offline_evaluation` reads the generated manifest, executes detection on each image, computes correct, missed, and unexpected ID sets, maps known detections, writes the per-image CSV and full log, and draws overlays from the returned detector corners. Exact-case success requires no missed or unexpected IDs.
+- **Actual results:** All 18 tests passed with zero failures, errors, or skips. All 14 synthetic cases were exact successes. The detector found all 15 expected marker occurrences, for 100.00% synthetic marker recall, with zero missed IDs and zero unexpected IDs. Unknown valid ID 42 was detected but correctly remained unmapped. The blank image produced no detections.
+- **False detections and misses:** Zero false/unexpected IDs and zero missed IDs occurred in this controlled 14-image synthetic set. This is not a real-world accuracy claim.
+- **Evidence:** `C3-TAG-001` single detection, `C3-TAG-002` multiple detection, `C3-TAG-003` checkpoint mapping, `C3-TAG-004` automated tests, and `C3-TAG-005` offline metrics are verified. The demo log provides full per-case output.
+- **Reproducibility:** From the repository root, create `component3/.venv`, install the pinned requirements with `--only-binary=:all:`, run the fixture generator, run the evaluator, run the AprilTag tests with `--output`, and then run the store-map, routing, and evidence validators. Exact commands are in `component3/README.md`.
+- **Limitations:** Synthetic fixtures cannot establish physical-camera performance under glare, motion blur, viewing distance, occlusion, printing variation, lens distortion, focus, or changing illumination. No camera capture or pose estimation was implemented. Store coordinates are checkpoint values from the simulated JSON layout, not image-derived metric poses.
+- **Future physical testing:** Test printed `tag36h11` markers using the intended camera while recording range, angle, lighting, blur, partial occlusion, false detections, and misses separately from these synthetic results.
+- **Research report relevance:** Establishes the checkpoint contract, safe unknown-ID behavior, detector methodology, controlled evaluation procedure, actual synthetic results, and the boundary between synthetic verification and physical-camera accuracy.
+- **Next action:** Stop after Phase 3A and await approval before live-camera, encoder/IMU, route-deviation, or CNN work.

@@ -42,15 +42,30 @@ Owner: comp3. Population-level POS data only (no individual customer data); reco
 Run commands from the repository root:
 
 ```bash
+python3.14 -m venv component3/.venv
+component3/.venv/bin/python -m pip install --only-binary=:all: \
+  -r component3/backend/comp3_reco_navigation/requirements.txt
+component3/.venv/bin/python -B \
+  component3/data/store_map/generate_apriltag_test_images.py
+component3/.venv/bin/python -B -m \
+  component3.backend.comp3_reco_navigation.navigation.apriltag_offline_evaluation
 python3 -B -m unittest -v \
   component3.backend.comp3_reco_navigation.tests.test_dijkstra
 python3 -B -m component3.backend.comp3_reco_navigation.tests.test_held_karp \
   --output component3/evaluation/test_results/held_karp_tests.txt
+component3/.venv/bin/python -B -m \
+  component3.backend.comp3_reco_navigation.tests.test_apriltag \
+  --output component3/evaluation/test_results/apriltag_tests.txt
 python3 -B -m \
   component3.backend.comp3_reco_navigation.navigation.held_karp_demo
 python3 -B component3/data/store_map/validate_store_map.py
 python3 -B component3/docs/research_evidence/tools/validate_evidence.py
 ```
+
+The project-local `.venv/` is ignored by Git. Phase 3A was verified with
+CPython 3.14.0, `opencv-contrib-python` 5.0.0.93 (OpenCV 5.0.0), and NumPy
+2.5.4 on arm64 macOS. AprilTag fixtures and metrics are synthetic offline
+evaluation artifacts, not physical-camera accuracy measurements.
 
 Research evidence is stored under `docs/research_evidence/`, with executable
 results under `evaluation/`. Shared product and location seeds remain under the

@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "synthetic_fixture_notice": "Generated markers are controlled test fixtures, not physical camera captures.",
+  "opencv_version": "5.0.0",
+  "dictionary": "DICT_APRILTAG_36h11",
+  "checkpoint_ids": [
+    100,
+    101,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115
+  ],
+  "clean_marker_pixels": 320,
+  "clean_canvas_pixels": 512,
+  "clean_white_margin_pixels": 96,
+  "random_seed": null,
+  "randomness_used": false,
+  "cases": [
+    {
+      "image": "component3/data/apriltag_test_images/clean/tag_100.png",
+      "expected_ids": [
+        100
+      ],
+      "category": "clean"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/clean/tag_101.png",
+      "expected_ids": [
+        101
+      ],
+      "category": "clean"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/clean/tag_110.png",
+      "expected_ids": [
+        110
+      ],
+      "category": "clean"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/clean/tag_111.png",
+      "expected_ids": [
+        111
+      ],
+      "category": "clean"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/clean/tag_112.png",
+      "expected_ids": [
+        112
+      ],
+      "category": "clean"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/clean/tag_113.png",
+      "expected_ids": [
+        113
+      ],
+      "category": "clean"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/clean/tag_114.png",
+      "expected_ids": [
+        114
+      ],
+      "category": "clean"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/clean/tag_115.png",
+      "expected_ids": [
+        115
+      ],
+      "category": "clean"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/transformed/multiple_100_110_115.png",
+      "expected_ids": [
+        100,
+        110,
+        115
+      ],
+      "category": "multiple"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/transformed/unknown_tag_42.png",
+      "expected_ids": [
+        42
+      ],
+      "category": "unknown_valid_id"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/transformed/blank.png",
+      "expected_ids": [],
+      "category": "no_marker"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/transformed/rotated_90_tag_100.png",
+      "expected_ids": [
+        100
+      ],
+      "category": "rotated_90_degrees"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/transformed/perspective_tag_100.png",
+      "expected_ids": [
+        100
+      ],
+      "category": "fixed_perspective_transform"
+    },
+    {
+      "image": "component3/data/apriltag_test_images/transformed/reduced_resolution_tag_100.png",
+      "expected_ids": [
+        100
+      ],
+      "category": "reduced_resolution"
+    }
+  ]
+}

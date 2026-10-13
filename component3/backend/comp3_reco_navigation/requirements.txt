@@ -1,2 +1,4 @@
-# requirements.txt - Python dependencies for Component 3 (fastapi, scikit-learn, pandas, numpy, networkx/scipy, opencv-contrib-python, pyserial).
-# Owner: comp3
+# Phase 3A offline AprilTag environment verified on CPython 3.14 arm64 macOS.
+# Install with: python -m pip install --only-binary=:all: -r requirements.txt
+numpy==2.5.4
+opencv-contrib-python==5.0.0.93

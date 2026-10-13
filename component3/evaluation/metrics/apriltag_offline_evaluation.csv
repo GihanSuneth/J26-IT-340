@@ -1,0 +1,15 @@
+test_image,expected_marker_ids,detected_marker_ids,correctly_detected_ids,missed_ids,unexpected_ids,checkpoint_mapping,detection_success,transformation_category
+component3/data/apriltag_test_images/clean/tag_100.png,100,100,100,,,"100:ENT@(13.80,0.00)",true,clean
+component3/data/apriltag_test_images/clean/tag_101.png,101,101,101,,,"101:CHK@(18.00,1.00)",true,clean
+component3/data/apriltag_test_images/clean/tag_110.png,110,110,110,,,"110:B1@(3.00,3.00)",true,clean
+component3/data/apriltag_test_images/clean/tag_111.png,111,111,111,,,"111:B2@(6.60,3.00)",true,clean
+component3/data/apriltag_test_images/clean/tag_112.png,112,112,112,,,"112:B3@(10.20,3.00)",true,clean
+component3/data/apriltag_test_images/clean/tag_113.png,113,113,113,,,"113:B4@(13.80,3.00)",true,clean
+component3/data/apriltag_test_images/clean/tag_114.png,114,114,114,,,"114:B5@(17.40,3.00)",true,clean
+component3/data/apriltag_test_images/clean/tag_115.png,115,115,115,,,"115:B6@(21.00,3.00)",true,clean
+component3/data/apriltag_test_images/transformed/multiple_100_110_115.png,100|110|115,100|110|115,100|110|115,,,"100:ENT@(13.80,0.00)|110:B1@(3.00,3.00)|115:B6@(21.00,3.00)",true,multiple
+component3/data/apriltag_test_images/transformed/unknown_tag_42.png,42,42,42,,,42:UNKNOWN,true,unknown_valid_id
+component3/data/apriltag_test_images/transformed/blank.png,,,,,,,true,no_marker
+component3/data/apriltag_test_images/transformed/rotated_90_tag_100.png,100,100,100,,,"100:ENT@(13.80,0.00)",true,rotated_90_degrees
+component3/data/apriltag_test_images/transformed/perspective_tag_100.png,100,100,100,,,"100:ENT@(13.80,0.00)",true,fixed_perspective_transform
+component3/data/apriltag_test_images/transformed/reduced_resolution_tag_100.png,100,100,100,,,"100:ENT@(13.80,0.00)",true,reduced_resolution

@@ -1,0 +1,143 @@
+Component 3 Offline AprilTag Evaluation
+========================================
+Executed: 2026-10-14T00:50:42+05:30
+Python: 3.14.0
+OpenCV: 5.0.0
+Dictionary: DICT_APRILTAG_36h11
+Detector API: cv2.aruco.ArucoDetector.detectMarkers
+Synthetic cases: 14
+Notice: controlled synthetic fixtures; not physical-camera accuracy.
+
+[tag_100.png — clean]
+Expected IDs: 100
+Detected IDs: 100
+Correct IDs: 100
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 100:ENT@(13.80,0.00)
+Exact case success: True
+
+[tag_101.png — clean]
+Expected IDs: 101
+Detected IDs: 101
+Correct IDs: 101
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 101:CHK@(18.00,1.00)
+Exact case success: True
+
+[tag_110.png — clean]
+Expected IDs: 110
+Detected IDs: 110
+Correct IDs: 110
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 110:B1@(3.00,3.00)
+Exact case success: True
+
+[tag_111.png — clean]
+Expected IDs: 111
+Detected IDs: 111
+Correct IDs: 111
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 111:B2@(6.60,3.00)
+Exact case success: True
+
+[tag_112.png — clean]
+Expected IDs: 112
+Detected IDs: 112
+Correct IDs: 112
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 112:B3@(10.20,3.00)
+Exact case success: True
+
+[tag_113.png — clean]
+Expected IDs: 113
+Detected IDs: 113
+Correct IDs: 113
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 113:B4@(13.80,3.00)
+Exact case success: True
+
+[tag_114.png — clean]
+Expected IDs: 114
+Detected IDs: 114
+Correct IDs: 114
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 114:B5@(17.40,3.00)
+Exact case success: True
+
+[tag_115.png — clean]
+Expected IDs: 115
+Detected IDs: 115
+Correct IDs: 115
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 115:B6@(21.00,3.00)
+Exact case success: True
+
+[multiple_100_110_115.png — multiple]
+Expected IDs: 100|110|115
+Detected IDs: 100|110|115
+Correct IDs: 100|110|115
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 100:ENT@(13.80,0.00)|110:B1@(3.00,3.00)|115:B6@(21.00,3.00)
+Exact case success: True
+
+[unknown_tag_42.png — unknown_valid_id]
+Expected IDs: 42
+Detected IDs: 42
+Correct IDs: 42
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 42:UNKNOWN
+Exact case success: True
+
+[blank.png — no_marker]
+Expected IDs: none
+Detected IDs: none
+Correct IDs: none
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: none
+Exact case success: True
+
+[rotated_90_tag_100.png — rotated_90_degrees]
+Expected IDs: 100
+Detected IDs: 100
+Correct IDs: 100
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 100:ENT@(13.80,0.00)
+Exact case success: True
+
+[perspective_tag_100.png — fixed_perspective_transform]
+Expected IDs: 100
+Detected IDs: 100
+Correct IDs: 100
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 100:ENT@(13.80,0.00)
+Exact case success: True
+
+[reduced_resolution_tag_100.png — reduced_resolution]
+Expected IDs: 100
+Detected IDs: 100
+Correct IDs: 100
+Missed IDs: none
+Unexpected IDs: none
+Checkpoint mapping: 100:ENT@(13.80,0.00)
+Exact case success: True
+
+Summary
+Successful cases: 14/14 (100.00%)
+Expected marker detections: 15
+Correct marker detections: 15
+Synthetic marker recall: 100.00%
+Total missed IDs: 0
+Total unexpected IDs: 0
