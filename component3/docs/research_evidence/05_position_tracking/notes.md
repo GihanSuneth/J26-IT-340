@@ -251,3 +251,141 @@ or physical store geometry. The route manager remains unchanged. A later
 rerouting phase may consume a confirmed deviation event and recompute a path,
 but should first define route-update UX, safety constraints, and recovery
 behavior; none are implemented here.
+
+## Phase 5B — route recalculation after confirmed deviation
+
+### Objective and state model
+
+Recalculate the shopping route only when the Phase 5A deviation monitor reports
+a confirmed entry transition. The route manager maintains the current planned
+route, latest valid estimate, original and remaining shopping destinations,
+explicitly visited destinations, checkout, confirmed-deviation state, and
+reroute history. Passing through a destination node does not complete it;
+`confirm_destination_visit` is the only operation that removes a remaining
+stop. Duplicate requested stops are stably deduplicated for routing while the
+original request sequence is retained.
+
+Reroutes use a latch: one calculation is allowed on a new detector entry,
+additional samples while deviated are suppressed, and detector recovery
+re-arms the next entry. Route localization and Held-Karp calculation are
+completed before active route state is changed. Invalid or distant positions,
+an unreachable required stop, or being at checkout with unvisited stops
+produce a structured failure record and preserve the active route and shopping
+list. With no remaining shopping stops, the route still ends at checkout; at
+checkout with no stops it is the singleton checkout route.
+
+### Graph localization and routing limitation
+
+For an estimate `p=(x,y)` and graph edge endpoints `a` and `b`, localization
+projects onto the closed segment using
+
+```text
+t = clamp(dot(p - a, b - a) / dot(b - a, b - a), 0, 1)
+q = a + t * (b - a)
+snap_distance = norm(p - q)
+```
+
+The graph's stored coordinates and edge list are authoritative. Zero-length
+edges project to their endpoint. The closest edge is selected; equal-distance
+edge ties use the lexically sorted endpoint pair. If the perpendicular
+distance exceeds the configured maximum, localization fails instead of
+snapping to a distant node. The route start is the nearer endpoint to the
+projected point; an endpoint-distance tie chooses the lexically smaller node
+ID. The existing Dijkstra and Held-Karp APIs route from graph nodes only.
+Consequently, the partial distance between the projected position and chosen
+endpoint is omitted from reported graph route distance, and direction along
+the edge is not modeled. No connectivity is inferred beyond existing graph
+edges.
+
+### Simulation assumptions and evaluation method
+
+Run the reproducible evaluation and test suite from the repository root:
+
+```bash
+component3/.venv/bin/python -B -m \
+  component3.backend.comp3_reco_navigation.navigation.route_recalculation_simulation
+component3/.venv/bin/python -B -m unittest -v \
+  component3.backend.comp3_reco_navigation.tests.test_route_manager
+```
+
+The simulation uses seed `5052`, a 0.5 s sample interval, 1.2 m synthetic
+perpendicular deviation with seeded +/-0.01 m jitter, a 1.5 m maximum snap
+distance, three consecutive entry samples, and two recovery samples. These
+values are controlled simulation assumptions, not empirically calibrated
+hardware thresholds. Twelve scenarios cover route following, a brief
+deviation, sustained deviation, multiple/one/zero remaining stops, invalid
+and distant positions, unreachable stops, duplicate-trigger suppression,
+explicit visit confirmation, and return to the route. The unreachable-stop
+case uses a deliberately disconnected synthetic test graph; the main
+trajectory and successful scenarios use the existing store-map graph.
+
+Scenario labels are assigned by the simulation setup independently of the
+detector; no ground-truth label or trajectory is an input to the route manager.
+The logged expected-trigger denominator is eight scenarios: sustained
+deviation with zero, one, or multiple required stops, repeated deviation,
+return-after-reroute, beyond-snap-limit, and unreachable-stop cases. The
+invalid-position scenario is rejected before any confirmed detector event and
+is not counted as an expected trigger. False triggers are unexpected route
+changes in the route-following/brief-deviation controls; missed triggers are
+expected scenarios with no recorded attempt. Preservation rates use the eight
+attempted scenarios (success or failure). Mean route-distance change and mean delay use successful recalculations only
+(six cases). Delay is recorded from the confirming sample's timestamp to
+synchronous route calculation; both use the same sample timestamp, so observed
+delay is zero in this non-real-time simulation.
+
+### Actual results
+
+| Measure | Result |
+| --- | ---: |
+| Scenarios | 12 |
+| Expected trigger scenarios / attempts | 8 / 8 |
+| Successful / failed reroutes | 6 / 2 |
+| False / missed reroute triggers | 0 / 0 |
+| Mean confirmed-to-reroute delay | 0.000 s |
+| Mean route-distance change | -3.000 m across 6 successful reroutes |
+| Remaining-stop preservation | 1.000 (8/8 attempts) |
+| Checkout preservation | 1.000 (8/8 attempts) |
+| Duplicate reroutes suppressed | 1 |
+| Route-manager tests | 19 passed; 0 failed; 0 skipped |
+
+Both failed attempts leave the prior route and stops unchanged: one is rejected
+for exceeding the snap-distance limit and one cannot reach a required stop.
+The mean distance change is a result from the controlled graph scenarios, not
+a promise that rerouting always shortens a route. The zero delay reflects
+synchronous function execution in the simulator and is not an end-to-end
+latency measurement.
+
+Final regression validation passed: store-map validation (15 checks), Dijkstra
+(15 tests), Held-Karp (18), AprilTag (18, zero skipped), dead reckoning (16),
+route deviation (22), and route manager (19). Evidence validation accepted all
+31 indexed artifacts, and `git diff --check` reported no whitespace errors.
+
+### Reproducible outputs and evidence
+
+- `evaluation/route_recalculation/simulation_config.json` — seed, thresholds,
+  sampling, graph-localization policy, and node-only limitation.
+- `evaluation/route_recalculation/events.csv` — one independently initialized
+  scenario result per row, including routes, visits, attempts, failures,
+  distances, trigger sample, and preservation checks.
+- `evaluation/route_recalculation/metrics.json` — aggregate counts and
+  explicitly denominated means/rates.
+- `evaluation/route_recalculation/reproducibility.log` — human-readable run
+  summary and scope note.
+- `evaluation/test_results/route_manager_tests.txt` — captured actual
+  `unittest` output.
+- `screenshots/C3-POS-010_route_recalculation.png` and its SVG source —
+  original and recalculated shopping routes, confirmed deviation estimate,
+  remaining shopping stops, route distances, and a failed snap-distance case.
+
+### Limitations and future connection
+
+All deviations and positions are synthetic; no frontend, physical sensor,
+hardware dependency, or automatic hardware control is included. The
+node-only-routing approximation omits projected partial-edge travel and
+heading/direction. The evaluation does not characterize real-time performance,
+map uncertainty, detector false alarms under field data, or safety behavior in
+a live trolley. A future frontend integration must communicate route changes
+and failure states clearly. Physical deployment would additionally require
+independent localization confidence, partial-edge routing or a documented
+node-anchor policy, and tested recovery/safety behavior. Automatic rerouting
+does not itself establish any physical accuracy or safety claim.

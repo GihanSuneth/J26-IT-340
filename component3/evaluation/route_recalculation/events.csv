@@ -1,0 +1,13 @@
+scenario,mode,expected_reroute,original_route,new_route,remaining_destinations_before,remaining_destinations_after,visited_destinations,reroute_attempts,successful_reroutes,failed_reroutes,false_reroute_triggers,missed_reroute_triggers,detection_delay_samples,detection_delay_s,previous_route_distance_m,new_route_distance_m,route_distance_change_m,remaining_stops_preserved,checkout_preserved,duplicate_reroute_suppressed,confirmation_sample_index,failure_reason
+normal_route_following,normal,False,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,B1 B3 B5,B1 B3 B5,,0,0,0,0,0,,,30.290000,,,1,1,0,-1,
+brief_deviation_no_reroute,brief,False,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,B1 B3 B5,B1 B3 B5,,0,0,0,0,0,,,30.290000,,,1,1,0,-1,
+sustained_deviation_success,sustained,True,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,B4 B3 B2 B1 B2 B3 B4 B5 CHK,B1 B3 B5,B1 B3 B5,,1,1,0,0,0,0,0.000,30.290000,27.290000,-3.000000,1,1,0,2,
+multiple_remaining_stops,sustained,True,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,B4 B3 B2 B1 B2 B3 B4 B5 CHK,B1 B3 B5,B1 B3 B5,,1,1,0,0,0,0,0.000,30.290000,27.290000,-3.000000,1,1,0,2,
+one_remaining_stop,sustained,True,ENT B4 B5 CHK,B4 B5 CHK,B5,B5,,1,1,0,0,0,0,0.000,8.690000,5.690000,-3.000000,1,1,0,2,
+no_remaining_stops,sustained,True,ENT B4 B5 CHK,B4 B5 CHK,,,,1,1,0,0,0,0,0.000,8.690000,5.690000,-3.000000,1,1,0,2,
+invalid_position_estimate,invalid,False,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,B1 B3,B1 B3,,0,0,0,0,0,,,30.290000,,,1,1,0,-1,invalid_position
+position_beyond_snap_limit,far,True,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,B1 B3,B1 B3,,1,0,1,0,0,,,30.290000,,,1,1,0,2,position_exceeds_max_snapping_distance
+unreachable_destination,unreachable,True,A B C,A B C,B,B,,1,0,1,0,0,,,2.000000,,,1,1,0,2,route_computation_failed: Required location 'B' is unreachable from 'D'
+repeated_deviated_samples,repeated,True,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,B4 B3 B2 B1 B2 B3 B4 B5 CHK,B1 B3,B1 B3,,1,1,0,0,0,0,0.000,30.290000,27.290000,-3.000000,1,1,1,2,
+explicit_visit_confirmation,visit,False,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,B1 B2 B3 B4 B5 CHK,B1 B3 B5,B3 B5,B1,0,0,0,0,0,,,30.290000,,,1,1,0,-1,
+return_to_route_after_reroute,return,True,ENT B4 B3 B2 B1 B2 B3 B4 B5 CHK,B4 B3 B2 B1 B2 B3 B4 B5 CHK,B1 B3 B5,B1 B3 B5,,1,1,0,0,0,0,0.000,30.290000,27.290000,-3.000000,1,1,0,2,

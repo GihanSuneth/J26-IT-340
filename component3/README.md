@@ -88,6 +88,37 @@ precision=0.900000, recall=0.642857, F1=0.750000, and a mean detected-episode
 delay of two samples (1.0 s). These are controlled synthetic results; see the
 position-tracking research notes for methodology and limitations.
 
+## Phase 5B — route recalculation after confirmed deviation
+
+`python -B -m component3.backend.comp3_reco_navigation.navigation.route_recalculation_simulation`
+evaluates automatic route recalculation after the Phase 5A detector enters a
+confirmed deviated state. `navigation/route_manager.py` projects the position
+estimate onto the nearest valid graph edge, applies deterministic edge and
+endpoint tie-breaking, and uses the selected endpoint as the starting node for
+the existing Held-Karp/Dijkstra route algorithms. Recalculation is latched for
+the duration of a deviation episode; it can trigger again only after the
+detector reports recovery and a later entry. Shopping stops are removed only by
+an explicit visit-confirmation event. Failed localization or route calculation
+retains the active route and remaining list.
+
+The seed-5052 evaluation covers 12 controlled scenarios. Its assumptions
+include 0.5 s samples, 1.2 m synthetic lateral deviation with seeded +/-0.01 m
+jitter, 1.5 m maximum snap distance, three entry confirmations, and two
+recovery confirmations; these are not sensor calibrations. The run produced
+six successful and two failed reroute attempts, zero false or missed reroute
+triggers, 1.000 remaining-stop and checkout preservation rates, and one
+suppressed duplicate attempt. Mean synchronous trigger-to-reroute delay was
+0.000 s; mean route-distance change was -3.000 m across six successful
+scenarios. These synthetic results do not imply hardware performance.
+
+The graph is localized to an edge but routing remains node-only. Dijkstra and
+Held-Karp begin at the deterministically chosen endpoint, so the partial-edge
+distance from the trolley estimate to that endpoint is omitted from the route
+cost. Full scenario records and reproducibility data are under
+`evaluation/route_recalculation/`; the route-manager suite has 19 tests.
+See `docs/research_evidence/05_position_tracking/notes.md` for metric
+definitions, assumptions, and limitations.
+
 ## Validation
 
 Run commands from the repository root:
@@ -111,10 +142,14 @@ component3/.venv/bin/python -B -m unittest -v \
   component3.backend.comp3_reco_navigation.tests.test_dead_reckoning
 component3/.venv/bin/python -B -m unittest -v \
   component3.backend.comp3_reco_navigation.tests.test_deviation
+component3/.venv/bin/python -B -m unittest -v \
+  component3.backend.comp3_reco_navigation.tests.test_route_manager
 component3/.venv/bin/python -B -m \
   component3.backend.comp3_reco_navigation.navigation.position_tracking_simulation
 component3/.venv/bin/python -B -m \
   component3.backend.comp3_reco_navigation.navigation.deviation_simulation
+component3/.venv/bin/python -B -m \
+  component3.backend.comp3_reco_navigation.navigation.route_recalculation_simulation
 python3 -B -m \
   component3.backend.comp3_reco_navigation.navigation.held_karp_demo
 python3 -B component3/data/store_map/validate_store_map.py

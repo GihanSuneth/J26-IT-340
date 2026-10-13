@@ -22,6 +22,20 @@ work or results; mark them `Pending` or `Not applicable`.
 
 ## Verified entries
 
+### 2026-10-14 02:03 +0530 — Phase 5B route recalculation
+
+- **Development phase:** Phase 5B — Automatic Route Recalculation After Confirmed Deviation
+- **Objective:** Recalculate the remaining shopping route after the existing detector confirms a deviation, without changing other components or starting frontend/hardware integration.
+- **Work completed:** Implemented graph-edge localization with a snap limit and deterministic endpoint anchoring; added atomic Held-Karp/Dijkstra route replacement, explicit visit confirmation, recovery re-arming and duplicate-attempt suppression; built 12 seeded scenarios and saved event, aggregate, configuration, reproducibility, test, and PNG/SVG evidence outputs.
+- **Files created or modified:** `backend/comp3_reco_navigation/navigation/route_manager.py`, `backend/comp3_reco_navigation/navigation/route_recalculation_simulation.py`, `backend/comp3_reco_navigation/tests/test_route_manager.py`, `evaluation/route_recalculation/`, `evaluation/test_results/route_manager_tests.txt`, `docs/research_evidence/05_position_tracking/screenshots/C3-POS-010*`, `docs/research_evidence/05_position_tracking/notes.md`, `docs/research_evidence/evidence_index.csv`, `docs/research_evidence/progress_log.md`, and `README.md`.
+- **Tools and technologies used:** Existing StoreGraph, deviation detector, Dijkstra and Held-Karp code; CPython project environment, standard-library `unittest`, seeded `random.Random`, OpenCV/NumPy, CSV/JSON/PNG/SVG.
+- **Implementation decisions and reasons:** Project estimates to valid store-graph edges, reject estimates farther than 1.5 m, and select the nearest endpoint with lexical tie-breaking because route algorithms accept nodes only; preserve the prior route/list until a complete replacement exists; only explicit visits remove stops; use a detector-entry latch rearmed on recovery; keep scenario labels separate from route-manager inputs.
+- **Problems encountered:** Initial tests relied on a route having no repeated transit nodes and treated an on-route estimate as a deviation; route expansion may validly transit a required stop more than once.
+- **Solutions attempted:** Updated the test assumptions to allow graph transit and directly tested the already-at-checkout result; added regression coverage for entry-only triggering and recovery re-arming; reran tests and the seeded evaluation.
+- **Test results:** Store-map validation passed 15 checks; Dijkstra 15/15, Held-Karp 18/18, AprilTag 18/18 (zero skipped), dead reckoning 16/16, route deviation 22/22, and route manager 19/19; evidence validation accepted 31 artifacts; `git diff --check` passed. Seed 5052 produced 12 scenarios, six successful and two failed attempts, zero false or missed triggers, one suppressed duplicate attempt, 1.000 remaining-stop/checkout preservation rates (8/8 attempts), mean synchronous trigger-to-reroute delay 0.000 s, and -3.000 m mean route-distance change across six successful reroutes. Results are synthetic only.
+- **Evidence screenshot references:** `C3-POS-010` route recalculation map; `C3-POS-011` route-manager test output; `C3-POS-012` machine-readable aggregate metrics.
+- **Next planned action:** Review this Phase 5B report; no commit, push, frontend integration, or Phase 5C work.
+
 ### 2026-10-14 01:29 +0530 — Phase 5A route-deviation detection
 
 - **Development phase:** Phase 5A — Route Deviation Detection

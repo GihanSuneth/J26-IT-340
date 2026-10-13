@@ -1,0 +1,43 @@
+test_already_at_checkout_and_checkout_preservation (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_already_at_checkout_and_checkout_preservation)
+Return a singleton checkout route when no shopping stops remain. ... ok
+test_already_at_checkout_with_stops_fails_atomically (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_already_at_checkout_with_stops_fails_atomically)
+Do not claim shopping stops are complete at checkout. ... ok
+test_boolean_position_does_not_update_estimate_or_route (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_boolean_position_does_not_update_estimate_or_route)
+Reject bool coordinates even though bool is a Python numeric subtype. ... ok
+test_detector_recovery_rearms_rerouting (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_detector_recovery_rearms_rerouting)
+Allow another reroute only after the deviation state has recovered. ... ok
+test_deterministic_rerouting (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_deterministic_rerouting)
+Repeat equivalent reroutes and compare graph route and distance. ... ok
+test_dijkstra_and_held_karp_are_used_for_rerouting (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_dijkstra_and_held_karp_are_used_for_rerouting)
+Reroute from the localized node while retaining every pending stop. ... ok
+test_duplicate_destinations_are_stably_deduplicated (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_duplicate_destinations_are_stably_deduplicated)
+Keep original requests but route each required destination once. ... ok
+test_explicit_visit_confirmation_only (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_explicit_visit_confirmation_only)
+Passing a shopping node in the route does not mark it visited. ... ok
+test_failed_localization_is_atomic (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_failed_localization_is_atomic)
+Keep previous route and shopping list after too-distant estimate. ... ok
+test_graph_localization_projects_and_chooses_nearest_endpoint (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_graph_localization_projects_and_chooses_nearest_endpoint)
+Project onto a known store edge and select the closer endpoint. ... ok
+test_invalid_localization_failure_has_structured_record (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_invalid_localization_failure_has_structured_record)
+Store a malformed estimate failure without touching session state. ... ok
+test_invalid_position_and_maximum_distance (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_invalid_position_and_maximum_distance)
+Return safe localization failure for malformed estimates. ... ok
+test_localization_threshold_boundary_and_distant_rejection (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_localization_threshold_boundary_and_distant_rejection)
+Accept a snap exactly at maximum distance and reject a larger one. ... ok
+test_no_repeated_rerouting_while_deviation_persists (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_no_repeated_rerouting_while_deviation_persists)
+Suppress repeated attempts until detector exits and re-enters. ... ok
+test_rerouting_requires_enter_transition (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_rerouting_requires_enter_transition)
+Do not recalculate from a latched state without a new entry event. ... ok
+test_session_initialization_uses_held_karp_route (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_session_initialization_uses_held_karp_route)
+Initialize route, destination lists, checkout, and route length. ... ok
+test_successful_reroute_is_atomic_and_tracks_history (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_successful_reroute_is_atomic_and_tracks_history)
+Record distances and timestamps only after route calculation succeeds. ... ok
+test_unreachable_destination_preserves_active_session (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_unreachable_destination_preserves_active_session)
+Keep route and stops unchanged when localized component cannot reach stops. ... ok
+test_visit_recalculation_with_no_remaining_stops (component3.backend.comp3_reco_navigation.tests.test_route_manager.RouteManagerTests.test_visit_recalculation_with_no_remaining_stops)
+Keep checkout as the route after the final explicit visit. ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.005s
+
+OK

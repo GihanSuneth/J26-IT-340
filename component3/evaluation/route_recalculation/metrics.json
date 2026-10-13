@@ -1,0 +1,16 @@
+{
+  "seed": 5052,
+  "scenario_count": 12,
+  "successful_reroutes": 6,
+  "failed_reroutes": 2,
+  "false_reroute_triggers": 0,
+  "missed_reroute_triggers": 0,
+  "expected_trigger_scenarios": 8,
+  "trigger_scenarios_attempted": 8,
+  "mean_confirmed_to_reroute_delay_s": 0.0,
+  "mean_route_distance_change_m": -3.0,
+  "remaining_stop_preservation_rate": 1.0,
+  "checkout_preservation_rate": 1.0,
+  "duplicate_reroutes_suppressed": 1,
+  "route_change_attempt_count": 8
+}

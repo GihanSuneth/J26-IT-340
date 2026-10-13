@@ -1,0 +1,21 @@
+{
+  "seed": 5052,
+  "sample_interval_s": 0.5,
+  "position_offset_m": 1.2,
+  "seeded_offset_jitter_m": 0.01,
+  "maximum_graph_snapping_distance_m": 1.5,
+  "deviation_enter_confirmations": 3,
+  "deviation_recovery_confirmations": 2,
+  "route_start_node_id": "ENT",
+  "checkout_node_id": "CHK",
+  "shopping_destinations": [
+    "B1",
+    "B3",
+    "B5"
+  ],
+  "localization_policy": "Project to nearest valid edge; equal-distance edges choose lexical unordered endpoints; start at nearer endpoint, lexical tie-break.",
+  "node_only_limitation": "The fractional edge position is not represented in Dijkstra/Held-Karp costs; routing starts at the selected endpoint and omits partial-edge travel.",
+  "scenario_count": 12,
+  "truth_usage": "No ground-truth label is passed to RouteManager.",
+  "physical_calibration": false
+}

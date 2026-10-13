@@ -1,0 +1,14 @@
+Component 3 Phase 5B route recalculation simulation
+Seed: 5052
+Scenarios: 12
+Successful reroutes: 6
+Failed reroutes: 2
+False reroute triggers: 0
+Missed reroute triggers: 0
+Mean confirmed-to-reroute delay: 0.000 s
+Mean route-distance change: -3.000 m
+Remaining-stop preservation: 1.000
+Checkout preservation: 1.000
+Duplicate reroutes suppressed: 1
+Scenario labels are evaluation controls and are not detector or route-manager inputs.
+No hardware accuracy claim is made.
