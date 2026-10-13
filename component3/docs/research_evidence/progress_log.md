@@ -22,6 +22,20 @@ work or results; mark them `Pending` or `Not applicable`.
 
 ## Verified entries
 
+### 2026-10-14 01:08 +0530 — Phase 4A simulated position tracking
+
+- **Development phase:** Phase 4A — Simulated Trolley Position Tracking
+- **Objective:** Evaluate encoder/IMU dead-reckoning with deterministic synthetic movement and existing simulated AprilTag checkpoint corrections; no physical hardware was available.
+- **Work completed:** Implemented a validated midpoint dead-reckoner; built a seeded simulation along a Held-Karp route on the existing Dijkstra graph; generated aligned ideal and noisy measurement streams and simulated mapped-checkpoint corrections; added 16 standard-library tests; produced actual trajectory/metrics CSVs, reproducibility log, OpenCV trajectory/error PNGs and SVG sources; documented assumptions, results, limitations, and future hardware integration.
+- **Files created or modified:** `backend/comp3_reco_navigation/navigation/dead_reckoning.py`, `backend/comp3_reco_navigation/navigation/position_tracking_simulation.py`, `backend/comp3_reco_navigation/tests/test_dead_reckoning.py`, `evaluation/position_tracking/`, `evaluation/test_results/position_tracking_tests.txt`, `docs/research_evidence/05_position_tracking/notes.md`, the three `C3-POS-00*.png` and companion SVG plots, `docs/research_evidence/evidence_index.csv`, `docs/research_evidence/progress_log.md`, and `README.md`.
+- **Tools and technologies used:** CPython 3.14.0, NumPy 2.5.4, OpenCV 5.0.0, Python standard-library `unittest`, CSV/JSON/SVG, fixed-seed `random.Random`, existing Dijkstra/Held-Karp/store graph/AprilTag layout.
+- **Implementation decisions and reasons:** Kept `MotionMeasurement` sensor-only and ground truth in a separate simulation trace; used east/north metric coordinates and counter-clockwise heading from +x; integrated wheel displacement at midpoint heading; emitted checkpoint events only for mapped route-node arrivals; snapped only x/y to exact existing map coordinates; used the same seeded noisy sequence for scenarios B and C. All noise/bias values are explicit simulation assumptions, not physical calibrations.
+- **Problems encountered:** Matplotlib/Pillow are not installed in the project environment. No package was installed.
+- **Solutions attempted:** Generated scalable SVG figures and 1400×900 PNG plots with the already-installed OpenCV dependency.
+- **Test results:** 16/16 dead-reckoning tests passed. Scenario A: mean/RMSE/max/final error 0 m. Scenario B: mean 0.292980 m, RMSE 0.489878 m, max/final 1.313433 m. Scenario C: mean 0.081926 m, RMSE 0.138332 m, max 0.482411 m, final 0 m; nine simulated corrections had mean error 0.194205 m before and 0 m after. These are synthetic results only.
+- **Evidence screenshot references:** `C3-POS-001` through `C3-POS-005`; generated plots and machine-readable metrics are indexed in `evidence_index.csv`.
+- **Next planned action:** Run full Phase 4A and prior Component 3 validation, inspect generated plots, then stop for review; no commit or hardware phase is authorized.
+
 ### 2026-10-13 22:48 +0530 — Research evidence structure established
 
 - **Development phase:** Evidence-management setup across all Component 3 phases

@@ -1,0 +1,37 @@
+test_checkpoint_correction_reduces_error_at_mapped_node (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_checkpoint_correction_reduces_error_at_mapped_node)
+A simulated map snap has zero node-position error at arrival. ... ok
+test_checkpointed_and_uncorrected_scenarios_share_measurements (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_checkpointed_and_uncorrected_scenarios_share_measurements)
+Compare correction strategies over the exact same noisy trajectory. ... ok
+test_estimator_does_not_receive_ground_truth (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_estimator_does_not_receive_ground_truth)
+The sensor input and estimator state expose no truth coordinates. ... ok
+test_heading_normalization (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_heading_normalization)
+Normalize initial and integrated headings to [-pi, pi). ... ok
+test_ideal_measurements_have_zero_error (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_ideal_measurements_have_zero_error)
+The zero-noise scenario exactly follows its generated path. ... ok
+test_invalid_measurement_values (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_invalid_measurement_values)
+Reject non-finite displacement and yaw values. ... ok
+test_invalid_timestamps (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_invalid_timestamps)
+Reject repeated and backwards timestamps. ... ok
+test_no_correction_scenario_does_not_snap_at_checkpoints (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_no_correction_scenario_does_not_snap_at_checkpoints)
+Known checkpoint arrivals do not alter an uncorrected estimate. ... ok
+test_noisy_measurements_are_nonideal (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_noisy_measurements_are_nonideal)
+Seeded noise and bias produce position error along the route. ... ok
+test_repeated_simulation_is_deterministic (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_repeated_simulation_is_deterministic)
+Reproduce ground truth, sensor streams, and events for a fixed seed. ... ok
+test_simulated_checkpoint_correction (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_simulated_checkpoint_correction)
+Correct x/y to the known checkpoint and preserve heading and time. ... ok
+test_stationary_measurement (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_stationary_measurement)
+Keep position unchanged for a stationary zero-yaw sample. ... ok
+test_straight_line_motion (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_straight_line_motion)
+Integrate forward movement along the positive x-axis. ... ok
+test_turning_and_forward_motion (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_turning_and_forward_motion)
+Integrate a stationary quarter turn followed by northward travel. ... ok
+test_unknown_checkpoint_is_rejected (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_unknown_checkpoint_is_rejected)
+Do not map a simulated unknown tag to a graph position. ... ok
+test_zero_distance_turn (component3.backend.comp3_reco_navigation.tests.test_dead_reckoning.DeadReckoningTests.test_zero_distance_turn)
+Allow heading updates when wheel displacement is zero. ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.006s
+
+OK

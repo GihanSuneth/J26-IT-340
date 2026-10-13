@@ -1,0 +1,15 @@
+Component 3 simulated position-tracking evaluation
+Ground truth, sensor streams, and checkpoint events generated deterministically.
+AprilTag events in this run are simulated map lookups, not OpenCV image detections.
+Seed: 3404
+Route: ENT -> B4 -> B3 -> B2 -> B1 -> B2 -> B3 -> B4 -> B5 -> CHK
+Ground-truth samples: 182
+Checkpoint observations: 9
+B and C scenarios use the same noisy measurement sequence and ground truth.
+All dimensions, speed, noise, and bias values are simulation assumptions, not measured sensor calibration.
+No physical-camera, wheel-encoder, or IMU accuracy claim is made.
+
+Metrics:
+ideal: mean=0.000000 m, RMSE=0.000000 m, max=0.000000 m, final=0.000000 m, checkpoint mean before/after=0.000000/0.000000 m
+noisy_no_corrections: mean=0.292980 m, RMSE=0.489878 m, max=1.313433 m, final=1.313433 m, checkpoint mean before/after=0.000000/0.000000 m
+noisy_checkpoint_corrected: mean=0.081926 m, RMSE=0.138332 m, max=0.482411 m, final=0.000000 m, checkpoint mean before/after=0.194205/0.000000 m

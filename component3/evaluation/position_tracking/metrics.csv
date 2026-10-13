@@ -1,0 +1,4 @@
+scenario,measurement_mode,checkpoint_corrections,mean_position_error_m,rmse_position_error_m,max_position_error_m,final_position_error_m,mean_error_before_checkpoint_m,mean_error_after_checkpoint_m
+ideal,zero_noise_zero_bias,0,0.00000000,0.00000000,0.00000000,0.00000000,0.00000000,0.00000000
+noisy_no_corrections,seeded_noise_and_bias,0,0.29297968,0.48987823,1.31343275,1.31343275,0.00000000,0.00000000
+noisy_checkpoint_corrected,same_seeded_noise_and_bias,9,0.08192618,0.13833159,0.48241068,0.00000000,0.19420508,0.00000000

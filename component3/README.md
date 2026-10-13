@@ -36,6 +36,27 @@ Owner: comp3. Population-level POS data only (no individual customer data); reco
 - `ml/configs/comp3_cnn.yaml` — CNN configuration.
 - `ml/configs/comp3_reco.yaml` — recommendation configuration.
 - `data/raw/Retail_pos_basket_data.csv` — ignored local POS dataset.
+- `backend/comp3_reco_navigation/navigation/position_tracking_simulation.py` —
+  deterministic synthetic encoder/IMU evaluation and report figure generator.
+
+## Phase 4A — simulated position tracking
+
+`python -B -m component3.backend.comp3_reco_navigation.navigation.position_tracking_simulation`
+replays the Dijkstra/Held-Karp route through the existing metric store map and
+writes deterministic ground truth, ideal/noisy sensor streams, checkpoint
+events, aggregate metrics, a reproducibility log, and plots. Motion uses east
+as +x, north as +y, and heading counter-clockwise from +x. The estimator
+integrates signed wheel displacement with IMU yaw increments using the
+midpoint method. At mapped graph-node arrivals, the corrected scenario uses
+the existing tag-ID-to-node mapping and exact stored x/y as a simulated map
+observation; it is not an OpenCV detection.
+
+All noise, bias, speed, sampling, and turn settings are assumptions recorded
+in `evaluation/position_tracking/simulation_config.json`, not physical sensor
+calibrations. Scenarios B and C share the exact same noisy samples and truth.
+This simulation does not establish camera, encoder, or IMU hardware accuracy.
+See `docs/research_evidence/05_position_tracking/notes.md` for the evaluated
+method and observed results.
 
 ## Validation
 
@@ -56,6 +77,10 @@ python3 -B -m component3.backend.comp3_reco_navigation.tests.test_held_karp \
 component3/.venv/bin/python -B -m \
   component3.backend.comp3_reco_navigation.tests.test_apriltag \
   --output component3/evaluation/test_results/apriltag_tests.txt
+component3/.venv/bin/python -B -m unittest -v \
+  component3.backend.comp3_reco_navigation.tests.test_dead_reckoning
+component3/.venv/bin/python -B -m \
+  component3.backend.comp3_reco_navigation.navigation.position_tracking_simulation
 python3 -B -m \
   component3.backend.comp3_reco_navigation.navigation.held_karp_demo
 python3 -B component3/data/store_map/validate_store_map.py

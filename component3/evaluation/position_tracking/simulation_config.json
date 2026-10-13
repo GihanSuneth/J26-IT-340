@@ -1,0 +1,18 @@
+{
+  "checkout_node_id": "CHK",
+  "encoder_bias_fraction": 0.002,
+  "encoder_noise_std_m": 0.003,
+  "imu_yaw_bias_rad_s": 0.002617993877991494,
+  "imu_yaw_noise_std_rad": 0.004363323129985824,
+  "nominal_speed_m_s": 0.8,
+  "sample_interval_s": 0.25,
+  "seed": 3404,
+  "shopping_stop_ids": [
+    "B1",
+    "B3",
+    "B5"
+  ],
+  "start_node_id": "ENT",
+  "stationary_samples_per_node": 1,
+  "turn_duration_s": 0.5
+}
