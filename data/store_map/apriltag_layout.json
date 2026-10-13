@@ -1,5 +1,24 @@
 {
-  "_description": "AprilTag ID -> checkpoint node and pose.",
-  "_owner": "comp3",
-  "tags": []
+  "schema_version": "1.0",
+  "description": "AprilTag checkpoints for the simulated six-section supermarket prototype.",
+  "owner": "comp3",
+  "prototype_notice": "Positions, orientations, and marker sizes are simulated design values for prototype evaluation.",
+  "family": "tag36h11",
+  "coordinate_system": {
+    "origin": "south-west corner of the simulated store floor",
+    "x_axis": "east",
+    "y_axis": "north",
+    "position_unit": "metre",
+    "orientation": "degrees counter-clockwise from the positive x-axis"
+  },
+  "tags": [
+    {"tag_id": 100, "node_id": "ENT", "x_m": 13.8, "y_m": 0.0, "orientation_deg": 90.0, "size_m": 0.16, "location_name": "Entrance"},
+    {"tag_id": 101, "node_id": "CHK", "x_m": 18.0, "y_m": 1.0, "orientation_deg": 180.0, "size_m": 0.16, "location_name": "Checkout"},
+    {"tag_id": 110, "node_id": "B1", "x_m": 3.0, "y_m": 3.0, "orientation_deg": 270.0, "size_m": 0.16, "location_name": "Produce south access"},
+    {"tag_id": 111, "node_id": "B2", "x_m": 6.6, "y_m": 3.0, "orientation_deg": 270.0, "size_m": 0.16, "location_name": "Bakery south access"},
+    {"tag_id": 112, "node_id": "B3", "x_m": 10.2, "y_m": 3.0, "orientation_deg": 270.0, "size_m": 0.16, "location_name": "Dairy south access"},
+    {"tag_id": 113, "node_id": "B4", "x_m": 13.8, "y_m": 3.0, "orientation_deg": 270.0, "size_m": 0.16, "location_name": "Meat south access"},
+    {"tag_id": 114, "node_id": "B5", "x_m": 17.4, "y_m": 3.0, "orientation_deg": 270.0, "size_m": 0.16, "location_name": "Frozen south access"},
+    {"tag_id": 115, "node_id": "B6", "x_m": 21.0, "y_m": 3.0, "orientation_deg": 270.0, "size_m": 0.16, "location_name": "General grocery south access"}
+  ]
 }

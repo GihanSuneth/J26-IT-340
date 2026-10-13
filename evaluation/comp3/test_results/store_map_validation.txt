@@ -1,0 +1,35 @@
+Component 3 Store Map Validation
+================================
+Executed: 2026-10-13T22:59:17+05:30
+Python: 3.14.0
+Git commit: 0b4340f28acd805b9b4821e07a47341e06ee7133
+Command: python3 data/store_map/validate_store_map.py --output evaluation/comp3/test_results/store_map_validation.txt
+Sources:
+- data/store_map/store_graph.json
+- data/store_map/apriltag_layout.json
+- shared/db/seed/products.csv
+- shared/db/seed/store_locations.csv
+
+[PASS] JSON structure: Graph and tag documents parsed as JSON objects with list collections
+[PASS] Unique graph node IDs: 20 node IDs checked
+[PASS] Valid edge references: 29 edge endpoint pairs checked
+[PASS] Positive edge distances: 29 distances checked in metres
+[PASS] Undirected edge uniqueness: No duplicated undirected node pairs
+[PASS] Graph connectivity: 20 of 20 nodes reachable
+[PASS] Entrance and checkout: Exactly one entrance and one checkout node
+[PASS] Coordinate system and units: All nodes within simulated 24.0 m × 18.0 m footprint; metres declared
+[PASS] Edge geometry consistency: Walking distances are not shorter than straight-line coordinate distances
+[PASS] Six section references: bakery, dairy, frozen, general_grocery, meat, produce
+[PASS] Valid product-location references: 0 graph mappings and 0 seed location rows checked against 0 product IDs
+[PASS] Unique AprilTag IDs: 8 integer tag IDs checked
+[PASS] Valid AprilTag node mappings: 8 tag-to-node mappings checked
+[PASS] AprilTag family and physical properties: Family tag36h11; positive size and valid orientation checked
+[PASS] AprilTag coordinate consistency: Every tag position matches its mapped graph node
+
+Graph nodes: 20
+Graph edges: 29
+Store sections: 6
+Product seed rows: 0
+Product mappings: 0
+AprilTag checkpoints: 8
+Overall result: PASS

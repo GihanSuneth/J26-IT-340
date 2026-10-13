@@ -13,10 +13,15 @@ dist/
 data/raw/*
 !data/raw/README.md
 data/processed/*
+!data/processed/.gitkeep
 data/datasets/*/*
 !data/datasets/*/.gitkeep
+!data/datasets/*/README.md
+!data/datasets/*/ATTRIBUTION.csv
 ml/models/*
 !ml/models/README.md
+!ml/models/comp3/
+!ml/models/comp3/.gitkeep
 *.pt
 *.onnx
 *.pkl
