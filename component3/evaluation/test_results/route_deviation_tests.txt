@@ -1,0 +1,49 @@
+test_consecutive_confirmation_resets_on_a_good_sample (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_consecutive_confirmation_resets_on_a_good_sample)
+Require uninterrupted above-threshold observations before entry. ... ok
+test_diagonal_segment_distance (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_diagonal_segment_distance)
+Project onto a diagonal route using Euclidean coordinates. ... ok
+test_horizontal_segment_distance (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_horizontal_segment_distance)
+Measure perpendicular distance to a horizontal route segment. ... ok
+test_hysteresis_and_recovery_confirmation (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_hysteresis_and_recovery_confirmation)
+Hold state between enter and exit thresholds and confirm recovery. ... ok
+test_invalid_coordinates_and_threshold (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_invalid_coordinates_and_threshold)
+Reject nonfinite, boolean, and negative position/threshold values. ... ok
+test_invalid_graph_coordinates_are_rejected (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_invalid_graph_coordinates_are_rejected)
+Do not accept nonfinite coordinates from a malformed graph. ... ok
+test_invalid_graph_nodes_and_disconnected_route (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_invalid_graph_nodes_and_disconnected_route)
+Reject unknown nodes and non-edge consecutive route pairs. ... ok
+test_invalid_position_does_not_advance_confirmation (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_invalid_position_does_not_advance_confirmation)
+Reject an invalid sample without mutating the pending count. ... ok
+test_invalid_scenario_positions_are_excluded_without_alarm (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_invalid_scenario_positions_are_excluded_without_alarm)
+Reject invalid estimate coordinates and exclude them from metrics. ... ok
+test_progress_scaled_threshold (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_progress_scaled_threshold)
+Apply the configured epsilon(d) threshold along the planned route. ... ok
+test_projection_after_segment_end_is_clamped (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_projection_after_segment_end_is_clamped)
+Use the segment end rather than an unbounded projection. ... ok
+test_projection_before_segment_start_is_clamped (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_projection_before_segment_start_is_clamped)
+Use the segment start rather than an unbounded projection. ... ok
+test_route_with_multiple_segments (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_route_with_multiple_segments)
+Choose the nearest of all consecutive route segments. ... ok
+test_scenario_generation_is_reproducible_and_labeled (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_scenario_generation_is_reproducible_and_labeled)
+Reproduce labeled truth and sensor estimates using the fixed seed. ... ok
+test_single_node_route_endpoint (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_single_node_route_endpoint)
+Treat a one-node route as a point endpoint. ... ok
+test_small_noisy_positions_do_not_raise_alarm (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_small_noisy_positions_do_not_raise_alarm)
+Keep deterministic small perturbations within the route threshold. ... ok
+test_state_reset (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_state_reset)
+Clear active deviation state and both consecutive counters. ... ok
+test_sustained_deviation_and_recovery (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_sustained_deviation_and_recovery)
+Latch sustained distance and recover after consecutive close samples. ... ok
+test_sustained_scenario_confirms_and_truth_is_not_detector_input (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_sustained_scenario_confirms_and_truth_is_not_detector_input)
+Confirm synthetic sustained offsets while estimate API stays sensor-only. ... ok
+test_threshold_boundary_is_on_route (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_threshold_boundary_is_on_route)
+The detector only classifies distances strictly above threshold. ... ok
+test_vertical_segment_distance (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_vertical_segment_distance)
+Measure perpendicular distance to a vertical route segment. ... ok
+test_zero_length_coordinate_segment (component3.backend.comp3_reco_navigation.tests.test_deviation.RouteDeviationTests.test_zero_length_coordinate_segment)
+Handle adjacent valid nodes with identical stored coordinates. ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.002s
+
+OK

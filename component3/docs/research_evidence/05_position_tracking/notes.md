@@ -123,3 +123,131 @@ filtering. Future hardware work must calibrate the encoder and IMU, estimate
 camera/tag pose and uncertainty, handle real timestamp synchronization, and
 evaluate against independently measured ground truth before claiming physical
 performance.
+
+## Phase 5A — route-deviation detection
+
+### Objective and scope
+
+Evaluate deterministic deviation detection against a planned shopping route
+using the existing simulated store graph. This work does not implement
+automatic rerouting and does not claim physical position accuracy.
+
+### Geometry and detector
+
+The planned route is the ordered node sequence returned by the existing
+Held-Karp/Dijkstra route implementation. `deviation.py` uses only each graph
+node's stored `x_m`/`y_m` coordinates. Consecutive nodes form straight
+segments. For estimate `p`, segment start `a`, and direction `v = b - a`, the
+projection parameter is
+
+```text
+t = clamp(dot(p - a, v) / dot(v, v), 0, 1)
+q = a + t * v
+distance = norm(p - q)
+```
+
+Zero-length coordinate segments project to their shared endpoint. A route with
+one valid node is treated as a point; multi-node routes must use graph edges.
+The minimum distance across all segments is reported with the nearest segment,
+projected point, and cumulative coordinate-polyline progress. Threshold
+boundaries use strict `distance > threshold` semantics.
+
+The default enter threshold follows the project rule
+`epsilon(d) = 0.3 + 0.02*d` metres, with `d` measured along the coordinate
+polyline. Callers can instead configure a fixed metre-valued threshold.
+Deviation entry requires three consecutive samples above the enter threshold.
+The exit threshold is `max(0, enter_threshold - 0.15 m)`; recovery requires two
+consecutive samples at or below it. These configurable thresholds/counts are
+simulation assumptions, not empirical or hardware-calibrated values.
+
+### Reproducible scenarios and evaluation
+
+Run from the repository root:
+
+```bash
+component3/.venv/bin/python -B -m \
+  component3.backend.comp3_reco_navigation.navigation.deviation_simulation
+component3/.venv/bin/python -B -m unittest -v \
+  component3.backend.comp3_reco_navigation.tests.test_deviation
+```
+
+The evaluator constructs the `ENT -> B4 -> B3 -> B2 -> B1 -> B2 -> B3 ->
+B4 -> B5 -> CHK` route using the actual Held-Karp and Dijkstra code. Seed
+`5041` generates eight controlled scenarios: planned-route following, small
+position noise, a brief one-sample deviation, sustained off-route movement,
+return to the route, a corner, an endpoint, and invalid position data. The
+simulation uses 56 observations (54 valid and two invalid), a 0.5 s sample
+interval, 0.04 m Gaussian estimate noise, and a known 1.5 m synthetic
+off-route offset. The labeled off-route truth is assigned by the scenario
+generator, independently from detector output. Only the estimated x/y position
+is passed to the detector. Invalid coordinates are rejected and excluded from
+the confusion matrix.
+
+Precision, recall, and F1 are set to zero when their denominator is zero.
+Detection delay is the elapsed samples/time from the beginning of a labeled
+off-route episode to the confirmed transition. A brief episode shorter than
+the configured confirmation count is recorded as missed. A false alarm event
+counts an entry transition on an on-route label; false-positive samples can
+also occur while a prior, correctly triggered alarm is waiting for recovery.
+
+### Actual results
+
+| Measure | Result |
+| --- | ---: |
+| Scenarios | 8 |
+| Observations | 56 total; 54 valid; 2 invalid |
+| True positives | 9 |
+| False positives | 1 |
+| True negatives | 39 |
+| False negatives | 5 |
+| Precision | 0.900000 |
+| Recall | 0.642857 |
+| F1 | 0.750000 |
+| Mean delay for detected off-route episodes | 2 samples; 1.0 s |
+| Off-route episodes detected / missed | 2 / 1 |
+| False alarm entry events | 0 |
+| Automated deviation tests | 22 passed; 0 failed; 0 skipped |
+
+The single-sample deviation is intentionally missed by the three-sample entry
+confirmation rule. The one false-positive sample occurs during recovery from a
+confirmed deviation; it is not a new false alarm event. Results are synthetic
+and deterministic, not a measured physical trolley performance estimate.
+The per-scenario confusion counts and computed aggregate are recorded in
+`evaluation/route_deviation/metrics.csv`; all sample labels, estimates,
+distances, thresholds, and detector state are in
+`evaluation/route_deviation/observations.csv`.
+
+Final regression validation also passed: store-map validation (15 checks),
+Dijkstra (15 tests), Held-Karp (18 tests), AprilTag (18 tests, zero skipped),
+dead reckoning (16 tests), route deviation (22 tests), and research evidence
+validation (28 indexed artifacts). `git diff --check` reported no whitespace
+errors.
+
+### Evidence and outputs
+
+- `evaluation/route_deviation/simulation_config.json` records the seed,
+  threshold, hysteresis, route, sample interval, and simulation assumptions.
+- `evaluation/route_deviation/observations.csv` records all 56 labeled samples,
+  separated ground truth and estimates, detector outcomes, and invalid-input
+  exclusions.
+- `evaluation/route_deviation/metrics.csv` contains per-scenario and overall
+  confusion metrics, delays, missed episodes, and alarm counts.
+- `evaluation/route_deviation/reproducibility.log` records the actual aggregate.
+- `evaluation/test_results/route_deviation_tests.txt` contains actual
+  `unittest` output.
+- `screenshots/C3-POS-006_route_deviation_scenarios.png` shows the planned
+  route, labeled estimated points, and detected deviation transitions.
+- `screenshots/C3-POS-007_distance_hysteresis.png` shows distance and
+  progress-dependent enter/exit thresholds over the concatenated samples.
+- Companion SVG evidence sheets are saved alongside both PNGs.
+
+### Limitations and future connection to rerouting
+
+The simulation uses a synthetic fixed perpendicular offset and small seeded
+coordinate noise, straight-line graph-coordinate segments, known route and
+labels, and an ideal estimate input. It does not model map uncertainty,
+real-world localization error distributions, missed samples, sensor latency,
+or physical store geometry. The route manager remains unchanged. A later
+rerouting phase may consume a confirmed deviation event and recompute a path,
+but should first define route-update UX, safety constraints, and recovery
+behavior; none are implemented here.

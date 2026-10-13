@@ -1,0 +1,34 @@
+{
+  "seed": 5041,
+  "sample_interval_s": 0.5,
+  "position_noise_std_m": 0.04,
+  "off_route_offset_m": 1.5,
+  "base_threshold_m": 0.3,
+  "threshold_slope_per_m": 0.02,
+  "hysteresis_m": 0.15,
+  "enter_confirmations": 3,
+  "recovery_confirmations": 2,
+  "start_node_id": "ENT",
+  "checkout_node_id": "CHK",
+  "shopping_stop_ids": [
+    "B1",
+    "B3",
+    "B5"
+  ],
+  "planned_route_node_ids": [
+    "ENT",
+    "B4",
+    "B3",
+    "B2",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "CHK"
+  ],
+  "coordinate_units": "metres; east is +x and north is +y",
+  "threshold_model": "epsilon(d) = base_threshold_m + threshold_slope_per_m * route_progress_m",
+  "truth_source": "explicit synthetic scenario labels, independent of detector output",
+  "physical_calibration": false
+}

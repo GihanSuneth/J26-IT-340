@@ -22,6 +22,20 @@ work or results; mark them `Pending` or `Not applicable`.
 
 ## Verified entries
 
+### 2026-10-14 01:29 +0530 — Phase 5A route-deviation detection
+
+- **Development phase:** Phase 5A — Route Deviation Detection
+- **Objective:** Detect when simulated position estimates leave the active graph route, without automatic rerouting.
+- **Work completed:** Implemented clamped Euclidean projection onto valid graph-route segments; added configurable fixed or progress-scaled enter threshold, lower hysteresis exit threshold, consecutive-sample confirmation/recovery, and reset behavior; built eight deterministic labeled scenarios with invalid-data rejection; saved per-sample outputs, aggregate/per-scenario metrics, configuration, reproducibility log, and PNG/SVG evidence; updated Phase 5A research notes and Component 3 README.
+- **Files created or modified:** `backend/comp3_reco_navigation/navigation/deviation.py`, `backend/comp3_reco_navigation/navigation/deviation_simulation.py`, `backend/comp3_reco_navigation/tests/test_deviation.py`, `evaluation/route_deviation/`, `evaluation/test_results/route_deviation_tests.txt`, `docs/research_evidence/05_position_tracking/screenshots/C3-POS-006*`, `C3-POS-007*`, `docs/research_evidence/05_position_tracking/notes.md`, `docs/research_evidence/evidence_index.csv`, `docs/research_evidence/progress_log.md`, and `README.md`.
+- **Tools and technologies used:** Existing StoreGraph, Dijkstra/Held-Karp route code, Python standard-library `unittest`, seeded `random.Random`, OpenCV and NumPy for figures, CSV/JSON/SVG outputs.
+- **Implementation decisions and reasons:** Used store-map node coordinates as the only route geometry source; required connected consecutive route nodes; clamped segment projections and safely handled zero-length coordinate segments; kept truth labels out of detector inputs; used `epsilon(d) = 0.3 + 0.02*d` by default, with caller-configurable fixed thresholds; counted false-positive samples separately from new false alarm entry events.
+- **Problems encountered:** Initial aggregate delay computation accidentally merged adjacent off-route labels from independent scenarios. A first threshold test also assumed the entrance segment was horizontal although its actual route segment is vertical.
+- **Solutions attempted:** Aggregated episode delays from independent per-scenario results and rewrote the threshold test to assert the exact progress-scaled formula. Re-ran the complete deviation suite and deterministic evaluation after the fixes.
+- **Test results:** Store-map validation passed 15 checks; Dijkstra 15/15, Held-Karp 18/18, AprilTag 18/18 (zero skipped), dead reckoning 16/16, route deviation 22/22; evidence validation passed for 28 indexed artifacts; `git diff --check` passed. The eight scenarios produced 56 observations (54 valid, two rejected); aggregate TP=9, FP=1, TN=39, FN=5; precision=0.900000, recall=0.642857, F1=0.750000; mean delay across the two detected off-route episodes was 2 samples / 1.0 s; one short episode was missed and there were zero false alarm entry events. These are synthetic results.
+- **Evidence screenshot references:** `C3-POS-006` and `C3-POS-007` route-deviation and hysteresis plots; `C3-POS-008` computed metrics; `C3-POS-009` test output.
+- **Next planned action:** Run all Phase 5A and prior navigation/localization validators, inspect the final diff, and report; no commit, push, or rerouting work is authorized.
+
 ### 2026-10-14 01:08 +0530 — Phase 4A simulated position tracking
 
 - **Development phase:** Phase 4A — Simulated Trolley Position Tracking

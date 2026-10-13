@@ -1,0 +1,11 @@
+Component 3 Phase 5A route-deviation simulation
+Seed: 5041
+Route: ENT -> B4 -> B3 -> B2 -> B1 -> B2 -> B3 -> B4 -> B5 -> CHK
+Scenarios: 8
+Observations: 56 total; 54 valid; 2 invalid
+Confusion: TP=9, FP=1, TN=39, FN=5
+Precision=0.900000; recall=0.642857; F1=0.750000
+Mean detection delay=2.000000 samples; 1.000000 s
+Detected off-route episodes=2; missed episodes=1; false alarm events=0
+Truth labels are controlled synthetic scenario inputs and are not detector outputs.
+No automatic rerouting or physical sensor validation was performed.

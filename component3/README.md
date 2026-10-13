@@ -58,6 +58,36 @@ This simulation does not establish camera, encoder, or IMU hardware accuracy.
 See `docs/research_evidence/05_position_tracking/notes.md` for the evaluated
 method and observed results.
 
+## Phase 5A — route-deviation detection
+
+`python -B -m component3.backend.comp3_reco_navigation.navigation.deviation_simulation`
+evaluates a planned Held-Karp route against synthetic position estimates using
+the existing graph-node coordinates. `navigation/deviation.py` projects each
+estimate onto the nearest clamped route segment and reports its distance,
+nearest segment, route progress, and threshold status. By default the enter
+threshold follows `epsilon(d) = 0.3 + 0.02*d` metres, where `d` is progress
+along the coordinate polyline; a fixed metre threshold can be supplied instead.
+A lower hysteresis exit threshold and consecutive-sample confirmations filter
+brief alarms and noisy recovery.
+
+The deterministic evaluation includes eight labeled scenarios, with
+ground-truth labels kept separate from the detector input. Seeded synthetic
+position noise, a fixed 1.5 m off-route displacement, 0.5 s samples, three
+enter confirmations, two recovery confirmations, and 0.15 m hysteresis are
+simulation assumptions, not calibrated hardware values. Metrics, per-sample
+observations, configuration, and reproducibility information are saved under
+`evaluation/route_deviation/`; report PNG/SVG figures and test evidence are
+indexed under `docs/research_evidence/05_position_tracking/`. Invalid
+positions are rejected and excluded from classification counts. This phase
+detects deviations only; it does not reroute the trolley or establish physical
+localization performance.
+
+The default Phase 5A simulation produced 56 observations across eight
+scenarios (54 valid, two rejected), with TP=9, FP=1, TN=39, FN=5,
+precision=0.900000, recall=0.642857, F1=0.750000, and a mean detected-episode
+delay of two samples (1.0 s). These are controlled synthetic results; see the
+position-tracking research notes for methodology and limitations.
+
 ## Validation
 
 Run commands from the repository root:
@@ -79,8 +109,12 @@ component3/.venv/bin/python -B -m \
   --output component3/evaluation/test_results/apriltag_tests.txt
 component3/.venv/bin/python -B -m unittest -v \
   component3.backend.comp3_reco_navigation.tests.test_dead_reckoning
+component3/.venv/bin/python -B -m unittest -v \
+  component3.backend.comp3_reco_navigation.tests.test_deviation
 component3/.venv/bin/python -B -m \
   component3.backend.comp3_reco_navigation.navigation.position_tracking_simulation
+component3/.venv/bin/python -B -m \
+  component3.backend.comp3_reco_navigation.navigation.deviation_simulation
 python3 -B -m \
   component3.backend.comp3_reco_navigation.navigation.held_karp_demo
 python3 -B component3/data/store_map/validate_store_map.py

@@ -1,0 +1,10 @@
+scenario,scenario_count,total_observations,valid_observations,invalid_observations,true_positives,false_positives,true_negatives,false_negatives,precision,recall,f1_score,detection_delay_samples_mean,detection_delay_seconds_mean,detected_off_route_episodes,missed_off_route_episodes,false_alarm_events
+following_planned_route,1,8,8,0,0,0,8,0,0.000000,0.000000,0.000000,0.000000,0.000000,0,0,0
+small_position_noise,1,8,8,0,0,0,8,0,0.000000,0.000000,0.000000,0.000000,0.000000,0,0,0
+brief_single_sample_deviation,1,6,6,0,0,0,5,1,0.000000,0.000000,0.000000,0.000000,0.000000,0,1,0
+sustained_off_route_movement,1,8,8,0,6,0,0,2,1.000000,0.750000,0.857143,2.000000,1.000000,1,0,0
+return_to_route,1,10,10,0,3,1,4,2,0.750000,0.600000,0.666667,2.000000,1.000000,1,0,0
+near_route_corner,1,6,6,0,0,0,6,0,0.000000,0.000000,0.000000,0.000000,0.000000,0,0,0
+near_route_endpoint,1,6,6,0,0,0,6,0,0.000000,0.000000,0.000000,0.000000,0.000000,0,0,0
+invalid_position_data,1,4,2,2,0,0,2,0,0.000000,0.000000,0.000000,0.000000,0.000000,0,0,0
+overall,8,56,54,2,9,1,39,5,0.900000,0.642857,0.750000,2.000000,1.000000,2,1,0

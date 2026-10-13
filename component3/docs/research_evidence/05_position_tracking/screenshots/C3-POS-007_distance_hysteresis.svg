@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+<title>Distance to planned route and hysteresis</title>
+<desc>Observed route distance and progress-scaled enter/exit thresholds.</desc>
+<image href="C3-POS-007_distance_hysteresis.png" width="1400" height="900"/>
+</svg>
