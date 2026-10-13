@@ -1,0 +1,29 @@
+test_coordinate_scaling_preserves_equal_axis_scale (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_coordinate_scaling_preserves_equal_axis_scale)
+Use the smaller viewport scale and center the actual metric map. ... ok
+test_coordinate_scaling_rejects_out_of_bounds_and_invalid_values (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_coordinate_scaling_rejects_out_of_bounds_and_invalid_values)
+Do not distort or silently draw invalid coordinates. ... ok
+test_destination_validation_deduplicates_and_rejects_unmapped_nodes (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_destination_validation_deduplicates_and_rejects_unmapped_nodes)
+Accept only mapped aisle nodes while retaining selection order. ... ok
+test_duplicate_destinations_are_counted_once (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_duplicate_destinations_are_counted_once)
+Route unique mapped stops once even when a client repeats a choice. ... ok
+test_empty_selection_routes_directly_to_checkout (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_empty_selection_routes_directly_to_checkout)
+An empty list is a valid entrance-to-checkout route. ... ok
+test_failed_session_calculation_preserves_previous_route (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_failed_session_calculation_preserves_previous_route)
+A rejected selection must not overwrite a previously valid plan. ... ok
+test_graph_loading_uses_component_store_map (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_graph_loading_uses_component_store_map)
+Load all authoritative graph nodes and edges. ... ok
+test_held_karp_and_dijkstra_are_reused (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_held_karp_and_dijkstra_are_reused)
+Verify the adapter calls the established optimizer and shortest path. ... ok
+test_invalid_graph_nodes_are_reported (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_invalid_graph_nodes_are_reported)
+Reject invalid route endpoints and destination IDs explicitly. ... ok
+test_map_data_includes_sections_and_checkpoint_layout (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_map_data_includes_sections_and_checkpoint_layout)
+Expose real graph geometry, six aisle destinations, and eight tags. ... ok
+test_session_calculation_and_reset (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_session_calculation_and_reset)
+Calculate a default route then reset to the deterministic defaults. ... ok
+test_unreachable_destination_returns_explicit_error (component3.simulations.navigation_dashboard.tests.test_adapter.NavigationDashboardAdapterTests.test_unreachable_destination_returns_explicit_error)
+Report an unreachable checkout without inventing a fallback route. ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.003s
+
+OK

@@ -21,7 +21,7 @@ evaluation/                     Component 3 logs, metrics, and test results
 firmware/                       Component-owned ESP32 motion task
 frontend/navigation/            Trolley-display navigation feature
 ml/                             Colab notebook, configs, models, and experiments
-simulations/                    Component 3 HTML simulations
+simulations/                    Component 3 simulations and offline dashboard
 ```
 
 ## Rules
@@ -38,6 +38,8 @@ Owner: comp3. Population-level POS data only (no individual customer data); reco
 - `data/raw/Retail_pos_basket_data.csv` — ignored local POS dataset.
 - `backend/comp3_reco_navigation/navigation/position_tracking_simulation.py` —
   deterministic synthetic encoder/IMU evaluation and report figure generator.
+- `simulations/navigation_dashboard/` — local-only interactive navigation
+  dashboard, map/route adapter, and adapter tests.
 
 ## Phase 4A — simulated position tracking
 
@@ -118,6 +120,33 @@ cost. Full scenario records and reproducibility data are under
 `evaluation/route_recalculation/`; the route-manager suite has 19 tests.
 See `docs/research_evidence/05_position_tracking/notes.md` for metric
 definitions, assumptions, and limitations.
+
+## Phase 6A — offline navigation dashboard foundation
+
+Launch the local dashboard from the repository root:
+
+```bash
+python3 -B -m component3.simulations.navigation_dashboard.dashboard
+```
+
+Open `http://127.0.0.1:8765/`. The server binds to loopback only and serves
+bundled assets plus map and route endpoints; it does not call cloud services or
+internet APIs. It uses Python's standard library and requires no dashboard
+packages. Streamlit and Plotly were not present in the existing environment, so
+they were not installed. See
+`simulations/navigation_dashboard/README.md` for launch, test, and offline
+details.
+
+The dashboard reads the existing 24 m by 18 m store graph and AprilTag layout.
+It offers the six mapped section access nodes as selectable destinations and
+plans the selected visit order with the existing Held-Karp and Dijkstra
+algorithms. The deterministic default is B1, B3, and B5; checkout remains the
+final node. The map uses the stored metric coordinates and equal x/y scale.
+Because the graph has no product-to-location mappings, this demonstration
+selects mapped aisle/category access points and does not generate product IDs.
+This foundation supports static route planning and reset/clear interactions
+only; continuous trolley motion, sensor streaming, and deviation-triggered
+animation are not implemented.
 
 ## Validation
 

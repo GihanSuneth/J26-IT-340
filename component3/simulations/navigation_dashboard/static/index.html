@@ -1,0 +1,106 @@
+<!-- Offline browser interface for the Component 3 navigation simulator. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Smart Shopping Trolley — Navigation Simulation</title>
+    <link rel="stylesheet" href="/app.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">J26-IT-340 · COMPONENT 3</p>
+        <h1>Smart Shopping Trolley — Navigation Simulation</h1>
+      </div>
+      <div class="offline-tag"><span class="status-dot"></span>Local · Offline</div>
+    </header>
+    <main class="layout">
+      <aside class="panel controls-panel" aria-label="Route controls">
+        <div class="panel-heading">
+          <p class="eyebrow">PLAN A SHOP</p>
+          <h2>Destinations</h2>
+        </div>
+        <p class="subtle">Choose mapped aisle access points for this route.</p>
+        <div id="mapping-notice" class="notice hidden" role="note"></div>
+        <div id="destination-list" class="destination-list" aria-live="polite">
+          <p class="loading">Loading mapped aisles…</p>
+        </div>
+        <div class="button-stack">
+          <button id="calculate-button" class="button button-primary" type="button">
+            Calculate route
+          </button>
+          <button id="clear-button" class="button button-secondary" type="button">
+            Clear selection
+          </button>
+          <button id="reset-button" class="button button-tertiary" type="button">
+            Reset demonstration
+          </button>
+        </div>
+        <div class="control-footnote">
+          Destinations use existing section access nodes. No product locations
+          are generated for this demonstration.
+        </div>
+      </aside>
+
+      <section class="panel map-panel" aria-label="Mapped supermarket">
+        <div class="map-header">
+          <div>
+            <p class="eyebrow">ACTUAL COMPONENT 3 STORE GRAPH</p>
+            <h2>Supermarket map</h2>
+          </div>
+          <div class="map-size" id="map-size">Mapped geometry</div>
+        </div>
+        <div id="map-container" class="map-container">
+          <p class="loading">Loading the store graph…</p>
+        </div>
+        <div class="legend" aria-label="Map legend">
+          <span><i class="legend-line"></i>Mapped walking edge</span>
+          <span><i class="legend-line legend-route"></i>Planned route</span>
+          <span><i class="legend-node legend-stop"></i>Selected aisle</span>
+          <span><i class="legend-tag">T</i>AprilTag checkpoint</span>
+          <span><i class="legend-node legend-terminal"></i>Entrance / checkout</span>
+        </div>
+        <p class="map-caption">
+          Graph coordinates and connections come from the Component 3 map.
+          Labels identify mapped graph nodes; no shelf or product geometry is shown.
+        </p>
+      </section>
+
+      <aside class="panel summary-panel" aria-label="Route summary">
+        <div class="panel-heading">
+          <p class="eyebrow">ROUTE RESULT</p>
+          <h2>Trip summary</h2>
+        </div>
+        <div id="route-status" class="route-status" role="status">
+          Preparing default route…
+        </div>
+        <div class="distance-card">
+          <span>Total planned distance</span>
+          <strong id="route-distance">— <small>m</small></strong>
+          <small class="distance-note">Sum of existing graph edge weights</small>
+        </div>
+        <div class="summary-section">
+          <h3>Optimized shopping order</h3>
+          <ol id="visit-order" class="route-list">
+            <li class="empty-list">Calculate a route to see the visit order.</li>
+          </ol>
+        </div>
+        <div class="summary-section">
+          <h3>Expanded graph path</h3>
+          <div id="route-path" class="route-path">—</div>
+        </div>
+        <div class="summary-section summary-footer">
+          <span>Checkout</span>
+          <strong id="checkout-node">CHK</strong>
+        </div>
+      </aside>
+    </main>
+    <footer class="disclaimer">
+      <strong>Software simulation using mapped store geometry. No physical hardware is connected.</strong>
+      <span>Prototype map dimensions and positions are simulated design values.</span>
+    </footer>
+    <script src="/app.js"></script>
+  </body>
+</html>

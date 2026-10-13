@@ -16,7 +16,7 @@ baskets and TF-IDF/KNN-based methods.
 | `01_architecture/` | Architecture and component boundaries | `C3-ARCH` |
 | `02_store_map/` | Store graph and map validation | `C3-MAP` |
 | `03_apriltag_detection/` | Camera-based AprilTag detection | `C3-TAG` |
-| `04_navigation_algorithms/` | Dijkstra and Held-Karp | `C3-NAV` |
+| `04_navigation_algorithms/` | Dijkstra, Held-Karp, and the offline navigation dashboard | `C3-NAV`, `C3-DASH` |
 | `05_position_tracking/` | Encoder/IMU localization | `C3-POS` |
 | `06_recommendation_engine/` | POS, TF-IDF, KNN, and fusion | `C3-REC` |
 | `07_cnn_training/` | Optional aisle-classifier training | `C3-CNN` |

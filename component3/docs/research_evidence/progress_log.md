@@ -22,6 +22,20 @@ work or results; mark them `Pending` or `Not applicable`.
 
 ## Verified entries
 
+### 2026-10-14 02:30 +0530 — Phase 6A offline navigation dashboard foundation
+
+- **Development phase:** Phase 6A — Interactive Navigation Simulator Dashboard Foundation
+- **Objective:** Make the existing Component 3 store map and route planner demonstrable in an offline browser without physical trolley hardware.
+- **Work completed:** Added a localhost-only, standard-library dashboard server, navigation adapter/session, bundled responsive browser UI, and 12 adapter tests. The UI loads the actual graph and AprilTag layout, allows selection of mapped aisle access nodes, and calculates/display routes using the existing Held-Karp and Dijkstra implementations. Added launch/dependency instructions and documented the verified default and empty-selection routes.
+- **Files created or modified:** `simulations/navigation_dashboard/` (server, adapter, session, configuration, static UI, tests, and README); `evaluation/test_results/navigation_dashboard_tests.txt`; five live-browser screenshots `docs/research_evidence/04_navigation_algorithms/screenshots/C3-DASH-001` through `C3-DASH-005`; `README.md`; `docs/research_evidence/04_navigation_algorithms/notes.md`; `docs/research_evidence/README.md`; `docs/research_evidence/evidence_index.csv`; and this progress log.
+- **Tools and technologies used:** Python standard library, existing Component 3 StoreGraph/Held-Karp/Dijkstra modules, bundled HTML/CSS/JavaScript/SVG, browser capture, and `unittest`. No package was installed.
+- **Implementation decisions and reasons:** Streamlit and Plotly were unavailable in the existing environment, so used a dependency-free local HTTP server and bundled browser assets. Used the existing six section access nodes because the map has no product-location mappings; did not invent products or geometry. Kept the application limited to static route planning, clear/reset controls, and the required no-hardware disclaimer; no continuous movement, sensor stream, or deviation animation was added.
+- **Problems encountered:** Initial browser element screenshots clipped the responsive page. Regenerated and visually checked a full-page live-app capture and a map-only capture at a readable size; map capture CSS changed only presentation scale, not map data.
+- **Solutions attempted:** Reopened the running local dashboard in a clean browser page, captured full-page app states and the actual SVG map, then inspected each PNG before indexing it.
+- **Test results:** Store-map validator passed all 15 checks. Dijkstra 15/15, Held-Karp 18/18, AprilTag 18/18 (zero skipped), dead reckoning 16/16, route deviation 22/22, route manager 19/19, and dashboard adapter 12/12 tests passed. The initial Phase 6A summary mistakenly reported 15 AprilTag tests; the canonical unittest run confirms all 18 implemented tests passed. Live API confirmed 20 graph nodes, 29 edges, six mapped destinations, eight tags, zero product mappings; the default B1/B3/B5 route was 30.29 m and ended at CHK. Evidence validation passed with 37 indexed artifacts. `git diff --check` passed.
+- **Evidence screenshot references:** `C3-DASH-001` dashboard overview; `C3-DASH-002` actual graph visualization; `C3-DASH-003` selected mapped destinations; `C3-DASH-004` calculated route; `C3-DASH-005` route summary; `C3-DASH-006` dashboard adapter test output.
+- **Next planned action:** Review the Phase 6A implementation and approve any follow-up; do not start Phase 6B, commit, or push as part of this phase.
+
 ### 2026-10-14 02:03 +0530 — Phase 5B route recalculation
 
 - **Development phase:** Phase 5B — Automatic Route Recalculation After Confirmed Deviation
