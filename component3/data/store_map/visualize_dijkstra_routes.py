@@ -20,7 +20,7 @@ from component3.backend.comp3_reco_navigation.navigation.store_graph import (  #
     StoreGraph,
     load_store_graph,
 )
-from data.store_map.visualize_store_map import (  # noqa: E402
+from component3.data.store_map.visualize_store_map import (  # noqa: E402
     add_graph,
     add_sections,
     base_svg,

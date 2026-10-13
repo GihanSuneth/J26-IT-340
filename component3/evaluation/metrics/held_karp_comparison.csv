@@ -1,0 +1,4 @@
+session_id,unique_shopping_stops,original_order_distance_m,optimized_distance_m,distance_saved_m,percentage_reduction,original_stop_order,optimized_stop_order
+A,3,30.29,30.29,0.00,0.00,B1 -> B3 -> B5,B1 -> B3 -> B5
+B,3,37.49,30.29,7.20,19.21,B6 -> B2 -> B4,B2 -> B4 -> B6
+C,4,44.69,30.29,14.40,32.22,B5 -> B1 -> B3 -> B2,B1 -> B2 -> B3 -> B5

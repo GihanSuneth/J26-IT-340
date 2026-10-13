@@ -44,6 +44,10 @@ Run commands from the repository root:
 ```bash
 python3 -B -m unittest -v \
   component3.backend.comp3_reco_navigation.tests.test_dijkstra
+python3 -B -m component3.backend.comp3_reco_navigation.tests.test_held_karp \
+  --output component3/evaluation/test_results/held_karp_tests.txt
+python3 -B -m \
+  component3.backend.comp3_reco_navigation.navigation.held_karp_demo
 python3 -B component3/data/store_map/validate_store_map.py
 python3 -B component3/docs/research_evidence/tools/validate_evidence.py
 ```
