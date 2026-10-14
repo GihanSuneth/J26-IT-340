@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
-// These prices are illustrative demo values only. The recommendation API
-// currently returns product information and scores, not verified prices.
+// Illustrative demo prices only. The API returns recommendation data, not verified prices.
 const initialProducts = [
   {
     id: "P00760",
@@ -41,11 +40,16 @@ const initialProducts = [
   },
 ];
 
-const API_URL = "http://127.0.0.1:8000/c4/recommendations/C0118";
+const API_BASE_URL = "http://127.0.0.1:8000/c4/recommendations";
 
 function App() {
-  const [products, setProducts] = useState(initialProducts);
+  // customerId is what the user is editing; activeCustomerId is the ID currently queried.
+  const [customerId, setCustomerId] = useState("C0118");
+  const [activeCustomerId, setActiveCustomerId] = useState("C0118");
+  const [products, setProducts] = useState([]);
   const [recommendationStatus, setRecommendationStatus] = useState("loading");
+  const [recommendationError, setRecommendationError] = useState("");
+
   const [cart, setCart] = useState([]);
   const [productName, setProductName] = useState("");
   const [category, setCategory] = useState("Groceries");
@@ -58,18 +62,27 @@ function App() {
 
     async function loadRecommendations() {
       setRecommendationStatus("loading");
+      setRecommendationError("");
+      setProducts([]);
 
       try {
-        const response = await fetch(API_URL, {
+        const encodedCustomerId = encodeURIComponent(activeCustomerId);
+        const response = await fetch(`${API_BASE_URL}/${encodedCustomerId}`, {
           signal: controller.signal,
         });
 
         if (!response.ok) {
-          throw new Error(`API request failed: ${response.status}`);
+          let detail = `API request failed (${response.status})`;
+          try {
+            const errorData = await response.json();
+            if (errorData.detail) detail = errorData.detail;
+          } catch {
+            // Keep the default error if the response isn't JSON.
+          }
+          throw new Error(detail);
         }
 
         const data = await response.json();
-
         if (!Array.isArray(data.recommendations)) {
           throw new Error("The API response does not contain a recommendations list.");
         }
@@ -84,8 +97,7 @@ function App() {
             name: item.product_name,
             category: item.category,
             score: item.score,
-            // Prices are demo values matched by product ID; unknown products
-            // use 0 rather than displaying an invented price.
+            // Demo prices are matched by product ID; unknown products use 0.
             price: existing?.price ?? 0,
             pastPurchaseCount: item.past_purchase_count,
             daysSinceLastPurchase: item.days_since_last_purchase,
@@ -96,23 +108,41 @@ function App() {
         setRecommendationStatus("success");
       } catch (error) {
         if (error.name === "AbortError") return;
-
         console.error("Could not load recommendations:", error);
         setProducts([]);
+        setRecommendationError(error.message || "Unable to load recommendations.");
         setRecommendationStatus("error");
       }
     }
 
     loadRecommendations();
-
     return () => controller.abort();
-  }, []);
+  }, [activeCustomerId]);
+
+  const handleCustomerSubmit = (event) => {
+    event?.preventDefault();
+    const cleanCustomerId = customerId.trim();
+
+    if (!cleanCustomerId) {
+      setMessage("Enter a customer ID, for example C0118.");
+      return;
+    }
+
+    setCustomerId(cleanCustomerId);
+    if (cleanCustomerId === activeCustomerId) {
+      // Allow the user to retry the current customer's request.
+      setActiveCustomerId("");
+      window.setTimeout(() => setActiveCustomerId(cleanCustomerId), 0);
+    } else {
+      setActiveCustomerId(cleanCustomerId);
+    }
+    setMessage(`Loading recommendations for ${cleanCustomerId}.`);
+  };
 
   // Add a recommended product to the bill.
   const addToCart = (product) => {
     setCart((currentCart) => {
       const existing = currentCart.find((item) => item.id === product.id);
-
       if (existing) {
         return currentCart.map((item) =>
           item.id === product.id
@@ -120,10 +150,8 @@ function App() {
             : item
         );
       }
-
       return [...currentCart, { ...product, quantity: 1 }];
     });
-
     setMessage(`${product.name} added to your bill.`);
   };
 
@@ -132,9 +160,7 @@ function App() {
     setCart((currentCart) =>
       currentCart
         .map((item) =>
-          item.id === id
-            ? { ...item, quantity: item.quantity + change }
-            : item
+          item.id === id ? { ...item, quantity: item.quantity + change } : item
         )
         .filter((item) => item.quantity > 0)
     );
@@ -143,18 +169,13 @@ function App() {
   // Remove one product completely from the bill.
   const removeFromCart = (id) => {
     const removedItem = cart.find((item) => item.id === id);
-
     setCart((currentCart) => currentCart.filter((item) => item.id !== id));
-
-    if (removedItem) {
-      setMessage(`${removedItem.name} removed from your bill.`);
-    }
+    if (removedItem) setMessage(`${removedItem.name} removed from your bill.`);
   };
 
   // Add a product manually.
   const addManualProduct = (event) => {
     event.preventDefault();
-
     const cleanName = productName.trim();
     const cleanCategory = category.trim();
     const unitPrice = Number(price);
@@ -185,21 +206,17 @@ function App() {
       ...currentCart,
       { ...newProduct, quantity: itemQuantity },
     ]);
-
     setProductName("");
     setPrice("");
     setQuantity("1");
     setMessage(`${cleanName} added to your bill.`);
   };
 
-  // Calculate the bill automatically.
   const total = useMemo(
     () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
     [cart]
   );
-
   const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-
   const formatLKR = (amount) =>
     `LKR ${amount.toLocaleString("en-LK", {
       minimumFractionDigits: 2,
@@ -231,6 +248,34 @@ function App() {
           <div className="welcome-icon">🛒</div>
         </section>
 
+        <section className="customer-selector panel">
+          <div className="panel-heading">
+            <div className="panel-icon">👤</div>
+            <div>
+              <h2>Choose customer</h2>
+              <p>Enter a customer ID from the purchase-history dataset.</p>
+            </div>
+          </div>
+          <form className="customer-form" onSubmit={handleCustomerSubmit}>
+            <label htmlFor="customer-id">
+              Customer ID
+              <input
+                id="customer-id"
+                type="text"
+                value={customerId}
+                onChange={(event) => setCustomerId(event.target.value)}
+                placeholder="e.g. C0118"
+                autoComplete="off"
+                required
+              />
+            </label>
+            <button className="primary-button" type="submit">
+              Load recommendations
+            </button>
+          </form>
+          <p className="product-id">Currently viewing customer: {activeCustomerId || customerId}</p>
+        </section>
+
         <section className="section-heading">
           <div>
             <p className="eyebrow">PERSONALIZED FOR YOU</p>
@@ -242,18 +287,17 @@ function App() {
 
         {recommendationStatus === "loading" && (
           <p className="recommendation-status" role="status">
-            Loading personalized recommendations...
+            Loading personalized recommendations for {activeCustomerId || customerId}...
           </p>
         )}
 
         {recommendationStatus === "error" && (
           <div className="recommendation-status error" role="alert">
-            Could not load recommendations. Check that the backend is running,
-            then refresh this page.
+            Could not load recommendations for {activeCustomerId || customerId}. {recommendationError}
             <button
               type="button"
               className="secondary-button"
-              onClick={() => window.location.reload()}
+              onClick={handleCustomerSubmit}
             >
               Try again
             </button>
@@ -270,18 +314,15 @@ function App() {
           {products.map((product) => (
             <article className="product-card" key={product.id}>
               <div className="product-visual">🛍️</div>
-
               <div className="product-details">
                 <span className="category-label">{product.category}</span>
                 <h3>{product.name}</h3>
                 <p className="product-id">{product.id}</p>
-
                 {typeof product.daysSinceLastPurchase === "number" && (
                   <p className="product-id">
                     Last purchased {product.daysSinceLastPurchase} days ago
                   </p>
                 )}
-
                 <div className="product-card-bottom">
                   <strong>{formatLKR(product.price)}</strong>
                   <button
@@ -317,7 +358,6 @@ function App() {
                   required
                 />
               </label>
-
               <label>
                 Category
                 <input
@@ -327,7 +367,6 @@ function App() {
                   required
                 />
               </label>
-
               <div className="form-row">
                 <label>
                   Unit price (LKR)
@@ -341,7 +380,6 @@ function App() {
                     required
                   />
                 </label>
-
                 <label>
                   Quantity
                   <input
@@ -354,7 +392,6 @@ function App() {
                   />
                 </label>
               </div>
-
               <button className="primary-button full-button" type="submit">
                 Add product to bill
               </button>
@@ -383,7 +420,6 @@ function App() {
                     <div className="cart-item-info">
                       <h3>{item.name}</h3>
                       <p>{formatLKR(item.price)} each</p>
-
                       <div className="quantity-controls">
                         <button
                           type="button"
@@ -402,7 +438,6 @@ function App() {
                           +
                         </button>
                       </div>
-
                       <button
                         type="button"
                         className="remove-item-button"
@@ -411,7 +446,6 @@ function App() {
                         Remove
                       </button>
                     </div>
-
                     <strong>{formatLKR(item.price * item.quantity)}</strong>
                   </div>
                 ))}
@@ -423,12 +457,10 @@ function App() {
                 <span>Total units</span>
                 <span>{itemCount}</span>
               </div>
-
               <div className="grand-total">
                 <span>Grand total</span>
                 <strong>{formatLKR(total)}</strong>
               </div>
-
               <button
                 type="button"
                 className="clear-button"
@@ -458,10 +490,9 @@ function App() {
         )}
 
         <p className="prototype-note">
-          Prototype demonstration only. Product prices are illustrative demo
-          values, not verified current supermarket prices. Recommendations are
-          loaded from the Component 4 API for customer C0118 when the backend is
-          available.
+          Prototype demonstration only. Product prices are illustrative demo values,
+          not verified current supermarket prices. Recommendations are loaded from
+          the Component 4 API for the selected customer when the backend is available.
         </p>
       </main>
     </div>
