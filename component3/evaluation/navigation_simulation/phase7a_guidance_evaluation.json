@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0",
+  "data_classification": "synthetic_software_evaluation_only",
+  "limitations": [
+    "No physical trolley, camera, surveyed store, shopper trial, or real POS data was used.",
+    "Checkpoint observations are labeled simulator inputs, not live AprilTag camera detections.",
+    "Arrival precision and recall apply only to the four declared synthetic fixtures."
+  ],
+  "turn_instruction_accuracy": {
+    "correct": 4,
+    "total": 4,
+    "fixtures": [
+      {
+        "case": "straight",
+        "expected": "STRAIGHT",
+        "actual": "STRAIGHT"
+      },
+      {
+        "case": "left",
+        "expected": "TURN_LEFT",
+        "actual": "TURN_LEFT"
+      },
+      {
+        "case": "right",
+        "expected": "TURN_RIGHT",
+        "actual": "TURN_RIGHT"
+      },
+      {
+        "case": "u_turn",
+        "expected": "U_TURN",
+        "actual": "U_TURN"
+      }
+    ]
+  },
+  "shelf_side_accuracy": {
+    "correct": 4,
+    "total": 4,
+    "fixtures": [
+      {
+        "case": "east_north_shelf",
+        "expected": "left",
+        "actual": "left"
+      },
+      {
+        "case": "west_north_shelf",
+        "expected": "right",
+        "actual": "right"
+      },
+      {
+        "case": "north_west_shelf",
+        "expected": "left",
+        "actual": "left"
+      },
+      {
+        "case": "south_west_shelf",
+        "expected": "right",
+        "actual": "right"
+      }
+    ]
+  },
+  "product_metadata_validity": {
+    "valid": 6,
+    "total": 6
+  },
+  "checkpoint_observations": {
+    "correct_decisions": 6,
+    "total": 6,
+    "fixtures": [
+      {
+        "tag_id": 200,
+        "expected_acceptance": true,
+        "accepted": true,
+        "reason": "accepted"
+      },
+      {
+        "tag_id": 200,
+        "expected_acceptance": false,
+        "accepted": false,
+        "reason": "duplicate_observation"
+      },
+      {
+        "tag_id": 999,
+        "expected_acceptance": false,
+        "accepted": false,
+        "reason": "unknown_tag"
+      },
+      {
+        "tag_id": 202,
+        "expected_acceptance": false,
+        "accepted": false,
+        "reason": "unexpected_checkpoint"
+      },
+      {
+        "tag_id": 201,
+        "expected_acceptance": false,
+        "accepted": false,
+        "reason": "confidence_below_threshold"
+      },
+      {
+        "tag_id": 201,
+        "expected_acceptance": true,
+        "accepted": true,
+        "reason": "accepted"
+      }
+    ]
+  },
+  "arrival_classification": {
+    "true_positive": 1,
+    "true_negative": 3,
+    "false_positive": 0,
+    "false_negative": 0,
+    "total": 4,
+    "fixtures": [
+      {
+        "case": "stable_inside",
+        "expected": true,
+        "actual": true
+      },
+      {
+        "case": "outside",
+        "expected": false,
+        "actual": false
+      },
+      {
+        "case": "uncertain_inside",
+        "expected": false,
+        "actual": false
+      },
+      {
+        "case": "single_inside",
+        "expected": false,
+        "actual": false
+      }
+    ]
+  },
+  "turn_notification_timing": {
+    "correct": 2,
+    "total": 2,
+    "fixtures": [
+      {
+        "distance_m": 1.0,
+        "expected": "TURN_RIGHT",
+        "actual": "TURN_RIGHT"
+      },
+      {
+        "distance_m": 1.5,
+        "expected": "STRAIGHT",
+        "actual": "STRAIGHT"
+      }
+    ]
+  },
+  "notification_thresholds_m": {
+    "turn": 1.25,
+    "checkpoint": 1.5,
+    "product": 2.0,
+    "stable_arrival_radius": 1.0
+  },
+  "guided_scenario": {
+    "runs": 3,
+    "deterministic": true,
+    "completed_runs": 3,
+    "completion_rate": 1.0,
+    "collected_product_ids": [
+      "SIM-P-001",
+      "SIM-P-006"
+    ],
+    "checkpoint_sequence": [
+      200,
+      201,
+      202
+    ],
+    "reroute_count": 1,
+    "guidance_types": [
+      "CHECKPOINT_CONFIRMED",
+      "START",
+      "TURN_LEFT",
+      "STRAIGHT",
+      "TURN_RIGHT",
+      "TURN_RIGHT",
+      "STRAIGHT",
+      "APPROACH_PRODUCT",
+      "PRODUCT_REACHED",
+      "WAIT_FOR_PICKUP",
+      "PICKUP_CONFIRMED",
+      "STRAIGHT",
+      "TURN_LEFT",
+      "TURN_RIGHT",
+      "STRAIGHT",
+      "REROUTING",
+      "REROUTING",
+      "U_TURN",
+      "STRAIGHT",
+      "APPROACH_CHECKPOINT",
+      "CHECKPOINT_CONFIRMED",
+      "TURN_RIGHT",
+      "TURN_RIGHT",
+      "STRAIGHT",
+      "APPROACH_PRODUCT",
+      "PRODUCT_REACHED",
+      "WAIT_FOR_PICKUP",
+      "PICKUP_CONFIRMED",
+      "STRAIGHT",
+      "TURN_LEFT",
+      "TURN_LEFT",
+      "PROCEED_TO_CHECKOUT",
+      "APPROACH_CHECKPOINT",
+      "CHECKPOINT_CONFIRMED",
+      "ARRIVED_CHECKOUT"
+    ],
+    "product_arrivals_with_shelf_level_and_side": 2,
+    "product_arrivals": 2,
+    "reroute_guidance_updates": 2,
+    "simulation_time_s": 41.25
+  }
+}

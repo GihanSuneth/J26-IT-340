@@ -85,12 +85,22 @@
             <strong id="guided-stage">Stage 0/9</strong>
           </section>
           <div id="pickup-notice" class="pickup-notice" role="status" hidden></div>
-          <h2 id="instruction">Loading local demonstration…</h2>
+          <section class="primary-guidance" aria-live="polite">
+            <span id="direction-icon" class="direction-icon" aria-hidden="true">●</span>
+            <div><span id="instruction-type" class="instruction-type">START</span>
+              <h2 id="instruction" data-guidance-type="START">Loading local demonstration…</h2>
+            </div>
+          </section>
           <div class="distance"><span>Distance to maneuver</span><strong id="maneuver-distance">—</strong></div>
           <dl class="details">
-            <div><dt>Active product</dt><dd id="active-product">—</dd></div>
-            <div><dt>Target shelf</dt><dd id="target-shelf">—</dd></div>
+            <div><dt>Current destination</dt><dd id="active-product">—</dd></div>
+            <div><dt>Shelf section / level / side</dt><dd id="target-shelf">—</dd></div>
+            <div><dt>Distance to product</dt><dd id="product-distance">—</dd></div>
+            <div><dt>Heading</dt><dd id="heading">—</dd></div>
+            <div><dt>Progress</dt><dd id="navigation-progress">—</dd></div>
+            <div><dt>Localization</dt><dd id="localization-status">—</dd></div>
             <div><dt>Next checkpoint</dt><dd id="next-checkpoint">—</dd></div>
+            <div><dt>Observed checkpoint</dt><dd id="observed-checkpoint">None</dd></div>
             <div><dt>Checkpoint distance</dt><dd id="checkpoint-distance">—</dd></div>
             <div><dt>Last confirmed checkpoint</dt><dd id="last-checkpoint">—</dd></div>
             <div><dt>Last correction</dt><dd id="correction">—</dd></div>
@@ -99,6 +109,7 @@
             <div><dt>Remaining distance</dt><dd id="remaining-distance">—</dd></div>
             <div><dt>Reroutes</dt><dd id="reroutes">0</dd></div>
           </dl>
+          <label class="speech-control"><input id="speech-enabled" type="checkbox"> Spoken guidance (optional)</label>
           <h3>Products collected</h3><ul id="collected" class="compact-list"></ul>
           <h3>Products remaining</h3><ul id="remaining" class="compact-list"></ul>
           <h3>Event log <a class="download" href="/api/spatial/export.json">Download JSON</a></h3>
@@ -109,6 +120,7 @@
           </section>
         </aside>
       </div>
+      <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="false"></div>
       <footer class="footer">Synthetic demonstration only. No physical hardware, real products, POS records, or sensor measurements are connected.</footer>
       <p class="research-link"><a href="/research">Open the validated Component 3 research graph dashboard</a></p>
     </main>

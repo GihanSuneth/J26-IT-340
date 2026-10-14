@@ -231,6 +231,52 @@ python3 -B -m component3.simulations.navigation_dashboard.browser_acceptance
 The documented spatial API start action is `POST /api/spatial/control` with
 the JSON body `{"action":"guided_demo"}`.
 
+## Phase 7A — automatic turn-by-turn customer guidance
+
+The synthetic spatial dashboard now generates typed guidance from active route
+geometry rather than scripted display text. Instructions cover start,
+straight, left, right, U-turn, checkpoint approach/confirmation, product
+approach/arrival, pickup, rerouting, uncertainty, checkout, and completion.
+Every event has a deterministic ID, route revision, timestamp, target, and
+distance; repeated polling refreshes distance without duplicating the event.
+
+All six synthetic products now have validated product ID, display name,
+section, shelf, level, bay, walkable pickup node, and shelf-facing coordinates.
+Left/right shelf guidance is calculated from the signed approach geometry. A
+product is reached only after two consecutive dead-reckoned estimates within
+1.0 m and localization uncertainty no greater than 0.75 m. Ground truth is
+retained for evaluation only and is not used to accept arrival.
+
+Checkpoint correction is observation-driven. The control API accepts
+`{"action":"observe_checkpoint","observation":{...}}`; the observation must
+identify the expected mapped tag, map version, timestamp, source, and optional
+confidence. Unknown, duplicate, out-of-order, wrong-map, unexpected, and
+low-confidence observations are rejected without changing localization.
+Simulator-created tag observations are explicitly labeled
+`synthetic_spatial_simulator`; this phase does not implement live camera input.
+
+The dashboard prominently displays direction, destination, section/level/side,
+distance, heading, progress, localization state, observed versus confirmed
+checkpoint state, and non-obstructive event notifications. Optional browser
+speech is off by default and only speaks new structured event IDs. Manual mode
+still requires pickup confirmation; guided mode uses the same route manager,
+arrival monitor, checkpoint processor, deviation monitor, and pickup path.
+
+Generate the synthetic evaluation and run real-browser acceptance with:
+
+```bash
+python3 -B -m component3.simulations.navigation_dashboard.phase7a_evaluation
+python3 -B -m component3.simulations.navigation_dashboard.phase7a_browser_acceptance
+```
+
+The current evaluation reports 4/4 turn classifications, 2/2 turn-notification
+timing decisions, 4/4 shelf-side
+classifications, 6/6 valid product mappings, 6/6 checkpoint decisions, and
+4/4 labeled arrival decisions with zero false arrivals. Three guided runs were
+identical and completed with two products, CP200→CP201→CP202, and one reroute.
+These are controlled synthetic software results, not physical navigation,
+camera, shopper, or store-performance measurements.
+
 ## Validation
 
 Run commands from the repository root:

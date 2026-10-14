@@ -183,6 +183,15 @@ def build_demo_store(raw: Mapping[str, Any]) -> DemoStore:
             if left < x_m + half_lane and right > x_m - half_lane:
                 raise DemoMapValidationError(f"Shelf {shelf_id} overlaps a cross-aisle lane")
         pickup_node_id = shelf.get("pickup_node_id")
+        level_count = shelf.get("level_count")
+        if (
+            isinstance(level_count, bool)
+            or not isinstance(level_count, int)
+            or level_count < 1
+        ):
+            raise DemoMapValidationError(
+                f"Shelf {shelf_id} level_count must be a positive integer"
+            )
         pickup = (
             node_coordinates.get(pickup_node_id)
             if isinstance(pickup_node_id, str)
@@ -257,6 +266,8 @@ def build_demo_store(raw: Mapping[str, Any]) -> DemoStore:
         if not isinstance(product, Mapping):
             raise DemoMapValidationError("Each demo product must be an object")
         product_id = product.get("demo_product_id")
+        canonical_product_id = product.get("product_id")
+        display_name = product.get("display_name")
         shelf_id = product.get("shelf_id")
         pickup_node_id = product.get("pickup_node_id")
         if (
@@ -265,6 +276,18 @@ def build_demo_store(raw: Mapping[str, Any]) -> DemoStore:
             or product_id in seen_product_ids
         ):
             raise DemoMapValidationError("Demo product IDs must be unique SIM-P-* IDs")
+        if canonical_product_id != product_id:
+            raise DemoMapValidationError(
+                f"Demo product {product_id} product_id must match demo_product_id"
+            )
+        if (
+            not isinstance(display_name, str)
+            or not display_name.strip()
+            or display_name != product.get("name")
+        ):
+            raise DemoMapValidationError(
+                f"Demo product {product_id} must have one consistent display name"
+            )
         if (
             not isinstance(shelf_id, str)
             or shelf_id not in shelf_by_id
@@ -273,8 +296,51 @@ def build_demo_store(raw: Mapping[str, Any]) -> DemoStore:
         ):
             raise DemoMapValidationError(f"Demo product {product_id} has an invalid shelf or pickup")
         shelf = shelf_by_id[shelf_id]
-        if shelf["pickup_node_id"] != pickup_node_id or shelf["section"] != product.get("shelf_section"):
+        if (
+            shelf["pickup_node_id"] != pickup_node_id
+            or product.get("pickup_node") != pickup_node_id
+            or shelf["section"] != product.get("shelf_section")
+        ):
             raise DemoMapValidationError(f"Demo product {product_id} does not match its shelf mapping")
+        shelf_level = product.get("shelf_level")
+        if (
+            isinstance(shelf_level, bool)
+            or not isinstance(shelf_level, int)
+            or not 1 <= shelf_level <= shelf["level_count"]
+        ):
+            raise DemoMapValidationError(
+                f"Demo product {product_id} has an invalid shelf level"
+            )
+        shelf_bay = product.get("shelf_bay")
+        if isinstance(shelf_bay, bool) or not isinstance(shelf_bay, int) or shelf_bay < 1:
+            raise DemoMapValidationError(
+                f"Demo product {product_id} has an invalid shelf bay"
+            )
+        raw_facing = product.get("shelf_facing_point_m")
+        if not isinstance(raw_facing, list) or len(raw_facing) != 2:
+            raise DemoMapValidationError(
+                f"Demo product {product_id} needs a shelf-facing point"
+            )
+        facing_x, facing_y = (
+            _number(value, f"Demo product {product_id} shelf-facing point")
+            for value in raw_facing
+        )
+        left, bottom, right, top = (
+            _number(value, f"Shelf {shelf_id} bounds") for value in shelf["bounds_m"]
+        )
+        on_shelf_face = (
+            (math.isclose(facing_x, left) or math.isclose(facing_x, right))
+            and bottom <= facing_y <= top
+        ) or (
+            (math.isclose(facing_y, bottom) or math.isclose(facing_y, top))
+            and left <= facing_x <= right
+        )
+        pickup_x, pickup_y = node_coordinates[pickup_node_id]
+        facing_distance = math.hypot(facing_x - pickup_x, facing_y - pickup_y)
+        if not on_shelf_face or not 0 < facing_distance <= lane_width:
+            raise DemoMapValidationError(
+                f"Demo product {product_id} shelf-facing point is not adjacent to its pickup"
+            )
         seen_product_ids.add(product_id)
 
     tag_rows: list[dict[str, Any]] = []

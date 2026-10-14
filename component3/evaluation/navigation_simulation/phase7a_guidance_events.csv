@@ -1,0 +1,36 @@
+event_id,timestamp,instruction_type,instruction_text,distance_to_maneuver_m,target_node,target_product_id,target_shelf_id,shelf_section,shelf_level,shelf_side,route_revision
+GUIDE-00-0001,0.0,CHECKPOINT_CONFIRMED,Checkpoint CP200 confirmed; localization updated.,0.0,N0_0,,,,,,0
+GUIDE-00-0002,0.0,START,Route ready at the entrance. Start navigation toward Bananas.,0.0,N1_1,SIM-P-001,DEMO-SHELF-01,Produce,2,,0
+GUIDE-00-0003,0.25,TURN_LEFT,Turn left toward N1_0.,0.0,N1_0,SIM-P-001,DEMO-SHELF-01,Produce,2,,0
+GUIDE-00-0004,0.5,STRAIGHT,"Continue straight for 5.8 m, then make a right turn.",5.8,N1_0,SIM-P-001,DEMO-SHELF-01,Produce,2,,0
+GUIDE-00-0005,4.0,TURN_RIGHT,Turn right at N1_0.,0.0,N1_0,SIM-P-001,DEMO-SHELF-01,Produce,2,,0
+GUIDE-00-0006,4.25,TURN_RIGHT,Turn right toward N1_1.,0.0,N1_1,SIM-P-001,DEMO-SHELF-01,Produce,2,,0
+GUIDE-00-0007,4.5,STRAIGHT,"Continue straight for 15.8 m, then make a left turn.",15.8,N1_3,SIM-P-001,DEMO-SHELF-01,Produce,2,,0
+GUIDE-00-0008,6.75,APPROACH_PRODUCT,Approach Bananas at DEMO-SHELF-01.,2.0,N1_1,SIM-P-001,DEMO-SHELF-01,Produce,2,,0
+GUIDE-00-0009,9.25,PRODUCT_REACHED,"You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2.",0.0,N1_1,SIM-P-001,DEMO-SHELF-01,Produce,2,left,0
+GUIDE-00-0010,9.25,WAIT_FOR_PICKUP,"You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2. Confirm the product when collected.",0.0,N1_1,SIM-P-001,DEMO-SHELF-01,Produce,2,left,0
+GUIDE-01-0011,9.25,PICKUP_CONFIRMED,Bananas pickup confirmed. Continue to the next destination.,0.0,N1_1,SIM-P-001,DEMO-SHELF-01,Produce,2,,1
+GUIDE-01-0012,9.25,STRAIGHT,"Continue straight for 8.0 m, then make a left turn.",8.0,N1_3,SIM-P-006,DEMO-SHELF-06,Frozen,2,,1
+GUIDE-01-0013,19.25,TURN_LEFT,Turn left at N1_3.,0.0,N1_3,SIM-P-006,DEMO-SHELF-06,Frozen,2,,1
+GUIDE-01-0014,19.5,TURN_RIGHT,Turn right toward N0_3.,0.0,N0_3,SIM-P-006,DEMO-SHELF-06,Frozen,2,,1
+GUIDE-01-0015,19.75,STRAIGHT,"Continue straight for 2.8 m, then make a U-turn.",2.8,N1_3,SIM-P-006,DEMO-SHELF-06,Frozen,2,,1
+GUIDE-01-0016,20.75,REROUTING,Wrong turn confirmed. Recalculating the remaining route.,0.0,N0_3,,,,,,1
+GUIDE-02-0017,20.75,REROUTING,Rerouting complete. Follow the updated highlighted route.,0.0,N1_3,SIM-P-006,DEMO-SHELF-06,Frozen,2,,2
+GUIDE-02-0018,20.75,U_TURN,Make a U-turn at N1_3.,1.0,N1_3,SIM-P-006,DEMO-SHELF-06,Frozen,2,,2
+GUIDE-02-0019,21.0,STRAIGHT,"Continue straight for 3.8 m, then make a right turn.",3.8,N2_3,SIM-P-006,DEMO-SHELF-06,Frozen,2,,2
+GUIDE-02-0020,24.0,APPROACH_CHECKPOINT,Approaching checkpoint CP201.,1.4000000000000001,N2_3,SIM-P-006,DEMO-SHELF-06,Frozen,2,,2
+GUIDE-02-0021,25.75,CHECKPOINT_CONFIRMED,Checkpoint CP201 confirmed; localization updated.,0.0,N2_3,,,,,,2
+GUIDE-02-0022,25.75,TURN_RIGHT,Turn right at N2_3.,0.0,N2_3,SIM-P-006,DEMO-SHELF-06,Frozen,2,,2
+GUIDE-02-0023,26.0,TURN_RIGHT,Turn right toward N2_4.,0.0,N2_4,SIM-P-006,DEMO-SHELF-06,Frozen,2,,2
+GUIDE-02-0024,26.25,STRAIGHT,"Continue straight for 9.8 m, then make a left turn.",9.8,N2_5,SIM-P-006,DEMO-SHELF-06,Frozen,2,,2
+GUIDE-02-0025,28.5,APPROACH_PRODUCT,Approach Frozen peas at DEMO-SHELF-06.,2.0,N2_4,SIM-P-006,DEMO-SHELF-06,Frozen,2,,2
+GUIDE-02-0026,31.0,PRODUCT_REACHED,"You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2.",0.0,N2_4,SIM-P-006,DEMO-SHELF-06,Frozen,2,left,2
+GUIDE-02-0027,31.0,WAIT_FOR_PICKUP,"You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2. Confirm the product when collected.",0.0,N2_4,SIM-P-006,DEMO-SHELF-06,Frozen,2,left,2
+GUIDE-03-0028,31.0,PICKUP_CONFIRMED,Frozen peas pickup confirmed. Continue to the next destination.,0.0,N2_4,SIM-P-006,DEMO-SHELF-06,Frozen,2,,3
+GUIDE-03-0029,31.0,STRAIGHT,"Continue straight for 2.0 m, then make a left turn.",2.0,N2_5,,,,,,3
+GUIDE-03-0030,33.5,TURN_LEFT,Turn left at N2_5.,0.0,N2_5,,,,,,3
+GUIDE-03-0031,33.75,TURN_LEFT,Turn left toward N3_5.,0.0,N3_5,,,,,,3
+GUIDE-03-0032,34.0,PROCEED_TO_CHECKOUT,Proceed to checkout.,2.8,N4_5,,,,,,3
+GUIDE-03-0033,39.5,APPROACH_CHECKPOINT,Approaching checkpoint CP202.,1.4000000000000001,N4_5,,,,,,3
+GUIDE-03-0034,41.25,CHECKPOINT_CONFIRMED,Checkpoint CP202 confirmed; localization updated.,0.0,N4_5,,,,,,3
+GUIDE-03-0035,41.25,ARRIVED_CHECKOUT,Checkout reached after all selected products were confirmed.,0.0,N4_5,,,,,,3

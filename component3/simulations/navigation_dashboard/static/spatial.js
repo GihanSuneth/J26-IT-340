@@ -9,6 +9,8 @@ const state = {
   pollBusy: false,
   connectionLost: false,
   playbackSteps: 1,
+  displayedGuidanceEvents: new Set(),
+  spokenGuidanceEventId: null,
 };
 const byId = (id) => document.getElementById(id);
 
@@ -54,6 +56,41 @@ function showNotice(message) {
   byId("connection-error").hidden = !message;
 }
 
+const directionIcons = {
+  START: "●", STRAIGHT: "↑", TURN_LEFT: "↰", TURN_RIGHT: "↱", U_TURN: "↶",
+  APPROACH_CHECKPOINT: "◇", CHECKPOINT_CONFIRMED: "✓", APPROACH_PRODUCT: "⌖",
+  PRODUCT_REACHED: "★", WAIT_FOR_PICKUP: "☝", PICKUP_CONFIRMED: "✓",
+  REROUTING: "⟳", LOCALIZATION_UNCERTAIN: "!", PROCEED_TO_CHECKOUT: "↑",
+  ARRIVED_CHECKOUT: "✓",
+};
+const popupTypes = new Set([
+  "TURN_LEFT", "TURN_RIGHT", "U_TURN", "CHECKPOINT_CONFIRMED", "PRODUCT_REACHED",
+  "PICKUP_CONFIRMED", "REROUTING", "LOCALIZATION_UNCERTAIN", "ARRIVED_CHECKOUT",
+]);
+
+function showGuidanceToast(event) {
+  if (!popupTypes.has(event.instruction_type) || state.displayedGuidanceEvents.has(event.event_id)) return;
+  state.displayedGuidanceEvents.add(event.event_id);
+  const toast = document.createElement("div");
+  toast.className = `toast ${["REROUTING", "LOCALIZATION_UNCERTAIN"].includes(event.instruction_type) ? "critical" : ""}`;
+  toast.dataset.guidanceType = event.instruction_type;
+  const copy = document.createElement("span");
+  copy.textContent = `${event.instruction_type.replaceAll("_", " ")} — ${event.instruction_text}`;
+  const dismiss = document.createElement("button");
+  dismiss.type = "button";
+  dismiss.setAttribute("aria-label", "Dismiss notification");
+  dismiss.textContent = "×";
+  dismiss.addEventListener("click", () => toast.remove());
+  toast.append(copy, dismiss);
+  byId("toast-region").append(toast);
+  while (byId("toast-region").children.length > 3) byId("toast-region").firstElementChild.remove();
+  if (event.instruction_type === "REROUTING" && "speechSynthesis" in window) window.speechSynthesis.cancel();
+  if (byId("speech-enabled").checked && "speechSynthesis" in window && state.spokenGuidanceEventId !== event.event_id) {
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance(event.instruction_text));
+    state.spokenGuidanceEventId = event.event_id;
+  }
+}
+
 function svgNode(name, attributes = {}, label = "") {
   const node = document.createElementNS("http://www.w3.org/2000/svg", name);
   Object.entries(attributes).forEach(([key, value]) => node.setAttribute(key, value));
@@ -81,7 +118,7 @@ function renderProducts() {
       name.textContent = product.name;
       const description = document.createElement("small");
       description.textContent =
-        `${product.demo_product_id} · ${product.category} · ${product.shelf_id}`;
+        `${product.demo_product_id} · ${product.category} · ${product.shelf_section} · level ${product.shelf_level}`;
       copy.append(name, description);
       label.append(input, copy);
       form.append(label);
@@ -237,6 +274,9 @@ function render() {
   const sim = state.sim;
   const guide = sim.guidance;
   byId("instruction").textContent = guide.instruction;
+  byId("instruction").dataset.guidanceType = guide.instruction_type;
+  byId("instruction-type").textContent = guide.instruction_type.replaceAll("_", " ");
+  byId("direction-icon").textContent = directionIcons[guide.instruction_type] || "●";
   byId("maneuver-distance").textContent = `${guide.distance_to_maneuver_m.toFixed(1)} m`;
   byId("route-distance").textContent = `${sim.route_distance_m.toFixed(2)} m`;
   byId("planned-route").textContent = sim.planned_route.join(" → ");
@@ -257,12 +297,22 @@ function render() {
     ? `${sim.active_product.name} (${sim.active_product.demo_product_id})`
     : "Checkout";
   byId("target-shelf").textContent = sim.active_product
-    ? `${sim.active_product.shelf_id} · ${sim.active_product.shelf_section}`
+    ? `${sim.active_product.shelf_section} · Level ${sim.active_product.shelf_level} · ${sim.active_product.shelf_side || "side pending"}`
     : "Checkout";
+  byId("product-distance").textContent = sim.active_product
+    ? `${sim.distance_to_active_product_m.toFixed(1)} m` : "—";
+  byId("heading").textContent = `${sim.heading_deg.toFixed(1)}°`;
+  byId("navigation-progress").textContent =
+    `${sim.navigation_progress.collected_products}/${sim.navigation_progress.total_products} · ${sim.navigation_progress.percent.toFixed(0)}%`;
+  byId("localization-status").textContent =
+    `${sim.localization.status.replaceAll("_", " ")} · ±${sim.localization.uncertainty_m.toFixed(2)} m`;
   byId("next-checkpoint").textContent = sim.next_checkpoint
     ? `${sim.next_checkpoint.name} · CP${sim.next_checkpoint.checkpoint_id}`
     : "No mapped checkpoint ahead";
   byId("checkpoint-distance").textContent = `${sim.distance_to_checkpoint_m.toFixed(1)} m`;
+  byId("observed-checkpoint").textContent = sim.observed_checkpoint
+    ? `CP${sim.observed_checkpoint.tag_id} · ${sim.observed_checkpoint.accepted ? "accepted" : sim.observed_checkpoint.reason}`
+    : "None";
   byId("last-checkpoint").textContent = sim.last_confirmed_checkpoint
     ? `${sim.last_confirmed_checkpoint.node_id} · CP${sim.last_confirmed_checkpoint.checkpoint_id}`
     : "None";
@@ -319,6 +369,7 @@ function render() {
   byId("completion-copy").textContent = completion
     ? `${completion.products_collected.length} products · checkpoints ${completion.checkpoint_sequence.join(" → ")} · ${completion.reroute_count} reroute · ${completion.simulation_time_s.toFixed(2)} s.`
     : "";
+  sim.guidance_events.forEach(showGuidanceToast);
   byId("guided-demo").disabled = state.busy;
   byId("start").disabled = sim.status !== "ready" || guided.active;
   byId("pause").disabled = !sim.running;
@@ -338,6 +389,12 @@ async function control(action, values = {}) {
   if (state.busy) return;
   state.busy = true;
   try {
+    if (["reset", "guided_demo", "set_products"].includes(action)) {
+      state.displayedGuidanceEvents.clear();
+      state.spokenGuidanceEventId = null;
+      byId("toast-region").replaceChildren();
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    }
     state.sim = await requestJson("/api/spatial/control", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

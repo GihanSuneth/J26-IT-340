@@ -10,8 +10,6 @@ from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import (
     DeadReckoner,
     MotionMeasurement,
     PositionEstimate,
-    SimulatedCheckpointObservation,
-    correct_to_checkpoint,
     normalize_heading,
 )
 from component3.backend.comp3_reco_navigation.navigation.deviation import (
@@ -26,6 +24,19 @@ from component3.backend.comp3_reco_navigation.navigation.route_manager import (
 
 from .demo_store import DemoStore, load_demo_store
 from .engine import FIXED_TIMESTEP_S
+from .checkpoint_observations import (
+    CheckpointObservation,
+    CheckpointObservationProcessor,
+)
+from .guidance import (
+    GuidanceEngine,
+    MAX_ARRIVAL_UNCERTAINTY_M,
+    ProductArrivalMonitor,
+    ProductLocation,
+    classify_turn,
+    product_shelf_side,
+    resolve_product_location,
+)
 from .sensors import SensorConfig, SimulatedSensorGenerator
 
 REROUTE_RECOVERY_CONFIRMATIONS = 2
@@ -38,11 +49,11 @@ GUIDED_STAGES = {
     0: "Manual navigation",
     1: "Initial route calculated",
     2: "Leaving the entrance",
-    3: "Navigating to Bananas",
-    4: "Bananas pickup",
+    3: "Navigating to first product shelf",
+    4: "First product pickup",
     5: "Wrong turn and deviation confirmation",
     6: "Replacement route active",
-    7: "Frozen peas pickup",
+    7: "Second product pickup",
     8: "Navigating to checkout",
     9: "Demonstration complete",
 }
@@ -91,6 +102,13 @@ class SpatialNavigationSimulation:
         }
         self.products_by_node = {
             product["pickup_node_id"]: product for product in self.data["products"]
+        }
+        self.shelves_by_id = {
+            shelf["shelf_id"]: shelf for shelf in self.data["shelves"]
+        }
+        self.product_locations = {
+            product_id: resolve_product_location(product, self.shelves_by_id, self.graph)
+            for product_id, product in self.products_by_id.items()
         }
         self.checkpoints_by_node = {
             checkpoint["node_id"]: checkpoint for checkpoint in self.data["checkpoints"]
@@ -160,6 +178,8 @@ class SpatialNavigationSimulation:
         self._route_cursor = 0
         self._detected_checkpoint_ids: list[int] = []
         self._last_checkpoint_event: dict[str, Any] | None = None
+        self._last_observed_checkpoint: dict[str, Any] | None = None
+        self._last_localization_correction: dict[str, Any] | None = None
         self._events: list[dict[str, Any]] = []
         self._truth_path: list[dict[str, float]] = []
         self._estimated_path: list[dict[str, float]] = []
@@ -168,6 +188,13 @@ class SpatialNavigationSimulation:
         self._reroute_episode_active = False
         self._reroute_recovery_samples = 0
         self._last_deviation: dict[str, Any] | None = None
+        self._localization_uncertainty_m = 0.05
+        self._localization_variance_m2 = 0.0
+        self._distance_since_checkpoint_m = 0.0
+        self._arrival_state: dict[str, Any] | None = None
+        self._arrived_product_id: str | None = None
+        self._arrival_heading_rad: float | None = None
+        self._announced_edge_turns: set[tuple[int, str, str]] = set()
         self._guided_mode = False
         self._guided_stage = 0
         self._guided_pickup_notice_steps = 0
@@ -175,6 +202,11 @@ class SpatialNavigationSimulation:
         self._guided_wrong_turn_queued = False
         self._guided_completion_summary: dict[str, Any] | None = None
         self._paused_status: str | None = None
+        self.checkpoint_processor = CheckpointObservationProcessor(
+            self.store.checkpoint_layout, self.data["map_id"]
+        )
+        self.arrival_monitor = ProductArrivalMonitor()
+        self.guidance_engine = GuidanceEngine(self.graph)
         pickup_nodes = self._product_nodes(self._selected_products)
         self.route_manager = RouteManager(
             self.graph,
@@ -192,6 +224,7 @@ class SpatialNavigationSimulation:
         )
         self._detect_checkpoint(self.current_node_id)
         self._record_sample()
+        self._refresh_guidance()
 
     def _new_deviation_monitor(
         self, route: Sequence[str], *, initially_deviated: bool = False
@@ -221,6 +254,139 @@ class SpatialNavigationSimulation:
             }
         )
 
+    def _publish_guidance(
+        self,
+        instruction_type: str,
+        instruction_text: str,
+        *,
+        distance_to_maneuver_m: float = 0.0,
+        target_node: str | None = None,
+        product: ProductLocation | None = None,
+        shelf_side: str | None = None,
+        identity_detail: str | None = None,
+    ) -> dict[str, Any]:
+        """Publish one structured instruction transition and mirror it in events."""
+        event, is_new = self.guidance_engine.publish(
+            instruction_type,
+            instruction_text,
+            timestamp=self.simulation_time_s,
+            distance_to_maneuver_m=distance_to_maneuver_m,
+            target_node=target_node,
+            product=product,
+            shelf_side=shelf_side,
+            identity_detail=identity_detail,
+        )
+        if is_new:
+            self._record_event(
+                "guidance_instruction",
+                instruction_text,
+                event.to_dict(),
+            )
+        return event.to_dict()
+
+    def _active_product_location(self) -> ProductLocation | None:
+        """Return the next route-ordered product location, including unavailable state."""
+        remaining_nodes = set(self.route_manager.remaining_destinations)
+        for node_id in self._remaining_route():
+            if node_id in remaining_nodes:
+                product = self.products_by_node.get(node_id)
+                if product:
+                    return self.product_locations[product["demo_product_id"]]
+        return None
+
+    def _refresh_guidance(self) -> None:
+        """Refresh live distance while emitting only meaningful instruction changes."""
+        product = self._active_product_location()
+        if self.status == "ready":
+            target = product.display_name if product else "checkout"
+            self._publish_guidance(
+                "START",
+                f"Route ready at the entrance. Start navigation toward {target}.",
+                target_node=product.pickup_node if product else self.checkout_node_id,
+                product=product,
+            )
+            return
+        if self.status == "complete":
+            self._publish_guidance(
+                "ARRIVED_CHECKOUT",
+                "Checkout reached. Navigation complete.",
+                target_node=self.checkout_node_id,
+            )
+            return
+        if self.status == "awaiting_product_confirmation" and product:
+            side = None
+            if (
+                product.pickup_coordinate_m is not None
+                and product.shelf_facing_point_m is not None
+                and self._arrival_heading_rad is not None
+            ):
+                side = product_shelf_side(
+                    self._arrival_heading_rad,
+                    product.pickup_coordinate_m,
+                    product.shelf_facing_point_m,
+                )
+            text = self._product_arrival_text(product, side, waiting=True)
+            self._publish_guidance(
+                "WAIT_FOR_PICKUP",
+                text,
+                target_node=product.pickup_node,
+                product=product,
+                shelf_side=side,
+            )
+            return
+        route = self._remaining_route()
+        next_checkpoint = self._expected_checkpoint()
+        checkpoint_distance = (
+            self._distance_to_route_node(next_checkpoint["node_id"])
+            if next_checkpoint
+            else None
+        )
+        product_distance = (
+            self._distance_to_route_node(product.pickup_node)
+            if product and product.pickup_node
+            else None
+        )
+        route_start_distance = (
+            max(0.0, self._edge_distance_m - self._edge_progress_m)
+            if self._edge_target
+            else 0.0
+        )
+        event, is_new = self.guidance_engine.navigation_instruction(
+            timestamp=self.simulation_time_s,
+            estimated_heading_rad=self.estimator.pose.heading_rad,
+            remaining_route=route,
+            distance_to_route_start_m=route_start_distance,
+            active_product=product,
+            distance_to_product_m=product_distance,
+            next_checkpoint=next_checkpoint,
+            distance_to_checkpoint_m=checkpoint_distance,
+            localization_uncertain=(
+                self._localization_uncertainty_m > MAX_ARRIVAL_UNCERTAINTY_M
+                or self.status in {"localization_uncertain", "reroute_failed"}
+            ),
+        )
+        if is_new:
+            self._record_event(
+                "guidance_instruction", event.instruction_text, event.to_dict()
+            )
+
+    @staticmethod
+    def _product_arrival_text(
+        product: ProductLocation, side: str | None, *, waiting: bool
+    ) -> str:
+        """Build shelf guidance only from resolved location metadata."""
+        if not product.available:
+            return "Product location is unavailable. Ask store staff for assistance."
+        if side is None:
+            text = "Product shelf reached. Check the highlighted shelf."
+        else:
+            text = (
+                f"You have reached {product.display_name}. It is on your {side}, "
+                f"Shelf {product.shelf_id}, Section {product.shelf_section}, "
+                f"Level {product.shelf_level}."
+            )
+        return f"{text} Confirm the product when collected." if waiting else text
+
     def _record_sample(self) -> None:
         """Record separate map-truth and dead-reckoned positions."""
         self._truth_path.append(
@@ -239,32 +405,159 @@ class SpatialNavigationSimulation:
             }
         )
 
+    def _checkpoint_sequence(self) -> list[dict[str, Any]]:
+        """Return undetected checkpoints in their active-route order."""
+        return [
+            checkpoint
+            for node_id in self.route_manager.current_planned_route
+            if (checkpoint := self.checkpoints_by_node.get(node_id))
+            and checkpoint["checkpoint_id"] not in self._detected_checkpoint_ids
+        ]
+
+    def _expected_checkpoint(self) -> dict[str, Any] | None:
+        """Return the next route-specific checkpoint expected by localization."""
+        sequence = self._checkpoint_sequence()
+        return sequence[0] if sequence else None
+
     def _detect_checkpoint(self, node_id: str) -> None:
-        """Apply one existing checkpoint correction at a mapped demo tag node."""
+        """Submit one clearly labeled synthetic observation at a mapped node."""
         checkpoint = self.checkpoints_by_node.get(node_id)
-        if checkpoint is None or checkpoint["checkpoint_id"] in self._detected_checkpoint_ids:
+        if checkpoint is None:
             return
-        before = self.estimator.pose
-        observation = SimulatedCheckpointObservation(
-            checkpoint["checkpoint_id"], self.simulation_time_s, node_id
+        observation = CheckpointObservation(
+            tag_id=checkpoint["checkpoint_id"],
+            timestamp_s=self.simulation_time_s,
+            detection_source="synthetic_spatial_simulator",
+            map_id=self.data["map_id"],
+            confidence=1.0,
         )
-        corrected = correct_to_checkpoint(
-            before, self.store.checkpoint_layout, observation.tag_id
+        self._process_checkpoint_observation(observation)
+
+    def observe_checkpoint(self, payload: dict[str, Any]) -> dict[str, Any]:
+        """Validate an API-supplied observation without claiming camera support."""
+        if not isinstance(payload, dict):
+            raise ValueError("checkpoint observation must be a JSON object")
+        observation = CheckpointObservation(
+            tag_id=payload.get("tag_id"),
+            timestamp_s=payload.get("timestamp_s"),
+            detection_source=payload.get("detection_source", "external_simulated_input"),
+            map_id=payload.get("map_id", self.data["map_id"]),
+            confidence=payload.get("confidence"),
+            observed_x_m=payload.get("observed_x_m"),
+            observed_y_m=payload.get("observed_y_m"),
         )
-        self.estimator = DeadReckoner(corrected)
-        correction_m = math.hypot(corrected.x_m - before.x_m, corrected.y_m - before.y_m)
-        self._detected_checkpoint_ids.append(observation.tag_id)
-        self._last_checkpoint_event = {
-            "checkpoint_id": observation.tag_id,
-            "node_id": node_id,
-            "correction_m": correction_m,
-            "simulated_detection": True,
+        self._process_checkpoint_observation(observation)
+        return self.snapshot()
+
+    def _process_checkpoint_observation(self, observation: CheckpointObservation) -> None:
+        """Apply an accepted observation through the existing correction function."""
+        expected = self._expected_checkpoint()
+        result = self.checkpoint_processor.process(
+            observation,
+            self.estimator.pose,
+            expected_tag_id=expected["checkpoint_id"] if expected else None,
+        )
+        self._last_observed_checkpoint = {
+            **observation.to_dict(),
+            "accepted": result.accepted,
+            "reason": result.reason,
         }
+        if not result.accepted:
+            self._record_event(
+                "checkpoint_observation_rejected",
+                f"Checkpoint observation {observation.tag_id} rejected: {result.reason}.",
+                result.to_dict(),
+            )
+            return
+        assert result.corrected_pose is not None
+        self.estimator = DeadReckoner(result.corrected_pose)
+        self._detected_checkpoint_ids.append(observation.tag_id)
+        self._localization_uncertainty_m = 0.05
+        self._localization_variance_m2 = 0.0
+        self._distance_since_checkpoint_m = 0.0
+        correction = {
+            "checkpoint_id": observation.tag_id,
+            "node_id": result.checkpoint_node_id,
+            "correction_m": result.correction_m,
+            "detection_source": observation.detection_source,
+            "confidence": observation.confidence,
+            "simulated_detection": observation.detection_source.startswith("synthetic"),
+        }
+        self._last_checkpoint_event = dict(correction)
+        self._last_localization_correction = dict(correction)
         self._record_event(
             "checkpoint_detected",
-            f"Simulated checkpoint {observation.tag_id} detected at {node_id}; estimate corrected by {correction_m:.3f} m.",
-            dict(self._last_checkpoint_event),
+            f"Simulated checkpoint {observation.tag_id} detected at {result.checkpoint_node_id}; estimate corrected by {result.correction_m:.3f} m.",
+            correction,
         )
+        self._publish_guidance(
+            "CHECKPOINT_CONFIRMED",
+            f"Checkpoint CP{observation.tag_id} confirmed; localization updated.",
+            target_node=result.checkpoint_node_id,
+            identity_detail=str(observation.tag_id),
+        )
+
+    def _update_arrival_monitor(self) -> None:
+        """Update estimate-only stable arrival state for the active product."""
+        edge_product = (
+            self.products_by_node.get(self._edge_target)
+            if self._edge_target in self.route_manager.remaining_destinations
+            else None
+        )
+        product = (
+            self.product_locations[edge_product["demo_product_id"]]
+            if edge_product is not None
+            else self._active_product_location()
+        )
+        if (
+            product is None
+            or not product.available
+            or product.pickup_coordinate_m is None
+        ):
+            self._arrival_state = None
+            return
+        estimate = self.estimator.pose
+        state = self.arrival_monitor.update(
+            target_product_id=product.product_id,
+            estimated_position_m=(estimate.x_m, estimate.y_m),
+            pickup_coordinate_m=product.pickup_coordinate_m,
+            localization_uncertainty_m=self._localization_uncertainty_m,
+        )
+        self._arrival_state = asdict(state)
+
+    def _stationary_arrival_confirmation(self, product: ProductLocation) -> None:
+        """Take one explicit stationary estimate sample to stabilize shelf arrival."""
+        if (
+            self._arrival_state is None
+            or self._arrival_state["arrived"]
+            or self._arrival_state["localization_uncertain"]
+            or self._arrival_state["consecutive_inside_samples"] < 1
+            or product.pickup_coordinate_m is None
+        ):
+            return
+        self.simulation_time_s = round(
+            self.simulation_time_s + FIXED_TIMESTEP_S, 9
+        )
+        measurement = self.sensor_generator.measurement(
+            self.simulation_time_s, 0.0, 0.0
+        )
+        self.estimator.update(measurement)
+        self._localization_variance_m2 += self.sensor_config.encoder_noise_std_m ** 2
+        self._localization_uncertainty_m = (
+            0.05
+            + math.sqrt(self._localization_variance_m2)
+            + abs(self.sensor_config.encoder_bias_fraction)
+            * self._distance_since_checkpoint_m
+        )
+        estimate = self.estimator.pose
+        state = self.arrival_monitor.update(
+            target_product_id=product.product_id,
+            estimated_position_m=(estimate.x_m, estimate.y_m),
+            pickup_coordinate_m=product.pickup_coordinate_m,
+            localization_uncertainty_m=self._localization_uncertainty_m,
+        )
+        self._arrival_state = asdict(state)
+        self._record_sample()
 
     def start(self) -> dict[str, Any]:
         """Start a planned synthetic shopping route."""
@@ -273,6 +566,13 @@ class SpatialNavigationSimulation:
         self.running = True
         self.status = "navigating"
         self._record_event("started", "Spatial navigation started.")
+        product = self._active_product_location()
+        self._publish_guidance(
+            "START",
+            "Navigation started. Follow the highlighted walkable route.",
+            target_node=product.pickup_node if product else self.checkout_node_id,
+            product=product,
+        )
         return self.snapshot()
 
     def start_guided_demo(self) -> dict[str, Any]:
@@ -289,16 +589,27 @@ class SpatialNavigationSimulation:
         self._set_guided_stage(1)
         self._record_event(
             "guided_demo_started",
-            "One-click guided demo started with Bananas and Frozen peas.",
+            "One-click guided demo started with the configured two-product scenario.",
             {
                 "seed": GUIDED_DEMO_SEED,
                 "product_ids": list(GUIDED_PRODUCT_IDS),
+                "product_names": [
+                    self.products_by_id[product_id]["display_name"]
+                    for product_id in GUIDED_PRODUCT_IDS
+                ],
                 "automatic_simulated_pickups": True,
             },
         )
         self.running = True
         self.status = "navigating"
         self._record_event("started", "Spatial navigation started at the entrance.")
+        product = self._active_product_location()
+        self._publish_guidance(
+            "START",
+            "Guided navigation started. Follow the highlighted walkable route.",
+            target_node=product.pickup_node if product else self.checkout_node_id,
+            product=product,
+        )
         return self.snapshot()
 
     def _set_guided_stage(self, stage: int) -> None:
@@ -369,22 +680,25 @@ class SpatialNavigationSimulation:
         """Collect a product only after reaching and confirming its pickup node."""
         if self.status != "awaiting_product_confirmation":
             raise ValueError("No product is currently waiting for pickup confirmation")
-        node_id = self.current_node_id
-        product = self.products_by_node.get(node_id)
+        product_id = self._arrived_product_id
+        product = self.products_by_id.get(product_id) if product_id else None
         if product is None or product["demo_product_id"] not in self._selected_products:
             raise ValueError("Current location is not a selected product pickup point")
+        node_id = product["pickup_node_id"]
         confirmation = self.route_manager.confirm_destination_visit(
             node_id, self.simulation_time_s
         )
         if not confirmation.confirmed:
             raise ValueError(confirmation.failure_reason or "Product collection could not be confirmed")
         product_id = product["demo_product_id"]
+        product_location = self.product_locations[product_id]
         self._selected_products = tuple(
             item for item in self._selected_products if item != product_id
         )
         self._active_route = tuple(self.route_manager.current_planned_route)
         self._route_cursor = 0
         self.deviation_monitor = self._new_deviation_monitor(self._active_route)
+        self.guidance_engine.route_changed()
         self._record_event(
             "product_collected",
             (
@@ -401,10 +715,21 @@ class SpatialNavigationSimulation:
                 ),
             },
         )
+        self._publish_guidance(
+            "PICKUP_CONFIRMED",
+            f"{product_location.display_name} pickup confirmed. Continue to the next destination.",
+            target_node=node_id,
+            product=product_location,
+            identity_detail=("automated_simulated" if automated else "manual"),
+        )
         if not self._selected_products:
             self._record_event("checkout_next", "All selected products collected; proceed to checkout.")
         self.status = "navigating"
         self.running = True
+        self._arrived_product_id = None
+        self._arrival_heading_rad = None
+        self._arrival_state = None
+        self.arrival_monitor.reset()
         if self._guided_mode and automated:
             if product_id == GUIDED_PRODUCT_IDS[0]:
                 self._set_guided_stage(5)
@@ -413,6 +738,7 @@ class SpatialNavigationSimulation:
                     self._guided_wrong_turn_queued = True
             elif product_id == GUIDED_PRODUCT_IDS[1]:
                 self._set_guided_stage(8)
+        self._refresh_guidance()
         return self.snapshot()
 
     def _next_route_node(self) -> str | None:
@@ -452,6 +778,32 @@ class SpatialNavigationSimulation:
                 f"Simulated trolley takes valid lane edge {self._edge_start} → {target_node_id}.",
                 {"from_node": self._edge_start, "to_node": target_node_id},
             )
+
+    def _announce_edge_turn(self, target_node_id: str) -> bool:
+        """Hold one timestep for a new non-straight graph maneuver instruction."""
+        start = self.graph.node(self.current_node_id)
+        target = self.graph.node(target_node_id)
+        outgoing = heading_between((start.x_m, start.y_m), (target.x_m, target.y_m))
+        maneuver = classify_turn(self.estimator.pose.heading_rad, outgoing)
+        if maneuver == "STRAIGHT":
+            return False
+        key = (self.guidance_engine.route_revision, self.current_node_id, target_node_id)
+        if key in self._announced_edge_turns:
+            return False
+        self._announced_edge_turns.add(key)
+        verb = {
+            "TURN_LEFT": "Turn left",
+            "TURN_RIGHT": "Turn right",
+            "U_TURN": "Make a U-turn",
+        }[maneuver]
+        self._publish_guidance(
+            maneuver,
+            f"{verb} toward {target_node_id}.",
+            target_node=target_node_id,
+            product=self._active_product_location(),
+            identity_detail=f"edge:{self.current_node_id}:{target_node_id}",
+        )
+        return True
 
     def _route_manager_update(self) -> None:
         """Feed only estimator output to the established deviation and reroute logic."""
@@ -494,6 +846,12 @@ class SpatialNavigationSimulation:
                     "confirmation_samples": DEVIATION_CONFIRMATIONS,
                 },
             )
+            self._publish_guidance(
+                "REROUTING",
+                "Wrong turn confirmed. Recalculating the remaining route.",
+                target_node=self._edge_target,
+                identity_detail="deviation_confirmed",
+            )
         record = self.route_manager.process_position(self.estimator.pose, state)
         if record is None:
             return
@@ -505,12 +863,18 @@ class SpatialNavigationSimulation:
             )
             self.status = "reroute_failed"
             self.running = False
+            self._publish_guidance(
+                "LOCALIZATION_UNCERTAIN",
+                "Route replacement failed safely. Confirm your position before continuing.",
+                identity_detail="reroute_failed",
+            )
             return
         self._reroute_count += 1
         self._reroute_episode_active = True
         self._reroute_recovery_samples = 0
         self._previous_route = self._active_route
         self._active_route = tuple(record.new_route)
+        self.guidance_engine.route_changed()
         self._route_cursor = 0
         self.deviation_monitor = self._new_deviation_monitor(
             self._active_route, initially_deviated=True
@@ -536,6 +900,13 @@ class SpatialNavigationSimulation:
                 "remaining_destinations": list(record.remaining_destinations),
                 "partial_edge_cost_included": False,
             },
+        )
+        self._publish_guidance(
+            "REROUTING",
+            "Rerouting complete. Follow the updated highlighted route.",
+            target_node=record.new_route[0] if record.new_route else None,
+            product=self._active_product_location(),
+            identity_detail="replacement_route_active",
         )
         if self._guided_mode:
             self._set_guided_stage(6)
@@ -569,6 +940,7 @@ class SpatialNavigationSimulation:
         if self.status not in {"navigating", "paused"}:
             raise ValueError("Spatial simulation is not currently navigating")
         was_paused = self.status == "paused"
+        preserve_transition = False
         for _ in range(count):
             if self.status not in {"navigating", "paused"}:
                 break
@@ -579,9 +951,23 @@ class SpatialNavigationSimulation:
                 self._set_guided_stage(2)
             if self._edge_start is None:
                 if self.current_node_id == self.checkout_node_id:
+                    if self._selected_products:
+                        self.status = "navigation_error"
+                        self.running = False
+                        self._record_event(
+                            "premature_checkout_blocked",
+                            "Checkout arrival was blocked because products remain unconfirmed.",
+                            {"remaining_product_ids": list(self._selected_products)},
+                        )
+                        break
                     self.status = "complete"
                     self.running = False
                     self._record_event("checkout_complete", "Trolley reached checkout.")
+                    self._publish_guidance(
+                        "ARRIVED_CHECKOUT",
+                        "Checkout reached after all selected products were confirmed.",
+                        target_node=self.checkout_node_id,
+                    )
                     self._complete_guided_demo()
                     break
                 target = self._rejoin_node or self._next_route_node()
@@ -601,6 +987,9 @@ class SpatialNavigationSimulation:
                     if alternate is not None:
                         target = alternate
                         taking_wrong_turn = True
+                if self._announce_edge_turn(target):
+                    preserve_transition = True
+                    break
                 self._begin_edge(target, wrong_turn=taking_wrong_turn)
 
             assert self._edge_start is not None and self._edge_target is not None
@@ -623,7 +1012,16 @@ class SpatialNavigationSimulation:
                 self.simulation_time_s, movement_m, yaw_delta
             )
             self.estimator.update(measurement)
+            self._distance_since_checkpoint_m += abs(measurement.wheel_displacement_m)
+            self._localization_variance_m2 += self.sensor_config.encoder_noise_std_m ** 2
+            self._localization_uncertainty_m = (
+                0.05
+                + math.sqrt(self._localization_variance_m2)
+                + abs(self.sensor_config.encoder_bias_fraction)
+                * self._distance_since_checkpoint_m
+            )
             self._route_manager_update()
+            self._update_arrival_monitor()
             self._record_sample()
 
             if self._edge_progress_m + 1e-9 >= self._edge_distance_m:
@@ -649,28 +1047,104 @@ class SpatialNavigationSimulation:
                     self._set_guided_stage(3)
                 self._detect_checkpoint(arrived)
                 if arrived == self.checkout_node_id:
+                    if self._selected_products:
+                        self.status = "navigation_error"
+                        self.running = False
+                        self._record_event(
+                            "premature_checkout_blocked",
+                            "Checkout arrival was blocked because products remain unconfirmed.",
+                            {"remaining_product_ids": list(self._selected_products)},
+                        )
+                        break
                     self.status = "complete"
                     self.running = False
                     self._record_event("checkout_complete", "Trolley reached checkout.")
+                    self._publish_guidance(
+                        "ARRIVED_CHECKOUT",
+                        "Checkout reached after all selected products were confirmed.",
+                        target_node=self.checkout_node_id,
+                    )
                     self._complete_guided_demo()
                     break
                 if arrived in self.route_manager.remaining_destinations:
+                    product = self.products_by_node.get(arrived, {})
+                    product_id = product.get("demo_product_id")
+                    location = self.product_locations.get(product_id)
+                    if location is None or not location.available:
+                        self.status = "location_unavailable"
+                        self.running = False
+                        self._record_event(
+                            "product_location_unavailable",
+                            "Product pickup location is unavailable; navigation stopped safely.",
+                            {
+                                "demo_product_id": product_id,
+                                "reason": location.unavailable_reason if location else "missing_metadata",
+                            },
+                        )
+                        break
+                    self._stationary_arrival_confirmation(location)
+                    if (
+                        self._arrival_state is None
+                        or self._arrival_state["localization_uncertain"]
+                        or not self._arrival_state["arrived"]
+                    ):
+                        self.status = "localization_uncertain"
+                        self.running = False
+                        self._publish_guidance(
+                            "LOCALIZATION_UNCERTAIN",
+                            "Product area reached, but localization is uncertain. Confirm your position.",
+                            target_node=arrived,
+                            product=location,
+                            identity_detail="product_arrival_guard",
+                        )
+                        self._record_event(
+                            "product_arrival_rejected",
+                            "Estimated-position arrival confirmation did not pass its stability and uncertainty guard.",
+                            dict(self._arrival_state or {}),
+                        )
+                        break
                     self.status = "awaiting_product_confirmation"
                     self.running = False
-                    product = self.products_by_node.get(arrived, {})
+                    self._arrived_product_id = product_id
+                    self._arrival_heading_rad = self.estimator.pose.heading_rad
+                    side = product_shelf_side(
+                        self._arrival_heading_rad,
+                        location.pickup_coordinate_m,
+                        location.shelf_facing_point_m,
+                    )
+                    arrival_text = self._product_arrival_text(location, side, waiting=False)
                     self._record_event(
                         "pickup_reached",
                         (
-                            f"Reached pickup point for {product.get('name', arrived)}; "
-                            "guided demo will record an automated simulated confirmation."
+                            f"{arrival_text} Guided demo will record an automated simulated confirmation."
                             if self._guided_mode
-                            else f"Reached pickup point for {product.get('name', arrived)}; confirm collection explicitly."
+                            else f"{arrival_text} Confirm collection explicitly."
                         ),
                         {
                             "pickup_node_id": arrived,
-                            "shelf_id": product.get("shelf_id"),
+                            "product_id": product_id,
+                            "shelf_id": location.shelf_id,
+                            "shelf_section": location.shelf_section,
+                            "shelf_level": location.shelf_level,
+                            "shelf_bay": location.shelf_bay,
+                            "shelf_side": side,
+                            "arrival": dict(self._arrival_state),
                             "automatic_simulated_confirmation": self._guided_mode,
                         },
+                    )
+                    self._publish_guidance(
+                        "PRODUCT_REACHED",
+                        arrival_text,
+                        target_node=arrived,
+                        product=location,
+                        shelf_side=side,
+                    )
+                    self._publish_guidance(
+                        "WAIT_FOR_PICKUP",
+                        self._product_arrival_text(location, side, waiting=True),
+                        target_node=arrived,
+                        product=location,
+                        shelf_side=side,
                     )
                     if self._guided_mode:
                         self.running = True
@@ -681,6 +1155,8 @@ class SpatialNavigationSimulation:
                     break
             if was_paused and self.status == "navigating":
                 self.status = "paused"
+        if not preserve_transition:
+            self._refresh_guidance()
         return self.snapshot()
 
     def _complete_guided_demo(self) -> None:
@@ -752,117 +1228,48 @@ class SpatialNavigationSimulation:
             route_distance += max(0.0, self._edge_distance_m - self._edge_progress_m)
         return route_distance
 
-    def _active_product(self) -> dict[str, str] | None:
-        """Resolve the first remaining planned pickup to its synthetic product."""
-        remaining_nodes = set(self.route_manager.remaining_destinations)
-        for node_id in self._remaining_route():
-            if node_id in remaining_nodes:
-                product = self.products_by_node.get(node_id)
-                if product:
-                    return {
-                        "demo_product_id": product["demo_product_id"],
-                        "name": product["name"],
-                        "shelf_id": product["shelf_id"],
-                        "shelf_section": product["shelf_section"],
-                        "pickup_node_id": node_id,
-                    }
-        return None
+    def _active_product(self) -> dict[str, Any] | None:
+        """Expose the next product and its resolved shelf-level location."""
+        location = self._active_product_location()
+        if location is None:
+            return None
+        result = location.to_dict()
+        result["demo_product_id"] = location.product_id
+        result["name"] = location.display_name
+        result["pickup_node_id"] = location.pickup_node
+        if (
+            location.available
+            and location.pickup_coordinate_m is not None
+            and location.shelf_facing_point_m is not None
+        ):
+            result["shelf_side"] = product_shelf_side(
+                self._arrival_heading_rad
+                if self._arrival_heading_rad is not None
+                else self.estimator.pose.heading_rad,
+                location.pickup_coordinate_m,
+                location.shelf_facing_point_m,
+            )
+        else:
+            result["shelf_side"] = None
+        return result
+
+    def _current_lane(self) -> str:
+        """Describe the actual mapped lane segment without inventing an aisle name."""
+        if self._edge_start and self._edge_target:
+            start = self.graph.node(self._edge_start)
+            target = self.graph.node(self._edge_target)
+            if math.isclose(start.y_m, target.y_m):
+                return f"Horizontal lane y={start.y_m:.1f} m"
+            if math.isclose(start.x_m, target.x_m):
+                return f"Cross-aisle x={start.x_m:.1f} m"
+        return f"Mapped intersection {self.current_node_id}"
 
     def _guidance(self) -> dict[str, Any]:
-        """Generate the next instruction and distance from current route geometry."""
-        route = self._remaining_route()
-        active = self._active_product()
-        if self.status == "awaiting_product_confirmation" and active:
-            return {
-                "instruction": (
-                    f"Product pickup reached: automated simulated confirmation pending for "
-                    f"{active['name']} at {active['shelf_id']}."
-                    if self._guided_mode
-                    else f"Product pickup reached: confirm {active['name']} at {active['shelf_id']}."
-                ),
-                "distance_to_maneuver_m": 0.0,
-                "maneuver": "Product pickup reached",
-            }
-        if self.status == "complete":
-            return {
-                "instruction": "Proceed to checkout — checkout reached.",
-                "distance_to_maneuver_m": 0.0,
-                "maneuver": "Checkout reached",
-            }
-        if not route or len(route) < 2:
-            return {
-                "instruction": "Proceed to checkout.",
-                "distance_to_maneuver_m": 0.0,
-                "maneuver": "Proceed to checkout",
-            }
-        if not self._edge_target and self.current_node_id == route[0]:
-            current = self.graph.node(route[0])
-            following = self.graph.node(route[1])
-            first_leg_heading = heading_between(
-                (current.x_m, current.y_m), (following.x_m, following.y_m)
-            )
-            initial_turn = turn_instruction(
-                self.estimator.pose.heading_rad, first_leg_heading
-            )
-            if initial_turn != "Continue straight":
-                active_target = (
-                    f"{active['name']} at {active['shelf_id']}"
-                    if active
-                    else "checkout"
-                )
-                return {
-                    "instruction": f"{initial_turn} at {self.current_node_id} toward {active_target}.",
-                    "distance_to_maneuver_m": 0.0,
-                    "maneuver": initial_turn,
-                    "maneuver_node_id": self.current_node_id,
-                }
-        start_index = 0
-        next_node_id = self._edge_target or route[1]
-        if next_node_id not in route:
-            next_node_id = route[1]
-        start_index = route.index(next_node_id)
-        first = self.graph.node(route[start_index - 1] if start_index else route[0])
-        second = self.graph.node(next_node_id)
-        heading = self.estimator.pose.heading_rad
-        distance_to_next = (
-            self._edge_distance_m - self._edge_progress_m
-            if self._edge_target
-            else math.hypot(second.x_m - first.x_m, second.y_m - first.y_m)
-        )
-        cumulative = distance_to_next
-        maneuver = "Continue straight"
-        maneuver_node = next_node_id
-        for index in range(start_index, len(route) - 1):
-            before = self.graph.node(route[index])
-            after = self.graph.node(route[index + 1])
-            outgoing = heading_between(
-                (before.x_m, before.y_m), (after.x_m, after.y_m)
-            )
-            candidate = turn_instruction(heading, outgoing)
-            if candidate != "Continue straight":
-                maneuver = candidate
-                maneuver_node = route[index]
-                break
-            cumulative += math.hypot(after.x_m - before.x_m, after.y_m - before.y_m)
-        if active:
-            target = active["pickup_node_id"]
-            if target == maneuver_node and maneuver == "Continue straight":
-                instruction = f"Approach {active['shelf_id']} for {active['name']}."
-                maneuver = "Approach selected shelf"
-            else:
-                instruction = f"{maneuver} toward {active['name']} at {active['shelf_id']}."
-        else:
-            if maneuver_node == self.checkout_node_id and maneuver == "Continue straight":
-                instruction = "Proceed to checkout."
-                maneuver = "Proceed to checkout"
-            else:
-                instruction = f"{maneuver} toward checkout."
-        return {
-            "instruction": instruction,
-            "distance_to_maneuver_m": max(0.0, cumulative),
-            "maneuver": maneuver,
-            "maneuver_node_id": maneuver_node,
-        }
+        """Return the latest structured instruction generated by the engine."""
+        if self.guidance_engine.current_event is None:
+            self._refresh_guidance()
+        assert self.guidance_engine.current_event is not None
+        return self.guidance_engine.current_event.to_dict()
 
     def snapshot(self) -> dict[str, Any]:
         """Return complete browser-safe spatial, product, checkpoint, and route state."""
@@ -878,23 +1285,26 @@ class SpatialNavigationSimulation:
             if product_id not in remaining_ids
         ]
         route = list(self.route_manager.current_planned_route)
-        checkpoint_sequence = [
-            checkpoint
-            for node_id in route
-            if (checkpoint := self.checkpoints_by_node.get(node_id))
-            and checkpoint["checkpoint_id"] not in self._detected_checkpoint_ids
-        ]
+        checkpoint_sequence = self._checkpoint_sequence()
         estimate = self.estimator.pose
         position_error = math.hypot(
             estimate.x_m - self.true_x_m, estimate.y_m - self.true_y_m
         )
         guidance = self._guidance()
+        active_product = self._active_product()
         next_checkpoint = checkpoint_sequence[0] if checkpoint_sequence else None
         checkpoint_distance = 0.0
         if next_checkpoint:
             checkpoint_distance = self._distance_to_route_node(
                 next_checkpoint["node_id"]
             )
+        product_distance = 0.0
+        if active_product and active_product.get("pickup_node_id"):
+            product_distance = self._distance_to_route_node(
+                active_product["pickup_node_id"]
+            )
+        total_products = len(self._requested_products)
+        collected_count = len(collected_ids)
         return {
             "map_id": self.data["map_id"],
             "data_classification": self.data["data_classification"],
@@ -913,10 +1323,13 @@ class SpatialNavigationSimulation:
             "estimate": asdict(estimate),
             "position_error_m": position_error,
             "heading_rad": estimate.heading_rad,
-            "current_aisle": (
-                (self._active_product() or {}).get("shelf_section")
-            ),
-            "active_product": self._active_product(),
+            "heading_deg": math.degrees(estimate.heading_rad),
+            "current_aisle": self._current_lane(),
+            "active_product": active_product,
+            "product_locations": {
+                product_id: location.to_dict()
+                for product_id, location in self.product_locations.items()
+            },
             "remaining_products": selected_products,
             "collected_product_ids": collected_ids,
             "selected_product_ids": list(self._requested_products),
@@ -927,6 +1340,18 @@ class SpatialNavigationSimulation:
             "remaining_distance_m": self._distance_to_route_node(
                 self.checkout_node_id
             ),
+            "distance_to_active_product_m": product_distance,
+            "navigation_progress": {
+                "collected_products": collected_count,
+                "total_products": total_products,
+                "percent": (
+                    100.0
+                    if total_products == 0 and self.status == "complete"
+                    else 0.0
+                    if total_products == 0
+                    else 100.0 * collected_count / total_products
+                ),
+            },
             "travelled_ground_truth": self._truth_path,
             "travelled_estimate": self._estimated_path,
             "guidance": guidance,
@@ -936,8 +1361,26 @@ class SpatialNavigationSimulation:
                 if self.current_node_id else None
             ),
             "last_confirmed_checkpoint": self._last_checkpoint_event,
+            "observed_checkpoint": self._last_observed_checkpoint,
+            "localization_correction_event": self._last_localization_correction,
             "distance_to_checkpoint_m": checkpoint_distance,
             "detected_checkpoint_ids": list(self._detected_checkpoint_ids),
+            "localization": {
+                "status": (
+                    "uncertain"
+                    if self._localization_uncertainty_m > MAX_ARRIVAL_UNCERTAINTY_M
+                    or self.status in {"localization_uncertain", "reroute_failed"}
+                    else "checkpoint_confirmed"
+                    if self._last_checkpoint_event
+                    and self._last_checkpoint_event["checkpoint_id"]
+                    == (self._detected_checkpoint_ids[-1] if self._detected_checkpoint_ids else None)
+                    else "dead_reckoning"
+                ),
+                "uncertainty_m": self._localization_uncertainty_m,
+                "maximum_arrival_uncertainty_m": MAX_ARRIVAL_UNCERTAINTY_M,
+                "source": "synthetic_sensor_model_and_checkpoint_observations",
+            },
+            "product_arrival": self._arrival_state,
             "deviation": self._last_deviation,
             "reroute_count": self._reroute_count,
             "guided_demo": {
@@ -950,5 +1393,11 @@ class SpatialNavigationSimulation:
                 "automatic_pickups": self._guided_mode,
                 "completion_summary": self._guided_completion_summary,
             },
+            "guidance_events": [
+                event.to_dict() for event in self.guidance_engine.events[-100:]
+            ],
+            "reroute_cost_limitation": (
+                "Endpoint-anchored node routing excludes partial-edge travel cost."
+            ),
             "events": self._events[-100:],
         }

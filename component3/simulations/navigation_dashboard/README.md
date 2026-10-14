@@ -59,6 +59,44 @@ telemetry. Checkpoint detections are simulated, not camera observations.
 `GET /api/spatial/export.json` exports the current run state, trails, metrics,
 and event history.
 
+### Phase 7A structured guidance
+
+`guidance.py` classifies maneuvers from signed route-segment angles and emits
+structured, deduplicated events. Product instructions use validated section,
+shelf level, bay, pickup node, and shelf-facing geometry from the versioned
+synthetic catalog. Arrival requires two confident dead-reckoned estimates
+within the configured radius; simulation truth never grants arrival.
+
+`checkpoint_observations.py` separates a tag observation from map correction.
+To submit a synthetic or future detector observation, post:
+
+```json
+{
+  "action": "observe_checkpoint",
+  "observation": {
+    "tag_id": 201,
+    "timestamp_s": 12.5,
+    "detection_source": "external_simulated_input",
+    "map_id": "comp3-synthetic-supermarket-demo-v1",
+    "confidence": 0.95
+  }
+}
+```
+
+The server validates sequence, duplication, time, map, known ID, and
+confidence before calling the existing checkpoint correction function. This
+interface does not claim live camera support. The UI distinguishes the last
+observation, accepted checkpoint, and localization correction, and offers
+optional browser speech that is disabled by default.
+
+Run Phase 7A tests and evaluations from the repository root:
+
+```bash
+python3 -B -m unittest -v component3.simulations.navigation_dashboard.tests.test_phase7a_guidance
+python3 -B -m component3.simulations.navigation_dashboard.phase7a_evaluation
+python3 -B -m component3.simulations.navigation_dashboard.phase7a_browser_acceptance
+```
+
 ## Simulation design
 
 - `engine.py` owns deterministic physical-time state and delegates route

@@ -174,6 +174,10 @@ def make_handler(
                             result = spatial_simulator.wrong_turn()
                         elif action == "confirm_product":
                             result = spatial_simulator.confirm_product()
+                        elif action == "observe_checkpoint":
+                            result = spatial_simulator.observe_checkpoint(
+                                payload.get("observation")
+                            )
                         elif action == "configure":
                             result = spatial_simulator.configure_speed(
                                 payload.get("speed_m_s")

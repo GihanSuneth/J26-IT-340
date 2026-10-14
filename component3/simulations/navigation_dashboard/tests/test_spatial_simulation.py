@@ -117,13 +117,12 @@ class SpatialNavigationTests(unittest.TestCase):
         """Generate changing route guidance from geometry and product target."""
         simulation = SpatialNavigationSimulation()
         initial = simulation.snapshot()
-        self.assertEqual(initial["guidance"]["maneuver"], "Turn left")
+        self.assertEqual(initial["guidance"]["instruction_type"], "START")
         self.assertEqual(initial["guidance"]["distance_to_maneuver_m"], 0.0)
         self.assertIn("Bananas", initial["guidance"]["instruction"])
-        self.assertIn("DEMO-SHELF-", initial["guidance"]["instruction"])
         simulation.start()
         after_departure = simulation.step()
-        self.assertGreater(after_departure["guidance"]["distance_to_maneuver_m"], 0)
+        self.assertEqual(after_departure["guidance"]["instruction_type"], "TURN_LEFT")
 
     def test_checkpoint_sequence_is_route_specific_not_every_graph_node(self) -> None:
         """Expose only configured checkpoint mappings, beginning at the entrance."""

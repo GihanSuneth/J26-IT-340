@@ -1,0 +1,3491 @@
+{
+  "map_id": "comp3-synthetic-supermarket-demo-v1",
+  "data_classification": "synthetic_demonstration_only",
+  "status": "complete",
+  "running": false,
+  "simulation_time_s": 41.25,
+  "fixed_timestep_s": 0.25,
+  "speed_m_s": 0.8,
+  "current_node_id": "N4_5",
+  "current_location": "N4_5",
+  "ground_truth": {
+    "x_m": 19.0,
+    "y_m": 13.0
+  },
+  "estimate": {
+    "x_m": 19.0,
+    "y_m": 13.0,
+    "heading_rad": 1.5734915760939634,
+    "timestamp_s": 41.25
+  },
+  "position_error_m": 0.0,
+  "heading_rad": 1.5734915760939634,
+  "heading_deg": 90.15442640957212,
+  "current_aisle": "Mapped intersection N4_5",
+  "active_product": null,
+  "product_locations": {
+    "SIM-P-001": {
+      "available": true,
+      "product_id": "SIM-P-001",
+      "display_name": "Bananas",
+      "category": "Produce",
+      "shelf_id": "DEMO-SHELF-01",
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "shelf_bay": 1,
+      "pickup_node": "N1_1",
+      "pickup_coordinate_m": [
+        5.0,
+        4.0
+      ],
+      "shelf_facing_point_m": [
+        5.0,
+        4.55
+      ],
+      "unavailable_reason": null
+    },
+    "SIM-P-002": {
+      "available": true,
+      "product_id": "SIM-P-002",
+      "display_name": "Bread loaf",
+      "category": "Bakery",
+      "shelf_id": "DEMO-SHELF-02",
+      "shelf_section": "Bakery",
+      "shelf_level": 3,
+      "shelf_bay": 2,
+      "pickup_node": "N1_2",
+      "pickup_coordinate_m": [
+        9.0,
+        4.0
+      ],
+      "shelf_facing_point_m": [
+        9.0,
+        4.55
+      ],
+      "unavailable_reason": null
+    },
+    "SIM-P-003": {
+      "available": true,
+      "product_id": "SIM-P-003",
+      "display_name": "Milk carton",
+      "category": "Dairy",
+      "shelf_id": "DEMO-SHELF-03",
+      "shelf_section": "Dairy",
+      "shelf_level": 1,
+      "shelf_bay": 1,
+      "pickup_node": "N1_4",
+      "pickup_coordinate_m": [
+        17.0,
+        4.0
+      ],
+      "shelf_facing_point_m": [
+        17.0,
+        4.55
+      ],
+      "unavailable_reason": null
+    },
+    "SIM-P-004": {
+      "available": true,
+      "product_id": "SIM-P-004",
+      "display_name": "Pasta",
+      "category": "Pantry",
+      "shelf_id": "DEMO-SHELF-04",
+      "shelf_section": "Pantry",
+      "shelf_level": 2,
+      "shelf_bay": 1,
+      "pickup_node": "N2_1",
+      "pickup_coordinate_m": [
+        5.0,
+        7.0
+      ],
+      "shelf_facing_point_m": [
+        5.0,
+        7.55
+      ],
+      "unavailable_reason": null
+    },
+    "SIM-P-005": {
+      "available": true,
+      "product_id": "SIM-P-005",
+      "display_name": "Cereal box",
+      "category": "Cereal",
+      "shelf_id": "DEMO-SHELF-05",
+      "shelf_section": "Cereal",
+      "shelf_level": 4,
+      "shelf_bay": 2,
+      "pickup_node": "N2_2",
+      "pickup_coordinate_m": [
+        9.0,
+        7.0
+      ],
+      "shelf_facing_point_m": [
+        9.0,
+        7.55
+      ],
+      "unavailable_reason": null
+    },
+    "SIM-P-006": {
+      "available": true,
+      "product_id": "SIM-P-006",
+      "display_name": "Frozen peas",
+      "category": "Frozen",
+      "shelf_id": "DEMO-SHELF-06",
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "shelf_bay": 3,
+      "pickup_node": "N2_4",
+      "pickup_coordinate_m": [
+        17.0,
+        7.0
+      ],
+      "shelf_facing_point_m": [
+        17.0,
+        7.55
+      ],
+      "unavailable_reason": null
+    }
+  },
+  "remaining_products": [],
+  "collected_product_ids": [
+    "SIM-P-001",
+    "SIM-P-006"
+  ],
+  "selected_product_ids": [
+    "SIM-P-001",
+    "SIM-P-006"
+  ],
+  "planned_route": [
+    "N2_4",
+    "N2_5",
+    "N3_5",
+    "N4_5"
+  ],
+  "previous_planned_route": [
+    "N1_1",
+    "N1_2",
+    "N1_3",
+    "N2_3",
+    "N2_4",
+    "N2_5",
+    "N3_5",
+    "N4_5"
+  ],
+  "remaining_route": [
+    "N4_5"
+  ],
+  "route_distance_m": 8.0,
+  "remaining_distance_m": 0,
+  "distance_to_active_product_m": 0.0,
+  "navigation_progress": {
+    "collected_products": 2,
+    "total_products": 2,
+    "percent": 100.0
+  },
+  "travelled_ground_truth": [
+    {
+      "timestamp_s": 0.0,
+      "x_m": 1.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 0.5,
+      "x_m": 1.0,
+      "y_m": 1.2
+    },
+    {
+      "timestamp_s": 0.75,
+      "x_m": 1.0,
+      "y_m": 1.4
+    },
+    {
+      "timestamp_s": 1.0,
+      "x_m": 1.0,
+      "y_m": 1.6
+    },
+    {
+      "timestamp_s": 1.25,
+      "x_m": 1.0,
+      "y_m": 1.8
+    },
+    {
+      "timestamp_s": 1.5,
+      "x_m": 1.0,
+      "y_m": 2.0
+    },
+    {
+      "timestamp_s": 1.75,
+      "x_m": 1.0,
+      "y_m": 2.2
+    },
+    {
+      "timestamp_s": 2.0,
+      "x_m": 1.0,
+      "y_m": 2.4
+    },
+    {
+      "timestamp_s": 2.25,
+      "x_m": 1.0,
+      "y_m": 2.6
+    },
+    {
+      "timestamp_s": 2.5,
+      "x_m": 1.0,
+      "y_m": 2.8
+    },
+    {
+      "timestamp_s": 2.75,
+      "x_m": 1.0,
+      "y_m": 3.0
+    },
+    {
+      "timestamp_s": 3.0,
+      "x_m": 1.0,
+      "y_m": 3.1999999999999997
+    },
+    {
+      "timestamp_s": 3.25,
+      "x_m": 1.0,
+      "y_m": 3.4
+    },
+    {
+      "timestamp_s": 3.5,
+      "x_m": 1.0,
+      "y_m": 3.6
+    },
+    {
+      "timestamp_s": 3.75,
+      "x_m": 1.0,
+      "y_m": 3.8000000000000003
+    },
+    {
+      "timestamp_s": 4.0,
+      "x_m": 1.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 4.5,
+      "x_m": 1.2,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 4.75,
+      "x_m": 1.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 5.0,
+      "x_m": 1.6,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 5.25,
+      "x_m": 1.8,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 5.5,
+      "x_m": 2.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 5.75,
+      "x_m": 2.2,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 6.0,
+      "x_m": 2.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 6.25,
+      "x_m": 2.5999999999999996,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 6.5,
+      "x_m": 2.8,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 6.75,
+      "x_m": 3.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 7.0,
+      "x_m": 3.1999999999999997,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 7.25,
+      "x_m": 3.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 7.5,
+      "x_m": 3.6,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 7.75,
+      "x_m": 3.8000000000000003,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 8.0,
+      "x_m": 4.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 8.25,
+      "x_m": 4.200000000000001,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 8.5,
+      "x_m": 4.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 8.75,
+      "x_m": 4.600000000000001,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 9.0,
+      "x_m": 4.800000000000001,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 9.25,
+      "x_m": 5.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 9.5,
+      "x_m": 5.2,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 9.75,
+      "x_m": 5.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 10.0,
+      "x_m": 5.6,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 10.25,
+      "x_m": 5.8,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 10.5,
+      "x_m": 6.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 10.75,
+      "x_m": 6.2,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 11.0,
+      "x_m": 6.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 11.25,
+      "x_m": 6.6,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 11.5,
+      "x_m": 6.8,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 11.75,
+      "x_m": 7.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 12.0,
+      "x_m": 7.199999999999999,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 12.25,
+      "x_m": 7.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 12.5,
+      "x_m": 7.6,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 12.75,
+      "x_m": 7.800000000000001,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 13.0,
+      "x_m": 8.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 13.25,
+      "x_m": 8.200000000000001,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 13.5,
+      "x_m": 8.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 13.75,
+      "x_m": 8.600000000000001,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 14.0,
+      "x_m": 8.8,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 14.25,
+      "x_m": 9.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 14.5,
+      "x_m": 9.2,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 14.75,
+      "x_m": 9.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 15.0,
+      "x_m": 9.6,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 15.25,
+      "x_m": 9.8,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 15.5,
+      "x_m": 10.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 15.75,
+      "x_m": 10.2,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 16.0,
+      "x_m": 10.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 16.25,
+      "x_m": 10.6,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 16.5,
+      "x_m": 10.8,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 16.75,
+      "x_m": 11.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 17.0,
+      "x_m": 11.2,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 17.25,
+      "x_m": 11.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 17.5,
+      "x_m": 11.6,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 17.75,
+      "x_m": 11.8,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 18.0,
+      "x_m": 12.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 18.25,
+      "x_m": 12.200000000000001,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 18.5,
+      "x_m": 12.4,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 18.75,
+      "x_m": 12.600000000000001,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 19.0,
+      "x_m": 12.8,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 19.25,
+      "x_m": 13.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 19.75,
+      "x_m": 13.0,
+      "y_m": 3.8
+    },
+    {
+      "timestamp_s": 20.0,
+      "x_m": 13.0,
+      "y_m": 3.6
+    },
+    {
+      "timestamp_s": 20.25,
+      "x_m": 13.0,
+      "y_m": 3.4
+    },
+    {
+      "timestamp_s": 20.5,
+      "x_m": 13.0,
+      "y_m": 3.2
+    },
+    {
+      "timestamp_s": 20.75,
+      "x_m": 13.0,
+      "y_m": 3.0
+    },
+    {
+      "timestamp_s": 21.0,
+      "x_m": 13.0,
+      "y_m": 3.2
+    },
+    {
+      "timestamp_s": 21.25,
+      "x_m": 13.0,
+      "y_m": 3.4000000000000004
+    },
+    {
+      "timestamp_s": 21.5,
+      "x_m": 13.0,
+      "y_m": 3.6000000000000005
+    },
+    {
+      "timestamp_s": 21.75,
+      "x_m": 13.0,
+      "y_m": 3.8000000000000007
+    },
+    {
+      "timestamp_s": 22.0,
+      "x_m": 13.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 22.25,
+      "x_m": 13.0,
+      "y_m": 4.2
+    },
+    {
+      "timestamp_s": 22.5,
+      "x_m": 13.0,
+      "y_m": 4.4
+    },
+    {
+      "timestamp_s": 22.75,
+      "x_m": 13.0,
+      "y_m": 4.6
+    },
+    {
+      "timestamp_s": 23.0,
+      "x_m": 13.0,
+      "y_m": 4.8
+    },
+    {
+      "timestamp_s": 23.25,
+      "x_m": 13.0,
+      "y_m": 5.0
+    },
+    {
+      "timestamp_s": 23.5,
+      "x_m": 13.0,
+      "y_m": 5.2
+    },
+    {
+      "timestamp_s": 23.75,
+      "x_m": 13.0,
+      "y_m": 5.4
+    },
+    {
+      "timestamp_s": 24.0,
+      "x_m": 13.0,
+      "y_m": 5.6
+    },
+    {
+      "timestamp_s": 24.25,
+      "x_m": 13.0,
+      "y_m": 5.8
+    },
+    {
+      "timestamp_s": 24.5,
+      "x_m": 13.0,
+      "y_m": 6.0
+    },
+    {
+      "timestamp_s": 24.75,
+      "x_m": 13.0,
+      "y_m": 6.199999999999999
+    },
+    {
+      "timestamp_s": 25.0,
+      "x_m": 13.0,
+      "y_m": 6.4
+    },
+    {
+      "timestamp_s": 25.25,
+      "x_m": 13.0,
+      "y_m": 6.6
+    },
+    {
+      "timestamp_s": 25.5,
+      "x_m": 13.0,
+      "y_m": 6.800000000000001
+    },
+    {
+      "timestamp_s": 25.75,
+      "x_m": 13.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 26.25,
+      "x_m": 13.2,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 26.5,
+      "x_m": 13.4,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 26.75,
+      "x_m": 13.6,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 27.0,
+      "x_m": 13.8,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 27.25,
+      "x_m": 14.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 27.5,
+      "x_m": 14.2,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 27.75,
+      "x_m": 14.4,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 28.0,
+      "x_m": 14.6,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 28.25,
+      "x_m": 14.8,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 28.5,
+      "x_m": 15.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 28.75,
+      "x_m": 15.2,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 29.0,
+      "x_m": 15.4,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 29.25,
+      "x_m": 15.6,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 29.5,
+      "x_m": 15.8,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 29.75,
+      "x_m": 16.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 30.0,
+      "x_m": 16.2,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 30.25,
+      "x_m": 16.400000000000002,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 30.5,
+      "x_m": 16.6,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 30.75,
+      "x_m": 16.8,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 31.0,
+      "x_m": 17.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 31.25,
+      "x_m": 17.2,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 31.5,
+      "x_m": 17.4,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 31.75,
+      "x_m": 17.6,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 32.0,
+      "x_m": 17.8,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 32.25,
+      "x_m": 18.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 32.5,
+      "x_m": 18.2,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 32.75,
+      "x_m": 18.4,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 33.0,
+      "x_m": 18.6,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 33.25,
+      "x_m": 18.8,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 33.5,
+      "x_m": 19.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 34.0,
+      "x_m": 19.0,
+      "y_m": 7.2
+    },
+    {
+      "timestamp_s": 34.25,
+      "x_m": 19.0,
+      "y_m": 7.4
+    },
+    {
+      "timestamp_s": 34.5,
+      "x_m": 19.0,
+      "y_m": 7.6
+    },
+    {
+      "timestamp_s": 34.75,
+      "x_m": 19.0,
+      "y_m": 7.8
+    },
+    {
+      "timestamp_s": 35.0,
+      "x_m": 19.0,
+      "y_m": 8.0
+    },
+    {
+      "timestamp_s": 35.25,
+      "x_m": 19.0,
+      "y_m": 8.2
+    },
+    {
+      "timestamp_s": 35.5,
+      "x_m": 19.0,
+      "y_m": 8.4
+    },
+    {
+      "timestamp_s": 35.75,
+      "x_m": 19.0,
+      "y_m": 8.6
+    },
+    {
+      "timestamp_s": 36.0,
+      "x_m": 19.0,
+      "y_m": 8.8
+    },
+    {
+      "timestamp_s": 36.25,
+      "x_m": 19.0,
+      "y_m": 9.0
+    },
+    {
+      "timestamp_s": 36.5,
+      "x_m": 19.0,
+      "y_m": 9.2
+    },
+    {
+      "timestamp_s": 36.75,
+      "x_m": 19.0,
+      "y_m": 9.4
+    },
+    {
+      "timestamp_s": 37.0,
+      "x_m": 19.0,
+      "y_m": 9.6
+    },
+    {
+      "timestamp_s": 37.25,
+      "x_m": 19.0,
+      "y_m": 9.8
+    },
+    {
+      "timestamp_s": 37.5,
+      "x_m": 19.0,
+      "y_m": 10.0
+    },
+    {
+      "timestamp_s": 37.75,
+      "x_m": 19.0,
+      "y_m": 10.2
+    },
+    {
+      "timestamp_s": 38.0,
+      "x_m": 19.0,
+      "y_m": 10.4
+    },
+    {
+      "timestamp_s": 38.25,
+      "x_m": 19.0,
+      "y_m": 10.6
+    },
+    {
+      "timestamp_s": 38.5,
+      "x_m": 19.0,
+      "y_m": 10.8
+    },
+    {
+      "timestamp_s": 38.75,
+      "x_m": 19.0,
+      "y_m": 11.0
+    },
+    {
+      "timestamp_s": 39.0,
+      "x_m": 19.0,
+      "y_m": 11.2
+    },
+    {
+      "timestamp_s": 39.25,
+      "x_m": 19.0,
+      "y_m": 11.4
+    },
+    {
+      "timestamp_s": 39.5,
+      "x_m": 19.0,
+      "y_m": 11.6
+    },
+    {
+      "timestamp_s": 39.75,
+      "x_m": 19.0,
+      "y_m": 11.8
+    },
+    {
+      "timestamp_s": 40.0,
+      "x_m": 19.0,
+      "y_m": 12.0
+    },
+    {
+      "timestamp_s": 40.25,
+      "x_m": 19.0,
+      "y_m": 12.2
+    },
+    {
+      "timestamp_s": 40.5,
+      "x_m": 19.0,
+      "y_m": 12.4
+    },
+    {
+      "timestamp_s": 40.75,
+      "x_m": 19.0,
+      "y_m": 12.6
+    },
+    {
+      "timestamp_s": 41.0,
+      "x_m": 19.0,
+      "y_m": 12.8
+    },
+    {
+      "timestamp_s": 41.25,
+      "x_m": 19.0,
+      "y_m": 13.0
+    }
+  ],
+  "travelled_estimate": [
+    {
+      "timestamp_s": 0.0,
+      "x_m": 1.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 0.5,
+      "x_m": 1.1429422336938206,
+      "y_m": 1.1426037964598301
+    },
+    {
+      "timestamp_s": 0.75,
+      "x_m": 1.143040431157176,
+      "y_m": 1.3397179497542075
+    },
+    {
+      "timestamp_s": 1.0,
+      "x_m": 1.1419717647642231,
+      "y_m": 1.5476318046379407
+    },
+    {
+      "timestamp_s": 1.25,
+      "x_m": 1.142044593006549,
+      "y_m": 1.7482133332420295
+    },
+    {
+      "timestamp_s": 1.5,
+      "x_m": 1.1423158409597562,
+      "y_m": 1.9454172280740034
+    },
+    {
+      "timestamp_s": 1.75,
+      "x_m": 1.1411200567078665,
+      "y_m": 2.1528981144116552
+    },
+    {
+      "timestamp_s": 2.0,
+      "x_m": 1.140916539272326,
+      "y_m": 2.3531511209813667
+    },
+    {
+      "timestamp_s": 2.25,
+      "x_m": 1.1419508119101822,
+      "y_m": 2.5569313893175356
+    },
+    {
+      "timestamp_s": 2.5,
+      "x_m": 1.1429986902537748,
+      "y_m": 2.764434739679212
+    },
+    {
+      "timestamp_s": 2.75,
+      "x_m": 1.1430757639969509,
+      "y_m": 2.965175214408909
+    },
+    {
+      "timestamp_s": 3.0,
+      "x_m": 1.1430722460448952,
+      "y_m": 3.1648037703112077
+    },
+    {
+      "timestamp_s": 3.25,
+      "x_m": 1.1429491782739085,
+      "y_m": 3.363929852521738
+    },
+    {
+      "timestamp_s": 3.5,
+      "x_m": 1.1423119362652772,
+      "y_m": 3.5664166731475535
+    },
+    {
+      "timestamp_s": 3.75,
+      "x_m": 1.1415752545721787,
+      "y_m": 3.7682765195692154
+    },
+    {
+      "timestamp_s": 4.0,
+      "x_m": 1.1408698632139163,
+      "y_m": 3.979413537043823
+    },
+    {
+      "timestamp_s": 4.5,
+      "x_m": 1.2789377387288599,
+      "y_m": 4.1189150622141835
+    },
+    {
+      "timestamp_s": 4.75,
+      "x_m": 1.474358811570619,
+      "y_m": 4.119243166878924
+    },
+    {
+      "timestamp_s": 5.0,
+      "x_m": 1.6794749430049998,
+      "y_m": 4.11858972597858
+    },
+    {
+      "timestamp_s": 5.25,
+      "x_m": 1.8821127129780097,
+      "y_m": 4.118564818438856
+    },
+    {
+      "timestamp_s": 5.5,
+      "x_m": 2.074075568246928,
+      "y_m": 4.119296429844394
+    },
+    {
+      "timestamp_s": 5.75,
+      "x_m": 2.2688293766549745,
+      "y_m": 4.120740615456162
+    },
+    {
+      "timestamp_s": 6.0,
+      "x_m": 2.4655115101263037,
+      "y_m": 4.1209567243365735
+    },
+    {
+      "timestamp_s": 6.25,
+      "x_m": 2.6739213830161623,
+      "y_m": 4.119545842898601
+    },
+    {
+      "timestamp_s": 6.5,
+      "x_m": 2.870609632772961,
+      "y_m": 4.118965321795976
+    },
+    {
+      "timestamp_s": 6.75,
+      "x_m": 3.0713962530345813,
+      "y_m": 4.118882707285009
+    },
+    {
+      "timestamp_s": 7.0,
+      "x_m": 3.272135688816345,
+      "y_m": 4.118714350796693
+    },
+    {
+      "timestamp_s": 7.25,
+      "x_m": 3.4769318005842087,
+      "y_m": 4.119232656125807
+    },
+    {
+      "timestamp_s": 7.5,
+      "x_m": 3.6785316449577077,
+      "y_m": 4.120359056635299
+    },
+    {
+      "timestamp_s": 7.75,
+      "x_m": 3.881125434532587,
+      "y_m": 4.119831520663564
+    },
+    {
+      "timestamp_s": 8.0,
+      "x_m": 4.081687198696034,
+      "y_m": 4.118793702331795
+    },
+    {
+      "timestamp_s": 8.25,
+      "x_m": 4.2859428932086505,
+      "y_m": 4.119401517418504
+    },
+    {
+      "timestamp_s": 8.5,
+      "x_m": 4.485721932137044,
+      "y_m": 4.120131463447456
+    },
+    {
+      "timestamp_s": 8.75,
+      "x_m": 4.688499873910381,
+      "y_m": 4.120222851926702
+    },
+    {
+      "timestamp_s": 9.0,
+      "x_m": 4.889590481718392,
+      "y_m": 4.120599210938603
+    },
+    {
+      "timestamp_s": 9.25,
+      "x_m": 5.096434251068842,
+      "y_m": 4.121294028099668
+    },
+    {
+      "timestamp_s": 9.5,
+      "x_m": 5.300964718839951,
+      "y_m": 4.122151834733989
+    },
+    {
+      "timestamp_s": 9.75,
+      "x_m": 5.500635075614943,
+      "y_m": 4.123685932691822
+    },
+    {
+      "timestamp_s": 10.0,
+      "x_m": 5.708004650091574,
+      "y_m": 4.124308975085721
+    },
+    {
+      "timestamp_s": 10.25,
+      "x_m": 5.909570226983402,
+      "y_m": 4.124552511774395
+    },
+    {
+      "timestamp_s": 10.5,
+      "x_m": 6.1116804393974595,
+      "y_m": 4.125307135533862
+    },
+    {
+      "timestamp_s": 10.75,
+      "x_m": 6.30553933256217,
+      "y_m": 4.126046688813427
+    },
+    {
+      "timestamp_s": 11.0,
+      "x_m": 6.504989143179684,
+      "y_m": 4.127505898993562
+    },
+    {
+      "timestamp_s": 11.25,
+      "x_m": 6.708355125997973,
+      "y_m": 4.129041923383418
+    },
+    {
+      "timestamp_s": 11.5,
+      "x_m": 6.917777833124814,
+      "y_m": 4.1298374455554665
+    },
+    {
+      "timestamp_s": 11.75,
+      "x_m": 7.122544800631986,
+      "y_m": 4.1304866215591085
+    },
+    {
+      "timestamp_s": 12.0,
+      "x_m": 7.313794222125077,
+      "y_m": 4.130994839235214
+    },
+    {
+      "timestamp_s": 12.25,
+      "x_m": 7.5150854377469685,
+      "y_m": 4.131364154271015
+    },
+    {
+      "timestamp_s": 12.5,
+      "x_m": 7.717195121790884,
+      "y_m": 4.131014925670232
+    },
+    {
+      "timestamp_s": 12.75,
+      "x_m": 7.919611868859878,
+      "y_m": 4.130340090054225
+    },
+    {
+      "timestamp_s": 13.0,
+      "x_m": 8.12215178323669,
+      "y_m": 4.130210598138576
+    },
+    {
+      "timestamp_s": 13.25,
+      "x_m": 8.318570676235774,
+      "y_m": 4.129377696091904
+    },
+    {
+      "timestamp_s": 13.5,
+      "x_m": 8.524064408672706,
+      "y_m": 4.128035275873696
+    },
+    {
+      "timestamp_s": 13.75,
+      "x_m": 8.727531752501125,
+      "y_m": 4.1279167309818074
+    },
+    {
+      "timestamp_s": 14.0,
+      "x_m": 8.928402633223824,
+      "y_m": 4.127896217964825
+    },
+    {
+      "timestamp_s": 14.25,
+      "x_m": 9.129049285521173,
+      "y_m": 4.128270757366116
+    },
+    {
+      "timestamp_s": 14.5,
+      "x_m": 9.325247621733416,
+      "y_m": 4.128383921856414
+    },
+    {
+      "timestamp_s": 14.75,
+      "x_m": 9.530408784012579,
+      "y_m": 4.128236316422809
+    },
+    {
+      "timestamp_s": 15.0,
+      "x_m": 9.73121155073918,
+      "y_m": 4.127872702086738
+    },
+    {
+      "timestamp_s": 15.25,
+      "x_m": 9.938049480052147,
+      "y_m": 4.127574475808732
+    },
+    {
+      "timestamp_s": 15.5,
+      "x_m": 10.139405974405271,
+      "y_m": 4.129300408254669
+    },
+    {
+      "timestamp_s": 15.75,
+      "x_m": 10.342517721980297,
+      "y_m": 4.130883380428276
+    },
+    {
+      "timestamp_s": 16.0,
+      "x_m": 10.546192828446518,
+      "y_m": 4.13140451919114
+    },
+    {
+      "timestamp_s": 16.25,
+      "x_m": 10.748806478602871,
+      "y_m": 4.131137783841942
+    },
+    {
+      "timestamp_s": 16.5,
+      "x_m": 10.947126033628836,
+      "y_m": 4.130714841006339
+    },
+    {
+      "timestamp_s": 16.75,
+      "x_m": 11.14744506653744,
+      "y_m": 4.131103195623468
+    },
+    {
+      "timestamp_s": 17.0,
+      "x_m": 11.345442975269018,
+      "y_m": 4.132482836660078
+    },
+    {
+      "timestamp_s": 17.25,
+      "x_m": 11.548644310093303,
+      "y_m": 4.134262456421578
+    },
+    {
+      "timestamp_s": 17.5,
+      "x_m": 11.746086856161392,
+      "y_m": 4.135476368841336
+    },
+    {
+      "timestamp_s": 17.75,
+      "x_m": 11.948599433064933,
+      "y_m": 4.136439875928968
+    },
+    {
+      "timestamp_s": 18.0,
+      "x_m": 12.144603210382236,
+      "y_m": 4.137828274167554
+    },
+    {
+      "timestamp_s": 18.25,
+      "x_m": 12.347217201183224,
+      "y_m": 4.13857891352855
+    },
+    {
+      "timestamp_s": 18.5,
+      "x_m": 12.54396883416419,
+      "y_m": 4.138703576348789
+    },
+    {
+      "timestamp_s": 18.75,
+      "x_m": 12.74826695343128,
+      "y_m": 4.139109104169668
+    },
+    {
+      "timestamp_s": 19.0,
+      "x_m": 12.95321155666226,
+      "y_m": 4.1401020158124995
+    },
+    {
+      "timestamp_s": 19.25,
+      "x_m": 13.152888659076915,
+      "y_m": 4.140953899844159
+    },
+    {
+      "timestamp_s": 19.75,
+      "x_m": 13.296480848982245,
+      "y_m": 3.998165529818578
+    },
+    {
+      "timestamp_s": 20.0,
+      "x_m": 13.297360951687438,
+      "y_m": 3.7904855367391996
+    },
+    {
+      "timestamp_s": 20.25,
+      "x_m": 13.2981317113472,
+      "y_m": 3.587984844931108
+    },
+    {
+      "timestamp_s": 20.5,
+      "x_m": 13.297108893583589,
+      "y_m": 3.3829554376662854
+    },
+    {
+      "timestamp_s": 20.75,
+      "x_m": 13.296718934108945,
+      "y_m": 3.181666478731289
+    },
+    {
+      "timestamp_s": 21.0,
+      "x_m": 13.493662052965327,
+      "y_m": 3.181207391829462
+    },
+    {
+      "timestamp_s": 21.25,
+      "x_m": 13.49555638015125,
+      "y_m": 3.378961029527165
+    },
+    {
+      "timestamp_s": 21.5,
+      "x_m": 13.49599094761119,
+      "y_m": 3.5793602967026885
+    },
+    {
+      "timestamp_s": 21.75,
+      "x_m": 13.494995593080684,
+      "y_m": 3.7845271094124513
+    },
+    {
+      "timestamp_s": 22.0,
+      "x_m": 13.49373161548209,
+      "y_m": 3.9862392538483147
+    },
+    {
+      "timestamp_s": 22.25,
+      "x_m": 13.492756227595109,
+      "y_m": 4.188519092817616
+    },
+    {
+      "timestamp_s": 22.5,
+      "x_m": 13.491490150663106,
+      "y_m": 4.39101110900395
+    },
+    {
+      "timestamp_s": 22.75,
+      "x_m": 13.490579446614996,
+      "y_m": 4.595036310291063
+    },
+    {
+      "timestamp_s": 23.0,
+      "x_m": 13.490178585156727,
+      "y_m": 4.7948178233139656
+    },
+    {
+      "timestamp_s": 23.25,
+      "x_m": 13.489484192086433,
+      "y_m": 4.995964230018304
+    },
+    {
+      "timestamp_s": 23.5,
+      "x_m": 13.488408570542754,
+      "y_m": 5.200063589198237
+    },
+    {
+      "timestamp_s": 23.75,
+      "x_m": 13.488245829988479,
+      "y_m": 5.4018736230484485
+    },
+    {
+      "timestamp_s": 24.0,
+      "x_m": 13.48794273140384,
+      "y_m": 5.604977853735439
+    },
+    {
+      "timestamp_s": 24.25,
+      "x_m": 13.486998218965077,
+      "y_m": 5.80274561539946
+    },
+    {
+      "timestamp_s": 24.5,
+      "x_m": 13.487704336590765,
+      "y_m": 5.998978156545457
+    },
+    {
+      "timestamp_s": 24.75,
+      "x_m": 13.4883194735633,
+      "y_m": 6.199682269440668
+    },
+    {
+      "timestamp_s": 25.0,
+      "x_m": 13.487267097019565,
+      "y_m": 6.39950887024642
+    },
+    {
+      "timestamp_s": 25.25,
+      "x_m": 13.48754962469036,
+      "y_m": 6.603683358552231
+    },
+    {
+      "timestamp_s": 25.5,
+      "x_m": 13.48773742225172,
+      "y_m": 6.8071517956559475
+    },
+    {
+      "timestamp_s": 25.75,
+      "x_m": 13.486123137861139,
+      "y_m": 7.007057432782481
+    },
+    {
+      "timestamp_s": 26.25,
+      "x_m": 13.139445370963404,
+      "y_m": 7.141356729959575
+    },
+    {
+      "timestamp_s": 26.5,
+      "x_m": 13.341715731003214,
+      "y_m": 7.142240077710991
+    },
+    {
+      "timestamp_s": 26.75,
+      "x_m": 13.54634105221662,
+      "y_m": 7.1440466879238045
+    },
+    {
+      "timestamp_s": 27.0,
+      "x_m": 13.74921725681794,
+      "y_m": 7.145455409409378
+    },
+    {
+      "timestamp_s": 27.25,
+      "x_m": 13.95913978213724,
+      "y_m": 7.144953657183039
+    },
+    {
+      "timestamp_s": 27.5,
+      "x_m": 14.155634504580714,
+      "y_m": 7.143741899063766
+    },
+    {
+      "timestamp_s": 27.75,
+      "x_m": 14.359164525708126,
+      "y_m": 7.142729187303063
+    },
+    {
+      "timestamp_s": 28.0,
+      "x_m": 14.560611609422509,
+      "y_m": 7.142394351305051
+    },
+    {
+      "timestamp_s": 28.25,
+      "x_m": 14.764102821277291,
+      "y_m": 7.142126717856952
+    },
+    {
+      "timestamp_s": 28.5,
+      "x_m": 14.961280397002168,
+      "y_m": 7.142667031412697
+    },
+    {
+      "timestamp_s": 28.75,
+      "x_m": 15.160608930312431,
+      "y_m": 7.143576332520447
+    },
+    {
+      "timestamp_s": 29.0,
+      "x_m": 15.36057836037886,
+      "y_m": 7.143732955967374
+    },
+    {
+      "timestamp_s": 29.25,
+      "x_m": 15.558515600265705,
+      "y_m": 7.1440405306692645
+    },
+    {
+      "timestamp_s": 29.5,
+      "x_m": 15.76395757853126,
+      "y_m": 7.14432765505153
+    },
+    {
+      "timestamp_s": 29.75,
+      "x_m": 15.96700820001994,
+      "y_m": 7.144641300999246
+    },
+    {
+      "timestamp_s": 30.0,
+      "x_m": 16.16789608446779,
+      "y_m": 7.144006085559901
+    },
+    {
+      "timestamp_s": 30.25,
+      "x_m": 16.37044142084283,
+      "y_m": 7.142653456580646
+    },
+    {
+      "timestamp_s": 30.5,
+      "x_m": 16.575125490226615,
+      "y_m": 7.143300512046587
+    },
+    {
+      "timestamp_s": 30.75,
+      "x_m": 16.77879860028785,
+      "y_m": 7.145425323822892
+    },
+    {
+      "timestamp_s": 31.0,
+      "x_m": 16.984081499305976,
+      "y_m": 7.146253641263215
+    },
+    {
+      "timestamp_s": 31.25,
+      "x_m": 17.180980994079068,
+      "y_m": 7.147128131543163
+    },
+    {
+      "timestamp_s": 31.5,
+      "x_m": 17.38096191199325,
+      "y_m": 7.148868329103564
+    },
+    {
+      "timestamp_s": 31.75,
+      "x_m": 17.58862588077429,
+      "y_m": 7.1492652293810215
+    },
+    {
+      "timestamp_s": 32.0,
+      "x_m": 17.790071101666594,
+      "y_m": 7.150220353562832
+    },
+    {
+      "timestamp_s": 32.25,
+      "x_m": 17.987475993508244,
+      "y_m": 7.1523690727094955
+    },
+    {
+      "timestamp_s": 32.5,
+      "x_m": 18.182482936299493,
+      "y_m": 7.153769794686283
+    },
+    {
+      "timestamp_s": 32.75,
+      "x_m": 18.374847187211707,
+      "y_m": 7.154847002644861
+    },
+    {
+      "timestamp_s": 33.0,
+      "x_m": 18.575919722764095,
+      "y_m": 7.155507867251497
+    },
+    {
+      "timestamp_s": 33.25,
+      "x_m": 18.770841121576744,
+      "y_m": 7.15436895865928
+    },
+    {
+      "timestamp_s": 33.5,
+      "x_m": 18.973041784684227,
+      "y_m": 7.154061456193132
+    },
+    {
+      "timestamp_s": 34.0,
+      "x_m": 19.11414707954173,
+      "y_m": 7.295551914733534
+    },
+    {
+      "timestamp_s": 34.25,
+      "x_m": 19.11355834372496,
+      "y_m": 7.491714913538117
+    },
+    {
+      "timestamp_s": 34.5,
+      "x_m": 19.111616074530744,
+      "y_m": 7.6954104362188485
+    },
+    {
+      "timestamp_s": 34.75,
+      "x_m": 19.110577795994192,
+      "y_m": 7.897691325932228
+    },
+    {
+      "timestamp_s": 35.0,
+      "x_m": 19.10922969126673,
+      "y_m": 8.096787561188297
+    },
+    {
+      "timestamp_s": 35.25,
+      "x_m": 19.107865175253544,
+      "y_m": 8.286485059264802
+    },
+    {
+      "timestamp_s": 35.5,
+      "x_m": 19.10579632051801,
+      "y_m": 8.483524365036084
+    },
+    {
+      "timestamp_s": 35.75,
+      "x_m": 19.103601380046502,
+      "y_m": 8.69128361087268
+    },
+    {
+      "timestamp_s": 36.0,
+      "x_m": 19.103664611277768,
+      "y_m": 8.893820384684716
+    },
+    {
+      "timestamp_s": 36.25,
+      "x_m": 19.10426558484994,
+      "y_m": 9.098761188518123
+    },
+    {
+      "timestamp_s": 36.5,
+      "x_m": 19.10489451120588,
+      "y_m": 9.29660357603579
+    },
+    {
+      "timestamp_s": 36.75,
+      "x_m": 19.105831496120715,
+      "y_m": 9.501401097358887
+    },
+    {
+      "timestamp_s": 37.0,
+      "x_m": 19.105547793930544,
+      "y_m": 9.70527757588507
+    },
+    {
+      "timestamp_s": 37.25,
+      "x_m": 19.104311223761425,
+      "y_m": 9.907688804195713
+    },
+    {
+      "timestamp_s": 37.5,
+      "x_m": 19.104448527093414,
+      "y_m": 10.11017422968897
+    },
+    {
+      "timestamp_s": 37.75,
+      "x_m": 19.104841959303812,
+      "y_m": 10.314925293423377
+    },
+    {
+      "timestamp_s": 38.0,
+      "x_m": 19.10471639621666,
+      "y_m": 10.51447583223121
+    },
+    {
+      "timestamp_s": 38.25,
+      "x_m": 19.104414585928698,
+      "y_m": 10.712389574228455
+    },
+    {
+      "timestamp_s": 38.5,
+      "x_m": 19.10307566475329,
+      "y_m": 10.913863550456414
+    },
+    {
+      "timestamp_s": 38.75,
+      "x_m": 19.101564769533134,
+      "y_m": 11.108855374626405
+    },
+    {
+      "timestamp_s": 39.0,
+      "x_m": 19.101188970819326,
+      "y_m": 11.301828351359555
+    },
+    {
+      "timestamp_s": 39.25,
+      "x_m": 19.101877283183782,
+      "y_m": 11.501247588708907
+    },
+    {
+      "timestamp_s": 39.5,
+      "x_m": 19.10263092569239,
+      "y_m": 11.69916575237162
+    },
+    {
+      "timestamp_s": 39.75,
+      "x_m": 19.104194178614605,
+      "y_m": 11.901285284335948
+    },
+    {
+      "timestamp_s": 40.0,
+      "x_m": 19.105335758128447,
+      "y_m": 12.103423090788393
+    },
+    {
+      "timestamp_s": 40.25,
+      "x_m": 19.105582566360834,
+      "y_m": 12.309231884705222
+    },
+    {
+      "timestamp_s": 40.5,
+      "x_m": 19.10599649330341,
+      "y_m": 12.501074834993513
+    },
+    {
+      "timestamp_s": 40.75,
+      "x_m": 19.106916829322806,
+      "y_m": 12.697922945489722
+    },
+    {
+      "timestamp_s": 41.0,
+      "x_m": 19.1081017144053,
+      "y_m": 12.900045789020826
+    },
+    {
+      "timestamp_s": 41.25,
+      "x_m": 19.108206590623922,
+      "y_m": 13.10359180122501
+    }
+  ],
+  "guidance": {
+    "instruction_type": "ARRIVED_CHECKOUT",
+    "instruction_text": "Checkout reached. Navigation complete.",
+    "distance_to_maneuver_m": 0.0,
+    "target_node": "N4_5",
+    "target_product_id": null,
+    "target_shelf_id": null,
+    "timestamp": 41.25,
+    "event_id": "GUIDE-03-0034",
+    "route_revision": 3,
+    "shelf_side": null,
+    "shelf_section": null,
+    "shelf_level": null,
+    "instruction": "Checkout reached. Navigation complete.",
+    "maneuver": "Arrived Checkout"
+  },
+  "next_checkpoint": null,
+  "current_checkpoint": {
+    "checkpoint_id": 202,
+    "node_id": "N4_5",
+    "name": "Checkout"
+  },
+  "last_confirmed_checkpoint": {
+    "checkpoint_id": 202,
+    "node_id": "N4_5",
+    "correction_m": 0.14979962461733679,
+    "detection_source": "synthetic_spatial_simulator",
+    "confidence": 1.0,
+    "simulated_detection": true
+  },
+  "observed_checkpoint": {
+    "tag_id": 202,
+    "timestamp_s": 41.25,
+    "detection_source": "synthetic_spatial_simulator",
+    "map_id": "comp3-synthetic-supermarket-demo-v1",
+    "confidence": 1.0,
+    "observed_x_m": null,
+    "observed_y_m": null,
+    "accepted": true,
+    "reason": "accepted"
+  },
+  "localization_correction_event": {
+    "checkpoint_id": 202,
+    "node_id": "N4_5",
+    "correction_m": 0.14979962461733679,
+    "detection_source": "synthetic_spatial_simulator",
+    "confidence": 1.0,
+    "simulated_detection": true
+  },
+  "distance_to_checkpoint_m": 0.0,
+  "detected_checkpoint_ids": [
+    200,
+    201,
+    202
+  ],
+  "localization": {
+    "status": "checkpoint_confirmed",
+    "uncertainty_m": 0.05,
+    "maximum_arrival_uncertainty_m": 0.75,
+    "source": "synthetic_sensor_model_and_checkpoint_observations"
+  },
+  "product_arrival": null,
+  "deviation": {
+    "distance_m": 0.14979962461733679,
+    "threshold_m": 0.45999999999999996,
+    "is_deviated": false,
+    "entered_deviation": false,
+    "consecutive_enter_samples": 0
+  },
+  "reroute_count": 1,
+  "guided_demo": {
+    "active": true,
+    "seed": 6042,
+    "stage": 9,
+    "stage_count": 9,
+    "stage_title": "Demonstration complete",
+    "wrong_turn_injected": true,
+    "automatic_pickups": true,
+    "completion_summary": {
+      "seed": 6042,
+      "products_collected": [
+        "SIM-P-001",
+        "SIM-P-006"
+      ],
+      "checkpoint_sequence": [
+        200,
+        201,
+        202
+      ],
+      "reroute_count": 1,
+      "simulation_time_s": 41.25,
+      "checkout_node_id": "N4_5"
+    }
+  },
+  "guidance_events": [
+    {
+      "instruction_type": "CHECKPOINT_CONFIRMED",
+      "instruction_text": "Checkpoint CP200 confirmed; localization updated.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N0_0",
+      "target_product_id": null,
+      "target_shelf_id": null,
+      "timestamp": 0.0,
+      "event_id": "GUIDE-00-0001",
+      "route_revision": 0,
+      "shelf_side": null,
+      "shelf_section": null,
+      "shelf_level": null,
+      "instruction": "Checkpoint CP200 confirmed; localization updated.",
+      "maneuver": "Checkpoint Confirmed"
+    },
+    {
+      "instruction_type": "START",
+      "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N1_1",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 0.0,
+      "event_id": "GUIDE-00-0002",
+      "route_revision": 0,
+      "shelf_side": null,
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+      "maneuver": "Start"
+    },
+    {
+      "instruction_type": "TURN_LEFT",
+      "instruction_text": "Turn left toward N1_0.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N1_0",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 0.25,
+      "event_id": "GUIDE-00-0003",
+      "route_revision": 0,
+      "shelf_side": null,
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "Turn left toward N1_0.",
+      "maneuver": "Turn Left"
+    },
+    {
+      "instruction_type": "STRAIGHT",
+      "instruction_text": "Continue straight for 5.8 m, then make a right turn.",
+      "distance_to_maneuver_m": 5.8,
+      "target_node": "N1_0",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 0.5,
+      "event_id": "GUIDE-00-0004",
+      "route_revision": 0,
+      "shelf_side": null,
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "Continue straight for 5.8 m, then make a right turn.",
+      "maneuver": "Straight"
+    },
+    {
+      "instruction_type": "TURN_RIGHT",
+      "instruction_text": "Turn right at N1_0.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N1_0",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 4.0,
+      "event_id": "GUIDE-00-0005",
+      "route_revision": 0,
+      "shelf_side": null,
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "Turn right at N1_0.",
+      "maneuver": "Turn Right"
+    },
+    {
+      "instruction_type": "TURN_RIGHT",
+      "instruction_text": "Turn right toward N1_1.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N1_1",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 4.25,
+      "event_id": "GUIDE-00-0006",
+      "route_revision": 0,
+      "shelf_side": null,
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "Turn right toward N1_1.",
+      "maneuver": "Turn Right"
+    },
+    {
+      "instruction_type": "STRAIGHT",
+      "instruction_text": "Continue straight for 15.8 m, then make a left turn.",
+      "distance_to_maneuver_m": 15.8,
+      "target_node": "N1_3",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 4.5,
+      "event_id": "GUIDE-00-0007",
+      "route_revision": 0,
+      "shelf_side": null,
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "Continue straight for 15.8 m, then make a left turn.",
+      "maneuver": "Straight"
+    },
+    {
+      "instruction_type": "APPROACH_PRODUCT",
+      "instruction_text": "Approach Bananas at DEMO-SHELF-01.",
+      "distance_to_maneuver_m": 2.0,
+      "target_node": "N1_1",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 6.75,
+      "event_id": "GUIDE-00-0008",
+      "route_revision": 0,
+      "shelf_side": null,
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "Approach Bananas at DEMO-SHELF-01.",
+      "maneuver": "Approach Product"
+    },
+    {
+      "instruction_type": "PRODUCT_REACHED",
+      "instruction_text": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N1_1",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 9.25,
+      "event_id": "GUIDE-00-0009",
+      "route_revision": 0,
+      "shelf_side": "left",
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2.",
+      "maneuver": "Product Reached"
+    },
+    {
+      "instruction_type": "WAIT_FOR_PICKUP",
+      "instruction_text": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2. Confirm the product when collected.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N1_1",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 9.25,
+      "event_id": "GUIDE-00-0010",
+      "route_revision": 0,
+      "shelf_side": "left",
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2. Confirm the product when collected.",
+      "maneuver": "Wait For Pickup"
+    },
+    {
+      "instruction_type": "PICKUP_CONFIRMED",
+      "instruction_text": "Bananas pickup confirmed. Continue to the next destination.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N1_1",
+      "target_product_id": "SIM-P-001",
+      "target_shelf_id": "DEMO-SHELF-01",
+      "timestamp": 9.25,
+      "event_id": "GUIDE-01-0011",
+      "route_revision": 1,
+      "shelf_side": null,
+      "shelf_section": "Produce",
+      "shelf_level": 2,
+      "instruction": "Bananas pickup confirmed. Continue to the next destination.",
+      "maneuver": "Pickup Confirmed"
+    },
+    {
+      "instruction_type": "STRAIGHT",
+      "instruction_text": "Continue straight for 8.0 m, then make a left turn.",
+      "distance_to_maneuver_m": 8.0,
+      "target_node": "N1_3",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 9.25,
+      "event_id": "GUIDE-01-0012",
+      "route_revision": 1,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Continue straight for 8.0 m, then make a left turn.",
+      "maneuver": "Straight"
+    },
+    {
+      "instruction_type": "TURN_LEFT",
+      "instruction_text": "Turn left at N1_3.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N1_3",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 19.25,
+      "event_id": "GUIDE-01-0013",
+      "route_revision": 1,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Turn left at N1_3.",
+      "maneuver": "Turn Left"
+    },
+    {
+      "instruction_type": "TURN_RIGHT",
+      "instruction_text": "Turn right toward N0_3.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N0_3",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 19.5,
+      "event_id": "GUIDE-01-0014",
+      "route_revision": 1,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Turn right toward N0_3.",
+      "maneuver": "Turn Right"
+    },
+    {
+      "instruction_type": "STRAIGHT",
+      "instruction_text": "Continue straight for 2.8 m, then make a U-turn.",
+      "distance_to_maneuver_m": 2.8,
+      "target_node": "N1_3",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 19.75,
+      "event_id": "GUIDE-01-0015",
+      "route_revision": 1,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Continue straight for 2.8 m, then make a U-turn.",
+      "maneuver": "Straight"
+    },
+    {
+      "instruction_type": "REROUTING",
+      "instruction_text": "Wrong turn confirmed. Recalculating the remaining route.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N0_3",
+      "target_product_id": null,
+      "target_shelf_id": null,
+      "timestamp": 20.75,
+      "event_id": "GUIDE-01-0016",
+      "route_revision": 1,
+      "shelf_side": null,
+      "shelf_section": null,
+      "shelf_level": null,
+      "instruction": "Wrong turn confirmed. Recalculating the remaining route.",
+      "maneuver": "Rerouting"
+    },
+    {
+      "instruction_type": "REROUTING",
+      "instruction_text": "Rerouting complete. Follow the updated highlighted route.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N1_3",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 20.75,
+      "event_id": "GUIDE-02-0017",
+      "route_revision": 2,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Rerouting complete. Follow the updated highlighted route.",
+      "maneuver": "Rerouting"
+    },
+    {
+      "instruction_type": "U_TURN",
+      "instruction_text": "Make a U-turn at N1_3.",
+      "distance_to_maneuver_m": 1.0,
+      "target_node": "N1_3",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 20.75,
+      "event_id": "GUIDE-02-0018",
+      "route_revision": 2,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Make a U-turn at N1_3.",
+      "maneuver": "U Turn"
+    },
+    {
+      "instruction_type": "STRAIGHT",
+      "instruction_text": "Continue straight for 3.8 m, then make a right turn.",
+      "distance_to_maneuver_m": 3.8,
+      "target_node": "N2_3",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 21.0,
+      "event_id": "GUIDE-02-0019",
+      "route_revision": 2,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Continue straight for 3.8 m, then make a right turn.",
+      "maneuver": "Straight"
+    },
+    {
+      "instruction_type": "APPROACH_CHECKPOINT",
+      "instruction_text": "Approaching checkpoint CP201.",
+      "distance_to_maneuver_m": 1.4000000000000001,
+      "target_node": "N2_3",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 24.0,
+      "event_id": "GUIDE-02-0020",
+      "route_revision": 2,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Approaching checkpoint CP201.",
+      "maneuver": "Approach Checkpoint"
+    },
+    {
+      "instruction_type": "CHECKPOINT_CONFIRMED",
+      "instruction_text": "Checkpoint CP201 confirmed; localization updated.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N2_3",
+      "target_product_id": null,
+      "target_shelf_id": null,
+      "timestamp": 25.75,
+      "event_id": "GUIDE-02-0021",
+      "route_revision": 2,
+      "shelf_side": null,
+      "shelf_section": null,
+      "shelf_level": null,
+      "instruction": "Checkpoint CP201 confirmed; localization updated.",
+      "maneuver": "Checkpoint Confirmed"
+    },
+    {
+      "instruction_type": "TURN_RIGHT",
+      "instruction_text": "Turn right at N2_3.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N2_3",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 25.75,
+      "event_id": "GUIDE-02-0022",
+      "route_revision": 2,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Turn right at N2_3.",
+      "maneuver": "Turn Right"
+    },
+    {
+      "instruction_type": "TURN_RIGHT",
+      "instruction_text": "Turn right toward N2_4.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N2_4",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 26.0,
+      "event_id": "GUIDE-02-0023",
+      "route_revision": 2,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Turn right toward N2_4.",
+      "maneuver": "Turn Right"
+    },
+    {
+      "instruction_type": "STRAIGHT",
+      "instruction_text": "Continue straight for 8.4 m, then make a left turn.",
+      "distance_to_maneuver_m": 8.4,
+      "target_node": "N2_5",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 28.0,
+      "event_id": "GUIDE-02-0024",
+      "route_revision": 2,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Continue straight for 8.4 m, then make a left turn.",
+      "maneuver": "Straight"
+    },
+    {
+      "instruction_type": "APPROACH_PRODUCT",
+      "instruction_text": "Approach Frozen peas at DEMO-SHELF-06.",
+      "distance_to_maneuver_m": 0.7999999999999994,
+      "target_node": "N2_4",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 30.0,
+      "event_id": "GUIDE-02-0025",
+      "route_revision": 2,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Approach Frozen peas at DEMO-SHELF-06.",
+      "maneuver": "Approach Product"
+    },
+    {
+      "instruction_type": "PRODUCT_REACHED",
+      "instruction_text": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N2_4",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 31.0,
+      "event_id": "GUIDE-02-0026",
+      "route_revision": 2,
+      "shelf_side": "left",
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2.",
+      "maneuver": "Product Reached"
+    },
+    {
+      "instruction_type": "WAIT_FOR_PICKUP",
+      "instruction_text": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2. Confirm the product when collected.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N2_4",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 31.0,
+      "event_id": "GUIDE-02-0027",
+      "route_revision": 2,
+      "shelf_side": "left",
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2. Confirm the product when collected.",
+      "maneuver": "Wait For Pickup"
+    },
+    {
+      "instruction_type": "PICKUP_CONFIRMED",
+      "instruction_text": "Frozen peas pickup confirmed. Continue to the next destination.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N2_4",
+      "target_product_id": "SIM-P-006",
+      "target_shelf_id": "DEMO-SHELF-06",
+      "timestamp": 31.0,
+      "event_id": "GUIDE-03-0028",
+      "route_revision": 3,
+      "shelf_side": null,
+      "shelf_section": "Frozen",
+      "shelf_level": 2,
+      "instruction": "Frozen peas pickup confirmed. Continue to the next destination.",
+      "maneuver": "Pickup Confirmed"
+    },
+    {
+      "instruction_type": "STRAIGHT",
+      "instruction_text": "Continue straight for 2.0 m, then make a left turn.",
+      "distance_to_maneuver_m": 2.0,
+      "target_node": "N2_5",
+      "target_product_id": null,
+      "target_shelf_id": null,
+      "timestamp": 31.0,
+      "event_id": "GUIDE-03-0029",
+      "route_revision": 3,
+      "shelf_side": null,
+      "shelf_section": null,
+      "shelf_level": null,
+      "instruction": "Continue straight for 2.0 m, then make a left turn.",
+      "maneuver": "Straight"
+    },
+    {
+      "instruction_type": "TURN_LEFT",
+      "instruction_text": "Turn left toward N3_5.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N3_5",
+      "target_product_id": null,
+      "target_shelf_id": null,
+      "timestamp": 33.75,
+      "event_id": "GUIDE-03-0030",
+      "route_revision": 3,
+      "shelf_side": null,
+      "shelf_section": null,
+      "shelf_level": null,
+      "instruction": "Turn left toward N3_5.",
+      "maneuver": "Turn Left"
+    },
+    {
+      "instruction_type": "PROCEED_TO_CHECKOUT",
+      "instruction_text": "Proceed to checkout.",
+      "distance_to_maneuver_m": 1.4000000000000001,
+      "target_node": "N4_5",
+      "target_product_id": null,
+      "target_shelf_id": null,
+      "timestamp": 35.75,
+      "event_id": "GUIDE-03-0031",
+      "route_revision": 3,
+      "shelf_side": null,
+      "shelf_section": null,
+      "shelf_level": null,
+      "instruction": "Proceed to checkout.",
+      "maneuver": "Proceed To Checkout"
+    },
+    {
+      "instruction_type": "APPROACH_CHECKPOINT",
+      "instruction_text": "Approaching checkpoint CP202.",
+      "distance_to_maneuver_m": 1.2000000000000002,
+      "target_node": "N4_5",
+      "target_product_id": null,
+      "target_shelf_id": null,
+      "timestamp": 39.75,
+      "event_id": "GUIDE-03-0032",
+      "route_revision": 3,
+      "shelf_side": null,
+      "shelf_section": null,
+      "shelf_level": null,
+      "instruction": "Approaching checkpoint CP202.",
+      "maneuver": "Approach Checkpoint"
+    },
+    {
+      "instruction_type": "CHECKPOINT_CONFIRMED",
+      "instruction_text": "Checkpoint CP202 confirmed; localization updated.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N4_5",
+      "target_product_id": null,
+      "target_shelf_id": null,
+      "timestamp": 41.25,
+      "event_id": "GUIDE-03-0033",
+      "route_revision": 3,
+      "shelf_side": null,
+      "shelf_section": null,
+      "shelf_level": null,
+      "instruction": "Checkpoint CP202 confirmed; localization updated.",
+      "maneuver": "Checkpoint Confirmed"
+    },
+    {
+      "instruction_type": "ARRIVED_CHECKOUT",
+      "instruction_text": "Checkout reached after all selected products were confirmed.",
+      "distance_to_maneuver_m": 0.0,
+      "target_node": "N4_5",
+      "target_product_id": null,
+      "target_shelf_id": null,
+      "timestamp": 41.25,
+      "event_id": "GUIDE-03-0034",
+      "route_revision": 3,
+      "shelf_side": null,
+      "shelf_section": null,
+      "shelf_level": null,
+      "instruction": "Checkout reached after all selected products were confirmed.",
+      "maneuver": "Arrived Checkout"
+    }
+  ],
+  "reroute_cost_limitation": "Endpoint-anchored node routing excludes partial-edge travel cost.",
+  "events": [
+    {
+      "timestamp_s": 0.0,
+      "event_type": "route_planned",
+      "message": "Route calculated over synthetic walkable lanes using Held-Karp and Dijkstra.",
+      "details": {
+        "route_node_ids": [
+          "N0_0",
+          "N1_0",
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N2_3",
+          "N2_4",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ]
+      }
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "checkpoint_detected",
+      "message": "Simulated checkpoint 200 detected at N0_0; estimate corrected by 0.000 m.",
+      "details": {
+        "checkpoint_id": 200,
+        "node_id": "N0_0",
+        "correction_m": 0.0,
+        "detection_source": "synthetic_spatial_simulator",
+        "confidence": 1.0,
+        "simulated_detection": true
+      }
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "guidance_instruction",
+      "message": "Checkpoint CP200 confirmed; localization updated.",
+      "details": {
+        "instruction_type": "CHECKPOINT_CONFIRMED",
+        "instruction_text": "Checkpoint CP200 confirmed; localization updated.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N0_0",
+        "target_product_id": null,
+        "target_shelf_id": null,
+        "timestamp": 0.0,
+        "event_id": "GUIDE-00-0001",
+        "route_revision": 0,
+        "shelf_side": null,
+        "shelf_section": null,
+        "shelf_level": null,
+        "instruction": "Checkpoint CP200 confirmed; localization updated.",
+        "maneuver": "Checkpoint Confirmed"
+      }
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "guidance_instruction",
+      "message": "Route ready at the entrance. Start navigation toward Bananas.",
+      "details": {
+        "instruction_type": "START",
+        "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N1_1",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 0.0,
+        "event_id": "GUIDE-00-0002",
+        "route_revision": 0,
+        "shelf_side": null,
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+        "maneuver": "Start"
+      }
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "guided_stage_changed",
+      "message": "Stage 1/9 \u2014 Initial route calculated.",
+      "details": {
+        "stage": 1,
+        "stage_count": 9,
+        "title": "Initial route calculated"
+      }
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "guided_demo_started",
+      "message": "One-click guided demo started with the configured two-product scenario.",
+      "details": {
+        "seed": 6042,
+        "product_ids": [
+          "SIM-P-001",
+          "SIM-P-006"
+        ],
+        "product_names": [
+          "Bananas",
+          "Frozen peas"
+        ],
+        "automatic_simulated_pickups": true
+      }
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "started",
+      "message": "Spatial navigation started at the entrance.",
+      "details": {}
+    },
+    {
+      "timestamp_s": 0.25,
+      "event_type": "guided_stage_changed",
+      "message": "Stage 2/9 \u2014 Leaving the entrance.",
+      "details": {
+        "stage": 2,
+        "stage_count": 9,
+        "title": "Leaving the entrance"
+      }
+    },
+    {
+      "timestamp_s": 0.25,
+      "event_type": "guidance_instruction",
+      "message": "Turn left toward N1_0.",
+      "details": {
+        "instruction_type": "TURN_LEFT",
+        "instruction_text": "Turn left toward N1_0.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N1_0",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 0.25,
+        "event_id": "GUIDE-00-0003",
+        "route_revision": 0,
+        "shelf_side": null,
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "Turn left toward N1_0.",
+        "maneuver": "Turn Left"
+      }
+    },
+    {
+      "timestamp_s": 0.5,
+      "event_type": "guidance_instruction",
+      "message": "Continue straight for 5.8 m, then make a right turn.",
+      "details": {
+        "instruction_type": "STRAIGHT",
+        "instruction_text": "Continue straight for 5.8 m, then make a right turn.",
+        "distance_to_maneuver_m": 5.8,
+        "target_node": "N1_0",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 0.5,
+        "event_id": "GUIDE-00-0004",
+        "route_revision": 0,
+        "shelf_side": null,
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "Continue straight for 5.8 m, then make a right turn.",
+        "maneuver": "Straight"
+      }
+    },
+    {
+      "timestamp_s": 4.0,
+      "event_type": "guided_stage_changed",
+      "message": "Stage 3/9 \u2014 Navigating to first product shelf.",
+      "details": {
+        "stage": 3,
+        "stage_count": 9,
+        "title": "Navigating to first product shelf"
+      }
+    },
+    {
+      "timestamp_s": 4.0,
+      "event_type": "guidance_instruction",
+      "message": "Turn right at N1_0.",
+      "details": {
+        "instruction_type": "TURN_RIGHT",
+        "instruction_text": "Turn right at N1_0.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N1_0",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 4.0,
+        "event_id": "GUIDE-00-0005",
+        "route_revision": 0,
+        "shelf_side": null,
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "Turn right at N1_0.",
+        "maneuver": "Turn Right"
+      }
+    },
+    {
+      "timestamp_s": 4.25,
+      "event_type": "guidance_instruction",
+      "message": "Turn right toward N1_1.",
+      "details": {
+        "instruction_type": "TURN_RIGHT",
+        "instruction_text": "Turn right toward N1_1.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N1_1",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 4.25,
+        "event_id": "GUIDE-00-0006",
+        "route_revision": 0,
+        "shelf_side": null,
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "Turn right toward N1_1.",
+        "maneuver": "Turn Right"
+      }
+    },
+    {
+      "timestamp_s": 4.5,
+      "event_type": "guidance_instruction",
+      "message": "Continue straight for 15.8 m, then make a left turn.",
+      "details": {
+        "instruction_type": "STRAIGHT",
+        "instruction_text": "Continue straight for 15.8 m, then make a left turn.",
+        "distance_to_maneuver_m": 15.8,
+        "target_node": "N1_3",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 4.5,
+        "event_id": "GUIDE-00-0007",
+        "route_revision": 0,
+        "shelf_side": null,
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "Continue straight for 15.8 m, then make a left turn.",
+        "maneuver": "Straight"
+      }
+    },
+    {
+      "timestamp_s": 6.75,
+      "event_type": "guidance_instruction",
+      "message": "Approach Bananas at DEMO-SHELF-01.",
+      "details": {
+        "instruction_type": "APPROACH_PRODUCT",
+        "instruction_text": "Approach Bananas at DEMO-SHELF-01.",
+        "distance_to_maneuver_m": 2.0,
+        "target_node": "N1_1",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 6.75,
+        "event_id": "GUIDE-00-0008",
+        "route_revision": 0,
+        "shelf_side": null,
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "Approach Bananas at DEMO-SHELF-01.",
+        "maneuver": "Approach Product"
+      }
+    },
+    {
+      "timestamp_s": 9.25,
+      "event_type": "pickup_reached",
+      "message": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2. Guided demo will record an automated simulated confirmation.",
+      "details": {
+        "pickup_node_id": "N1_1",
+        "product_id": "SIM-P-001",
+        "shelf_id": "DEMO-SHELF-01",
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "shelf_bay": 1,
+        "shelf_side": "left",
+        "arrival": {
+          "target_product_id": "SIM-P-001",
+          "distance_m": 0.1549574329674168,
+          "arrival_radius_m": 1.0,
+          "localization_uncertainty_m": 0.13008457495941955,
+          "consecutive_inside_samples": 6,
+          "arrived": true,
+          "newly_arrived": false,
+          "localization_uncertain": false
+        },
+        "automatic_simulated_confirmation": true
+      }
+    },
+    {
+      "timestamp_s": 9.25,
+      "event_type": "guidance_instruction",
+      "message": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2.",
+      "details": {
+        "instruction_type": "PRODUCT_REACHED",
+        "instruction_text": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N1_1",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 9.25,
+        "event_id": "GUIDE-00-0009",
+        "route_revision": 0,
+        "shelf_side": "left",
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2.",
+        "maneuver": "Product Reached"
+      }
+    },
+    {
+      "timestamp_s": 9.25,
+      "event_type": "guidance_instruction",
+      "message": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2. Confirm the product when collected.",
+      "details": {
+        "instruction_type": "WAIT_FOR_PICKUP",
+        "instruction_text": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2. Confirm the product when collected.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N1_1",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 9.25,
+        "event_id": "GUIDE-00-0010",
+        "route_revision": 0,
+        "shelf_side": "left",
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "You have reached Bananas. It is on your left, Shelf DEMO-SHELF-01, Section Produce, Level 2. Confirm the product when collected.",
+        "maneuver": "Wait For Pickup"
+      }
+    },
+    {
+      "timestamp_s": 9.25,
+      "event_type": "guided_stage_changed",
+      "message": "Stage 4/9 \u2014 First product pickup.",
+      "details": {
+        "stage": 4,
+        "stage_count": 9,
+        "title": "First product pickup"
+      }
+    },
+    {
+      "timestamp_s": 9.25,
+      "event_type": "product_collected",
+      "message": "Automated simulated pickup confirmation: Bananas at DEMO-SHELF-01.",
+      "details": {
+        "demo_product_id": "SIM-P-001",
+        "shelf_id": "DEMO-SHELF-01",
+        "confirmation_mode": "guided_demo_automated_simulated"
+      }
+    },
+    {
+      "timestamp_s": 9.25,
+      "event_type": "guidance_instruction",
+      "message": "Bananas pickup confirmed. Continue to the next destination.",
+      "details": {
+        "instruction_type": "PICKUP_CONFIRMED",
+        "instruction_text": "Bananas pickup confirmed. Continue to the next destination.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N1_1",
+        "target_product_id": "SIM-P-001",
+        "target_shelf_id": "DEMO-SHELF-01",
+        "timestamp": 9.25,
+        "event_id": "GUIDE-01-0011",
+        "route_revision": 1,
+        "shelf_side": null,
+        "shelf_section": "Produce",
+        "shelf_level": 2,
+        "instruction": "Bananas pickup confirmed. Continue to the next destination.",
+        "maneuver": "Pickup Confirmed"
+      }
+    },
+    {
+      "timestamp_s": 9.25,
+      "event_type": "guided_stage_changed",
+      "message": "Stage 5/9 \u2014 Wrong turn and deviation confirmation.",
+      "details": {
+        "stage": 5,
+        "stage_count": 9,
+        "title": "Wrong turn and deviation confirmation"
+      }
+    },
+    {
+      "timestamp_s": 9.25,
+      "event_type": "wrong_turn_requested",
+      "message": "Wrong turn queued for the next mapped lane intersection.",
+      "details": {}
+    },
+    {
+      "timestamp_s": 9.25,
+      "event_type": "guidance_instruction",
+      "message": "Continue straight for 8.0 m, then make a left turn.",
+      "details": {
+        "instruction_type": "STRAIGHT",
+        "instruction_text": "Continue straight for 8.0 m, then make a left turn.",
+        "distance_to_maneuver_m": 8.0,
+        "target_node": "N1_3",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 9.25,
+        "event_id": "GUIDE-01-0012",
+        "route_revision": 1,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Continue straight for 8.0 m, then make a left turn.",
+        "maneuver": "Straight"
+      }
+    },
+    {
+      "timestamp_s": 19.25,
+      "event_type": "guidance_instruction",
+      "message": "Turn left at N1_3.",
+      "details": {
+        "instruction_type": "TURN_LEFT",
+        "instruction_text": "Turn left at N1_3.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N1_3",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 19.25,
+        "event_id": "GUIDE-01-0013",
+        "route_revision": 1,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Turn left at N1_3.",
+        "maneuver": "Turn Left"
+      }
+    },
+    {
+      "timestamp_s": 19.5,
+      "event_type": "guidance_instruction",
+      "message": "Turn right toward N0_3.",
+      "details": {
+        "instruction_type": "TURN_RIGHT",
+        "instruction_text": "Turn right toward N0_3.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N0_3",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 19.5,
+        "event_id": "GUIDE-01-0014",
+        "route_revision": 1,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Turn right toward N0_3.",
+        "maneuver": "Turn Right"
+      }
+    },
+    {
+      "timestamp_s": 19.75,
+      "event_type": "wrong_turn",
+      "message": "Simulated trolley takes valid lane edge N1_3 \u2192 N0_3.",
+      "details": {
+        "from_node": "N1_3",
+        "to_node": "N0_3"
+      }
+    },
+    {
+      "timestamp_s": 19.75,
+      "event_type": "guidance_instruction",
+      "message": "Continue straight for 2.8 m, then make a U-turn.",
+      "details": {
+        "instruction_type": "STRAIGHT",
+        "instruction_text": "Continue straight for 2.8 m, then make a U-turn.",
+        "distance_to_maneuver_m": 2.8,
+        "target_node": "N1_3",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 19.75,
+        "event_id": "GUIDE-01-0015",
+        "route_revision": 1,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Continue straight for 2.8 m, then make a U-turn.",
+        "maneuver": "Straight"
+      }
+    },
+    {
+      "timestamp_s": 20.75,
+      "event_type": "deviation_confirmed",
+      "message": "Existing deviation monitor confirmed the trolley is outside the planned route.",
+      "details": {
+        "distance_m": 0.8704664714340214,
+        "threshold_m": 0.45999999999999996,
+        "confirmation_samples": 3
+      }
+    },
+    {
+      "timestamp_s": 20.75,
+      "event_type": "guidance_instruction",
+      "message": "Wrong turn confirmed. Recalculating the remaining route.",
+      "details": {
+        "instruction_type": "REROUTING",
+        "instruction_text": "Wrong turn confirmed. Recalculating the remaining route.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N0_3",
+        "target_product_id": null,
+        "target_shelf_id": null,
+        "timestamp": 20.75,
+        "event_id": "GUIDE-01-0016",
+        "route_revision": 1,
+        "shelf_side": null,
+        "shelf_section": null,
+        "shelf_level": null,
+        "instruction": "Wrong turn confirmed. Recalculating the remaining route.",
+        "maneuver": "Rerouting"
+      }
+    },
+    {
+      "timestamp_s": 20.75,
+      "event_type": "reroute_success",
+      "message": "Confirmed deviation; existing route manager replanned remaining pickups and checkout.",
+      "details": {
+        "previous_route_node_ids": [
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N2_3",
+          "N2_4",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "route_node_ids": [
+          "N1_3",
+          "N2_3",
+          "N2_4",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "remaining_destinations": [
+          "N2_4"
+        ],
+        "partial_edge_cost_included": false
+      }
+    },
+    {
+      "timestamp_s": 20.75,
+      "event_type": "guidance_instruction",
+      "message": "Rerouting complete. Follow the updated highlighted route.",
+      "details": {
+        "instruction_type": "REROUTING",
+        "instruction_text": "Rerouting complete. Follow the updated highlighted route.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N1_3",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 20.75,
+        "event_id": "GUIDE-02-0017",
+        "route_revision": 2,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Rerouting complete. Follow the updated highlighted route.",
+        "maneuver": "Rerouting"
+      }
+    },
+    {
+      "timestamp_s": 20.75,
+      "event_type": "guided_stage_changed",
+      "message": "Stage 6/9 \u2014 Replacement route active.",
+      "details": {
+        "stage": 6,
+        "stage_count": 9,
+        "title": "Replacement route active"
+      }
+    },
+    {
+      "timestamp_s": 20.75,
+      "event_type": "guidance_instruction",
+      "message": "Make a U-turn at N1_3.",
+      "details": {
+        "instruction_type": "U_TURN",
+        "instruction_text": "Make a U-turn at N1_3.",
+        "distance_to_maneuver_m": 1.0,
+        "target_node": "N1_3",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 20.75,
+        "event_id": "GUIDE-02-0018",
+        "route_revision": 2,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Make a U-turn at N1_3.",
+        "maneuver": "U Turn"
+      }
+    },
+    {
+      "timestamp_s": 21.0,
+      "event_type": "guidance_instruction",
+      "message": "Continue straight for 3.8 m, then make a right turn.",
+      "details": {
+        "instruction_type": "STRAIGHT",
+        "instruction_text": "Continue straight for 3.8 m, then make a right turn.",
+        "distance_to_maneuver_m": 3.8,
+        "target_node": "N2_3",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 21.0,
+        "event_id": "GUIDE-02-0019",
+        "route_revision": 2,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Continue straight for 3.8 m, then make a right turn.",
+        "maneuver": "Straight"
+      }
+    },
+    {
+      "timestamp_s": 24.0,
+      "event_type": "guidance_instruction",
+      "message": "Approaching checkpoint CP201.",
+      "details": {
+        "instruction_type": "APPROACH_CHECKPOINT",
+        "instruction_text": "Approaching checkpoint CP201.",
+        "distance_to_maneuver_m": 1.4000000000000001,
+        "target_node": "N2_3",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 24.0,
+        "event_id": "GUIDE-02-0020",
+        "route_revision": 2,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Approaching checkpoint CP201.",
+        "maneuver": "Approach Checkpoint"
+      }
+    },
+    {
+      "timestamp_s": 25.75,
+      "event_type": "deviation_recovered",
+      "message": "Estimated position recovered on the updated route after graph rejoin.",
+      "details": {
+        "distance_m": 0.0070574327824806105,
+        "exit_threshold_m": 0.21972246275722276
+      }
+    },
+    {
+      "timestamp_s": 25.75,
+      "event_type": "checkpoint_detected",
+      "message": "Simulated checkpoint 201 detected at N2_3; estimate corrected by 0.486 m.",
+      "details": {
+        "checkpoint_id": 201,
+        "node_id": "N2_3",
+        "correction_m": 0.486174364319468,
+        "detection_source": "synthetic_spatial_simulator",
+        "confidence": 1.0,
+        "simulated_detection": true
+      }
+    },
+    {
+      "timestamp_s": 25.75,
+      "event_type": "guidance_instruction",
+      "message": "Checkpoint CP201 confirmed; localization updated.",
+      "details": {
+        "instruction_type": "CHECKPOINT_CONFIRMED",
+        "instruction_text": "Checkpoint CP201 confirmed; localization updated.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N2_3",
+        "target_product_id": null,
+        "target_shelf_id": null,
+        "timestamp": 25.75,
+        "event_id": "GUIDE-02-0021",
+        "route_revision": 2,
+        "shelf_side": null,
+        "shelf_section": null,
+        "shelf_level": null,
+        "instruction": "Checkpoint CP201 confirmed; localization updated.",
+        "maneuver": "Checkpoint Confirmed"
+      }
+    },
+    {
+      "timestamp_s": 25.75,
+      "event_type": "guidance_instruction",
+      "message": "Turn right at N2_3.",
+      "details": {
+        "instruction_type": "TURN_RIGHT",
+        "instruction_text": "Turn right at N2_3.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N2_3",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 25.75,
+        "event_id": "GUIDE-02-0022",
+        "route_revision": 2,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Turn right at N2_3.",
+        "maneuver": "Turn Right"
+      }
+    },
+    {
+      "timestamp_s": 26.0,
+      "event_type": "guidance_instruction",
+      "message": "Turn right toward N2_4.",
+      "details": {
+        "instruction_type": "TURN_RIGHT",
+        "instruction_text": "Turn right toward N2_4.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N2_4",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 26.0,
+        "event_id": "GUIDE-02-0023",
+        "route_revision": 2,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Turn right toward N2_4.",
+        "maneuver": "Turn Right"
+      }
+    },
+    {
+      "timestamp_s": 28.0,
+      "event_type": "guidance_instruction",
+      "message": "Continue straight for 8.4 m, then make a left turn.",
+      "details": {
+        "instruction_type": "STRAIGHT",
+        "instruction_text": "Continue straight for 8.4 m, then make a left turn.",
+        "distance_to_maneuver_m": 8.4,
+        "target_node": "N2_5",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 28.0,
+        "event_id": "GUIDE-02-0024",
+        "route_revision": 2,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Continue straight for 8.4 m, then make a left turn.",
+        "maneuver": "Straight"
+      }
+    },
+    {
+      "timestamp_s": 30.0,
+      "event_type": "guidance_instruction",
+      "message": "Approach Frozen peas at DEMO-SHELF-06.",
+      "details": {
+        "instruction_type": "APPROACH_PRODUCT",
+        "instruction_text": "Approach Frozen peas at DEMO-SHELF-06.",
+        "distance_to_maneuver_m": 0.7999999999999994,
+        "target_node": "N2_4",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 30.0,
+        "event_id": "GUIDE-02-0025",
+        "route_revision": 2,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Approach Frozen peas at DEMO-SHELF-06.",
+        "maneuver": "Approach Product"
+      }
+    },
+    {
+      "timestamp_s": 31.0,
+      "event_type": "pickup_reached",
+      "message": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2. Guided demo will record an automated simulated confirmation.",
+      "details": {
+        "pickup_node_id": "N2_4",
+        "product_id": "SIM-P-006",
+        "shelf_id": "DEMO-SHELF-06",
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "shelf_bay": 3,
+        "shelf_side": "left",
+        "arrival": {
+          "target_product_id": "SIM-P-006",
+          "distance_m": 0.14711738934298266,
+          "arrival_radius_m": 1.0,
+          "localization_uncertainty_m": 0.10023448588089404,
+          "consecutive_inside_samples": 5,
+          "arrived": true,
+          "newly_arrived": false,
+          "localization_uncertain": false
+        },
+        "automatic_simulated_confirmation": true
+      }
+    },
+    {
+      "timestamp_s": 31.0,
+      "event_type": "guidance_instruction",
+      "message": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2.",
+      "details": {
+        "instruction_type": "PRODUCT_REACHED",
+        "instruction_text": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N2_4",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 31.0,
+        "event_id": "GUIDE-02-0026",
+        "route_revision": 2,
+        "shelf_side": "left",
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2.",
+        "maneuver": "Product Reached"
+      }
+    },
+    {
+      "timestamp_s": 31.0,
+      "event_type": "guidance_instruction",
+      "message": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2. Confirm the product when collected.",
+      "details": {
+        "instruction_type": "WAIT_FOR_PICKUP",
+        "instruction_text": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2. Confirm the product when collected.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N2_4",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 31.0,
+        "event_id": "GUIDE-02-0027",
+        "route_revision": 2,
+        "shelf_side": "left",
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "You have reached Frozen peas. It is on your left, Shelf DEMO-SHELF-06, Section Frozen, Level 2. Confirm the product when collected.",
+        "maneuver": "Wait For Pickup"
+      }
+    },
+    {
+      "timestamp_s": 31.0,
+      "event_type": "guided_stage_changed",
+      "message": "Stage 7/9 \u2014 Second product pickup.",
+      "details": {
+        "stage": 7,
+        "stage_count": 9,
+        "title": "Second product pickup"
+      }
+    },
+    {
+      "timestamp_s": 31.0,
+      "event_type": "product_collected",
+      "message": "Automated simulated pickup confirmation: Frozen peas at DEMO-SHELF-06.",
+      "details": {
+        "demo_product_id": "SIM-P-006",
+        "shelf_id": "DEMO-SHELF-06",
+        "confirmation_mode": "guided_demo_automated_simulated"
+      }
+    },
+    {
+      "timestamp_s": 31.0,
+      "event_type": "guidance_instruction",
+      "message": "Frozen peas pickup confirmed. Continue to the next destination.",
+      "details": {
+        "instruction_type": "PICKUP_CONFIRMED",
+        "instruction_text": "Frozen peas pickup confirmed. Continue to the next destination.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N2_4",
+        "target_product_id": "SIM-P-006",
+        "target_shelf_id": "DEMO-SHELF-06",
+        "timestamp": 31.0,
+        "event_id": "GUIDE-03-0028",
+        "route_revision": 3,
+        "shelf_side": null,
+        "shelf_section": "Frozen",
+        "shelf_level": 2,
+        "instruction": "Frozen peas pickup confirmed. Continue to the next destination.",
+        "maneuver": "Pickup Confirmed"
+      }
+    },
+    {
+      "timestamp_s": 31.0,
+      "event_type": "checkout_next",
+      "message": "All selected products collected; proceed to checkout.",
+      "details": {}
+    },
+    {
+      "timestamp_s": 31.0,
+      "event_type": "guided_stage_changed",
+      "message": "Stage 8/9 \u2014 Navigating to checkout.",
+      "details": {
+        "stage": 8,
+        "stage_count": 9,
+        "title": "Navigating to checkout"
+      }
+    },
+    {
+      "timestamp_s": 31.0,
+      "event_type": "guidance_instruction",
+      "message": "Continue straight for 2.0 m, then make a left turn.",
+      "details": {
+        "instruction_type": "STRAIGHT",
+        "instruction_text": "Continue straight for 2.0 m, then make a left turn.",
+        "distance_to_maneuver_m": 2.0,
+        "target_node": "N2_5",
+        "target_product_id": null,
+        "target_shelf_id": null,
+        "timestamp": 31.0,
+        "event_id": "GUIDE-03-0029",
+        "route_revision": 3,
+        "shelf_side": null,
+        "shelf_section": null,
+        "shelf_level": null,
+        "instruction": "Continue straight for 2.0 m, then make a left turn.",
+        "maneuver": "Straight"
+      }
+    },
+    {
+      "timestamp_s": 33.75,
+      "event_type": "guidance_instruction",
+      "message": "Turn left toward N3_5.",
+      "details": {
+        "instruction_type": "TURN_LEFT",
+        "instruction_text": "Turn left toward N3_5.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N3_5",
+        "target_product_id": null,
+        "target_shelf_id": null,
+        "timestamp": 33.75,
+        "event_id": "GUIDE-03-0030",
+        "route_revision": 3,
+        "shelf_side": null,
+        "shelf_section": null,
+        "shelf_level": null,
+        "instruction": "Turn left toward N3_5.",
+        "maneuver": "Turn Left"
+      }
+    },
+    {
+      "timestamp_s": 35.75,
+      "event_type": "guidance_instruction",
+      "message": "Proceed to checkout.",
+      "details": {
+        "instruction_type": "PROCEED_TO_CHECKOUT",
+        "instruction_text": "Proceed to checkout.",
+        "distance_to_maneuver_m": 1.4000000000000001,
+        "target_node": "N4_5",
+        "target_product_id": null,
+        "target_shelf_id": null,
+        "timestamp": 35.75,
+        "event_id": "GUIDE-03-0031",
+        "route_revision": 3,
+        "shelf_side": null,
+        "shelf_section": null,
+        "shelf_level": null,
+        "instruction": "Proceed to checkout.",
+        "maneuver": "Proceed To Checkout"
+      }
+    },
+    {
+      "timestamp_s": 39.75,
+      "event_type": "guidance_instruction",
+      "message": "Approaching checkpoint CP202.",
+      "details": {
+        "instruction_type": "APPROACH_CHECKPOINT",
+        "instruction_text": "Approaching checkpoint CP202.",
+        "distance_to_maneuver_m": 1.2000000000000002,
+        "target_node": "N4_5",
+        "target_product_id": null,
+        "target_shelf_id": null,
+        "timestamp": 39.75,
+        "event_id": "GUIDE-03-0032",
+        "route_revision": 3,
+        "shelf_side": null,
+        "shelf_section": null,
+        "shelf_level": null,
+        "instruction": "Approaching checkpoint CP202.",
+        "maneuver": "Approach Checkpoint"
+      }
+    },
+    {
+      "timestamp_s": 41.25,
+      "event_type": "checkpoint_detected",
+      "message": "Simulated checkpoint 202 detected at N4_5; estimate corrected by 0.150 m.",
+      "details": {
+        "checkpoint_id": 202,
+        "node_id": "N4_5",
+        "correction_m": 0.14979962461733679,
+        "detection_source": "synthetic_spatial_simulator",
+        "confidence": 1.0,
+        "simulated_detection": true
+      }
+    },
+    {
+      "timestamp_s": 41.25,
+      "event_type": "guidance_instruction",
+      "message": "Checkpoint CP202 confirmed; localization updated.",
+      "details": {
+        "instruction_type": "CHECKPOINT_CONFIRMED",
+        "instruction_text": "Checkpoint CP202 confirmed; localization updated.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N4_5",
+        "target_product_id": null,
+        "target_shelf_id": null,
+        "timestamp": 41.25,
+        "event_id": "GUIDE-03-0033",
+        "route_revision": 3,
+        "shelf_side": null,
+        "shelf_section": null,
+        "shelf_level": null,
+        "instruction": "Checkpoint CP202 confirmed; localization updated.",
+        "maneuver": "Checkpoint Confirmed"
+      }
+    },
+    {
+      "timestamp_s": 41.25,
+      "event_type": "checkout_complete",
+      "message": "Trolley reached checkout.",
+      "details": {}
+    },
+    {
+      "timestamp_s": 41.25,
+      "event_type": "guidance_instruction",
+      "message": "Checkout reached after all selected products were confirmed.",
+      "details": {
+        "instruction_type": "ARRIVED_CHECKOUT",
+        "instruction_text": "Checkout reached after all selected products were confirmed.",
+        "distance_to_maneuver_m": 0.0,
+        "target_node": "N4_5",
+        "target_product_id": null,
+        "target_shelf_id": null,
+        "timestamp": 41.25,
+        "event_id": "GUIDE-03-0034",
+        "route_revision": 3,
+        "shelf_side": null,
+        "shelf_section": null,
+        "shelf_level": null,
+        "instruction": "Checkout reached after all selected products were confirmed.",
+        "maneuver": "Arrived Checkout"
+      }
+    },
+    {
+      "timestamp_s": 41.25,
+      "event_type": "guided_stage_changed",
+      "message": "Stage 9/9 \u2014 Demonstration complete.",
+      "details": {
+        "stage": 9,
+        "stage_count": 9,
+        "title": "Demonstration complete"
+      }
+    },
+    {
+      "timestamp_s": 41.25,
+      "event_type": "guided_demo_complete",
+      "message": "Guided demonstration complete: both products collected and checkout reached.",
+      "details": {
+        "seed": 6042,
+        "products_collected": [
+          "SIM-P-001",
+          "SIM-P-006"
+        ],
+        "checkpoint_sequence": [
+          200,
+          201,
+          202
+        ],
+        "reroute_count": 1,
+        "simulation_time_s": 41.25,
+        "checkout_node_id": "N4_5"
+      }
+    }
+  ]
+}

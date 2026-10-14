@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "source": "real headless Chromium using the localhost Phase 7A dashboard",
+  "synthetic_simulation_only": true,
+  "console_or_page_errors": [],
+  "status": "complete",
+  "products": [
+    "SIM-P-001",
+    "SIM-P-006"
+  ],
+  "checkpoints": [
+    200,
+    201,
+    202
+  ],
+  "reroute_count": 1,
+  "guidance_event_count": 34,
+  "viewport_checks": {
+    "1366x768": {
+      "noHorizontalOverflow": true,
+      "mapWidth": 640,
+      "guidanceWidth": 302
+    },
+    "1920x1080": {
+      "noHorizontalOverflow": true,
+      "mapWidth": 1161,
+      "guidanceWidth": 294
+    }
+  },
+  "screenshots": {
+    "automatic_start": "C3-DASH-053_phase7a_automatic_start.png",
+    "straight": "C3-DASH-054_phase7a_straight_guidance.png",
+    "left": "C3-DASH-055_phase7a_left_guidance.png",
+    "right": "C3-DASH-056_phase7a_right_guidance.png",
+    "next_checkpoint": "C3-DASH-057_phase7a_next_checkpoint.png",
+    "checkpoint_correction": "C3-DASH-058_phase7a_checkpoint_correction.png",
+    "shelf_arrival": "C3-DASH-059_phase7a_shelf_arrival.png",
+    "shelf_popup": "C3-DASH-060_phase7a_shelf_level_side_popup.png",
+    "pickup_confirmed": "C3-DASH-061_phase7a_pickup_confirmed.png",
+    "wrong_turn": "C3-DASH-062_phase7a_wrong_turn.png",
+    "updated_route": "C3-DASH-063_phase7a_updated_route.png",
+    "checkout": "C3-DASH-064_phase7a_checkout.png",
+    "evaluation_summary": "C3-DASH-065_phase7a_evaluation_summary.png"
+  }
+}
