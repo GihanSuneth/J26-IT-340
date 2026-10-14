@@ -1,7 +1,8 @@
-
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
+// These prices are illustrative demo values only. The recommendation API
+// currently returns product information and scores, not verified prices.
 const initialProducts = [
   {
     id: "P00760",
@@ -40,8 +41,11 @@ const initialProducts = [
   },
 ];
 
+const API_URL = "http://127.0.0.1:8000/c4/recommendations/C0118";
+
 function App() {
-  const [products] = useState(initialProducts);
+  const [products, setProducts] = useState(initialProducts);
+  const [recommendationStatus, setRecommendationStatus] = useState("loading");
   const [cart, setCart] = useState([]);
   const [productName, setProductName] = useState("");
   const [category, setCategory] = useState("Groceries");
@@ -49,12 +53,65 @@ function App() {
   const [quantity, setQuantity] = useState("1");
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadRecommendations() {
+      setRecommendationStatus("loading");
+
+      try {
+        const response = await fetch(API_URL, {
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`API request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data.recommendations)) {
+          throw new Error("The API response does not contain a recommendations list.");
+        }
+
+        const apiProducts = data.recommendations.map((item) => {
+          const existing = initialProducts.find(
+            (product) => product.id === item.product_id
+          );
+
+          return {
+            id: item.product_id,
+            name: item.product_name,
+            category: item.category,
+            score: item.score,
+            // Prices are demo values matched by product ID; unknown products
+            // use 0 rather than displaying an invented price.
+            price: existing?.price ?? 0,
+            pastPurchaseCount: item.past_purchase_count,
+            daysSinceLastPurchase: item.days_since_last_purchase,
+          };
+        });
+
+        setProducts(apiProducts);
+        setRecommendationStatus("success");
+      } catch (error) {
+        if (error.name === "AbortError") return;
+
+        console.error("Could not load recommendations:", error);
+        setProducts([]);
+        setRecommendationStatus("error");
+      }
+    }
+
+    loadRecommendations();
+
+    return () => controller.abort();
+  }, []);
+
   // Add a recommended product to the bill.
   const addToCart = (product) => {
     setCart((currentCart) => {
-      const existing = currentCart.find(
-        (item) => item.id === product.id
-      );
+      const existing = currentCart.find((item) => item.id === product.id);
 
       if (existing) {
         return currentCart.map((item) =>
@@ -87,9 +144,7 @@ function App() {
   const removeFromCart = (id) => {
     const removedItem = cart.find((item) => item.id === id);
 
-    setCart((currentCart) =>
-      currentCart.filter((item) => item.id !== id)
-    );
+    setCart((currentCart) => currentCart.filter((item) => item.id !== id));
 
     if (removedItem) {
       setMessage(`${removedItem.name} removed from your bill.`);
@@ -114,9 +169,7 @@ function App() {
       !Number.isInteger(itemQuantity) ||
       itemQuantity < 1
     ) {
-      setMessage(
-        "Enter a product name, category, valid price and quantity."
-      );
+      setMessage("Enter a product name, category, valid price and quantity.");
       return;
     }
 
@@ -141,18 +194,11 @@ function App() {
 
   // Calculate the bill automatically.
   const total = useMemo(
-    () =>
-      cart.reduce(
-        (sum, item) => sum + item.price * item.quantity,
-        0
-      ),
+    () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
     [cart]
   );
 
-  const itemCount = cart.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const formatLKR = (amount) =>
     `LKR ${amount.toLocaleString("en-LK", {
@@ -176,13 +222,10 @@ function App() {
       <main className="dashboard">
         <section className="welcome">
           <div>
-            <p className="eyebrow">
-              YOUR SMART SHOPPING EXPERIENCE
-            </p>
+            <p className="eyebrow">YOUR SMART SHOPPING EXPERIENCE</p>
             <h2>Welcome to your trolley</h2>
             <p className="welcome-description">
-              Discover your recommendations and manage your shopping
-              bill in one place.
+              Discover your recommendations and manage your shopping bill in one place.
             </p>
           </div>
           <div className="welcome-icon">🛒</div>
@@ -192,14 +235,36 @@ function App() {
           <div>
             <p className="eyebrow">PERSONALIZED FOR YOU</p>
             <h2>Recommended products</h2>
-            <p>
-              Products ranked by your recommendation prototype.
-            </p>
+            <p>Products ranked by your recommendation model.</p>
           </div>
-          <span className="product-count">
-            {products.length} products
-          </span>
+          <span className="product-count">{products.length} products</span>
         </section>
+
+        {recommendationStatus === "loading" && (
+          <p className="recommendation-status" role="status">
+            Loading personalized recommendations...
+          </p>
+        )}
+
+        {recommendationStatus === "error" && (
+          <div className="recommendation-status error" role="alert">
+            Could not load recommendations. Check that the backend is running,
+            then refresh this page.
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={() => window.location.reload()}
+            >
+              Try again
+            </button>
+          </div>
+        )}
+
+        {recommendationStatus === "success" && products.length === 0 && (
+          <p className="recommendation-status" role="status">
+            No recommendations are available for this customer yet.
+          </p>
+        )}
 
         <section className="product-grid">
           {products.map((product) => (
@@ -207,11 +272,15 @@ function App() {
               <div className="product-visual">🛍️</div>
 
               <div className="product-details">
-                <span className="category-label">
-                  {product.category}
-                </span>
+                <span className="category-label">{product.category}</span>
                 <h3>{product.name}</h3>
                 <p className="product-id">{product.id}</p>
+
+                {typeof product.daysSinceLastPurchase === "number" && (
+                  <p className="product-id">
+                    Last purchased {product.daysSinceLastPurchase} days ago
+                  </p>
+                )}
 
                 <div className="product-card-bottom">
                   <strong>{formatLKR(product.price)}</strong>
@@ -234,23 +303,16 @@ function App() {
               <div className="panel-icon">＋</div>
               <div>
                 <h2>Add a product manually</h2>
-                <p>
-                  Add an item that is not in the recommendation list.
-                </p>
+                <p>Add an item that is not in the recommendation list.</p>
               </div>
             </div>
 
-            <form
-              onSubmit={addManualProduct}
-              className="manual-form"
-            >
+            <form onSubmit={addManualProduct} className="manual-form">
               <label>
                 Product name
                 <input
                   value={productName}
-                  onChange={(event) =>
-                    setProductName(event.target.value)
-                  }
+                  onChange={(event) => setProductName(event.target.value)}
                   placeholder="e.g. White rice 1kg"
                   required
                 />
@@ -260,9 +322,7 @@ function App() {
                 Category
                 <input
                   value={category}
-                  onChange={(event) =>
-                    setCategory(event.target.value)
-                  }
+                  onChange={(event) => setCategory(event.target.value)}
                   placeholder="e.g. Rice & Grains"
                   required
                 />
@@ -276,9 +336,7 @@ function App() {
                     min="0"
                     step="0.01"
                     value={price}
-                    onChange={(event) =>
-                      setPrice(event.target.value)
-                    }
+                    onChange={(event) => setPrice(event.target.value)}
                     placeholder="250.00"
                     required
                   />
@@ -291,18 +349,13 @@ function App() {
                     min="1"
                     step="1"
                     value={quantity}
-                    onChange={(event) =>
-                      setQuantity(event.target.value)
-                    }
+                    onChange={(event) => setQuantity(event.target.value)}
                     required
                   />
                 </label>
               </div>
 
-              <button
-                className="primary-button full-button"
-                type="submit"
-              >
+              <button className="primary-button full-button" type="submit">
                 Add product to bill
               </button>
             </form>
@@ -314,18 +367,14 @@ function App() {
                 <p className="eyebrow">YOUR PURCHASE</p>
                 <h2>Shopping bill</h2>
               </div>
-              <span className="cart-count">
-                {itemCount} items
-              </span>
+              <span className="cart-count">{itemCount} items</span>
             </div>
 
             {cart.length === 0 ? (
               <div className="empty-cart">
                 <div className="empty-cart-icon">🛒</div>
                 <h3>Your trolley is empty</h3>
-                <p>
-                  Add a recommended or manual product to get started.
-                </p>
+                <p>Add a recommended or manual product to get started.</p>
               </div>
             ) : (
               <div className="cart-list">
@@ -339,22 +388,16 @@ function App() {
                         <button
                           type="button"
                           aria-label={`Decrease ${item.name} quantity`}
-                          onClick={() =>
-                            updateQuantity(item.id, -1)
-                          }
+                          onClick={() => updateQuantity(item.id, -1)}
                           disabled={item.quantity <= 1}
                         >
                           −
                         </button>
-
                         <span>{item.quantity}</span>
-
                         <button
                           type="button"
                           aria-label={`Increase ${item.name} quantity`}
-                          onClick={() =>
-                            updateQuantity(item.id, 1)
-                          }
+                          onClick={() => updateQuantity(item.id, 1)}
                         >
                           +
                         </button>
@@ -369,9 +412,7 @@ function App() {
                       </button>
                     </div>
 
-                    <strong>
-                      {formatLKR(item.price * item.quantity)}
-                    </strong>
+                    <strong>{formatLKR(item.price * item.quantity)}</strong>
                   </div>
                 ))}
               </div>
@@ -417,10 +458,10 @@ function App() {
         )}
 
         <p className="prototype-note">
-          Prototype demonstration only. Product prices are illustrative
-          demo values, not verified current supermarket prices.
-          Recommendations currently use sample data until connected
-          to the trained model.
+          Prototype demonstration only. Product prices are illustrative demo
+          values, not verified current supermarket prices. Recommendations are
+          loaded from the Component 4 API for customer C0118 when the backend is
+          available.
         </p>
       </main>
     </div>
