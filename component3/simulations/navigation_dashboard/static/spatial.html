@@ -1,0 +1,117 @@
+<!-- Panel-ready offline dashboard for the synthetic aisle-and-shelf demonstration. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Smart Shopping Trolley — Synthetic Store Walkthrough</title>
+    <link rel="stylesheet" href="/spatial.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">J26-IT-340 · COMPONENT 3 · SYNTHETIC MAP V1</p>
+        <h1>Smart Shopping Trolley — Supermarket Walkthrough</h1>
+      </div>
+      <div class="badge">Offline software demonstration</div>
+    </header>
+    <main>
+      <section class="disclosure" role="note">
+        Synthetic geometry, shelves, checkpoints, and demo catalog only. This is not
+        the validated research map, surveyed store data, real POS inventory, or physical hardware.
+      </section>
+      <div id="connection-error" class="connection-error" role="alert" hidden></div>
+      <div class="dashboard">
+        <aside class="card controls">
+          <p class="eyebrow">DEMO SHOPPING LIST</p>
+          <h2>Select products</h2>
+          <p class="muted">SIM-P identifiers are synthetic and are not POS records.</p>
+          <form id="product-list" class="product-list"></form>
+          <button id="apply-products" class="button secondary" type="button">Plan selected products</button>
+          <button id="guided-demo" class="button guided" type="button">Start Guided Demo</button>
+          <p class="guided-copy">One click selects Bananas and Frozen peas, follows the real route, confirms simulated pickups, demonstrates one detected wrong turn and reroute, then reaches checkout.</p>
+          <div class="button-stack">
+            <button id="start" class="button primary" type="button">Start navigation</button>
+            <div class="button-row">
+              <button id="pause" class="button secondary" type="button">Pause</button>
+              <button id="resume" class="button secondary" type="button">Resume</button>
+            </div>
+            <div class="button-row">
+              <button id="step" class="button secondary" type="button">Step 0.25 s</button>
+              <button id="reset" class="button secondary" type="button">Reset</button>
+            </div>
+            <button id="wrong-turn" class="button warn" type="button">Trigger wrong turn</button>
+            <button id="confirm-product" class="button primary" type="button">Confirm simulated pickup</button>
+          </div>
+          <label class="speed">Trolley speed <strong id="speed-value">0.8 m/s</strong>
+            <input id="speed" type="range" min="0.4" max="1.6" step="0.2" value="0.8">
+          </label>
+          <label class="speed">Playback speed <strong id="playback-value">1×</strong>
+            <input id="playback" type="range" min="1" max="8" step="1" value="1">
+          </label>
+          <p class="muted small">Movement follows lane graph edges. Manual mode requires explicit pickup confirmation; guided mode records clearly labeled automated simulated confirmations.</p>
+          <p class="route-string"><strong>Planned route · <span id="route-distance">—</span></strong><span id="planned-route">—</span></p>
+        </aside>
+
+        <section class="card map-card" aria-label="Synthetic supermarket map and trolley positions">
+          <div class="map-heading">
+            <div><p class="eyebrow">WALKABLE LANES · SHELF OBSTACLES</p><h2>Demonstration store map</h2></div>
+            <span id="map-dimensions" class="muted">Loading map…</span>
+          </div>
+          <div id="map" class="map" role="img" aria-label="Synthetic supermarket layout"></div>
+          <div class="legend">
+            <span><i class="key lane"></i>Walkable lane</span>
+            <span><i class="key shelf"></i>Shelf footprint</span>
+            <span><i class="key route"></i>Planned route</span>
+            <span><i class="key previous-route"></i>Previous route after rerouting</span>
+            <span><i class="key truth"></i>Simulation truth</span>
+            <span><i class="key estimate"></i>Estimated position</span>
+            <span><i class="key checkpoint"></i>Mapped demo checkpoint</span>
+            <span><i class="key pickup"></i>Product pickup point</span>
+          </div>
+          <section class="telemetry">
+            <div><span>Current position</span><strong id="position">—</strong></div>
+            <div><span>Position error</span><strong id="position-error">—</strong></div>
+            <div><span>Current aisle</span><strong id="aisle">—</strong></div>
+            <div><span>Deviation</span><strong id="deviation">—</strong></div>
+          </section>
+        </section>
+
+        <aside class="card guidance-panel">
+          <p class="eyebrow">TURN-BY-TURN GUIDANCE</p>
+          <section id="guided-stage-card" class="guided-stage" hidden>
+            <span>GUIDED DEMONSTRATION</span>
+            <strong id="guided-stage">Stage 0/9</strong>
+          </section>
+          <div id="pickup-notice" class="pickup-notice" role="status" hidden></div>
+          <h2 id="instruction">Loading local demonstration…</h2>
+          <div class="distance"><span>Distance to maneuver</span><strong id="maneuver-distance">—</strong></div>
+          <dl class="details">
+            <div><dt>Active product</dt><dd id="active-product">—</dd></div>
+            <div><dt>Target shelf</dt><dd id="target-shelf">—</dd></div>
+            <div><dt>Next checkpoint</dt><dd id="next-checkpoint">—</dd></div>
+            <div><dt>Checkpoint distance</dt><dd id="checkpoint-distance">—</dd></div>
+            <div><dt>Last confirmed checkpoint</dt><dd id="last-checkpoint">—</dd></div>
+            <div><dt>Last correction</dt><dd id="correction">—</dd></div>
+            <div><dt>Simulation time</dt><dd id="sim-time">—</dd></div>
+            <div><dt>Status</dt><dd id="sim-status">—</dd></div>
+            <div><dt>Remaining distance</dt><dd id="remaining-distance">—</dd></div>
+            <div><dt>Reroutes</dt><dd id="reroutes">0</dd></div>
+          </dl>
+          <h3>Products collected</h3><ul id="collected" class="compact-list"></ul>
+          <h3>Products remaining</h3><ul id="remaining" class="compact-list"></ul>
+          <h3>Event log <a class="download" href="/api/spatial/export.json">Download JSON</a></h3>
+          <ol id="events" class="events"></ol>
+          <section id="completion-summary" class="completion-summary" hidden>
+            <strong>Demonstration complete</strong>
+            <span id="completion-copy"></span>
+          </section>
+        </aside>
+      </div>
+      <footer class="footer">Synthetic demonstration only. No physical hardware, real products, POS records, or sensor measurements are connected.</footer>
+      <p class="research-link"><a href="/research">Open the validated Component 3 research graph dashboard</a></p>
+    </main>
+    <script src="/spatial.js"></script>
+  </body>
+</html>

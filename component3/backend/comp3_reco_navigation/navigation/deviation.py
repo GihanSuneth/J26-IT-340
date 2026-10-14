@@ -201,6 +201,7 @@ class RouteDeviationMonitor:
         hysteresis_m: float = 0.15,
         enter_confirmations: int = 3,
         recovery_confirmations: int = 2,
+        initially_deviated: bool = False,
     ) -> None:
         """Configure a fixed or progress-scaled threshold and state counts."""
         self._graph = graph
@@ -234,8 +235,11 @@ class RouteDeviationMonitor:
             or recovery_confirmations < 1
         ):
             raise ValueError("recovery_confirmations must be a positive integer")
+        if not isinstance(initially_deviated, bool):
+            raise ValueError("initially_deviated must be a boolean")
         self._enter_confirmations = enter_confirmations
         self._recovery_confirmations = recovery_confirmations
+        self._initially_deviated = initially_deviated
         self.reset()
 
     @property
@@ -245,7 +249,7 @@ class RouteDeviationMonitor:
 
     def reset(self) -> None:
         """Reset the confirmation state and consecutive-sample counters."""
-        self._is_deviated = False
+        self._is_deviated = self._initially_deviated
         self._above_count = 0
         self._below_count = 0
 

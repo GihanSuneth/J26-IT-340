@@ -212,6 +212,24 @@ class RouteDeviationTests(unittest.TestCase):
         self.assertTrue(recovered.recovered)
         self.assertFalse(recovered.is_deviated)
 
+    def test_confirmed_deviation_can_be_carried_to_a_replanned_route(self) -> None:
+        """Preserve an active deviation episode across route replacement."""
+        graph = coordinate_graph((("A", 0, 0),), ())
+        monitor = RouteDeviationMonitor(
+            graph,
+            ("A",),
+            threshold_m=1.0,
+            hysteresis_m=0.2,
+            recovery_confirmations=2,
+            initially_deviated=True,
+        )
+        first = monitor.update(estimate(0.5, 0))
+        self.assertTrue(first.is_deviated)
+        self.assertFalse(first.recovered)
+        second = monitor.update(estimate(0.5, 0))
+        self.assertFalse(second.is_deviated)
+        self.assertTrue(second.recovered)
+
     def test_state_reset(self) -> None:
         """Clear active deviation state and both consecutive counters."""
         graph = coordinate_graph((("A", 0, 0),), ())

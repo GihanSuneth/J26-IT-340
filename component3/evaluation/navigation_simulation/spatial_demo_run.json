@@ -1,0 +1,1086 @@
+{
+  "map_id": "comp3-synthetic-supermarket-demo-v1",
+  "data_classification": "synthetic_demonstration_only",
+  "status": "complete",
+  "running": false,
+  "simulation_time_s": 21.25,
+  "fixed_timestep_s": 0.25,
+  "speed_m_s": 1.6,
+  "current_node_id": "N4_5",
+  "current_location": "N4_5",
+  "ground_truth": {
+    "x_m": 19.0,
+    "y_m": 13.0
+  },
+  "estimate": {
+    "x_m": 19.0,
+    "y_m": 13.0,
+    "heading_rad": 1.5736571620337783,
+    "timestamp_s": 21.25
+  },
+  "position_error_m": 0.0,
+  "heading_rad": 1.5736571620337783,
+  "current_aisle": null,
+  "active_product": null,
+  "remaining_products": [],
+  "collected_product_ids": [
+    "SIM-P-006"
+  ],
+  "selected_product_ids": [
+    "SIM-P-006"
+  ],
+  "planned_route": [
+    "N2_4",
+    "N2_5",
+    "N3_5",
+    "N4_5"
+  ],
+  "previous_planned_route": [
+    "N0_0",
+    "N0_1",
+    "N0_2",
+    "N0_3",
+    "N1_3",
+    "N2_3",
+    "N2_4",
+    "N2_5",
+    "N3_5",
+    "N4_5"
+  ],
+  "remaining_route": [
+    "N4_5"
+  ],
+  "route_distance_m": 8.0,
+  "travelled_ground_truth": [
+    {
+      "timestamp_s": 0.0,
+      "x_m": 1.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 0.25,
+      "x_m": 1.4,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 0.5,
+      "x_m": 1.8,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 0.75,
+      "x_m": 2.2,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 1.0,
+      "x_m": 2.6,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 1.25,
+      "x_m": 3.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 1.5,
+      "x_m": 3.4,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 1.75,
+      "x_m": 3.8,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 2.0,
+      "x_m": 4.199999999999999,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 2.25,
+      "x_m": 4.6,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 2.5,
+      "x_m": 5.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 2.75,
+      "x_m": 5.4,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 3.0,
+      "x_m": 5.8,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 3.25,
+      "x_m": 6.2,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 3.5,
+      "x_m": 6.6,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 3.75,
+      "x_m": 7.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 4.0,
+      "x_m": 7.4,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 4.25,
+      "x_m": 7.8,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 4.5,
+      "x_m": 8.2,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 4.75,
+      "x_m": 8.6,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 5.0,
+      "x_m": 9.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 5.25,
+      "x_m": 9.4,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 5.5,
+      "x_m": 9.8,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 5.75,
+      "x_m": 10.2,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 6.0,
+      "x_m": 10.6,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 6.25,
+      "x_m": 11.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 6.5,
+      "x_m": 11.4,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 6.75,
+      "x_m": 11.8,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 7.0,
+      "x_m": 12.2,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 7.25,
+      "x_m": 12.6,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 7.5,
+      "x_m": 13.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 7.75,
+      "x_m": 13.4,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 8.0,
+      "x_m": 13.8,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 8.25,
+      "x_m": 14.2,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 8.5,
+      "x_m": 14.6,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 8.75,
+      "x_m": 14.2,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 9.0,
+      "x_m": 13.8,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 9.25,
+      "x_m": 13.4,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 9.5,
+      "x_m": 13.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 9.75,
+      "x_m": 13.0,
+      "y_m": 1.4
+    },
+    {
+      "timestamp_s": 10.0,
+      "x_m": 13.0,
+      "y_m": 1.8
+    },
+    {
+      "timestamp_s": 10.25,
+      "x_m": 13.0,
+      "y_m": 2.2
+    },
+    {
+      "timestamp_s": 10.5,
+      "x_m": 13.0,
+      "y_m": 2.6
+    },
+    {
+      "timestamp_s": 10.75,
+      "x_m": 13.0,
+      "y_m": 3.0
+    },
+    {
+      "timestamp_s": 11.0,
+      "x_m": 13.0,
+      "y_m": 3.4
+    },
+    {
+      "timestamp_s": 11.25,
+      "x_m": 13.0,
+      "y_m": 3.8
+    },
+    {
+      "timestamp_s": 11.5,
+      "x_m": 13.0,
+      "y_m": 4.0
+    },
+    {
+      "timestamp_s": 11.75,
+      "x_m": 13.0,
+      "y_m": 4.4
+    },
+    {
+      "timestamp_s": 12.0,
+      "x_m": 13.0,
+      "y_m": 4.8
+    },
+    {
+      "timestamp_s": 12.25,
+      "x_m": 13.0,
+      "y_m": 5.2
+    },
+    {
+      "timestamp_s": 12.5,
+      "x_m": 13.0,
+      "y_m": 5.6
+    },
+    {
+      "timestamp_s": 12.75,
+      "x_m": 13.0,
+      "y_m": 6.0
+    },
+    {
+      "timestamp_s": 13.0,
+      "x_m": 13.0,
+      "y_m": 6.4
+    },
+    {
+      "timestamp_s": 13.25,
+      "x_m": 13.0,
+      "y_m": 6.8
+    },
+    {
+      "timestamp_s": 13.5,
+      "x_m": 13.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 13.75,
+      "x_m": 13.4,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 14.0,
+      "x_m": 13.8,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 14.25,
+      "x_m": 14.2,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 14.5,
+      "x_m": 14.6,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 14.75,
+      "x_m": 15.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 15.0,
+      "x_m": 15.4,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 15.25,
+      "x_m": 15.8,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 15.5,
+      "x_m": 16.2,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 15.75,
+      "x_m": 16.6,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 16.0,
+      "x_m": 17.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 16.25,
+      "x_m": 17.4,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 16.5,
+      "x_m": 17.8,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 16.75,
+      "x_m": 18.2,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 17.0,
+      "x_m": 18.6,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 17.25,
+      "x_m": 19.0,
+      "y_m": 7.0
+    },
+    {
+      "timestamp_s": 17.5,
+      "x_m": 19.0,
+      "y_m": 7.4
+    },
+    {
+      "timestamp_s": 17.75,
+      "x_m": 19.0,
+      "y_m": 7.8
+    },
+    {
+      "timestamp_s": 18.0,
+      "x_m": 19.0,
+      "y_m": 8.2
+    },
+    {
+      "timestamp_s": 18.25,
+      "x_m": 19.0,
+      "y_m": 8.6
+    },
+    {
+      "timestamp_s": 18.5,
+      "x_m": 19.0,
+      "y_m": 9.0
+    },
+    {
+      "timestamp_s": 18.75,
+      "x_m": 19.0,
+      "y_m": 9.4
+    },
+    {
+      "timestamp_s": 19.0,
+      "x_m": 19.0,
+      "y_m": 9.8
+    },
+    {
+      "timestamp_s": 19.25,
+      "x_m": 19.0,
+      "y_m": 10.0
+    },
+    {
+      "timestamp_s": 19.5,
+      "x_m": 19.0,
+      "y_m": 10.4
+    },
+    {
+      "timestamp_s": 19.75,
+      "x_m": 19.0,
+      "y_m": 10.8
+    },
+    {
+      "timestamp_s": 20.0,
+      "x_m": 19.0,
+      "y_m": 11.2
+    },
+    {
+      "timestamp_s": 20.25,
+      "x_m": 19.0,
+      "y_m": 11.6
+    },
+    {
+      "timestamp_s": 20.5,
+      "x_m": 19.0,
+      "y_m": 12.0
+    },
+    {
+      "timestamp_s": 20.75,
+      "x_m": 19.0,
+      "y_m": 12.4
+    },
+    {
+      "timestamp_s": 21.0,
+      "x_m": 19.0,
+      "y_m": 12.8
+    },
+    {
+      "timestamp_s": 21.25,
+      "x_m": 19.0,
+      "y_m": 13.0
+    }
+  ],
+  "travelled_estimate": [
+    {
+      "timestamp_s": 0.0,
+      "x_m": 1.0,
+      "y_m": 1.0
+    },
+    {
+      "timestamp_s": 0.25,
+      "x_m": 1.4035113926622704,
+      "y_m": 0.9995217468807297
+    },
+    {
+      "timestamp_s": 0.5,
+      "x_m": 1.8022255209402156,
+      "y_m": 0.9993231172270675
+    },
+    {
+      "timestamp_s": 0.75,
+      "x_m": 2.2117367128349654,
+      "y_m": 1.0014279834398592
+    },
+    {
+      "timestamp_s": 1.0,
+      "x_m": 2.6139182281504834,
+      "y_m": 1.0012819571678477
+    },
+    {
+      "timestamp_s": 1.25,
+      "x_m": 3.0127219322775454,
+      "y_m": 1.000733414814929
+    },
+    {
+      "timestamp_s": 1.5,
+      "x_m": 3.4217994705093213,
+      "y_m": 1.003091070436388
+    },
+    {
+      "timestamp_s": 1.75,
+      "x_m": 3.8236523729659395,
+      "y_m": 1.0034994741531336
+    },
+    {
+      "timestamp_s": 2.0,
+      "x_m": 4.229030044744558,
+      "y_m": 1.0014420078570012
+    },
+    {
+      "timestamp_s": 2.25,
+      "x_m": 4.638130824570006,
+      "y_m": 0.9993760756839603
+    },
+    {
+      "timestamp_s": 2.5,
+      "x_m": 5.040471284440227,
+      "y_m": 0.9992215981909925
+    },
+    {
+      "timestamp_s": 2.75,
+      "x_m": 5.441699840311222,
+      "y_m": 0.9992286688368553
+    },
+    {
+      "timestamp_s": 3.0,
+      "x_m": 5.842425884018911,
+      "y_m": 0.9994763333337809
+    },
+    {
+      "timestamp_s": 3.25,
+      "x_m": 6.246511706318273,
+      "y_m": 1.0007480233147175
+    },
+    {
+      "timestamp_s": 3.5,
+      "x_m": 6.649970210234439,
+      "y_m": 1.0022204334994504
+    },
+    {
+      "timestamp_s": 3.75,
+      "x_m": 7.062706102616103,
+      "y_m": 1.0035993500684777
+    },
+    {
+      "timestamp_s": 4.0,
+      "x_m": 7.460574619066206,
+      "y_m": 1.0056543462607872
+    },
+    {
+      "timestamp_s": 4.25,
+      "x_m": 7.857595407761906,
+      "y_m": 1.0063209293005568
+    },
+    {
+      "timestamp_s": 4.5,
+      "x_m": 8.264310516209035,
+      "y_m": 1.005025252140557
+    },
+    {
+      "timestamp_s": 4.75,
+      "x_m": 8.66854828465911,
+      "y_m": 1.004975564620422
+    },
+    {
+      "timestamp_s": 5.0,
+      "x_m": 9.062109675788946,
+      "y_m": 1.006475511066449
+    },
+    {
+      "timestamp_s": 5.25,
+      "x_m": 9.458457941556233,
+      "y_m": 1.0094146087269733
+    },
+    {
+      "timestamp_s": 5.5,
+      "x_m": 9.856739953331775,
+      "y_m": 1.0098522299696038
+    },
+    {
+      "timestamp_s": 5.75,
+      "x_m": 10.266745206773802,
+      "y_m": 1.0070765994606872
+    },
+    {
+      "timestamp_s": 6.0,
+      "x_m": 10.665032578444938,
+      "y_m": 1.0059010629227902
+    },
+    {
+      "timestamp_s": 6.25,
+      "x_m": 11.067419181641664,
+      "y_m": 1.0057354992393177
+    },
+    {
+      "timestamp_s": 6.5,
+      "x_m": 11.469758546522058,
+      "y_m": 1.0053980645826992
+    },
+    {
+      "timestamp_s": 6.75,
+      "x_m": 11.876154012655942,
+      "y_m": 1.0064265847728864
+    },
+    {
+      "timestamp_s": 7.0,
+      "x_m": 12.279350710327156,
+      "y_m": 1.0086793690798062
+    },
+    {
+      "timestamp_s": 7.25,
+      "x_m": 12.683543816446564,
+      "y_m": 1.0076268866544933
+    },
+    {
+      "timestamp_s": 7.5,
+      "x_m": 13.085702881639099,
+      "y_m": 1.005545891546154
+    },
+    {
+      "timestamp_s": 7.75,
+      "x_m": 13.491557683561231,
+      "y_m": 1.0067536163648445
+    },
+    {
+      "timestamp_s": 8.0,
+      "x_m": 13.892935376821871,
+      "y_m": 1.0082201568731823
+    },
+    {
+      "timestamp_s": 8.25,
+      "x_m": 14.297313298121244,
+      "y_m": 1.0084024029446477
+    },
+    {
+      "timestamp_s": 8.5,
+      "x_m": 14.70000355284329,
+      "y_m": 1.0091560736805487
+    },
+    {
+      "timestamp_s": 8.75,
+      "x_m": 14.698631536896755,
+      "y_m": 1.4175987056314736
+    },
+    {
+      "timestamp_s": 9.0,
+      "x_m": 14.292502842161758,
+      "y_m": 1.4158953902646814
+    },
+    {
+      "timestamp_s": 9.25,
+      "x_m": 13.891238435432458,
+      "y_m": 1.412812414319444
+    },
+    {
+      "timestamp_s": 9.5,
+      "x_m": 13.482269770874789,
+      "y_m": 1.411583666966131
+    },
+    {
+      "timestamp_s": 9.75,
+      "x_m": 13.196844319391824,
+      "y_m": 1.696320234106024
+    },
+    {
+      "timestamp_s": 10.0,
+      "x_m": 13.195336982111904,
+      "y_m": 2.100029041312694
+    },
+    {
+      "timestamp_s": 10.25,
+      "x_m": 13.193828349561231,
+      "y_m": 2.495486467500527
+    },
+    {
+      "timestamp_s": 10.5,
+      "x_m": 13.19089423750678,
+      "y_m": 2.8965308828684186
+    },
+    {
+      "timestamp_s": 10.75,
+      "x_m": 13.187835570636189,
+      "y_m": 3.3014911155051876
+    },
+    {
+      "timestamp_s": 11.0,
+      "x_m": 13.18627424749155,
+      "y_m": 3.7125123681348926
+    },
+    {
+      "timestamp_s": 11.25,
+      "x_m": 13.184985938984106,
+      "y_m": 4.118878322518594
+    },
+    {
+      "timestamp_s": 11.5,
+      "x_m": 13.184477721308,
+      "y_m": 4.310127744011686
+    },
+    {
+      "timestamp_s": 11.75,
+      "x_m": 13.183738525322982,
+      "y_m": 4.713018620318022
+    },
+    {
+      "timestamp_s": 12.0,
+      "x_m": 13.184436101313192,
+      "y_m": 5.11672800340461
+    },
+    {
+      "timestamp_s": 12.25,
+      "x_m": 13.185783045863337,
+      "y_m": 5.520743630107348
+    },
+    {
+      "timestamp_s": 12.5,
+      "x_m": 13.186041428743218,
+      "y_m": 5.924883503281576
+    },
+    {
+      "timestamp_s": 12.75,
+      "x_m": 13.187729195311409,
+      "y_m": 6.322900583789004
+    },
+    {
+      "timestamp_s": 13.0,
+      "x_m": 13.190388571225903,
+      "y_m": 6.729990014661428
+    },
+    {
+      "timestamp_s": 13.25,
+      "x_m": 13.190624573031018,
+      "y_m": 7.135057324273262
+    },
+    {
+      "timestamp_s": 13.5,
+      "x_m": 13.190645086048,
+      "y_m": 7.335928204995961
+    },
+    {
+      "timestamp_s": 13.75,
+      "x_m": 13.283900150603808,
+      "y_m": 7.284962023781217
+    },
+    {
+      "timestamp_s": 14.0,
+      "x_m": 13.681698453281681,
+      "y_m": 7.285191468347531
+    },
+    {
+      "timestamp_s": 14.25,
+      "x_m": 14.088459563384367,
+      "y_m": 7.284898819634863
+    },
+    {
+      "timestamp_s": 14.5,
+      "x_m": 14.490861999587674,
+      "y_m": 7.284170147928499
+    },
+    {
+      "timestamp_s": 14.75,
+      "x_m": 14.899299719348882,
+      "y_m": 7.283581247907279
+    },
+    {
+      "timestamp_s": 15.0,
+      "x_m": 15.30224880822726,
+      "y_m": 7.2870351365379396
+    },
+    {
+      "timestamp_s": 15.25,
+      "x_m": 15.706954433465391,
+      "y_m": 7.290189251210789
+    },
+    {
+      "timestamp_s": 15.5,
+      "x_m": 16.11222888001471,
+      "y_m": 7.291226217521298
+    },
+    {
+      "timestamp_s": 15.75,
+      "x_m": 16.516442355474762,
+      "y_m": 7.290694081495696
+    },
+    {
+      "timestamp_s": 16.0,
+      "x_m": 16.916361452051422,
+      "y_m": 7.289841200816854
+    },
+    {
+      "timestamp_s": 16.25,
+      "x_m": 17.318280106106073,
+      "y_m": 7.290620392702648
+    },
+    {
+      "timestamp_s": 16.5,
+      "x_m": 17.717873120930573,
+      "y_m": 7.293404739894626
+    },
+    {
+      "timestamp_s": 16.75,
+      "x_m": 18.122666724733445,
+      "y_m": 7.296949887357756
+    },
+    {
+      "timestamp_s": 17.0,
+      "x_m": 18.521705460657056,
+      "y_m": 7.29940324954918
+    },
+    {
+      "timestamp_s": 17.25,
+      "x_m": 18.925815755858263,
+      "y_m": 7.301325911042925
+    },
+    {
+      "timestamp_s": 17.5,
+      "x_m": 19.204969010063895,
+      "y_m": 7.584462158661197
+    },
+    {
+      "timestamp_s": 17.75,
+      "x_m": 19.203471493075806,
+      "y_m": 7.988674765959943
+    },
+    {
+      "timestamp_s": 18.0,
+      "x_m": 19.203219095511336,
+      "y_m": 8.387026358474227
+    },
+    {
+      "timestamp_s": 18.25,
+      "x_m": 19.202413396372577,
+      "y_m": 8.792924080575538
+    },
+    {
+      "timestamp_s": 18.5,
+      "x_m": 19.200443788418237,
+      "y_m": 9.199466317880718
+    },
+    {
+      "timestamp_s": 18.75,
+      "x_m": 19.198731824508737,
+      "y_m": 9.600741585620863
+    },
+    {
+      "timestamp_s": 19.0,
+      "x_m": 19.197597584495576,
+      "y_m": 10.004842427423897
+    },
+    {
+      "timestamp_s": 19.25,
+      "x_m": 19.196717481790383,
+      "y_m": 10.212522420503277
+    },
+    {
+      "timestamp_s": 19.5,
+      "x_m": 19.195179396249,
+      "y_m": 10.61662165201588
+    },
+    {
+      "timestamp_s": 19.75,
+      "x_m": 19.197207911186208,
+      "y_m": 11.023248550766075
+    },
+    {
+      "timestamp_s": 20.0,
+      "x_m": 19.197988431986097,
+      "y_m": 11.426137131381894
+    },
+    {
+      "timestamp_s": 20.25,
+      "x_m": 19.19891745999828,
+      "y_m": 11.824679702507753
+    },
+    {
+      "timestamp_s": 20.5,
+      "x_m": 19.202742870953998,
+      "y_m": 12.224024091271755
+    },
+    {
+      "timestamp_s": 20.75,
+      "x_m": 19.203614608645008,
+      "y_m": 12.626022884444213
+    },
+    {
+      "timestamp_s": 21.0,
+      "x_m": 19.201641215272417,
+      "y_m": 13.03278732471944
+    },
+    {
+      "timestamp_s": 21.25,
+      "x_m": 19.200377237673823,
+      "y_m": 13.234499469155304
+    }
+  ],
+  "guidance": {
+    "instruction": "Proceed to checkout \u2014 checkout reached.",
+    "distance_to_maneuver_m": 0.0,
+    "maneuver": "Checkout reached"
+  },
+  "next_checkpoint": null,
+  "current_checkpoint": {
+    "checkpoint_id": 202,
+    "node_id": "N4_5",
+    "name": "Checkout"
+  },
+  "last_confirmed_checkpoint": {
+    "checkpoint_id": 202,
+    "node_id": "N4_5",
+    "correction_m": 0.3084494098096338,
+    "simulated_detection": true
+  },
+  "distance_to_checkpoint_m": 0.0,
+  "detected_checkpoint_ids": [
+    200,
+    201,
+    202
+  ],
+  "deviation": {
+    "distance_m": 0.3084494098096338,
+    "threshold_m": 0.45999999999999996,
+    "is_deviated": false,
+    "entered_deviation": false,
+    "consecutive_enter_samples": 0
+  },
+  "reroute_count": 1,
+  "events": [
+    {
+      "timestamp_s": 0.0,
+      "event_type": "route_planned",
+      "message": "Route calculated over synthetic walkable lanes using Held-Karp and Dijkstra.",
+      "details": {
+        "route_node_ids": [
+          "N0_0",
+          "N0_1",
+          "N0_2",
+          "N0_3",
+          "N1_3",
+          "N2_3",
+          "N2_4",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ]
+      }
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "checkpoint_detected",
+      "message": "Simulated checkpoint 200 detected at N0_0; estimate corrected by 0.000 m.",
+      "details": {
+        "checkpoint_id": 200,
+        "node_id": "N0_0",
+        "correction_m": 0.0,
+        "simulated_detection": true
+      }
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "started",
+      "message": "Spatial navigation started.",
+      "details": {}
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "wrong_turn_requested",
+      "message": "Wrong turn queued for the next mapped lane intersection.",
+      "details": {}
+    },
+    {
+      "timestamp_s": 0.0,
+      "event_type": "paused",
+      "message": "Spatial navigation paused.",
+      "details": {}
+    },
+    {
+      "timestamp_s": 7.75,
+      "event_type": "wrong_turn",
+      "message": "Simulated trolley takes valid lane edge N0_3 \u2192 N0_4.",
+      "details": {
+        "from_node": "N0_3",
+        "to_node": "N0_4"
+      }
+    },
+    {
+      "timestamp_s": 8.5,
+      "event_type": "reroute_success",
+      "message": "Confirmed deviation; existing route manager replanned remaining pickups and checkout.",
+      "details": {
+        "route_node_ids": [
+          "N0_3",
+          "N1_3",
+          "N2_3",
+          "N2_4",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "remaining_destinations": [
+          "N2_4"
+        ],
+        "partial_edge_cost_included": false
+      }
+    },
+    {
+      "timestamp_s": 13.5,
+      "event_type": "checkpoint_detected",
+      "message": "Simulated checkpoint 201 detected at N2_3; estimate corrected by 0.386 m.",
+      "details": {
+        "checkpoint_id": 201,
+        "node_id": "N2_3",
+        "correction_m": 0.386255495425059,
+        "simulated_detection": true
+      }
+    },
+    {
+      "timestamp_s": 16.0,
+      "event_type": "pickup_reached",
+      "message": "Reached pickup point for Frozen peas; confirm collection explicitly.",
+      "details": {
+        "pickup_node_id": "N2_4",
+        "shelf_id": "DEMO-SHELF-06"
+      }
+    },
+    {
+      "timestamp_s": 16.0,
+      "event_type": "product_collected",
+      "message": "Explicitly confirmed simulated pickup: Frozen peas at DEMO-SHELF-06.",
+      "details": {
+        "demo_product_id": "SIM-P-006",
+        "shelf_id": "DEMO-SHELF-06"
+      }
+    },
+    {
+      "timestamp_s": 16.0,
+      "event_type": "checkout_next",
+      "message": "All selected products collected; proceed to checkout.",
+      "details": {}
+    },
+    {
+      "timestamp_s": 16.0,
+      "event_type": "paused",
+      "message": "Spatial navigation paused.",
+      "details": {}
+    },
+    {
+      "timestamp_s": 21.25,
+      "event_type": "checkpoint_detected",
+      "message": "Simulated checkpoint 202 detected at N4_5; estimate corrected by 0.308 m.",
+      "details": {
+        "checkpoint_id": 202,
+        "node_id": "N4_5",
+        "correction_m": 0.3084494098096338,
+        "simulated_detection": true
+      }
+    },
+    {
+      "timestamp_s": 21.25,
+      "event_type": "checkout_complete",
+      "message": "Trolley reached checkout.",
+      "details": {}
+    }
+  ]
+}

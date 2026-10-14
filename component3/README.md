@@ -129,11 +129,11 @@ Launch the local dashboard from the repository root:
 python3 -B -m component3.simulations.navigation_dashboard.dashboard
 ```
 
-Open `http://127.0.0.1:8765/`. The server binds to loopback only and serves
-bundled assets plus map and route endpoints; it does not call cloud services or
-internet APIs. It uses Python's standard library and requires no dashboard
-packages. Streamlit and Plotly were not present in the existing environment, so
-they were not installed. See
+Open `http://127.0.0.1:8765/research` for the Phase 6A view of the validated
+research graph. The server binds to loopback only and serves bundled assets;
+it does not call cloud services or internet APIs. It uses Python's standard
+library and requires no dashboard packages. Streamlit and Plotly were not
+present in the existing environment, so they were not installed. See
 `simulations/navigation_dashboard/README.md` for launch, test, and offline
 details.
 
@@ -145,8 +145,91 @@ final node. The map uses the stored metric coordinates and equal x/y scale.
 Because the graph has no product-to-location mappings, this demonstration
 selects mapped aisle/category access points and does not generate product IDs.
 This foundation supports static route planning and reset/clear interactions
-only; continuous trolley motion, sensor streaming, and deviation-triggered
-animation are not implemented.
+with the Phase 6B live software simulation described below.
+
+## Phase 6B — live interactive navigation simulation
+
+At `/research`, the Phase 6B dashboard provides deterministic graph-constrained
+movement on the validated research graph. The dashboard root (`/`) now opens a
+separate, versioned synthetic supermarket walkthrough. Both views reuse the
+existing Component 3 Held-Karp, Dijkstra, dead-reckoning, deviation, and
+route-manager implementations; those algorithms are not duplicated.
+
+The `/research` guided panel scenario retains its B1/B3/B5 demonstration. The
+root spatial dashboard has its own Phase 6C **Start Guided Demo** action for
+synthetic Bananas and Frozen peas. Its seed-6042 server state machine uses the
+actual spatial lane graph, existing route algorithms, dead reckoning,
+checkpoint correction, deviation monitor, route manager, and pickup state. It
+records two automated simulated pickup confirmations, takes exactly one valid
+wrong turn after Bananas, reroutes once after detector confirmation, then
+reaches Frozen peas and checkout. Movement is fixed at 0.25-second simulation
+samples and stays on graph edges. Truth is used only to report simulation
+error, not as estimator or detector input. AprilTag observations are simulated
+and do not represent camera detection or hardware accuracy. Manual mode remains
+independent and continues to require explicit pickup confirmation.
+
+The research-graph route manager localizes to a graph edge but currently plans
+from a selected endpoint. Any partial-edge distance is excluded from node-only
+route cost. The simulator does not teleport to the selected anchor: it follows
+graph edges to the anchor, and the UI/event log calls out the route-cost
+limitation.
+
+### Spatial navigation correction
+
+The root dashboard uses `data/demo_store/v1/demo_store.json`, an explicitly
+synthetic 20 m by 14 m layout with walkable lanes, shelf obstacles, three
+mapped demonstration checkpoints, and six `SIM-P-*` demonstration products.
+It is separate from `data/store_map/store_graph.json` and
+`data/store_map/apriltag_layout.json`; neither validated research file is
+modified. The catalog and geometry are not POS inventory or a surveyed store.
+Routes are generated on the derived lane graph and stay clear of shelf
+footprints. Manual product collection requires explicit confirmation at the
+mapped pickup node. Guided mode instead pauses for a visible pickup notice and
+records its automated confirmation as simulated before continuing.
+
+The root view exposes current turn instructions and maneuver/checkpoint
+distances, aisle and shelf targets, simulation truth and estimated position,
+checkpoint correction events, product progress, route history after rerouting,
+and a chronological event log. Wrong turns use connected lane edges and only
+trigger the existing route manager after its confirmation samples. If the local
+server stops, the page displays a launch command and automatically reconnects
+and resynchronizes when it becomes available again.
+
+Run spatial and dashboard tests with:
+
+```bash
+python3 -B -m unittest -v \
+  component3.simulations.navigation_dashboard.tests.test_spatial_simulation \
+  component3.simulations.navigation_dashboard.tests.test_simulation \
+  component3.simulations.navigation_dashboard.tests.test_adapter
+```
+
+Evaluation output is generated with:
+
+```bash
+python3 -B -m component3.simulations.navigation_dashboard.evaluation
+```
+
+The report and telemetry CSV are written under
+`evaluation/navigation_simulation/`. Run the navigation dashboard tests with:
+
+```bash
+python3 -B -m unittest -v \
+  component3.simulations.navigation_dashboard.tests.test_simulation \
+  component3.simulations.navigation_dashboard.tests.test_adapter
+```
+
+See `simulations/navigation_dashboard/README.md` for API, control, evaluation,
+and offline-operation details.
+
+The Phase 6C Chromium acceptance and screenshot/export workflow is:
+
+```bash
+python3 -B -m component3.simulations.navigation_dashboard.browser_acceptance
+```
+
+The documented spatial API start action is `POST /api/spatial/control` with
+the JSON body `{"action":"guided_demo"}`.
 
 ## Validation
 

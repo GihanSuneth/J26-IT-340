@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "map_id": "comp3-synthetic-supermarket-demo-v1",
+  "data_classification": "synthetic_demonstration_only",
+  "notice": "Synthetic store geometry, shelves, checkpoint placements, and catalog. Not a surveyed store map or POS inventory.",
+  "coordinate_system": {
+    "unit": "metre",
+    "origin": "south-west corner",
+    "x_axis": "east",
+    "y_axis": "north"
+  },
+  "boundary_m": {
+    "width": 20.0,
+    "height": 14.0
+  },
+  "walkable_lanes": {
+    "width_m": 0.8,
+    "columns_x_m": [1.0, 5.0, 9.0, 13.0, 17.0, 19.0],
+    "rows_y_m": [1.0, 4.0, 7.0, 10.0, 13.0],
+    "cross_aisle_columns": [0, 3, 5]
+  },
+  "terminals": {
+    "entrance_node_id": "N0_0",
+    "checkout_node_id": "N4_5"
+  },
+  "shelves": [
+    {"shelf_id": "DEMO-SHELF-01", "section": "Produce", "bounds_m": [4.6, 4.55, 5.4, 6.45], "pickup_node_id": "N1_1"},
+    {"shelf_id": "DEMO-SHELF-02", "section": "Bakery", "bounds_m": [8.6, 4.55, 9.4, 6.45], "pickup_node_id": "N1_2"},
+    {"shelf_id": "DEMO-SHELF-03", "section": "Dairy", "bounds_m": [16.6, 4.55, 17.4, 6.45], "pickup_node_id": "N1_4"},
+    {"shelf_id": "DEMO-SHELF-04", "section": "Pantry", "bounds_m": [4.6, 7.55, 5.4, 9.45], "pickup_node_id": "N2_1"},
+    {"shelf_id": "DEMO-SHELF-05", "section": "Cereal", "bounds_m": [8.6, 7.55, 9.4, 9.45], "pickup_node_id": "N2_2"},
+    {"shelf_id": "DEMO-SHELF-06", "section": "Frozen", "bounds_m": [16.6, 7.55, 17.4, 9.45], "pickup_node_id": "N2_4"}
+  ],
+  "checkpoints": [
+    {"checkpoint_id": 200, "node_id": "N0_0", "name": "Entrance"},
+    {"checkpoint_id": 201, "node_id": "N2_3", "name": "Central cross-aisle"},
+    {"checkpoint_id": 202, "node_id": "N4_5", "name": "Checkout"}
+  ],
+  "products": [
+    {"demo_product_id": "SIM-P-001", "name": "Bananas", "category": "Produce", "shelf_id": "DEMO-SHELF-01", "shelf_section": "Produce", "pickup_node_id": "N1_1"},
+    {"demo_product_id": "SIM-P-002", "name": "Bread loaf", "category": "Bakery", "shelf_id": "DEMO-SHELF-02", "shelf_section": "Bakery", "pickup_node_id": "N1_2"},
+    {"demo_product_id": "SIM-P-003", "name": "Milk carton", "category": "Dairy", "shelf_id": "DEMO-SHELF-03", "shelf_section": "Dairy", "pickup_node_id": "N1_4"},
+    {"demo_product_id": "SIM-P-004", "name": "Pasta", "category": "Pantry", "shelf_id": "DEMO-SHELF-04", "shelf_section": "Pantry", "pickup_node_id": "N2_1"},
+    {"demo_product_id": "SIM-P-005", "name": "Cereal box", "category": "Cereal", "shelf_id": "DEMO-SHELF-05", "shelf_section": "Cereal", "pickup_node_id": "N2_2"},
+    {"demo_product_id": "SIM-P-006", "name": "Frozen peas", "category": "Frozen", "shelf_id": "DEMO-SHELF-06", "shelf_section": "Frozen", "pickup_node_id": "N2_4"}
+  ]
+}

@@ -14,92 +14,131 @@
         <p class="eyebrow">J26-IT-340 · COMPONENT 3</p>
         <h1>Smart Shopping Trolley — Navigation Simulation</h1>
       </div>
-      <div class="offline-tag"><span class="status-dot"></span>Local · Offline</div>
+      <div id="status-pill" class="offline-tag"><span class="status-dot"></span>Ready · Offline</div>
     </header>
-    <main class="layout">
-      <aside class="panel controls-panel" aria-label="Route controls">
+    <main class="sim-layout">
+      <aside class="panel controls-panel" aria-label="Simulation controls">
         <div class="panel-heading">
-          <p class="eyebrow">PLAN A SHOP</p>
-          <h2>Destinations</h2>
+          <p class="eyebrow">SHOPPING SESSION</p>
+          <h2>Mapped destinations</h2>
         </div>
-        <p class="subtle">Choose mapped aisle access points for this route.</p>
+        <p class="subtle">Select aisle access nodes from the actual store map.</p>
         <div id="mapping-notice" class="notice hidden" role="note"></div>
-        <div id="destination-list" class="destination-list" aria-live="polite">
-          <p class="loading">Loading mapped aisles…</p>
+        <div id="destination-list" class="destination-list" aria-live="polite"></div>
+        <button id="calculate-button" class="button button-secondary full-button" type="button">
+          Apply selections and plan
+        </button>
+        <div class="control-divider"></div>
+        <div class="button-stack compact">
+          <button id="guided-button" class="button button-primary" type="button">Start guided demo</button>
+          <button id="start-button" class="button button-primary" type="button">Start navigation</button>
+          <div class="button-row">
+            <button id="pause-button" class="button button-secondary" type="button">Pause</button>
+            <button id="resume-button" class="button button-secondary" type="button">Resume</button>
+          </div>
+          <div class="button-row">
+            <button id="step-button" class="button button-secondary" type="button">Step 0.25 s</button>
+            <button id="reset-button" class="button button-tertiary" type="button">Reset</button>
+          </div>
+          <button id="wrong-turn-button" class="button button-warn" type="button">Trigger wrong turn</button>
+          <button id="confirm-stop-button" class="button button-secondary" type="button">Confirm shopping stop</button>
         </div>
-        <div class="button-stack">
-          <button id="calculate-button" class="button button-primary" type="button">
-            Calculate route
-          </button>
-          <button id="clear-button" class="button button-secondary" type="button">
-            Clear selection
-          </button>
-          <button id="reset-button" class="button button-tertiary" type="button">
-            Reset demonstration
-          </button>
-        </div>
-        <div class="control-footnote">
-          Destinations use existing section access nodes. No product locations
-          are generated for this demonstration.
-        </div>
+        <label class="range-control" for="speed-control">
+          <span>Trolley speed <strong id="speed-value">0.8 m/s</strong></span>
+          <input id="speed-control" type="range" min="0.4" max="1.6" step="0.4" value="0.8">
+        </label>
+        <label class="range-control" for="playback-control">
+          <span>Playback rate <strong id="playback-value">1×</strong></span>
+          <input id="playback-control" type="range" min="1" max="8" step="1" value="1">
+        </label>
+        <label class="range-control" for="noise-control">
+          <span>Encoder noise <strong id="noise-value">4 mm</strong></span>
+          <input id="noise-control" type="range" min="0" max="20" step="1" value="4">
+        </label>
+        <p class="control-footnote">
+          Seed 6042 · Fixed 0.25 s simulation step. The guided demo runs offline
+          and generates synthetic sensor inputs only.
+        </p>
       </aside>
 
-      <section class="panel map-panel" aria-label="Mapped supermarket">
+      <section class="panel map-panel" aria-label="Mapped supermarket and trolley simulation">
         <div class="map-header">
           <div>
             <p class="eyebrow">ACTUAL COMPONENT 3 STORE GRAPH</p>
-            <h2>Supermarket map</h2>
+            <h2>Live navigation</h2>
           </div>
-          <div class="map-size" id="map-size">Mapped geometry</div>
+          <div id="map-size" class="map-size">Mapped geometry</div>
         </div>
-        <div id="map-container" class="map-container">
-          <p class="loading">Loading the store graph…</p>
-        </div>
+        <div id="map-container" class="map-container"><p class="loading">Loading store graph…</p></div>
         <div class="legend" aria-label="Map legend">
-          <span><i class="legend-line"></i>Mapped walking edge</span>
+          <span><i class="legend-line"></i>Mapped edge</span>
           <span><i class="legend-line legend-route"></i>Planned route</span>
-          <span><i class="legend-node legend-stop"></i>Selected aisle</span>
-          <span><i class="legend-tag">T</i>AprilTag checkpoint</span>
-          <span><i class="legend-node legend-terminal"></i>Entrance / checkout</span>
+          <span><i class="legend-line legend-travel"></i>Travelled path</span>
+          <span><i class="legend-estimate"></i>Estimated position</span>
+          <span><i class="legend-node legend-truth"></i>Simulation truth</span>
+          <span><i class="legend-tag">T</i>Mapped checkpoint</span>
         </div>
         <p class="map-caption">
-          Graph coordinates and connections come from the Component 3 map.
-          Labels identify mapped graph nodes; no shelf or product geometry is shown.
+          Mapped coordinates and graph edges are authoritative. Dashed trails show
+          simulation truth and sensor-only dead-reckoning estimates; no shelf geometry is implied.
         </p>
+        <section class="telemetry" aria-label="Live simulation telemetry">
+          <div class="telemetry-card"><span>Simulated time</span><strong id="time-value">0.00 s</strong></div>
+          <div class="telemetry-card"><span>Current graph location</span><strong id="location-value">ENT</strong></div>
+          <div class="telemetry-card"><span>Position error</span><strong id="error-value">0.00 m</strong></div>
+          <div class="telemetry-card"><span>Deviation distance / state</span><strong id="deviation-value">—</strong></div>
+          <div class="telemetry-card"><span>Estimated heading</span><strong id="heading-value">0°</strong></div>
+          <div class="telemetry-card"><span>Remaining stops</span><strong id="remaining-value">B1 · B3 · B5</strong></div>
+          <div class="telemetry-card"><span>Remaining route distance</span><strong id="remaining-distance-value">— m</strong></div>
+          <div class="telemetry-card"><span>Last simulated checkpoint</span><strong id="checkpoint-value">—</strong></div>
+          <div class="telemetry-card"><span>Automatic reroutes</span><strong id="reroute-value">0</strong></div>
+        </section>
+        <section class="measured-metrics" aria-label="Measured simulation results">
+          <h3>Measured simulation results <small>(synthetic run)</small></h3>
+          <div class="metrics-grid">
+            <div><span>Mean error</span><strong id="mean-error-value">0.000 m</strong></div>
+            <div><span>RMSE</span><strong id="rmse-error-value">0.000 m</strong></div>
+            <div><span>Maximum error</span><strong id="max-error-value">0.000 m</strong></div>
+            <div><span>Samples</span><strong id="sample-count-value">1</strong></div>
+            <div><span>Checkpoint corrections</span><strong id="checkpoint-count-value">0</strong></div>
+          </div>
+        </section>
       </section>
 
-      <aside class="panel summary-panel" aria-label="Route summary">
+      <aside class="panel summary-panel" aria-label="Route and event summary">
         <div class="panel-heading">
-          <p class="eyebrow">ROUTE RESULT</p>
-          <h2>Trip summary</h2>
+          <p class="eyebrow">ALGORITHM OUTPUT</p>
+          <h2>Route summary</h2>
         </div>
-        <div id="route-status" class="route-status" role="status">
-          Preparing default route…
-        </div>
+        <div id="route-status" class="route-status" role="status">Loading actual store map…</div>
         <div class="distance-card">
-          <span>Total planned distance</span>
+          <span>Planned graph distance</span>
           <strong id="route-distance">— <small>m</small></strong>
-          <small class="distance-note">Sum of existing graph edge weights</small>
+          <small class="distance-note">Graph edge weights; node-only reroutes omit partial-edge cost.</small>
         </div>
         <div class="summary-section">
-          <h3>Optimized shopping order</h3>
-          <ol id="visit-order" class="route-list">
-            <li class="empty-list">Calculate a route to see the visit order.</li>
-          </ol>
+          <h3>Remaining shopping stops</h3>
+          <ol id="visit-order" class="route-list"><li class="empty-list">—</li></ol>
         </div>
         <div class="summary-section">
-          <h3>Expanded graph path</h3>
+          <h3>Planned graph path</h3>
           <div id="route-path" class="route-path">—</div>
         </div>
-        <div class="summary-section summary-footer">
-          <span>Checkout</span>
-          <strong id="checkout-node">CHK</strong>
+        <div class="summary-section event-section">
+          <div class="event-heading">
+            <h3>Chronological event log</h3>
+            <span><a href="/api/simulation/export.csv">CSV</a> · <a href="/api/simulation/export.json">JSON</a></span>
+          </div>
+          <ol id="event-log" class="event-log" aria-live="polite"></ol>
+        </div>
+        <div class="summary-section">
+          <span class="simulation-notice">Software simulation using mapped store geometry. No physical hardware is connected.</span>
         </div>
       </aside>
     </main>
     <footer class="disclaimer">
-      <strong>Software simulation using mapped store geometry. No physical hardware is connected.</strong>
-      <span>Prototype map dimensions and positions are simulated design values.</span>
+      <strong>Synthetic wheel encoder, IMU, and checkpoint events; no camera or physical trolley is connected.</strong>
+      <span>Prototype store dimensions and positions are simulated design values.</span>
     </footer>
     <script src="/app.js"></script>
   </body>

@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "source": "real Chromium browser using the localhost spatial dashboard",
+  "synthetic_simulation_only": true,
+  "status": "complete",
+  "guided_demo": {
+    "active": true,
+    "seed": 6042,
+    "stage": 9,
+    "stage_count": 9,
+    "stage_title": "Demonstration complete",
+    "wrong_turn_injected": true,
+    "automatic_pickups": true,
+    "completion_summary": {
+      "seed": 6042,
+      "products_collected": [
+        "SIM-P-001",
+        "SIM-P-006"
+      ],
+      "checkpoint_sequence": [
+        200,
+        201,
+        202
+      ],
+      "reroute_count": 1,
+      "simulation_time_s": 40.0,
+      "checkout_node_id": "N4_5"
+    }
+  },
+  "selected_product_ids": [
+    "SIM-P-001",
+    "SIM-P-006"
+  ],
+  "collected_product_ids": [
+    "SIM-P-001",
+    "SIM-P-006"
+  ],
+  "detected_checkpoint_ids": [
+    200,
+    201,
+    202
+  ],
+  "reroute_count": 1,
+  "simulation_time_s": 40.0,
+  "sample_count": 161,
+  "position_error_m": {
+    "mean": 0.20468864668170117,
+    "rmse": 0.23465072742043477,
+    "maximum": 0.49642020251440977
+  },
+  "event_types": [
+    "route_planned",
+    "checkpoint_detected",
+    "guided_stage_changed",
+    "guided_demo_started",
+    "started",
+    "guided_stage_changed",
+    "guided_stage_changed",
+    "pickup_reached",
+    "guided_stage_changed",
+    "product_collected",
+    "guided_stage_changed",
+    "wrong_turn_requested",
+    "wrong_turn",
+    "deviation_confirmed",
+    "reroute_success",
+    "guided_stage_changed",
+    "deviation_recovered",
+    "checkpoint_detected",
+    "pickup_reached",
+    "guided_stage_changed",
+    "product_collected",
+    "checkout_next",
+    "guided_stage_changed",
+    "checkpoint_detected",
+    "checkout_complete",
+    "guided_stage_changed",
+    "guided_demo_complete"
+  ],
+  "screenshots": {
+    "initial_route": "C3-DASH-042_guided_initial_route.png",
+    "first_turn": "C3-DASH-043_guided_first_turn.png",
+    "first_checkpoint": "C3-DASH-044_guided_first_checkpoint.png",
+    "first_product_pickup": "C3-DASH-045_guided_first_product_pickup.png",
+    "wrong_turn": "C3-DASH-046_guided_wrong_turn.png",
+    "confirmed_deviation": "C3-DASH-047_guided_confirmed_deviation.png",
+    "replacement_route": "C3-DASH-048_guided_replacement_route.png",
+    "second_product_pickup": "C3-DASH-049_guided_second_product_pickup.png",
+    "checkout_completion": "C3-DASH-050_guided_checkout_completion.png"
+  },
+  "console_errors": [],
+  "page_errors": []
+}
