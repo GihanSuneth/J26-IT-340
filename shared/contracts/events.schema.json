@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "JSON Schema of every event exchanged between components (the integration contract). DRAFT: payload fields per event must be agreed by all four members before first integration.",
+  "title": "Smart trolley events",
+  "$defs": {
+    "weight_event": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "session_id",
+        "timestamp",
+        "type",
+        "payload"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "const": "weight_event"
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "valid_item_event": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "session_id",
+        "timestamp",
+        "type",
+        "payload"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "const": "valid_item_event"
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "cart_updated": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "session_id",
+        "timestamp",
+        "type",
+        "payload"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "const": "cart_updated"
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "recommendation_event": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "session_id",
+        "timestamp",
+        "type",
+        "payload"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "const": "recommendation_event"
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "route_update": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "session_id",
+        "timestamp",
+        "type",
+        "payload"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "const": "route_update"
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "checkout_event": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "session_id",
+        "timestamp",
+        "type",
+        "payload"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "const": "checkout_event"
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/weight_event"
+    },
+    {
+      "$ref": "#/$defs/valid_item_event"
+    },
+    {
+      "$ref": "#/$defs/cart_updated"
+    },
+    {
+      "$ref": "#/$defs/recommendation_event"
+    },
+    {
+      "$ref": "#/$defs/route_update"
+    },
+    {
+      "$ref": "#/$defs/checkout_event"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+# requirements.txt - Python dependencies for Component 1 (fastapi, pyserial, opencv-python, scikit-learn/torch).
+# Owner: comp1
