@@ -21,3 +21,17 @@ ml/models/*
 *.onnx
 *.pkl
 .pio/
+
+# Python environments
+**/.venv/
+__pycache__/
+*.pyc
+
+# Product recognition model weights
+ml/product_recognition/models/*.pt
+
+# Local environment variables
+.env
+
+# Temporary camera recordings
+ml/product_recognition/recordings/
