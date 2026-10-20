@@ -10,7 +10,7 @@ from sqlalchemy import select, func
 from sqlalchemy.orm import Session
 
 from auth_database import get_db
-from auth_models import User
+from auth_models import User, Customer
 from auth_schemas import (
     RegisterRequest,
     LoginRequest,
@@ -93,6 +93,7 @@ def admin_user(user: User = Depends(current_user)) -> User:
     return user
 
 
+
 @router.post("/register", response_model=TokenResponse, status_code=201)
 def register(
     body: RegisterRequest,
@@ -110,9 +111,14 @@ def register(
             detail="An account with this email already exists.",
         )
 
-    count = db.scalar(select(func.count()).select_from(User)) or 0
+    # Generate the next user code using the highest existing ID.
+    highest_user_id = db.scalar(
+        select(func.max(User.id))
+    ) or 0
 
+    # Find the next unused customer ID.
     customer_number = 1
+
     while db.scalar(
         select(User.id).where(
             User.customer_id == f"C{customer_number:04d}"
@@ -120,9 +126,11 @@ def register(
     ) is not None:
         customer_number += 1
 
+    customer_id = f"C{customer_number:04d}"
+
     user = User(
-        user_code=f"U{count + 1:04d}",
-        customer_id=f"C{customer_number:04d}",
+        user_code=f"U{highest_user_id + 1:04d}",
+        customer_id=customer_id,
         full_name=body.full_name.strip(),
         email=email,
         password_hash=password_hasher.hash(body.password),
@@ -130,14 +138,32 @@ def register(
         is_active=True,
     )
 
-    db.add(user)
-    db.commit()
-    db.refresh(user)
+    try:
+        # Save both records in one transaction.
+        db.add(user)
+        db.flush()  # Generates user.id without committing yet.
+
+        customer = Customer(
+            user_id=user.id,
+            customer_id=customer_id,
+        )
+
+        db.add(customer)
+        db.commit()
+        db.refresh(user)
+
+    except Exception:
+        db.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail="Registration failed. Please try again.",
+        )
 
     return TokenResponse(
         access_token=create_token(user),
         user=user,
     )
+
 
 
 @router.post("/login", response_model=TokenResponse)

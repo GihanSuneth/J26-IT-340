@@ -8,7 +8,7 @@ from api.router_reco import router as recommendation_router
 from api.router_catalog import router as catalogue_router
 
 from auth_database import Base, engine
-from auth_models import User
+from auth_models import User, Customer
 from auth_router import router as auth_router
 
 app = FastAPI(title="Component 4 - Smart Shopping Recommendations")
