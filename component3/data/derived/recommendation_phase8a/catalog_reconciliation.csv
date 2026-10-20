@@ -1,0 +1,69 @@
+source_item_key,source_product_name,source_category,mapping_status,demo_product_id,demo_product_name,shelf_section,shelf_id,pickup_node_id,navigation_eligible,rationale
+name:apple,Apple,Fruits & Vegetables,category_level_mapping,,,Produce,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:baby-food,Baby Food,Baby Care,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:banana,Banana,Fruits & Vegetables,normalized_name_mapping,SIM-P-001,Bananas,Produce,DEMO-SHELF-01,N1_1,True,Conservative normalized-name or reviewed singular/packaging alias; no shared SKU was verified.
+name:beef,Beef,Meat & Seafood,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:belt,Belt,Clothing Accessories,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:biscuits,Biscuits,Snacks,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:bread,Bread,Bakery,normalized_name_mapping,SIM-P-002,Bread loaf,Bakery,DEMO-SHELF-02,N1_2,True,Conservative normalized-name or reviewed singular/packaging alias; no shared SKU was verified.
+name:butter,Butter,Dairy & Eggs,category_level_mapping,,,Dairy,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:cake,Cake,Bakery,category_level_mapping,,,Bakery,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:carrot,Carrot,Fruits & Vegetables,category_level_mapping,,,Produce,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:charger,Charger,Electronics,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:cheese,Cheese,Dairy & Eggs,category_level_mapping,,,Dairy,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:chicken-breast,Chicken Breast,Meat & Seafood,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:chips,Chips,Snacks,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:chocolate,Chocolate,Snacks,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:coffee,Coffee,Beverages,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:cookies,Cookies,Bakery,category_level_mapping,,,Bakery,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:cooking-oil,Cooking Oil,Grains & Staples,category_level_mapping,,,Pantry,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:croissant,Croissant,Bakery,category_level_mapping,,,Bakery,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:detergent,Detergent,Household,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:diapers,Diapers,Baby Care,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:dishwashing-liquid,Dishwashing Liquid,Household,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:dress,Dress,Clothing,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:earphones,Earphones,Electronics,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:educational-book,Educational Book,Books,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:eggs,Eggs,Dairy & Eggs,category_level_mapping,,,Dairy,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:electric-kettle,Electric Kettle,Electronics,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:energy-drink,Energy Drink,Beverages,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:face-wash,Face Wash,Personal Care,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:fiction-book,Fiction Book,Books,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:fish,Fish,Meat & Seafood,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:floor-cleaner,Floor Cleaner,Household,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:jeans,Jeans,Clothing,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:juice,Juice,Beverages,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:lentils,Lentils,Grains & Staples,category_level_mapping,,,Pantry,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:marker,Marker,Stationery,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:milk,Milk,Dairy & Eggs,normalized_name_mapping,SIM-P-003,Milk carton,Dairy,DEMO-SHELF-03,N1_4,True,Conservative normalized-name or reviewed singular/packaging alias; no shared SKU was verified.
+name:mixer-grinder,Mixer Grinder,Electronics,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:notebook,Notebook,Stationery,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:onion,Onion,Fruits & Vegetables,category_level_mapping,,,Produce,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:orange,Orange,Fruits & Vegetables,category_level_mapping,,,Produce,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:pain-reliever,Pain Reliever,Health & Wellness,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:pasta,Pasta,Grains & Staples,normalized_name_mapping,SIM-P-004,Pasta,Pantry,DEMO-SHELF-04,N2_1,True,Conservative normalized-name or reviewed singular/packaging alias; no shared SKU was verified.
+name:pastry,Pastry,Bakery,category_level_mapping,,,Bakery,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:pen,Pen,Stationery,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:phone-cover,Phone Cover,Electronics,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:popcorn,Popcorn,Snacks,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:potato,Potato,Fruits & Vegetables,category_level_mapping,,,Produce,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:prawns,Prawns,Meat & Seafood,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:rice,Rice,Grains & Staples,category_level_mapping,,,Pantry,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:salt,Salt,Grains & Staples,category_level_mapping,,,Pantry,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:saree,Saree,Clothing,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:shampoo,Shampoo,Personal Care,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:shirt,Shirt,Clothing,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:shoes,Shoes,Footwear,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:soap,Soap,Personal Care,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:soda,Soda,Beverages,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:spices,Spices,Grains & Staples,category_level_mapping,,,Pantry,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:spinach,Spinach,Fruits & Vegetables,category_level_mapping,,,Produce,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:sugar,Sugar,Grains & Staples,category_level_mapping,,,Pantry,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:tea,Tea,Beverages,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:tissue,Tissue,Household,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:toilet-paper,Toilet Paper,Household,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:tomato,Tomato,Fruits & Vegetables,category_level_mapping,,,Produce,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:toothpaste,Toothpaste,Personal Care,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:vitamins,Vitamins,Health & Wellness,unmapped_product,,,,,,False,No defensible demo-catalog name or category mapping.
+name:wheat-flour,Wheat Flour,Grains & Staples,category_level_mapping,,,Pantry,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."
+name:yogurt,Yogurt,Dairy & Eggs,category_level_mapping,,,Dairy,,,False,"Category can be associated with a demo section, but no product-specific shelf destination is verified."

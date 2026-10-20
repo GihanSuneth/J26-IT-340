@@ -1,0 +1,14 @@
+{
+  "console_errors": [],
+  "page_errors": [],
+  "session_id": "nav-adc49787-010c-40a5-9432-d8c0daa00f88",
+  "same_session_in_both_views": true,
+  "free_walk_edge_options": 2,
+  "simulation_time_before_s": 0.0,
+  "simulation_time_after_move_s": 0.75,
+  "ground_truth_changed_on_step": true,
+  "stop_preserved_time_s": 0.75,
+  "route_revision_after_navigation_request": 1,
+  "partial_edge_distance_m": 0.6069395424406554,
+  "research_view_synchronized": true
+}

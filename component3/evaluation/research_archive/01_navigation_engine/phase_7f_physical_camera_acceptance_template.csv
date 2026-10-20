@@ -1,0 +1,2 @@
+trial_id,date_time_utc,camera_type,verified_device_identity,camera_index,tag_family,expected_tag_id,marker_size_m,viewing_distance_m,lighting_condition,view_angle_condition,presentation_number,presentation_start_monotonic_s,detected_tag_ids,stable_detection_monotonic_s,latency_ms,correct_detection,incorrect_detection,missed_detection,camera_disconnect_count,raw_scanner_log_path,notes
+PENDING,,,,,tag36h11,,,,,,,,,,,,,,,PENDING,No physical observations recorded

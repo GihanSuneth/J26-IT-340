@@ -1,0 +1,110 @@
+{
+  "milestone": "C3-P7E",
+  "data_classification": "deterministic_synthetic_software_evaluation",
+  "seed": 6042,
+  "fixed_timestep_s": 0.25,
+  "timing_repetitions": 30,
+  "physical_camera_used": false,
+  "physical_trolley_used": false,
+  "equivalent_demand_comparison": {
+    "product_ids": [
+      "SIM-P-001",
+      "SIM-P-004",
+      "SIM-P-006"
+    ],
+    "pickup_node_ids": [
+      "N1_1",
+      "N2_1",
+      "N2_4"
+    ],
+    "same_anchor": {
+      "anchor_type": "edge",
+      "node_id": null,
+      "edge_start_node_id": "N0_0",
+      "edge_end_node_id": "N1_0",
+      "distance_to_start_m": 0.28498746601375946,
+      "distance_to_end_m": 2.7150125339862408,
+      "edge_length_m": 3.0,
+      "projected_x_m": 1.0,
+      "projected_y_m": 1.2849874660137595,
+      "snap_distance_m": 0.2856638180612787,
+      "travel_direction": "toward_end",
+      "route_revision": 0
+    },
+    "baseline_B_naive_order_cost_m": 37.71501253398624,
+    "proposed_held_karp_cost_m": 37.71501253398624,
+    "cost_difference_proposed_minus_naive_m": 0.0,
+    "claim": "Equal remaining demands, graph, checkout and route anchor."
+  },
+  "baseline_A_fixed_list": {
+    "initial_route_cost_m": 38.0,
+    "total_travelled_distance_m": 38.0,
+    "status": "complete",
+    "successful_pickup_units": 3,
+    "requested_units": 3,
+    "route_revision_count": 3
+  },
+  "proposed_dynamic_session": {
+    "operations": [
+      "add",
+      "remove",
+      "increase",
+      "decrease_remaining"
+    ],
+    "final_product_ids": [
+      "SIM-P-001",
+      "SIM-P-004",
+      "SIM-P-006"
+    ],
+    "total_travelled_distance_m": 38.0,
+    "remaining_route_cost_m": 0,
+    "status": "complete",
+    "shopping_list_revision": 7,
+    "route_revision_count": 8,
+    "successful_pickup_units": 3,
+    "requested_units": 3,
+    "shopping_completion_rate": 1.0,
+    "navigation_completion_rate": 1.0,
+    "state_consistent": true
+  },
+  "independent_shelf_journey": {
+    "entrance_checkpoint_confirmed": true,
+    "free_walk_node": "N1_1",
+    "pickup_ready_from_estimate_guard": true,
+    "pickup_confirmed_explicitly": true,
+    "second_product_added": true,
+    "navigation_resumed_from_latest_estimate": true,
+    "ground_truth_not_used_by_arrival_policy": true
+  },
+  "unexpected_mapped_checkpoint": {
+    "expected_checkpoint_id": 201,
+    "observed_checkpoint_id": 202,
+    "classification": "unexpected_but_plausible_mapped_checkpoint",
+    "accepted": true,
+    "ground_truth_unchanged": true,
+    "shopping_state_preserved": true,
+    "route_replanned": true
+  },
+  "invalid_and_stale_commands": {
+    "valid_command_revision": 1,
+    "stale_command_rejected": true,
+    "shopping_state_unchanged": true,
+    "route_unchanged": true,
+    "invalid_mutation_rejections": 1,
+    "invalid_mutation_attempts": 1
+  },
+  "reoptimization_timing_ms": {
+    "count": 30,
+    "minimum": 0.118208,
+    "median": 0.1191045,
+    "p95_nearest_rank": 0.134792,
+    "maximum": 0.136834
+  },
+  "limitations": [
+    "All movement, sensing, shopping intentions and truth are synthetic.",
+    "Timing distribution contains repeated in-process calculations on one host.",
+    "The fixed and dynamic total-distance runs represent different intention timing and are not asserted as an equal-demand route-efficiency comparison.",
+    "No recommendation model was trained; the suggestion contract has no model score.",
+    "No physical camera or trolley was used."
+  ]
+}

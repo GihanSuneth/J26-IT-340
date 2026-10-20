@@ -1,0 +1,63 @@
+tag_id,x_m,y_m,orientation_deg,anchor_type,anchor,purpose,print_file
+200,1.0,1.0,0,node,N0_0,retained_checkpoint,apriltag_36h11_id_200_90mm.pdf
+201,13.0,7.0,0,node,N2_3,retained_checkpoint,apriltag_36h11_id_201_90mm.pdf
+202,19.0,13.0,0,node,N4_5,retained_checkpoint,apriltag_36h11_id_202_90mm.pdf
+203,5.0,1.0,0,node,N0_1,junction,apriltag_36h11_id_203_90mm.pdf
+204,9.0,1.0,0,node,N0_2,junction,apriltag_36h11_id_204_90mm.pdf
+205,13.0,1.0,0,node,N0_3,junction,apriltag_36h11_id_205_90mm.pdf
+206,17.0,1.0,0,node,N0_4,junction,apriltag_36h11_id_206_90mm.pdf
+207,19.0,1.0,0,node,N0_5,junction,apriltag_36h11_id_207_90mm.pdf
+208,1.0,4.0,0,node,N1_0,junction,apriltag_36h11_id_208_90mm.pdf
+209,5.0,4.0,0,node,N1_1,shelf_approach,apriltag_36h11_id_209_90mm.pdf
+210,9.0,4.0,0,node,N1_2,shelf_approach,apriltag_36h11_id_210_90mm.pdf
+211,13.0,4.0,0,node,N1_3,junction,apriltag_36h11_id_211_90mm.pdf
+212,17.0,4.0,0,node,N1_4,shelf_approach,apriltag_36h11_id_212_90mm.pdf
+213,19.0,4.0,0,node,N1_5,junction,apriltag_36h11_id_213_90mm.pdf
+214,1.0,7.0,0,node,N2_0,junction,apriltag_36h11_id_214_90mm.pdf
+215,5.0,7.0,0,node,N2_1,shelf_approach,apriltag_36h11_id_215_90mm.pdf
+216,9.0,7.0,0,node,N2_2,shelf_approach,apriltag_36h11_id_216_90mm.pdf
+217,17.0,7.0,0,node,N2_4,shelf_approach,apriltag_36h11_id_217_90mm.pdf
+218,19.0,7.0,0,node,N2_5,junction,apriltag_36h11_id_218_90mm.pdf
+219,1.0,10.0,0,node,N3_0,junction,apriltag_36h11_id_219_90mm.pdf
+220,5.0,10.0,0,node,N3_1,junction,apriltag_36h11_id_220_90mm.pdf
+221,9.0,10.0,0,node,N3_2,junction,apriltag_36h11_id_221_90mm.pdf
+222,13.0,10.0,0,node,N3_3,junction,apriltag_36h11_id_222_90mm.pdf
+223,17.0,10.0,0,node,N3_4,junction,apriltag_36h11_id_223_90mm.pdf
+224,19.0,10.0,0,node,N3_5,junction,apriltag_36h11_id_224_90mm.pdf
+225,1.0,13.0,0,node,N4_0,junction,apriltag_36h11_id_225_90mm.pdf
+226,5.0,13.0,0,node,N4_1,junction,apriltag_36h11_id_226_90mm.pdf
+227,9.0,13.0,0,node,N4_2,junction,apriltag_36h11_id_227_90mm.pdf
+228,13.0,13.0,0,node,N4_3,junction,apriltag_36h11_id_228_90mm.pdf
+229,17.0,13.0,0,node,N4_4,junction,apriltag_36h11_id_229_90mm.pdf
+230,3.0,1.0,0,edge,N0_0->N0_1 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_230_90mm.pdf
+231,1.0,2.5,0,edge,N0_0->N1_0 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_231_90mm.pdf
+232,7.0,1.0,0,edge,N0_1->N0_2 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_232_90mm.pdf
+233,11.0,1.0,0,edge,N0_2->N0_3 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_233_90mm.pdf
+234,15.0,1.0,0,edge,N0_3->N0_4 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_234_90mm.pdf
+235,13.0,2.5,0,edge,N0_3->N1_3 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_235_90mm.pdf
+236,19.0,2.5,0,edge,N0_5->N1_5 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_236_90mm.pdf
+237,3.0,4.0,0,edge,N1_0->N1_1 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_237_90mm.pdf
+238,1.0,5.5,0,edge,N1_0->N2_0 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_238_90mm.pdf
+239,7.0,4.0,0,edge,N1_1->N1_2 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_239_90mm.pdf
+240,11.0,4.0,0,edge,N1_2->N1_3 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_240_90mm.pdf
+241,15.0,4.0,0,edge,N1_3->N1_4 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_241_90mm.pdf
+242,13.0,5.5,0,edge,N1_3->N2_3 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_242_90mm.pdf
+243,19.0,5.5,0,edge,N1_5->N2_5 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_243_90mm.pdf
+244,3.0,7.0,0,edge,N2_0->N2_1 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_244_90mm.pdf
+245,1.0,8.5,0,edge,N2_0->N3_0 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_245_90mm.pdf
+246,7.0,7.0,0,edge,N2_1->N2_2 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_246_90mm.pdf
+247,11.0,7.0,0,edge,N2_2->N2_3 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_247_90mm.pdf
+248,15.0,7.0,0,edge,N2_3->N2_4 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_248_90mm.pdf
+249,13.0,8.5,0,edge,N2_3->N3_3 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_249_90mm.pdf
+250,19.0,8.5,0,edge,N2_5->N3_5 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_250_90mm.pdf
+251,3.0,10.0,0,edge,N3_0->N3_1 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_251_90mm.pdf
+252,1.0,11.5,0,edge,N3_0->N4_0 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_252_90mm.pdf
+253,7.0,10.0,0,edge,N3_1->N3_2 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_253_90mm.pdf
+254,11.0,10.0,0,edge,N3_2->N3_3 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_254_90mm.pdf
+255,15.0,10.0,0,edge,N3_3->N3_4 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_255_90mm.pdf
+256,13.0,11.5,0,edge,N3_3->N4_3 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_256_90mm.pdf
+257,19.0,11.5,0,edge,N3_5->N4_5 @ 1.5 m,mid_edge_localization,apriltag_36h11_id_257_90mm.pdf
+258,3.0,13.0,0,edge,N4_0->N4_1 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_258_90mm.pdf
+259,7.0,13.0,0,edge,N4_1->N4_2 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_259_90mm.pdf
+260,11.0,13.0,0,edge,N4_2->N4_3 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_260_90mm.pdf
+261,15.0,13.0,0,edge,N4_3->N4_4 @ 2.0 m,mid_edge_localization,apriltag_36h11_id_261_90mm.pdf

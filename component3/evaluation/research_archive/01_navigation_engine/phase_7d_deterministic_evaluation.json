@@ -1,0 +1,194 @@
+{
+  "milestone": "C3-P7D",
+  "data_classification": "deterministic_synthetic_software_evaluation",
+  "physical_camera_used": false,
+  "physical_trolley_used": false,
+  "seed": 6042,
+  "fixed_timestep_s": 0.25,
+  "speed_m_s": {
+    "baseline": 0.8,
+    "free_walk": 1.6
+  },
+  "map_id": "comp3-synthetic-supermarket-demo-v1",
+  "scenarios": {
+    "A_follow_original_route": {
+      "status": "complete",
+      "completed": true,
+      "products_confirmed": 2,
+      "products_requested": 2,
+      "simulation_time_s": 38.75,
+      "route_revisions": 2
+    },
+    "B_free_walk_to_other_location": {
+      "target_product": "Milk carton",
+      "target_pickup_node_id": "N1_4",
+      "path_node_ids": [
+        "N0_0",
+        "N0_1",
+        "N0_2",
+        "N0_3",
+        "N1_3",
+        "N1_4"
+      ],
+      "path_distance_m": 19.0,
+      "final_node_id": "N1_4",
+      "movement_constrained_to_graph": true
+    },
+    "C_D_E_off_route_accept_correct_replan": {
+      "observation": {
+        "tag_id": 202,
+        "timestamp_s": 19.25,
+        "detection_source": "adaptive_evaluation",
+        "map_id": "comp3-synthetic-supermarket-demo-v1",
+        "confidence": null,
+        "observed_x_m": null,
+        "observed_y_m": null,
+        "accepted": true,
+        "reason": "accepted_unexpected_plausible",
+        "expected_checkpoint_id": 201,
+        "position_before": {
+          "x_m": 19.546687285062443,
+          "y_m": 13.168404778282111,
+          "heading_rad": 1.5743838550540197,
+          "timestamp_s": 19.25
+        },
+        "position_after": {
+          "x_m": 19.0,
+          "y_m": 13.0,
+          "heading_rad": 1.5743838550540197,
+          "timestamp_s": 19.25
+        },
+        "classification": "unexpected_but_plausible_mapped_checkpoint",
+        "graph_distance_from_last_checkpoint_m": 30.0,
+        "graph_distance_from_estimate_m": 0.0,
+        "reachable_distance_limit_m": 32.12698826098192
+      },
+      "localization_error_before_m": 0.572037723403966,
+      "localization_error_after_m": 0.0,
+      "correction_distance_m": 0.572037723403966,
+      "route_cost_before_m": 54.0,
+      "route_cost_after_m": 54.0,
+      "partial_edge_distance_m": 0.0,
+      "replanning_computation_ms": 0.5869589986104984,
+      "route_revision_count": 1,
+      "ground_truth_unchanged_by_scan": true,
+      "shopping_list_preserved": true,
+      "collected_products_preserved": true
+    },
+    "F_unknown_tag": {
+      "tag_id": 999,
+      "timestamp_s": 0.25,
+      "detection_source": "adaptive_evaluation",
+      "map_id": "comp3-synthetic-supermarket-demo-v1",
+      "confidence": null,
+      "observed_x_m": null,
+      "observed_y_m": null,
+      "accepted": false,
+      "reason": "unknown_tag",
+      "expected_checkpoint_id": 201,
+      "position_before": {
+        "x_m": 1.0,
+        "y_m": 1.0,
+        "heading_rad": 0.0,
+        "timestamp_s": 0.0
+      },
+      "position_after": {
+        "x_m": 1.0,
+        "y_m": 1.0,
+        "heading_rad": 0.0,
+        "timestamp_s": 0.0
+      },
+      "classification": "unknown_marker",
+      "graph_distance_from_last_checkpoint_m": null,
+      "graph_distance_from_estimate_m": null,
+      "reachable_distance_limit_m": null
+    },
+    "G_duplicate_tag": {
+      "tag_id": 200,
+      "timestamp_s": 0.25,
+      "detection_source": "adaptive_evaluation",
+      "map_id": "comp3-synthetic-supermarket-demo-v1",
+      "confidence": null,
+      "observed_x_m": null,
+      "observed_y_m": null,
+      "accepted": false,
+      "reason": "duplicate_observation",
+      "expected_checkpoint_id": 201,
+      "position_before": {
+        "x_m": 1.0,
+        "y_m": 1.0,
+        "heading_rad": 0.0,
+        "timestamp_s": 0.0
+      },
+      "position_after": {
+        "x_m": 1.0,
+        "y_m": 1.0,
+        "heading_rad": 0.0,
+        "timestamp_s": 0.0
+      },
+      "classification": "duplicate",
+      "graph_distance_from_last_checkpoint_m": null,
+      "graph_distance_from_estimate_m": null,
+      "reachable_distance_limit_m": null
+    },
+    "H_spatially_implausible_tag": {
+      "tag_id": 202,
+      "timestamp_s": 0.25,
+      "detection_source": "adaptive_evaluation",
+      "map_id": "comp3-synthetic-supermarket-demo-v1",
+      "confidence": null,
+      "observed_x_m": null,
+      "observed_y_m": null,
+      "accepted": false,
+      "reason": "spatially_implausible_observation",
+      "expected_checkpoint_id": 201,
+      "position_before": {
+        "x_m": 1.0,
+        "y_m": 1.0,
+        "heading_rad": 0.0,
+        "timestamp_s": 0.0
+      },
+      "position_after": {
+        "x_m": 1.0,
+        "y_m": 1.0,
+        "heading_rad": 0.0,
+        "timestamp_s": 0.0
+      },
+      "classification": "spatially_implausible_observation",
+      "graph_distance_from_last_checkpoint_m": 30.0,
+      "graph_distance_from_estimate_m": 30.0,
+      "reachable_distance_limit_m": 1.25,
+      "estimate_unchanged": true,
+      "confirmed_checkpoint_unchanged": true
+    },
+    "I_J_camera_interruption_resume": {
+      "observation_injected_for_software_evaluation": true,
+      "status_after_interruption": "camera_stopped",
+      "status_after_resume": "navigating",
+      "resumed": true
+    }
+  },
+  "metrics": {
+    "checkpoint_observations": 4,
+    "checkpoint_accepted": 1,
+    "checkpoint_rejected": 3,
+    "acceptance_rate": 0.25,
+    "rejection_rate": 0.75,
+    "localization_error_before_m": 0.572037723403966,
+    "localization_error_after_m": 0.0,
+    "localization_error_change_m": -0.572037723403966,
+    "correction_distance_m": 0.572037723403966,
+    "route_cost_before_m": 54.0,
+    "route_cost_after_m": 54.0,
+    "replanning_computation_ms": 0.5869589986104984,
+    "route_revision_count": 1,
+    "baseline_completion_rate": 1.0,
+    "baseline_completion_denominator": 1
+  },
+  "limitations": [
+    "All movement, sensor noise, checkpoints and ground truth are synthetic.",
+    "Camera interruption uses a direct software callback; no physical camera was opened.",
+    "One deterministic trial per scenario is functional evidence, not a population accuracy estimate.",
+    "Ground truth is used only for reported evaluation error, not checkpoint acceptance."
+  ]
+}

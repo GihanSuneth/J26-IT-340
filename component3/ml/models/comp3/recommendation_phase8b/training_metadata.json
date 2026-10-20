@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "association_rules": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/ml/models/comp3/recommendation_phase8b/association_rules.json",
+    "category_popularity": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/ml/models/comp3/recommendation_phase8b/category_popularity.json",
+    "global_popularity": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/ml/models/comp3/recommendation_phase8b/global_popularity.json",
+    "item_item_cosine": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/ml/models/comp3/recommendation_phase8b/item_item_cosine.json",
+    "linear_basket_softmax": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/ml/models/comp3/recommendation_phase8b/linear_basket_softmax.json"
+  },
+  "selected_artifact": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/ml/models/comp3/recommendation_phase8b/selected_model.json",
+  "selection": {
+    "frozen": {
+      "candidate_filtering": "training vocabulary minus observed items",
+      "hyperparameters": {
+        "min_support_count": 5,
+        "model_type": "association_rules",
+        "rule_count": 3502,
+        "score": "max_confidence_times_lift",
+        "training_baskets": 1393,
+        "vocabulary_size": 68
+      },
+      "model_family": "association_rules",
+      "preprocessing": "phase8a-preparation-v1 normalized-name keys",
+      "ranking_logic": "descending model score then deterministic item key",
+      "seed": 3408,
+      "vocabulary_sha256": "f2f5255acf97b565da80acf38ef9bb5ed980e40df364a0f2fa0e5ff9e4f2a839"
+    },
+    "primary_criterion": "maximum validation NDCG@5",
+    "selected_model": "association_rules",
+    "selected_validation_ndcg@5": 0.058074855380056536,
+    "test_consulted_during_selection": false,
+    "tie_breakers": [
+      "validation HitRate@5",
+      "catalog coverage@5",
+      "lower model complexity"
+    ]
+  },
+  "training_baskets": 1393,
+  "training_examples": 1393,
+  "training_runtime_ms": {
+    "association_rules": 7.520667000790127,
+    "category_popularity": 1.674125000135973,
+    "global_popularity": 0.6296249994193204,
+    "item_item_cosine": 6.954832999326754,
+    "linear_basket_softmax": 176.16908300260548
+  }
+}

@@ -30,6 +30,8 @@ INSTRUCTION_TYPES = frozenset(
         "TURN_RIGHT",
         "U_TURN",
         "APPROACH_CHECKPOINT",
+        "SCAN_CHECKPOINT",
+        "FREE_WALK",
         "CHECKPOINT_CONFIRMED",
         "APPROACH_PRODUCT",
         "PRODUCT_REACHED",

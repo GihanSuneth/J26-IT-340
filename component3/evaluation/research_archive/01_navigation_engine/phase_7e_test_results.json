@@ -1,0 +1,35 @@
+{
+  "milestone": "C3-P7E",
+  "date": "2026-10-15",
+  "branch": "Comp3_Arun",
+  "starting_head": "4cc31bc7d113088ee2e0234a313889671c485fd3",
+  "claim_boundary": "Software tests, deterministic synthetic evaluation, and local headless Chromium only",
+  "physical_camera_tested": false,
+  "physical_trolley_tested": false,
+  "results": {
+    "full_pytest": {"passed": 249, "failed": 0},
+    "dynamic_shopping_focused": {"passed": 13, "failed": 0, "domain_and_simulation": 11, "api_idempotency_and_camera_concurrency": 2},
+    "phase_7e_three_view_browser": {"passed": 1, "failed": 0, "console_errors": 0, "page_errors": 0},
+    "phase_7d_browser_regression": {"passed": 1, "failed": 0, "console_errors": 0, "page_errors": 0},
+    "phase_7c_browser_regression": {"passed": 1, "failed": 0, "console_errors": 0, "page_errors": 0},
+    "phase_7b2_browser_regression": {"viewports_passed": 3, "viewports_failed": 0, "mode_checks_passed": 3},
+    "store_map_validation": {"passed": 15, "failed": 0},
+    "evidence_validation": {"indexed_artifacts": 107, "failed": 0},
+    "python_compileall": {"files_checked": 78, "errors": 0},
+    "javascript_syntax": {"passed": 3, "failed": 0},
+    "git_diff_check": {"passed": true, "errors": 0}
+  },
+  "transaction_checks": {
+    "duplicate_command_applied_once": true,
+    "stale_shopping_revision_http_status": 409,
+    "refresh_preserved_session": true,
+    "two_customer_tabs_synchronized": true,
+    "research_view_synchronized": true
+  },
+  "notes": [
+    "Camera-mode regression used the existing software test and Chromium paths; no physical camera was opened.",
+    "No physical trolley was used.",
+    "No recommendation model was trained.",
+    "No commit or push was performed."
+  ]
+}

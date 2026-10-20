@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:j26-it-340:component3:recommendation:1.0",
+  "title": "Component 3 recommendation output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["recommendation_id", "product_id", "recommendation_source", "model_version", "score", "mapping_status", "shelf_availability", "navigation_eligible", "acceptance_status"],
+  "properties": {
+    "recommendation_id": {"type": "string", "minLength": 1},
+    "product_id": {"type": "string", "minLength": 1},
+    "recommendation_source": {"type": "string", "minLength": 1},
+    "model_version": {"type": ["string", "null"]},
+    "score": {"type": ["number", "null"]},
+    "display_explanation": {"type": ["string", "null"]},
+    "mapping_status": {"enum": ["exact_verified_mapping", "normalized_name_mapping", "category_level_mapping", "unmapped_product"]},
+    "shelf_availability": {"enum": ["available", "unavailable", "unknown"]},
+    "shelf_id": {"type": ["string", "null"]},
+    "pickup_node_id": {"type": ["string", "null"]},
+    "navigation_eligible": {"type": "boolean"},
+    "route_detour_cost_m": {"type": ["number", "null"], "minimum": 0},
+    "acceptance_status": {"enum": ["pending", "accepted", "rejected"]}
+  }
+}

@@ -1,0 +1,9 @@
+Phase 7B.2 camera probe — 2026-10-15 (Asia/Colombo)
+Command: component3/.venv/bin/python -m component3.backend.comp3_reco_navigation.navigation.apriltag_camera_smoke_test --probe-cameras --camera-indices 1 2 0
+
+Index 1: opened=false, frame_read=false, resolution=unavailable, backend=unavailable, device_name=not exposed
+Index 2: opened=false, frame_read=false, resolution=unavailable, backend=unavailable, device_name=not exposed
+Index 0: opened=true, frame_read=true, resolution=1920x1080, backend=AVFOUNDATION, device_name=not exposed
+
+OpenCV reported indices 1 and 2 outside the available device range. Device names were not invented.
+The separate privacy-preserving dashboard acceptance loaded a real 960x540 throttled preview from the 1920x1080 index-0 source and saved no frame.

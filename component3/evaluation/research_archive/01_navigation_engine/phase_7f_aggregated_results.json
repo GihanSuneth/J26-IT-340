@@ -1,0 +1,49 @@
+{
+  "milestone": "C3-P7F",
+  "data_classification": "aggregated_synthetic_and_software_evaluation",
+  "route_comparison": {
+    "trials": 20,
+    "improvements": 10,
+    "ties": 10,
+    "oracle_matches": 20,
+    "mean_absolute_improvement_m": 6.0,
+    "median_percentage_improvement": 4.166666666666667
+  },
+  "localization": {
+    "observations": 50,
+    "tp": 20,
+    "tn": 30,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "precision_denominator": 20,
+    "recall": 1.0,
+    "recall_denominator": 20,
+    "correct_decision_interval_wilson_95": {
+      "proportion": 1.0,
+      "lower_95": 0.9286524008666414,
+      "upper_95": 1.0
+    },
+    "accepted_observation_interval_wilson_95": {
+      "proportion": 0.4,
+      "lower_95": 0.27608389730256544,
+      "upper_95": 0.5381856225241064
+    },
+    "mean_position_error_before_m": 0.21951322645807872,
+    "mean_position_error_after_m": 0.07188272388122471,
+    "synthetic_only_not_physical_accuracy": true
+  },
+  "performance": {
+    "benchmark_cells": 35,
+    "warmup_repetitions_per_cell": 10,
+    "measured_repetitions_per_cell": 100,
+    "maximum_destination_count": 6,
+    "scaling_limit": "Held-Karp is exponential O(n^2*2^n); production use is explicitly limited to 10 unique stops by the implementation."
+  },
+  "complete_journeys": {
+    "scenarios": 5,
+    "passed": 5,
+    "all_passed": true
+  },
+  "statistical_statement": "Descriptive repeated synthetic experiments only; no hypothesis-significance test was performed."
+}

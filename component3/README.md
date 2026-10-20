@@ -14,6 +14,7 @@ classifies the current aisle using a CNN.
 backend/comp3_reco_navigation/  API, recommendation, navigation, CNN, and tests
 data/raw/                       Local population-level POS CSV
 data/processed/                 Reproducible recommendation outputs
+data/derived/                   Audited Phase 8A basket and split artifacts
 data/datasets/                  Six-class aisle image dataset
 data/store_map/                 Store graph, AprilTag layout, and validators
 docs/                           Component design and reproducible evidence
@@ -40,6 +41,56 @@ Owner: comp3. Population-level POS data only (no individual customer data); reco
   deterministic synthetic encoder/IMU evaluation and report figure generator.
 - `simulations/navigation_dashboard/` — local-only interactive navigation
   dashboard, map/route adapter, and adapter tests.
+- `data/apriltag_cards/` — locally generated and detector-verified demo
+  checkpoint cards for Mac-camera evaluation.
+- `backend/comp3_reco_navigation/navigation/route_anchor.py` — exact node/mid-edge
+  route-start composition over the existing Dijkstra and Held–Karp algorithms.
+
+## Phase 7D — adaptive free-walk navigation
+
+The shared simulator now supports graph-edge free walk, stop/resume, junction choices,
+navigation requests from a node or mid-edge position, and plausible unexpected mapped
+checkpoint correction. The customer and research views expose the same authoritative
+state. See `evaluation/research_archive/01_navigation_engine/phase_7d_free_walk_adaptive_localization.md`
+for algorithm formulation, measured synthetic results and claim boundaries.
+
+## Phase 7E — dynamic shopping sessions
+
+`simulations/navigation_dashboard/shopping_session.py` owns requested, collected and
+remaining quantities, source, shopping revision and audit events. Live customer edits
+are validated and route-checked before one atomic commit, then reuse the exact
+node/mid-edge Dijkstra/Held–Karp path. The recommendation surface is a demonstration
+contract only; no model was trained and no score is fabricated. See the Phase 7E
+research-archive report for comparative results and limitations.
+
+## Phase 7F — navigation research evaluation
+
+`simulations/navigation_dashboard/phase7f_evaluation.py` runs the fixed-seed paired
+baseline, labeled localization, brute-force oracle, complete-journey and scaling
+experiments. It writes a manifest, raw and aggregate JSON, and baseline/localization/
+performance CSV tables under `evaluation/research_archive/01_navigation_engine/`.
+The Phase 7F summary reports synthetic/software navigation acceptance as PASS and
+physical camera acceptance as PENDING. No navigation engine, validated map, raw POS
+data, CNN image or recommendation model was changed by this evaluation phase.
+
+## Phase 8A — recommendation data preparation
+
+The single local POS-shaped CSV has unknown provenance and license and must not be
+described as verified real transactions. The deterministic preparation pipeline audits
+10,000 rows, reconstructs 1,991 baskets using normalized product names because source
+product IDs are unstable, freezes a leakage-safe chronological split, and creates an
+auditable demo-catalog crosswalk. Four baseline implementations and metric functions
+are ready for Phase 8B; no final model was trained and no quality metric was reported.
+See `evaluation/research_archive/02_recommendation_engine/`.
+
+## Phase 8B — offline recommendation evaluation
+
+Four fitted statistical baselines and a regularized NumPy linear ranker use only the
+frozen training split. Association rules were selected by validation NDCG@5 and then
+evaluated on the held-out test split. Test NDCG@5 was 0.0232 and HitRate@5 0.0468;
+these weak unknown-provenance results are research evidence, not deployment validation.
+Reloadable JSON artifacts are under `ml/models/comp3/recommendation_phase8b/`. No model
+prediction was integrated into the customer dashboard.
 
 ## Phase 4A — simulated position tracking
 
@@ -222,6 +273,21 @@ python3 -B -m unittest -v \
 See `simulations/navigation_dashboard/README.md` for API, control, evaluation,
 and offline-operation details.
 
+## Phase 7B.1 — Mac-camera-assisted checkpoint evaluation
+
+The optional camera mode keeps trolley motion and products simulated while
+OpenCV reads genuine `tag36h11` observations from a Mac camera. It is isolated
+from manual and guided modes, never uploads frames, pauses at checkpoint gates,
+and passes stable detections through the existing ordering, duplication,
+map-version, confidence, and correction-distance validator. See
+`docs/evaluation/phase7b1_mac_camera_implementation.md` for setup and the exact
+local acceptance procedure. Real-camera acceptance remains separate from
+mocked-frame and generated-card tests.
+
+The headless smoke test supports `--no-preview`; the separate `--probe-cameras`
+diagnostic checks indices 0, 1, and 2 without GUI windows. The dashboard shares
+the same camera scanner for detection but does not yet display live video.
+
 The Phase 6C Chromium acceptance and screenshot/export workflow is:
 
 ```bash
@@ -322,6 +388,20 @@ evaluation artifacts, not physical-camera accuracy measurements.
 Research evidence is stored under `docs/research_evidence/`, with executable
 results under `evaluation/`. Shared product and location seeds remain under the
 repository-root `shared/db/seed/` directory.
+
+Phase 7C architecture, roadmap, reproducibility handoff, and the non-destructive
+research archive are maintained in `docs/COMP3_ARCHITECTURE.md`,
+`docs/COMP3_RESEARCH_ROADMAP.md`, `docs/COMP3_CODEX_HANDOFF.md`, and
+`evaluation/research_archive/`. The adaptive free-walk and dynamic-list design is
+documented there.
+
+Phase 8C connects the unchanged frozen association model to both dashboards. Suggestions
+are experimental, restricted to verified mappings and accepted only through the atomic
+shopping mutation/current-position replanning path. Launch with:
+
+```bash
+component3/.venv/bin/python -B -m component3.simulations.navigation_dashboard.dashboard
+```
 
 ## GitHub Copilot prompt
 Open this folder in VS Code, open Copilot Chat, and paste:

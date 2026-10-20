@@ -1,0 +1,17 @@
+{
+  "console_errors": [],
+  "page_errors": [],
+  "session_id": "nav-a9098eab-90b4-4bbf-80cd-4c56b34b2245",
+  "two_customer_tabs_synchronized": true,
+  "research_view_synchronized": true,
+  "shopping_revision_after_three_mutations": 3,
+  "route_revision_after_three_mutations": 3,
+  "duplicate_command_statuses": [
+    200,
+    200
+  ],
+  "duplicate_applied_once": true,
+  "stale_command_status": 409,
+  "refresh_preserved_session": true,
+  "refresh_preserved_revision": true
+}

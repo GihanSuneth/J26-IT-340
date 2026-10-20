@@ -1,0 +1,19 @@
+{
+  "active_demo_catalog_product_count": 6,
+  "coverage_after_verified_reconciliation": {
+    "count": 4,
+    "denominator": 68,
+    "rate": 0.058823529411764705
+  },
+  "coverage_before_verified_reconciliation": {
+    "count": 4,
+    "denominator": 68,
+    "rate": 0.058823529411764705
+  },
+  "decision": "No additional mapping had product-specific catalog and map evidence.",
+  "invalid_reference_count": 0,
+  "new_mapping_approvals": 0,
+  "source_product_count": 68,
+  "validated_map_modified": false,
+  "verified_reference_count": 4
+}

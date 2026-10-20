@@ -1,0 +1,58 @@
+{
+  "milestone": "C3-P7G.1",
+  "executed_on": "2026-10-16",
+  "result": "software_pass_physical_camera_pending",
+  "dashboard_tests": {"passed": 128, "run": 128, "failures": 0, "errors": 0},
+  "backend_tests": {"passed": 136, "run": 136, "failures": 0, "errors": 0},
+  "layout": {
+    "layout_id": "comp3-dense-apriltag-layout-v2",
+    "unique_tags": 62,
+    "edges_checked": 37,
+    "edges_passed": 37,
+    "observed_maximum_opportunity_spacing_m": 2.0,
+    "retained_ids": [200, 201, 202],
+    "full_cards_decode_verified": 62,
+    "practical_cards_decode_verified": 9,
+    "physical_visibility_claimed": false
+  },
+  "browser": {
+    "browser": "installed Google Chrome headless",
+    "viewport": [1024, 768],
+    "customer_render": "passed",
+    "operator_render": "passed",
+    "shared_revision_observed": 4,
+    "playwright_scripted_interactions": "not_run_dependency_unavailable"
+  },
+  "three_product_reproduction": {
+    "product_ids": ["SIM-P-001", "SIM-P-002", "SIM-P-006"],
+    "shopping_revisions": [1, 2, 3],
+    "route_revisions": [1, 2, 3],
+    "final_route": ["N0_0", "N1_0", "N1_1", "N1_2", "N1_3", "N2_3", "N2_4", "N2_5", "N3_5", "N4_5"]
+  },
+  "acceptance": {
+    "A_three_products_update": "passed_api_and_chrome",
+    "B_close_editor_keeps_navigation": "passed_source_contract",
+    "C_automatic_navigation": "passed_regression",
+    "D_pickup_skip_at_product": "passed_regression",
+    "E_valid_mapped_scan": "passed_software_callback_physical_pending",
+    "F_estimate_moves_after_acceptance": "passed_regression",
+    "G_implausible_mapped_scan": "passed_regression",
+    "H_rejection_does_not_move": "passed_regression",
+    "I_missing_observation": "passed_regression",
+    "J_stale_warning": "passed_regression",
+    "K_plausible_recovery": "passed_software_physical_pending",
+    "L_graph_derived_candidates": "passed_regression",
+    "M_printed_ids_match_map": "passed_generator_decode_and_manifest",
+    "N_customer_operator_sync": "passed_api_and_chrome",
+    "O_physical_camera_disconnect_reconnect": "pending_no_hardware_software_path_passed",
+    "P_complete_shopping_checkout": "passed_regression"
+  },
+  "validators": {
+    "research_store_map": "15/15 passed",
+    "evidence_structure_before_new_index_rows": "113 artifacts passed",
+    "python_compileall": "passed",
+    "customer_javascript_syntax": "passed",
+    "operator_javascript_syntax": "passed",
+    "git_diff_check": "passed"
+  }
+}

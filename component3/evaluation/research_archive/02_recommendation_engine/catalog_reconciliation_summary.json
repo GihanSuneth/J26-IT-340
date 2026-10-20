@@ -1,0 +1,12 @@
+{
+  "demo_catalog_product_count": 6,
+  "exact_verified_mapping_count": 0,
+  "navigation_eligible_source_items": 4,
+  "policy": "Only exact-verified or normalized-name product mappings with shelf and pickup node may be navigable.",
+  "source_item_count": 68,
+  "status_counts": {
+    "category_level_mapping": 22,
+    "normalized_name_mapping": 4,
+    "unmapped_product": 42
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "counts": {
+    "purged_duplicate": 2,
+    "test": 299,
+    "train": 1393,
+    "validation": 297
+  },
+  "hidden_target": "One item per basket selected by SHA-256(seed:basket_id) modulo distinct item count.",
+  "leakage_controls": [
+    "Targets are removed from observed inputs.",
+    "Model and item statistics must fit train only.",
+    "Validation selects hyperparameters; test remains untouched until final evaluation.",
+    "A basket signature appearing in an earlier partition is purged from each later partition."
+  ],
+  "method": "chronological_70_15_15_then_purge_later_duplicate_signatures",
+  "raw_basket_count": 1991,
+  "seed_for_hidden_target": 3408,
+  "test_end_inclusive": "2024-12-31T21:33:00",
+  "train_end_inclusive": "2024-09-08T07:29:00",
+  "validation_end_inclusive": "2024-11-05T22:41:00"
+}

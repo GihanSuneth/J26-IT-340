@@ -1,0 +1,53 @@
+{
+  "phase": "8C",
+  "date": "2026-10-17",
+  "recommendation_and_integration_tests": {
+    "passed": 30,
+    "failed": 0
+  },
+  "backend_regression": {
+    "passed": 157,
+    "failed": 0
+  },
+  "dashboard_non_network_regression": {
+    "passed": 121,
+    "failed": 0,
+    "deselected_loopback_tests": 16
+  },
+  "dashboard_full_regression": {
+    "status": "PENDING",
+    "sandbox_result": "121 passed; 16 localhost fixtures failed during setup with PermissionError",
+    "outside_sandbox_rerun": "not run because permission was declined"
+  },
+  "browser_interaction": {
+    "status": "PENDING",
+    "reason": "Playwright is not installed and localhost-enabled execution was not authorized"
+  },
+  "physical_camera": {
+    "status": "PENDING"
+  },
+  "integrated_evaluation": {
+    "completed": true,
+    "scenario_count": 16,
+    "recommendation_available_count": 14,
+    "complete_journey": true,
+    "duplicate_mutation_rate": 0.0
+  },
+  "store_map_validation": {
+    "passed_checks": 15,
+    "failed_checks": 0
+  },
+  "javascript_syntax": {
+    "passed_files": 3,
+    "failed_files": 0
+  },
+  "python_compilation": true,
+  "evidence_validation": {
+    "passed": true,
+    "indexed_artifacts": 121
+  },
+  "git_diff_check": true,
+  "model_retrained": false,
+  "frozen_artifacts_modified": false,
+  "commit_or_push_performed": false
+}

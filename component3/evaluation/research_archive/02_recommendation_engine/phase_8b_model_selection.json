@@ -1,0 +1,27 @@
+{
+  "frozen": {
+    "candidate_filtering": "training vocabulary minus observed items",
+    "hyperparameters": {
+      "min_support_count": 5,
+      "model_type": "association_rules",
+      "rule_count": 3502,
+      "score": "max_confidence_times_lift",
+      "training_baskets": 1393,
+      "vocabulary_size": 68
+    },
+    "model_family": "association_rules",
+    "preprocessing": "phase8a-preparation-v1 normalized-name keys",
+    "ranking_logic": "descending model score then deterministic item key",
+    "seed": 3408,
+    "vocabulary_sha256": "f2f5255acf97b565da80acf38ef9bb5ed980e40df364a0f2fa0e5ff9e4f2a839"
+  },
+  "primary_criterion": "maximum validation NDCG@5",
+  "selected_model": "association_rules",
+  "selected_validation_ndcg@5": 0.058074855380056536,
+  "test_consulted_during_selection": false,
+  "tie_breakers": [
+    "validation HitRate@5",
+    "catalog coverage@5",
+    "lower model complexity"
+  ]
+}

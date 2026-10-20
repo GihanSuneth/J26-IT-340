@@ -1,0 +1,143 @@
+{
+  "category_diversity_definition": "mean fraction of unordered recommendation pairs belonging to different categories; lists shorter than two return 0",
+  "category_diversity_independent_recheck": {
+    "test_association_rules": {
+      "matches": true,
+      "published": 0.9431438127090301,
+      "recalculated": 0.9431438127090301
+    },
+    "validation_association_rules": {
+      "matches": true,
+      "published": 0.9471380471380472,
+      "recalculated": 0.9471380471380472
+    },
+    "validation_category_popularity": {
+      "matches": true,
+      "published": 0.6824915824915825,
+      "recalculated": 0.6824915824915825
+    },
+    "validation_global_popularity": {
+      "matches": true,
+      "published": 1.0,
+      "recalculated": 1.0
+    },
+    "validation_item_item_cosine": {
+      "matches": true,
+      "published": 0.9454545454545455,
+      "recalculated": 0.9454545454545454
+    },
+    "validation_linear_basket_softmax": {
+      "matches": true,
+      "published": 0.9973063973063973,
+      "recalculated": 0.9973063973063973
+    }
+  },
+  "category_diversity_recalculated_during_frozen_artifact_evaluation": {
+    "association_rules": 0.9431438127090301,
+    "category_popularity": 0.6795986622073579,
+    "global_popularity": 1.0,
+    "item_item_cosine": 0.9431438127090301,
+    "linear_basket_softmax": 0.9946488294314381
+  },
+  "chronological_and_split_verification": {
+    "basket_count": 1991,
+    "cross_split_signature_overlap": {
+      "train_test": 0,
+      "train_validation": 0,
+      "validation_test": 0
+    },
+    "errors": [],
+    "provenance_classification": "UNKNOWN PROVENANCE",
+    "purged_transaction_audit": [
+      {
+        "assessment": "Distinct transaction ID and timestamp; likely legitimate repeated item set, conservatively purged to enforce signature isolation.",
+        "basket_id": "2194",
+        "confirmed_duplicate_record": false,
+        "earlier_matching_transactions": [
+          {
+            "basket_id": "2388",
+            "timestamp": "2024-03-02T12:48:00"
+          }
+        ],
+        "signature": [
+          "name:earphones",
+          "name:pastry",
+          "name:prawns"
+        ],
+        "timestamp": "2024-10-14T10:46:00"
+      },
+      {
+        "assessment": "Distinct transaction ID and timestamp; likely legitimate repeated item set, conservatively purged to enforce signature isolation.",
+        "basket_id": "1708",
+        "confirmed_duplicate_record": false,
+        "earlier_matching_transactions": [
+          {
+            "basket_id": "2866",
+            "timestamp": "2024-01-30T14:23:00"
+          }
+        ],
+        "signature": [
+          "name:belt",
+          "name:charger",
+          "name:diapers"
+        ],
+        "timestamp": "2024-10-15T21:21:00"
+      }
+    ],
+    "raw_sha256": "0cd3a4d7d66dec3e7ce6fb1031b095740fb180b9e5fa46ce8bbb9f26f763ae57",
+    "split_counts": {
+      "purged_duplicate": 2,
+      "test": 299,
+      "train": 1393,
+      "validation": 297
+    },
+    "target_leak_count": 0,
+    "test_end": "2024-12-31T21:33:00",
+    "test_start": "2024-11-06T07:11:00",
+    "train_end": "2024-09-08T07:29:00",
+    "train_start": "2024-01-01T06:23:00",
+    "validation_end": "2024-11-05T22:41:00",
+    "validation_start": "2024-09-08T07:49:00",
+    "verified": true,
+    "vocabulary_size": 68
+  },
+  "chronological_order_strict": true,
+  "expected_model_artifact_sha256": {
+    "association_rules.json": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+    "category_popularity.json": "f3b1a331be80c26e483923a8c1b8af817868b2c157bc7b51de4a8372baba9148",
+    "evaluation_configuration.json": "0d8ad4f0621960dd04cb6b43a20fcf352897d9e703735be4a144c33a48efd7a5",
+    "global_popularity.json": "d8e29cd1a7ae1fd737a1dead212c7ff05ca029d18bb3e443b7a7a27c1969b068",
+    "item_item_cosine.json": "608f5933df4cfb9dd4128384eb41d964a8e1fa2e4a3ec45347055491fbbd7691",
+    "linear_basket_softmax.json": "cef4fcb3e56fbff23b4e5fe317c7f67a9ee5d94fe4e897fdf31d817ac5a3f1ce",
+    "product_vocabulary.json": "d51e186525edaad5cf658b34c341291d9bbf8e2ec31e06761ec506516e3ade9b",
+    "selected_model.json": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+    "training_configuration.json": "1b58f2669fd7619cd6e8374fdef5879abf14316f6199fc321c4ed162cbab592c",
+    "training_metadata.json": "35ae3ea1025636f1b84693892e66e6ff8a03629fe3c599639465ba85aa85690a"
+  },
+  "hidden_target_reconstruction_mismatch_count": 0,
+  "metric_denominators": {
+    "hidden_targets_per_case": 1,
+    "test": 299,
+    "validation": 297
+  },
+  "model_artifact_hashes_match_phase8b_manifest": true,
+  "observed_target_overlap_count": 0,
+  "precision_hit_rate_identity_at_5_holds": true,
+  "prediction_reproduction": {
+    "test": {
+      "prediction_mismatch_count": 0,
+      "reproduced": true,
+      "stored_records_checked": 299
+    },
+    "validation": {
+      "prediction_mismatch_count": 0,
+      "reproduced": true,
+      "stored_records_checked": 1485
+    }
+  },
+  "purged_repeated_purchase_implication": "The two records have distinct transaction IDs and timestamps and are likely legitimate repeated purchases. Their exclusion reduces the sample by two and slightly changes temporal prevalence, while enforcing the conservative no-shared-signature policy. They remain excluded to preserve the original split and report; no claim of source duplication is made.",
+  "training_vocabulary_size": 68,
+  "transaction_assignment_unique": true,
+  "unseen_test_targets": [],
+  "unseen_validation_targets": []
+}

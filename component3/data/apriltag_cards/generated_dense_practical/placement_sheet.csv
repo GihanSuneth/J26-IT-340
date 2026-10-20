@@ -1,0 +1,10 @@
+tag_id,x_m,y_m,orientation_deg,anchor_type,anchor,purpose,print_file
+200,1.0,1.0,0,node,N0_0,retained_checkpoint,apriltag_36h11_id_200_90mm.pdf
+201,13.0,7.0,0,node,N2_3,retained_checkpoint,apriltag_36h11_id_201_90mm.pdf
+202,19.0,13.0,0,node,N4_5,retained_checkpoint,apriltag_36h11_id_202_90mm.pdf
+209,5.0,4.0,0,node,N1_1,shelf_approach,apriltag_36h11_id_209_90mm.pdf
+210,9.0,4.0,0,node,N1_2,shelf_approach,apriltag_36h11_id_210_90mm.pdf
+212,17.0,4.0,0,node,N1_4,shelf_approach,apriltag_36h11_id_212_90mm.pdf
+215,5.0,7.0,0,node,N2_1,shelf_approach,apriltag_36h11_id_215_90mm.pdf
+216,9.0,7.0,0,node,N2_2,shelf_approach,apriltag_36h11_id_216_90mm.pdf
+217,17.0,7.0,0,node,N2_4,shelf_approach,apriltag_36h11_id_217_90mm.pdf

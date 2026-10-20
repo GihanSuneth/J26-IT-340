@@ -1,0 +1,62 @@
+{
+  "basket_count": 1991,
+  "cross_split_signature_overlap": {
+    "train_test": 0,
+    "train_validation": 0,
+    "validation_test": 0
+  },
+  "errors": [],
+  "provenance_classification": "UNKNOWN PROVENANCE",
+  "purged_transaction_audit": [
+    {
+      "assessment": "Distinct transaction ID and timestamp; likely legitimate repeated item set, conservatively purged to enforce signature isolation.",
+      "basket_id": "2194",
+      "confirmed_duplicate_record": false,
+      "earlier_matching_transactions": [
+        {
+          "basket_id": "2388",
+          "timestamp": "2024-03-02T12:48:00"
+        }
+      ],
+      "signature": [
+        "name:earphones",
+        "name:pastry",
+        "name:prawns"
+      ],
+      "timestamp": "2024-10-14T10:46:00"
+    },
+    {
+      "assessment": "Distinct transaction ID and timestamp; likely legitimate repeated item set, conservatively purged to enforce signature isolation.",
+      "basket_id": "1708",
+      "confirmed_duplicate_record": false,
+      "earlier_matching_transactions": [
+        {
+          "basket_id": "2866",
+          "timestamp": "2024-01-30T14:23:00"
+        }
+      ],
+      "signature": [
+        "name:belt",
+        "name:charger",
+        "name:diapers"
+      ],
+      "timestamp": "2024-10-15T21:21:00"
+    }
+  ],
+  "raw_sha256": "0cd3a4d7d66dec3e7ce6fb1031b095740fb180b9e5fa46ce8bbb9f26f763ae57",
+  "split_counts": {
+    "purged_duplicate": 2,
+    "test": 299,
+    "train": 1393,
+    "validation": 297
+  },
+  "target_leak_count": 0,
+  "test_end": "2024-12-31T21:33:00",
+  "test_start": "2024-11-06T07:11:00",
+  "train_end": "2024-09-08T07:29:00",
+  "train_start": "2024-01-01T06:23:00",
+  "validation_end": "2024-11-05T22:41:00",
+  "validation_start": "2024-09-08T07:49:00",
+  "verified": true,
+  "vocabulary_size": 68
+}

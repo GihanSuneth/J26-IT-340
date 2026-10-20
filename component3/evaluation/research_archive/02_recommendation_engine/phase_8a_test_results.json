@@ -1,0 +1,50 @@
+{
+  "phase": "8A",
+  "date": "2026-10-16",
+  "branch": "Comp3_Arun",
+  "final_model_trained": false,
+  "results": [
+    {
+      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8a.py -q",
+      "result": "PASS",
+      "detail": "8 passed in 0.02s"
+    },
+    {
+      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests -q",
+      "result": "PASS",
+      "detail": "144 passed in 1.58s"
+    },
+    {
+      "command": "component3/.venv/bin/python -m pytest component3/simulations/navigation_dashboard/tests -q",
+      "result": "PASS",
+      "detail": "128 passed in 8.82s with ephemeral localhost socket permission"
+    },
+    {
+      "command": "component3/.venv/bin/python component3/docs/research_evidence/tools/validate_evidence.py",
+      "result": "PASS",
+      "detail": "115 indexed artifacts valid"
+    },
+    {
+      "command": "component3/.venv/bin/python component3/evaluation/research_archive/validate_archive.py",
+      "result": "PASS",
+      "detail": "26 indexed artifacts valid before adding this result record; final rerun recorded separately in terminal"
+    },
+    {
+      "command": "component3/.venv/bin/python -m compileall -q component3/backend/comp3_reco_navigation component3/simulations/navigation_dashboard",
+      "result": "PASS",
+      "detail": "No output"
+    },
+    {
+      "command": "node --check on app.js, spatial.js and customer.js",
+      "result": "PASS",
+      "detail": "All three syntax checks produced no output"
+    },
+    {
+      "command": "git diff --check -- component3",
+      "result": "PASS",
+      "detail": "No output"
+    }
+  ],
+  "raw_dataset_sha256_after_validation": "0cd3a4d7d66dec3e7ce6fb1031b095740fb180b9e5fa46ce8bbb9f26f763ae57",
+  "claim_boundary": "Software/data preparation only; provenance remains unknown; no model accuracy or physical-system result."
+}

@@ -215,15 +215,16 @@ def _load_aruco() -> tuple[Any, Any]:
     return cv2, aruco
 
 
-def detect_apriltags(image_path: str | Path) -> tuple[AprilTagDetection, ...]:
-    """Detect tag36h11 markers using current or legacy OpenCV ArUco APIs."""
-    path = Path(image_path)
-    if not path.is_file():
-        raise ImageReadError(f"Image file does not exist: {path}")
+def detect_apriltags_frame(image: Any) -> tuple[AprilTagDetection, ...]:
+    """Detect tag36h11 markers in an OpenCV image array without side effects."""
     cv2, aruco = _load_aruco()
-    image = cv2.imread(str(path), cv2.IMREAD_GRAYSCALE)
     if image is None:
-        raise ImageReadError(f"OpenCV could not decode image: {path}")
+        raise ImageReadError("OpenCV image array is empty")
+    if not hasattr(image, "ndim") or image.ndim not in (2, 3):
+        raise ImageReadError("OpenCV image array must be grayscale or BGR/BGRA")
+    if image.ndim == 3:
+        conversion = cv2.COLOR_BGRA2GRAY if image.shape[2] == 4 else cv2.COLOR_BGR2GRAY
+        image = cv2.cvtColor(image, conversion)
     dictionary = aruco.getPredefinedDictionary(aruco.DICT_APRILTAG_36h11)
     if hasattr(aruco, "DetectorParameters"):
         parameters = aruco.DetectorParameters()
@@ -248,3 +249,15 @@ def detect_apriltags(image_path: str | Path) -> tuple[AprilTagDetection, ...]:
         for marker_corners, marker_id in zip(corners, ids.reshape(-1))
     ]
     return tuple(sorted(detections, key=lambda item: item.marker_id))
+
+
+def detect_apriltags(image_path: str | Path) -> tuple[AprilTagDetection, ...]:
+    """Decode an image file and pass it to the reusable array detector."""
+    path = Path(image_path)
+    if not path.is_file():
+        raise ImageReadError(f"Image file does not exist: {path}")
+    cv2, _ = _load_aruco()
+    image = cv2.imread(str(path), cv2.IMREAD_GRAYSCALE)
+    if image is None:
+        raise ImageReadError(f"OpenCV could not decode image: {path}")
+    return detect_apriltags_frame(image)

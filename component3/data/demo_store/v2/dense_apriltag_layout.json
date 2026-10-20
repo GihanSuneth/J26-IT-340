@@ -1,0 +1,1346 @@
+{
+  "schema_version": "2.0",
+  "layout_id": "comp3-dense-apriltag-layout-v2",
+  "map_id": "comp3-synthetic-supermarket-demo-v1",
+  "status": "optional_synthetic_demo_layout",
+  "family": "AprilTag 36h11",
+  "maximum_tag_id": 586,
+  "nominal_max_graph_path_opportunity_spacing_m": 2.0,
+  "important_note": "Coverage opportunity is not camera detection. Lighting, distance, occlusion, print scale, motion blur and viewing angle still govern detection.",
+  "retained_checkpoint_ids": [
+    200,
+    201,
+    202
+  ],
+  "tags": [
+    {
+      "tag_id": 200,
+      "family": "AprilTag 36h11",
+      "x_m": 1.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N0_0"
+      },
+      "purpose": "retained_checkpoint",
+      "practical_subset": true
+    },
+    {
+      "tag_id": 201,
+      "family": "AprilTag 36h11",
+      "x_m": 13.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N2_3"
+      },
+      "purpose": "retained_checkpoint",
+      "practical_subset": true
+    },
+    {
+      "tag_id": 202,
+      "family": "AprilTag 36h11",
+      "x_m": 19.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N4_5"
+      },
+      "purpose": "retained_checkpoint",
+      "practical_subset": true
+    },
+    {
+      "tag_id": 203,
+      "family": "AprilTag 36h11",
+      "x_m": 5.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N0_1"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 204,
+      "family": "AprilTag 36h11",
+      "x_m": 9.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N0_2"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 205,
+      "family": "AprilTag 36h11",
+      "x_m": 13.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N0_3"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 206,
+      "family": "AprilTag 36h11",
+      "x_m": 17.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N0_4"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 207,
+      "family": "AprilTag 36h11",
+      "x_m": 19.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N0_5"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 208,
+      "family": "AprilTag 36h11",
+      "x_m": 1.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N1_0"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 209,
+      "family": "AprilTag 36h11",
+      "x_m": 5.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N1_1"
+      },
+      "purpose": "shelf_approach",
+      "practical_subset": true
+    },
+    {
+      "tag_id": 210,
+      "family": "AprilTag 36h11",
+      "x_m": 9.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N1_2"
+      },
+      "purpose": "shelf_approach",
+      "practical_subset": true
+    },
+    {
+      "tag_id": 211,
+      "family": "AprilTag 36h11",
+      "x_m": 13.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N1_3"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 212,
+      "family": "AprilTag 36h11",
+      "x_m": 17.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N1_4"
+      },
+      "purpose": "shelf_approach",
+      "practical_subset": true
+    },
+    {
+      "tag_id": 213,
+      "family": "AprilTag 36h11",
+      "x_m": 19.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N1_5"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 214,
+      "family": "AprilTag 36h11",
+      "x_m": 1.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N2_0"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 215,
+      "family": "AprilTag 36h11",
+      "x_m": 5.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N2_1"
+      },
+      "purpose": "shelf_approach",
+      "practical_subset": true
+    },
+    {
+      "tag_id": 216,
+      "family": "AprilTag 36h11",
+      "x_m": 9.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N2_2"
+      },
+      "purpose": "shelf_approach",
+      "practical_subset": true
+    },
+    {
+      "tag_id": 217,
+      "family": "AprilTag 36h11",
+      "x_m": 17.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N2_4"
+      },
+      "purpose": "shelf_approach",
+      "practical_subset": true
+    },
+    {
+      "tag_id": 218,
+      "family": "AprilTag 36h11",
+      "x_m": 19.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N2_5"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 219,
+      "family": "AprilTag 36h11",
+      "x_m": 1.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N3_0"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 220,
+      "family": "AprilTag 36h11",
+      "x_m": 5.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N3_1"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 221,
+      "family": "AprilTag 36h11",
+      "x_m": 9.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N3_2"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 222,
+      "family": "AprilTag 36h11",
+      "x_m": 13.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N3_3"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 223,
+      "family": "AprilTag 36h11",
+      "x_m": 17.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N3_4"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 224,
+      "family": "AprilTag 36h11",
+      "x_m": 19.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N3_5"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 225,
+      "family": "AprilTag 36h11",
+      "x_m": 1.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N4_0"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 226,
+      "family": "AprilTag 36h11",
+      "x_m": 5.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N4_1"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 227,
+      "family": "AprilTag 36h11",
+      "x_m": 9.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N4_2"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 228,
+      "family": "AprilTag 36h11",
+      "x_m": 13.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N4_3"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 229,
+      "family": "AprilTag 36h11",
+      "x_m": 17.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "node",
+        "node_id": "N4_4"
+      },
+      "purpose": "junction",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 230,
+      "family": "AprilTag 36h11",
+      "x_m": 3.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N0_0",
+        "target": "N0_1",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 231,
+      "family": "AprilTag 36h11",
+      "x_m": 1.0,
+      "y_m": 2.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N0_0",
+        "target": "N1_0",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 232,
+      "family": "AprilTag 36h11",
+      "x_m": 7.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N0_1",
+        "target": "N0_2",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 233,
+      "family": "AprilTag 36h11",
+      "x_m": 11.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N0_2",
+        "target": "N0_3",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 234,
+      "family": "AprilTag 36h11",
+      "x_m": 15.0,
+      "y_m": 1.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N0_3",
+        "target": "N0_4",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 235,
+      "family": "AprilTag 36h11",
+      "x_m": 13.0,
+      "y_m": 2.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N0_3",
+        "target": "N1_3",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 236,
+      "family": "AprilTag 36h11",
+      "x_m": 19.0,
+      "y_m": 2.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N0_5",
+        "target": "N1_5",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 237,
+      "family": "AprilTag 36h11",
+      "x_m": 3.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N1_0",
+        "target": "N1_1",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 238,
+      "family": "AprilTag 36h11",
+      "x_m": 1.0,
+      "y_m": 5.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N1_0",
+        "target": "N2_0",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 239,
+      "family": "AprilTag 36h11",
+      "x_m": 7.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N1_1",
+        "target": "N1_2",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 240,
+      "family": "AprilTag 36h11",
+      "x_m": 11.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N1_2",
+        "target": "N1_3",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 241,
+      "family": "AprilTag 36h11",
+      "x_m": 15.0,
+      "y_m": 4.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N1_3",
+        "target": "N1_4",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 242,
+      "family": "AprilTag 36h11",
+      "x_m": 13.0,
+      "y_m": 5.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N1_3",
+        "target": "N2_3",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 243,
+      "family": "AprilTag 36h11",
+      "x_m": 19.0,
+      "y_m": 5.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N1_5",
+        "target": "N2_5",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 244,
+      "family": "AprilTag 36h11",
+      "x_m": 3.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N2_0",
+        "target": "N2_1",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 245,
+      "family": "AprilTag 36h11",
+      "x_m": 1.0,
+      "y_m": 8.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N2_0",
+        "target": "N3_0",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 246,
+      "family": "AprilTag 36h11",
+      "x_m": 7.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N2_1",
+        "target": "N2_2",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 247,
+      "family": "AprilTag 36h11",
+      "x_m": 11.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N2_2",
+        "target": "N2_3",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 248,
+      "family": "AprilTag 36h11",
+      "x_m": 15.0,
+      "y_m": 7.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N2_3",
+        "target": "N2_4",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 249,
+      "family": "AprilTag 36h11",
+      "x_m": 13.0,
+      "y_m": 8.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N2_3",
+        "target": "N3_3",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 250,
+      "family": "AprilTag 36h11",
+      "x_m": 19.0,
+      "y_m": 8.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N2_5",
+        "target": "N3_5",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 251,
+      "family": "AprilTag 36h11",
+      "x_m": 3.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N3_0",
+        "target": "N3_1",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 252,
+      "family": "AprilTag 36h11",
+      "x_m": 1.0,
+      "y_m": 11.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N3_0",
+        "target": "N4_0",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 253,
+      "family": "AprilTag 36h11",
+      "x_m": 7.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N3_1",
+        "target": "N3_2",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 254,
+      "family": "AprilTag 36h11",
+      "x_m": 11.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N3_2",
+        "target": "N3_3",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 255,
+      "family": "AprilTag 36h11",
+      "x_m": 15.0,
+      "y_m": 10.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N3_3",
+        "target": "N3_4",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 256,
+      "family": "AprilTag 36h11",
+      "x_m": 13.0,
+      "y_m": 11.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N3_3",
+        "target": "N4_3",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 257,
+      "family": "AprilTag 36h11",
+      "x_m": 19.0,
+      "y_m": 11.5,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N3_5",
+        "target": "N4_5",
+        "offset_m": 1.5
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 258,
+      "family": "AprilTag 36h11",
+      "x_m": 3.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N4_0",
+        "target": "N4_1",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 259,
+      "family": "AprilTag 36h11",
+      "x_m": 7.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N4_1",
+        "target": "N4_2",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 260,
+      "family": "AprilTag 36h11",
+      "x_m": 11.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N4_2",
+        "target": "N4_3",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    },
+    {
+      "tag_id": 261,
+      "family": "AprilTag 36h11",
+      "x_m": 15.0,
+      "y_m": 13.0,
+      "orientation_deg": 0,
+      "anchor": {
+        "type": "edge",
+        "source": "N4_3",
+        "target": "N4_4",
+        "offset_m": 2.0
+      },
+      "purpose": "mid_edge_localization",
+      "practical_subset": false
+    }
+  ],
+  "practical_subset_tag_ids": [
+    200,
+    201,
+    202,
+    209,
+    210,
+    212,
+    215,
+    216,
+    217
+  ],
+  "coverage_report": {
+    "edge_count": 37,
+    "tag_count": 62,
+    "unique_ids": true,
+    "all_edges_pass": true,
+    "observed_maximum_spacing_m": 2.0,
+    "edges": [
+      {
+        "source": "N0_0",
+        "target": "N0_1",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N0_0",
+        "target": "N1_0",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N0_1",
+        "target": "N0_2",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N0_2",
+        "target": "N0_3",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N0_3",
+        "target": "N0_4",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N0_3",
+        "target": "N1_3",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N0_4",
+        "target": "N0_5",
+        "edge_length_m": 2.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N0_5",
+        "target": "N1_5",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N1_0",
+        "target": "N1_1",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N1_0",
+        "target": "N2_0",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N1_1",
+        "target": "N1_2",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N1_2",
+        "target": "N1_3",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N1_3",
+        "target": "N1_4",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N1_3",
+        "target": "N2_3",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N1_4",
+        "target": "N1_5",
+        "edge_length_m": 2.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N1_5",
+        "target": "N2_5",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N2_0",
+        "target": "N2_1",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N2_0",
+        "target": "N3_0",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N2_1",
+        "target": "N2_2",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N2_2",
+        "target": "N2_3",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N2_3",
+        "target": "N2_4",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N2_3",
+        "target": "N3_3",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N2_4",
+        "target": "N2_5",
+        "edge_length_m": 2.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N2_5",
+        "target": "N3_5",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N3_0",
+        "target": "N3_1",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N3_0",
+        "target": "N4_0",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N3_1",
+        "target": "N3_2",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N3_2",
+        "target": "N3_3",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N3_3",
+        "target": "N3_4",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N3_3",
+        "target": "N4_3",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N3_4",
+        "target": "N3_5",
+        "edge_length_m": 2.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N3_5",
+        "target": "N4_5",
+        "edge_length_m": 3.0,
+        "opportunity_offsets_m": [
+          0.0,
+          1.5,
+          3.0
+        ],
+        "maximum_spacing_m": 1.5,
+        "passes": true
+      },
+      {
+        "source": "N4_0",
+        "target": "N4_1",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N4_1",
+        "target": "N4_2",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N4_2",
+        "target": "N4_3",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N4_3",
+        "target": "N4_4",
+        "edge_length_m": 4.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0,
+          4.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      },
+      {
+        "source": "N4_4",
+        "target": "N4_5",
+        "edge_length_m": 2.0,
+        "opportunity_offsets_m": [
+          0.0,
+          2.0
+        ],
+        "maximum_spacing_m": 2.0,
+        "passes": true
+      }
+    ]
+  }
+}

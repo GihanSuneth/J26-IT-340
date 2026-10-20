@@ -1,0 +1,99 @@
+{
+  "candidate_dataset_count": 1,
+  "datasets": [
+    {
+      "columns": [
+        "order_id",
+        "user_id",
+        "order_date",
+        "time",
+        "order_hour_of_day",
+        "product_name",
+        "quantity",
+        "price",
+        "category",
+        "product_id"
+      ],
+      "date_coverage": {
+        "maximum": "2024-12-31T21:33:00",
+        "minimum": "2024-01-01T06:23:00",
+        "unique_calendar_dates": 363
+      },
+      "duplicates": {
+        "exact_duplicate_extra_rows": 0,
+        "repeated_order_normalized_name_extra_rows": 299,
+        "repeated_order_normalized_name_pairs": 296,
+        "repeated_order_source_product_pairs": 29
+      },
+      "identifier_coverage": {
+        "model_item_key": "normalized_product_name",
+        "names_with_multiple_product_ids": 68,
+        "product_ids_with_multiple_names": 900,
+        "unique_product_names": 68,
+        "unique_source_product_ids": 900,
+        "unique_source_users": 488,
+        "unique_transactions": 1991
+      },
+      "inferred_dtypes": {
+        "category": "string",
+        "order_date": "date",
+        "order_hour_of_day": "integer",
+        "order_id": "string",
+        "price": "decimal-like float",
+        "product_id": "string",
+        "product_name": "string",
+        "quantity": "integer",
+        "time": "time",
+        "user_id": "string"
+      },
+      "missing_counts": {
+        "category": 0,
+        "order_date": 0,
+        "order_hour_of_day": 0,
+        "order_id": 0,
+        "price": 0,
+        "product_id": 0,
+        "product_name": 0,
+        "quantity": 0,
+        "time": 0,
+        "user_id": 0
+      },
+      "missing_rates": {
+        "category": 0.0,
+        "order_date": 0.0,
+        "order_hour_of_day": 0.0,
+        "order_id": 0.0,
+        "price": 0.0,
+        "product_id": 0.0,
+        "product_name": 0.0,
+        "quantity": 0.0,
+        "time": 0.0,
+        "user_id": 0.0
+      },
+      "numeric_fields": {
+        "nonpositive_prices": 0,
+        "nonpositive_quantities": 0,
+        "price_max": 499.96,
+        "price_min": 10.09,
+        "quantity_max": 3,
+        "quantity_min": 1,
+        "quantity_total": 20094
+      },
+      "path": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/data/raw/Retail_pos_basket_data.csv",
+      "provenance_classification": "unknown",
+      "provenance_note": "No source, acquisition, generator, or license record was found in component3.",
+      "reject_samples": [],
+      "rejected_row_count": 0,
+      "row_count": 10000,
+      "sha256": "0cd3a4d7d66dec3e7ce6fb1031b095740fb180b9e5fa46ce8bbb9f26f763ae57",
+      "size_bytes": 660339,
+      "valid_row_count": 10000
+    }
+  ],
+  "discovery_scope": "component3 data directories",
+  "requested_filename_search": {
+    "Retail_pos_basket_data.csv": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/data/raw/Retail_pos_basket_data.csv",
+    "Retail_pos_basket_data.csv.csv": "not found",
+    "srilanka_supermarket_raw_pos.csv": "not found"
+  }
+}

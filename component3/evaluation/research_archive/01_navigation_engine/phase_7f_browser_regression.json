@@ -1,0 +1,101 @@
+{
+  "milestone": "C3-P7F",
+  "data_classification": "local_headless_chromium_acceptance",
+  "executed_at_utc": "2026-10-15T12:44:45.426491+00:00",
+  "physical_camera_used": false,
+  "flows": {
+    "phase_7b2_modes_and_layouts": {
+      "viewports": {
+        "1366x768": {
+          "horizontal_overflow": false,
+          "required_sections": 5,
+          "screenshot": "temporary_capture_not_retained"
+        },
+        "1920x1080": {
+          "horizontal_overflow": false,
+          "required_sections": 5,
+          "screenshot": "temporary_capture_not_retained"
+        },
+        "mobile_390x844": {
+          "horizontal_overflow": false,
+          "required_sections": 5,
+          "screenshot": "temporary_capture_not_retained"
+        }
+      },
+      "console_errors": [],
+      "page_errors": [],
+      "voice": {
+        "first_event_spoken": true,
+        "duplicate_event_spoken": false,
+        "calls_after_duplicate": [
+          "Turn left"
+        ],
+        "disabled_event_spoken": false
+      },
+      "manual_navigation": "passed",
+      "guided_navigation": "passed",
+      "camera_assisted_navigation": {
+        "status": "awaiting_checkpoint",
+        "expected_checkpoint": 200
+      }
+    },
+    "phase_7c_shared_session": {
+      "console_errors": [],
+      "page_errors": [],
+      "session_id": "nav-b0b23a15-ba4c-48fd-a0f6-7324df2f000f",
+      "refresh_preserved_session": true,
+      "refresh_advanced_time": false,
+      "shared_session_visible_in_both_views": true,
+      "initial_controller": "customer-27715832-c06f-4aa2-888c-85c7c6caebf9",
+      "takeover_controller": "research-5ed95d3c-a61e-49d3-9fb9-24a8bc97d28e",
+      "time_before_controller_close_s": 0.25,
+      "time_after_takeover_s": 0.5,
+      "controller_lease_timeout_s": 2.0,
+      "customer_view_required_fields": true
+    },
+    "phase_7d_free_walk": {
+      "console_errors": [],
+      "page_errors": [],
+      "session_id": "nav-1adace3b-5168-40c5-89b9-e6c77e69463a",
+      "same_session_in_both_views": true,
+      "free_walk_edge_options": 2,
+      "simulation_time_before_s": 0.0,
+      "simulation_time_after_move_s": 0.75,
+      "ground_truth_changed_on_step": true,
+      "stop_preserved_time_s": 0.75,
+      "route_revision_after_navigation_request": 1,
+      "partial_edge_distance_m": 0.6069395424406554,
+      "research_view_synchronized": true
+    },
+    "phase_7e_dynamic_shopping": {
+      "console_errors": [],
+      "page_errors": [],
+      "session_id": "nav-8dce152c-2ac2-40db-a868-aa9f4e71908d",
+      "two_customer_tabs_synchronized": true,
+      "research_view_synchronized": true,
+      "shopping_revision_after_three_mutations": 3,
+      "route_revision_after_three_mutations": 3,
+      "duplicate_command_statuses": [
+        200,
+        200
+      ],
+      "duplicate_applied_once": true,
+      "stale_command_status": 409,
+      "refresh_preserved_session": true,
+      "refresh_preserved_revision": true
+    }
+  },
+  "summary": {
+    "flows_executed": 4,
+    "flows_passed": 4,
+    "console_errors": 0,
+    "page_errors": 0,
+    "manual_mode": true,
+    "guided_mode": true,
+    "camera_assisted_mode_gate": true,
+    "customer_research_synchronization": true,
+    "free_walk_control": true,
+    "duplicate_command_applied_once": true,
+    "stale_command_status": 409
+  }
+}

@@ -7,6 +7,7 @@ import json
 from http.server import ThreadingHTTPServer
 import threading
 import unittest
+from unittest.mock import patch
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
@@ -17,6 +18,7 @@ from component3.simulations.navigation_dashboard.demo_store import (
     load_demo_store,
 )
 from component3.simulations.navigation_dashboard.dashboard import make_handler
+from component3.simulations.navigation_dashboard import dashboard as dashboard_module
 from component3.simulations.navigation_dashboard.spatial_simulation import (
     SpatialNavigationSimulation,
     heading_between,
@@ -112,6 +114,88 @@ class SpatialNavigationTests(unittest.TestCase):
         self.assertEqual(turn_instruction(0.0, math.pi / 2), "Turn left")
         self.assertEqual(turn_instruction(0.0, -math.pi / 2), "Turn right")
         self.assertEqual(turn_instruction(0.0, math.pi), "Make a U-turn")
+
+    def test_camera_mode_rejects_tags_outside_an_active_gate_without_teleporting(self) -> None:
+        simulation = SpatialNavigationSimulation()
+        started = simulation.start_camera_evaluation()
+        self.assertEqual(started["status"], "awaiting_checkpoint")
+        self.assertEqual(started["camera_evaluation"]["gate"]["checkpoint_id"], 200)
+        self.assertFalse(
+            any(event["event_type"] == "checkpoint_detected" for event in started["events"])
+        )
+        before = started["estimate"]
+        rejected = simulation.observe_camera_detection(42, 1.0)
+        self.assertEqual(rejected["observed_checkpoint"]["reason"], "unknown_tag")
+        self.assertEqual(rejected["estimate"], before)
+        jumped = simulation.observe_camera_detection(202, 1.25)
+        self.assertEqual(
+            jumped["observed_checkpoint"]["reason"], "unexpected_checkpoint"
+        )
+        self.assertEqual(jumped["estimate"], before)
+        self.assertEqual(jumped["detected_checkpoint_ids"], [])
+        self.assertEqual(
+            jumped["camera_evaluation"]["gate"]["checkpoint_id"], 200
+        )
+        external = simulation.observe_checkpoint(
+            {"tag_id": 200, "timestamp_s": 1.5, "detection_source": "test"}
+        )
+        self.assertEqual(
+            external["observed_checkpoint"]["reason"],
+            "camera_mode_requires_camera_source",
+        )
+        self.assertEqual(external["estimate"], before)
+        accepted = simulation.observe_camera_detection(200, 2.0)
+        self.assertTrue(accepted["observed_checkpoint"]["accepted"])
+        self.assertEqual(accepted["status"], "navigating")
+        before = accepted["estimate"]
+        early = simulation.observe_camera_detection(201, 3.0)
+        self.assertEqual(early["observed_checkpoint"]["reason"], "checkpoint_gate_not_active")
+        self.assertEqual(early["estimate"], before)
+        self.assertNotIn(201, early["detected_checkpoint_ids"])
+
+    def test_camera_mode_gates_checkpoints_and_requires_manual_pickups(self) -> None:
+        simulation = SpatialNavigationSimulation()
+        simulation.set_products(["SIM-P-001", "SIM-P-006"])
+        simulation.start_camera_evaluation()
+        simulation.observe_camera_detection(200, 1.0)
+        confirmations = 0
+        timestamp = 2.0
+        for _ in range(4000):
+            state = simulation.snapshot()
+            if state["status"] == "complete":
+                break
+            if state["status"] == "awaiting_checkpoint":
+                tag_id = state["camera_evaluation"]["gate"]["checkpoint_id"]
+                simulation.observe_camera_detection(tag_id, timestamp)
+                timestamp += 1.0
+            elif state["status"] == "awaiting_product_confirmation":
+                simulation.confirm_product()
+                confirmations += 1
+            else:
+                simulation.step()
+        else:
+            self.fail("Camera-assisted simulation did not reach checkout")
+        final = simulation.snapshot()
+        self.assertEqual(final["detected_checkpoint_ids"], [200, 201, 202])
+        self.assertEqual(confirmations, 2)
+        self.assertEqual(final["status"], "complete")
+        modes = [
+            event["details"].get("confirmation_mode")
+            for event in final["events"]
+            if event["event_type"] == "product_collected"
+        ]
+        self.assertEqual(modes, ["manual_simulated", "manual_simulated"])
+
+    def test_camera_stop_and_reconnect_pause_virtual_movement(self) -> None:
+        simulation = SpatialNavigationSimulation()
+        simulation.start_camera_evaluation()
+        simulation.observe_camera_detection(200, 1.0)
+        stopped = simulation.camera_stopped()
+        self.assertEqual(stopped["status"], "camera_stopped")
+        self.assertFalse(stopped["running"])
+        resumed = simulation.camera_reconnected()
+        self.assertEqual(resumed["status"], "navigating")
+        self.assertTrue(resumed["running"])
 
     def test_guidance_is_derived_from_selected_route_and_has_maneuver_distance(self) -> None:
         """Generate changing route guidance from geometry and product target."""
@@ -433,9 +517,10 @@ class SpatialApiTests(unittest.TestCase):
     def setUp(self) -> None:
         """Start an isolated local server with one spatial simulation."""
         self.simulation = SpatialNavigationSimulation()
+        self.handler = make_handler(spatial_simulation=self.simulation)
         self.server = ThreadingHTTPServer(
             ("127.0.0.1", 0),
-            make_handler(spatial_simulation=self.simulation),
+            self.handler,
         )
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
@@ -518,6 +603,231 @@ class SpatialApiTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(resumed["status"], "navigating")
 
+    def test_shared_session_reads_are_pure_and_step_commands_are_idempotent(self) -> None:
+        """Do not advance time on reads or duplicate delivery of one command."""
+        status, initial = self.request("/api/session/state")
+        self.assertEqual(status, 200)
+        status, repeated = self.request("/api/session/state")
+        self.assertEqual(status, 200)
+        self.assertEqual(repeated["simulation_time_s"], initial["simulation_time_s"])
+        self.assertEqual(repeated["state_revision"], initial["state_revision"])
+        status, _ = self.request(
+            "/api/session/control",
+            {"action": "start", "client_id": "tab-a", "command_id": "start-a"},
+        )
+        self.assertEqual(status, 200)
+        step = {
+            "action": "step", "count": 1, "client_id": "tab-a",
+            "command_id": "step-a-1",
+        }
+        status, first = self.request("/api/session/control", step)
+        self.assertEqual(status, 200)
+        status, duplicate = self.request("/api/session/control", step)
+        self.assertEqual(status, 200)
+        self.assertEqual(first["simulation_time_s"], 0.25)
+        self.assertEqual(duplicate["simulation_time_s"], 0.25)
+        self.assertEqual(duplicate["state_revision"], first["state_revision"])
+
+    def test_only_one_browser_controller_can_advance_shared_clock(self) -> None:
+        """Reject a second tab's step while preserving the first tab's lease."""
+        status, _ = self.request(
+            "/api/session/control",
+            {"action": "start", "client_id": "tab-a", "command_id": "start-a"},
+        )
+        self.assertEqual(status, 200)
+        status, advanced = self.request(
+            "/api/session/control",
+            {"action": "step", "client_id": "tab-a", "command_id": "step-a"},
+        )
+        self.assertEqual(status, 200)
+        status, conflict = self.request(
+            "/api/session/control",
+            {"action": "step", "client_id": "tab-b", "command_id": "step-b"},
+        )
+        self.assertEqual(status, 409)
+        self.assertIn("Only controller", conflict["error"])
+        status, current = self.request("/api/session/state")
+        self.assertEqual(status, 200)
+        self.assertEqual(current["simulation_time_s"], advanced["simulation_time_s"])
+        self.assertEqual(current["controller_id"], "tab-a")
+
+    def test_free_walk_is_shared_and_only_explicit_steps_advance_time(self) -> None:
+        """Synchronize free-walk state while keeping repeated reads side-effect free."""
+        status, entered = self.request(
+            "/api/session/control",
+            {"action": "enter_free_walk", "client_id": "customer", "command_id": "fw-enter"},
+        )
+        self.assertEqual(status, 200)
+        target = entered["free_walk"]["available_edges"][0]["node_id"]
+        status, moving = self.request(
+            "/api/session/control",
+            {
+                "action": "choose_free_walk_edge",
+                "target_node_id": target,
+                "client_id": "customer",
+                "command_id": "fw-choose",
+            },
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(moving["controller_id"], "customer")
+        status, observer_read = self.request("/api/session/state")
+        self.assertEqual(status, 200)
+        status, second_observer_read = self.request("/api/session/state")
+        self.assertEqual(status, 200)
+        self.assertEqual(observer_read["free_walk"], second_observer_read["free_walk"])
+        self.assertEqual(
+            observer_read["simulation_time_s"], second_observer_read["simulation_time_s"]
+        )
+        status, advanced = self.request(
+            "/api/session/control",
+            {"action": "step", "client_id": "customer", "command_id": "fw-step"},
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(advanced["simulation_time_s"], 0.25)
+        self.assertNotEqual(advanced["ground_truth"], observer_read["ground_truth"])
+
+    def test_dynamic_shopping_commands_are_idempotent_and_revision_safe(self) -> None:
+        """Serialize two-tab edits and reject stale retries without partial mutation."""
+        status, initial = self.request(
+            "/api/session/control",
+            {
+                "action": "set_products",
+                "product_ids": ["SIM-P-001"],
+                "client_id": "tab-a",
+                "command_id": "dynamic-initial",
+            },
+        )
+        self.assertEqual(status, 200)
+        command = {
+            "action": "shopping_add",
+            "product_id": "SIM-P-002",
+            "quantity": 2,
+            "expected_shopping_revision": initial["shopping_list_revision"],
+            "client_id": "tab-a",
+            "command_id": "dynamic-add",
+        }
+        status, added = self.request("/api/session/control", command)
+        self.assertEqual(status, 200)
+        status, duplicate = self.request("/api/session/control", command)
+        self.assertEqual(status, 200)
+        self.assertEqual(duplicate["shopping_session"], added["shopping_session"])
+        status, stale = self.request(
+            "/api/session/control",
+            {
+                "action": "shopping_remove",
+                "product_id": "SIM-P-001",
+                "quantity": 1,
+                "expected_shopping_revision": initial["shopping_list_revision"],
+                "client_id": "tab-b",
+                "command_id": "dynamic-stale",
+            },
+        )
+        self.assertEqual(status, 409)
+        self.assertIn("Stale shopping-list revision", stale["error"])
+        status, current = self.request("/api/session/state")
+        self.assertEqual(status, 200)
+        self.assertEqual(current["shopping_list_revision"], 1)
+        line = next(
+            item for item in current["shopping_session"]["items"]
+            if item["product_id"] == "SIM-P-002"
+        )
+        self.assertEqual(line["requested_quantity"], 2)
+
+    def test_live_recommendation_api_accepts_once_and_rejects_stale_revision(self) -> None:
+        """Expose model diagnostics and bind acceptance to one shopping revision."""
+        status, initial = self.request(
+            "/api/session/control",
+            {
+                "action": "set_products", "product_ids": ["SIM-P-001"],
+                "client_id": "recommendation-tab", "command_id": "recommendation-setup",
+            },
+        )
+        self.assertEqual(status, 200)
+        self.assertTrue(initial["recommendation_diagnostics"]["inference_ready"])
+        recommendation = initial["recommendations"][0]
+        stale = {
+            "action": "accept_recommendation",
+            "recommendation_id": recommendation["recommendation_id"],
+            "expected_shopping_revision": 8,
+            "client_id": "recommendation-tab", "command_id": "recommendation-stale",
+        }
+        status, error = self.request("/api/session/control", stale)
+        self.assertEqual(status, 409)
+        self.assertIn("Stale", error["error"])
+        accept = {
+            **stale, "expected_shopping_revision": 0, "command_id": "recommendation-accept",
+        }
+        status, accepted = self.request("/api/session/control", accept)
+        self.assertEqual(status, 200)
+        status, duplicate = self.request("/api/session/control", accept)
+        self.assertEqual(status, 200)
+        self.assertEqual(accepted["shopping_list_revision"], 1)
+        self.assertEqual(duplicate["shopping_list_revision"], 1)
+        self.assertEqual(accepted["recommendation_events"][-1]["event_type"], "accepted")
+
+    def test_camera_callback_and_shopping_reoptimization_are_serialized(self) -> None:
+        """Allow a camera callback and list edit to complete with no partial state."""
+        status, started = self.request(
+            "/api/session/control",
+            {
+                "action": "camera_evaluation",
+                "client_id": "camera-tab",
+                "command_id": "camera-start",
+            },
+        )
+        self.assertEqual(status, 200)
+        self.simulation.camera_reconnected()
+        barrier = threading.Barrier(3)
+        results: dict[str, object] = {}
+        errors: list[BaseException] = []
+
+        def edit() -> None:
+            try:
+                barrier.wait()
+                results["edit"] = self.request(
+                    "/api/session/control",
+                    {
+                        "action": "shopping_increase",
+                        "product_id": "SIM-P-001",
+                        "quantity": 1,
+                        "expected_shopping_revision": started["shopping_list_revision"],
+                        "client_id": "shopping-tab",
+                        "command_id": "camera-race-edit",
+                    },
+                )
+            except BaseException as exc:  # pragma: no cover - diagnostic capture
+                errors.append(exc)
+
+        def observe() -> None:
+            try:
+                barrier.wait()
+                results["camera"] = self.handler.camera_scanner.callback(200, 0.0)
+            except BaseException as exc:  # pragma: no cover - diagnostic capture
+                errors.append(exc)
+
+        edit_thread = threading.Thread(target=edit)
+        camera_thread = threading.Thread(target=observe)
+        edit_thread.start()
+        camera_thread.start()
+        barrier.wait()
+        edit_thread.join(timeout=3)
+        camera_thread.join(timeout=3)
+        self.assertFalse(errors)
+        self.assertFalse(edit_thread.is_alive())
+        self.assertFalse(camera_thread.is_alive())
+        self.assertEqual(results["edit"][0], 200)
+        status, current = self.request("/api/session/state")
+        self.assertEqual(status, 200)
+        self.assertEqual(
+            current["shopping_list_revision"], started["shopping_list_revision"] + 1
+        )
+        self.assertIn(200, current["detected_checkpoint_ids"])
+        line = next(
+            item for item in current["shopping_session"]["items"]
+            if item["product_id"] == "SIM-P-001"
+        )
+        self.assertEqual((line["requested_quantity"], line["collected_quantity"]), (2, 0))
+
     def test_guided_demo_api_action_starts_one_click_scenario(self) -> None:
         """Expose a documented single API action for the full guided run."""
         status, started = self.request(
@@ -528,6 +838,76 @@ class SpatialApiTests(unittest.TestCase):
         self.assertEqual(started["guided_demo"]["stage"], 1)
         self.assertEqual(started["selected_product_ids"], ["SIM-P-001", "SIM-P-006"])
         self.assertTrue(started["running"])
+
+    def test_camera_evaluation_api_starts_at_real_observation_gate(self) -> None:
+        status, started = self.request(
+            "/api/spatial/control", {"action": "camera_evaluation"}
+        )
+        self.assertEqual(status, 200)
+        self.assertTrue(started["camera_evaluation"]["active"])
+        self.assertEqual(started["status"], "awaiting_checkpoint")
+        self.assertEqual(started["camera_evaluation"]["gate"]["checkpoint_id"], 200)
+        status, camera = self.request("/api/camera/state")
+        self.assertEqual(status, 200)
+        self.assertEqual(camera["connection"], "stopped")
+        status, exported = self.request("/api/camera/export.json")
+        self.assertEqual(status, 200)
+        self.assertEqual(exported["scan_events"], [])
+
+    def test_camera_refresh_exposes_only_verified_devices_and_passes_selection(self) -> None:
+        inventory = {
+            "devices": ({"camera_index": 2, "opened": True, "frame_read": True, "frame_dimensions": [1920, 1080], "backend": "AVFOUNDATION", "device_name": "iPhone Camera", "error": None, "label": "iPhone Camera"},),
+            "attempts": (),
+            "device_names_exposed": True,
+            "capture_backend": "AVFOUNDATION",
+        }
+        scanner = self.server.RequestHandlerClass.camera_scanner
+        with patch.object(dashboard_module, "enumerate_camera_devices", return_value=inventory):
+            status, refreshed = self.request(
+                "/api/camera/control", {"action": "refresh", "max_camera_index": 5}
+            )
+        self.assertEqual(status, 200)
+        self.assertEqual([item["camera_index"] for item in refreshed["devices"]], [2])
+        connected = {"connection": "connected", "camera_index": 2, "scanning": True}
+        with patch.object(scanner, "start", return_value=connected) as start:
+            status, started = self.request(
+                "/api/camera/control", {"action": "start", "camera_index": 2}
+            )
+        self.assertEqual(status, 200)
+        self.assertEqual(started["camera_index"], 2)
+        start.assert_called_once_with(2, "iPhone Camera")
+
+    def test_camera_selection_rejects_unverified_index(self) -> None:
+        status, failure = self.request(
+            "/api/camera/control", {"action": "start", "camera_index": 7}
+        )
+        self.assertEqual(status, 409)
+        self.assertIn("Refresh Cameras", failure["error"])
+
+    def test_camera_switch_uses_single_scanner_lifecycle(self) -> None:
+        inventory = {
+            "devices": (
+                {"camera_index": 0, "opened": True, "frame_read": True, "frame_dimensions": [1280, 720], "backend": "AVFOUNDATION", "device_name": "MacBook Camera", "error": None, "label": "MacBook Camera"},
+                {"camera_index": 1, "opened": True, "frame_read": True, "frame_dimensions": [1920, 1080], "backend": "AVFOUNDATION", "device_name": "iPhone Camera", "error": None, "label": "iPhone Camera"},
+            ),
+            "attempts": (),
+            "device_names_exposed": True,
+            "capture_backend": "AVFOUNDATION",
+        }
+        scanner = self.server.RequestHandlerClass.camera_scanner
+        with patch.object(dashboard_module, "enumerate_camera_devices", return_value=inventory):
+            self.request("/api/camera/control", {"action": "refresh"})
+        current = {"connection": "connected", "camera_index": 0, "scanning": True}
+        switched = {"connection": "connected", "camera_index": 1, "scanning": True}
+        with patch.object(scanner, "snapshot", return_value=current), patch.object(
+            scanner, "switch", return_value=switched
+        ) as switch:
+            status, result = self.request(
+                "/api/camera/control", {"action": "switch", "camera_index": 1}
+            )
+        self.assertEqual(status, 200)
+        self.assertEqual(result["camera_index"], 1)
+        switch.assert_called_once_with(1, "iPhone Camera")
 
 
 if __name__ == "__main__":

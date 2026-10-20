@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:j26-it-340:component3:recommendation-inference:1.0",
+  "title": "Phase 8B offline recommendation candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["product_id", "normalized_product_name", "mapped_demo_product_id", "score", "model_version", "candidate_source", "mapping_status", "navigation_eligible", "shelf_id", "pickup_node_id", "explanation"],
+  "properties": {
+    "product_id": {"type": "string", "pattern": "^name:[a-z0-9-]+$"},
+    "normalized_product_name": {"type": "string", "minLength": 1},
+    "mapped_demo_product_id": {"type": ["string", "null"]},
+    "score": {"type": "number"},
+    "model_version": {"type": "string", "minLength": 1},
+    "candidate_source": {"type": "string", "minLength": 1},
+    "mapping_status": {"enum": ["exact_verified_mapping", "normalized_name_mapping", "category_level_mapping", "unmapped_product"]},
+    "navigation_eligible": {"type": "boolean"},
+    "shelf_id": {"type": ["string", "null"]},
+    "pickup_node_id": {"type": ["string", "null"]},
+    "explanation": {"type": ["string", "null"]}
+  }
+}

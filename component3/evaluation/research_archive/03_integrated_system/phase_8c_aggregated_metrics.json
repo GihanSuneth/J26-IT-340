@@ -1,0 +1,22 @@
+{
+  "acceptance_to_route_update_latency_ms": 0.27225,
+  "accepted_product_collected": true,
+  "additional_route_distance_after_acceptance_m": 14.0,
+  "claims_scope": "functional synthetic integration only; not offline accuracy, personalization, satisfaction, or commercial impact",
+  "dismissal_preserved_revision": true,
+  "dismissed_product_not_immediately_repeated": true,
+  "duplicate_mutation_rate": 0.0,
+  "integrated_journey_completed": true,
+  "mean_eligibility_filtering_latency_ms": 0.36053368750000003,
+  "mean_end_to_end_response_latency_ms": 0.470492,
+  "mean_model_inference_latency_ms": 0.0974584375,
+  "model_unavailable_navigation_preserved": true,
+  "navigable_suggestion_fraction": 1.0,
+  "no_eligible_candidate_handled": true,
+  "recommendation_availability_fraction": 0.875,
+  "recommendation_available_count": 14,
+  "route_revision_correct": true,
+  "scenario_count": 16,
+  "shopping_revision_correct": true,
+  "stale_revision_rejected": true
+}

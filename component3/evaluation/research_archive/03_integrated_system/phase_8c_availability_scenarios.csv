@@ -1,0 +1,17 @@
+scenario_id,selected_products,shopping_revision,recommendation_available,navigable_suggestion,candidate_count,eligible_candidate_count,inference_latency_ms,filtering_latency_ms,response_latency_ms,fallback_state
+AVAIL-01,,0,False,False,68,0,0.046292,0.0615,0.114041,empty_shopping_list
+AVAIL-02,SIM-P-001,0,True,True,67,3,0.074625,0.285125,0.374333,none
+AVAIL-03,SIM-P-002,0,True,True,67,3,0.079875,0.289041,0.381583,none
+AVAIL-04,SIM-P-003,0,True,True,67,3,0.085375,0.317125,0.4155,none
+AVAIL-05,SIM-P-004,0,True,True,67,3,0.127542,0.580416,0.723333,none
+AVAIL-06,SIM-P-001|SIM-P-002,0,True,True,66,2,0.093292,0.315125,0.418916,none
+AVAIL-07,SIM-P-001|SIM-P-003,0,True,True,66,2,0.104875,0.359333,0.473792,none
+AVAIL-08,SIM-P-001|SIM-P-004,0,True,True,66,2,0.091166,0.361542,0.46175,none
+AVAIL-09,SIM-P-002|SIM-P-003,0,True,True,66,2,0.10075,0.361916,0.471083,none
+AVAIL-10,SIM-P-002|SIM-P-004,0,True,True,66,2,0.098042,0.39,0.4965,none
+AVAIL-11,SIM-P-003|SIM-P-004,0,True,True,66,2,0.100375,0.789,0.933125,none
+AVAIL-12,SIM-P-001|SIM-P-002|SIM-P-003,0,True,True,65,1,0.118125,0.3425,0.475916,none
+AVAIL-13,SIM-P-001|SIM-P-002|SIM-P-004,0,True,True,65,1,0.106292,0.352,0.468417,none
+AVAIL-14,SIM-P-001|SIM-P-003|SIM-P-004,0,True,True,65,1,0.112,0.358333,0.479542,none
+AVAIL-15,SIM-P-002|SIM-P-003|SIM-P-004,0,True,True,65,1,0.10575,0.380958,0.4955,none
+AVAIL-16,SIM-P-001|SIM-P-002|SIM-P-003|SIM-P-004,0,False,False,64,0,0.114959,0.224625,0.344541,no_eligible_candidate

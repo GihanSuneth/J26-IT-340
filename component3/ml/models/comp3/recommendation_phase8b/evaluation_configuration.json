@@ -1,0 +1,12 @@
+{
+  "full_catalog_size": 68,
+  "hidden_targets_per_basket": 1,
+  "k_values": [
+    1,
+    3,
+    5
+  ],
+  "navigable_catalog_size": 4,
+  "test_baskets": 299,
+  "validation_baskets": 297
+}

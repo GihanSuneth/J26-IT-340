@@ -17,6 +17,7 @@ from component3.backend.comp3_reco_navigation.navigation.apriltag import (
     AprilTagLayoutError,
     ImageReadError,
     detect_apriltags,
+    detect_apriltags_frame,
     load_apriltag_layout,
     localize_detections,
     localize_marker_ids,
@@ -101,6 +102,10 @@ class OpenCVDetectionTests(unittest.TestCase):
 
     def test_10_generated_valid_marker(self) -> None:
         self.assertEqual([item.marker_id for item in detect_apriltags(self.single)], [100])
+
+    def test_10b_array_detector_matches_file_detector(self) -> None:
+        image = cv2.imread(str(self.single), cv2.IMREAD_COLOR)
+        self.assertEqual(detect_apriltags_frame(image), detect_apriltags(self.single))
 
     def test_11_multiple_markers(self) -> None:
         self.assertEqual(

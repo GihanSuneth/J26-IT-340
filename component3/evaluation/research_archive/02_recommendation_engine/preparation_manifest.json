@@ -1,0 +1,22 @@
+{
+  "commands": [
+    "component3/.venv/bin/python -m component3.backend.comp3_reco_navigation.recommendation.prepare_phase8a"
+  ],
+  "final_model_trained": false,
+  "generated_at_utc": "2026-10-16T16:49:16.004113+00:00",
+  "inputs": {
+    "catalog_path": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/data/demo_store/v1/demo_store.json",
+    "catalog_sha256": "09a4c237975e1906d8f6c4b21aa3fede6d183cdd5036bcc9fe5c672850a7d6d1",
+    "raw_path": "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/data/raw/Retail_pos_basket_data.csv",
+    "raw_sha256": "0cd3a4d7d66dec3e7ce6fb1031b095740fb180b9e5fa46ce8bbb9f26f763ae57"
+  },
+  "outputs": {
+    "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/data/derived/recommendation_phase8a/catalog_reconciliation.csv": "b4bd348ca15e5cd9ae7951c17d1e4297751377f1348df1af97ada5baa550e5cc",
+    "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/data/derived/recommendation_phase8a/cleaned_baskets.jsonl": "80edfe9a0af727e574ca3405ff0c9fdfc6a7ac5812d5bd9a463335f5e2890edc",
+    "/Users/arun/Documents/Research Project/R1/J26-IT-340/component3/data/derived/recommendation_phase8a/split_assignments.csv": "ff3a34df4a68d0f0f63b5bd8475f5877e27e34fa53f5c609c6e125d81093a745"
+  },
+  "pipeline_version": "phase8a-preparation-v1",
+  "python_version": "3.14.0",
+  "raw_unchanged": true,
+  "seed": 3408
+}

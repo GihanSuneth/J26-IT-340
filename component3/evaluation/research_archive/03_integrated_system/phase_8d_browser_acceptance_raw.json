@@ -1,0 +1,4923 @@
+{
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  },
+  "steps": {
+    "initial_layout": {
+      "horizontal_overflow": false,
+      "vertical_overflow": false,
+      "map_height": 651,
+      "products_width": 327.671875,
+      "customer_url": "http://127.0.0.1:8765/customer"
+    },
+    "setup": {
+      "status": 200,
+      "body": {
+        "map_id": "comp3-synthetic-supermarket-demo-v1",
+        "data_classification": "synthetic_demonstration_only",
+        "status": "ready",
+        "running": false,
+        "simulation_time_s": 0,
+        "fixed_timestep_s": 0.25,
+        "speed_m_s": 0.8,
+        "current_node_id": "N0_0",
+        "current_location": "N0_0",
+        "ground_truth": {
+          "x_m": 1,
+          "y_m": 1
+        },
+        "estimate": {
+          "x_m": 1,
+          "y_m": 1,
+          "heading_rad": 0,
+          "timestamp_s": 0
+        },
+        "position_error_m": 0,
+        "heading_rad": 0,
+        "heading_deg": 0,
+        "current_aisle": "Mapped intersection N0_0",
+        "active_product": {
+          "available": true,
+          "product_id": "SIM-P-001",
+          "display_name": "Bananas",
+          "category": "Produce",
+          "shelf_id": "DEMO-SHELF-01",
+          "shelf_section": "Produce",
+          "shelf_level": 2,
+          "shelf_bay": 1,
+          "pickup_node": "N1_1",
+          "pickup_coordinate_m": [
+            5,
+            4
+          ],
+          "shelf_facing_point_m": [
+            5,
+            4.55
+          ],
+          "unavailable_reason": null,
+          "demo_product_id": "SIM-P-001",
+          "name": "Bananas",
+          "pickup_node_id": "N1_1",
+          "requested_quantity": 1,
+          "collected_quantity": 0,
+          "remaining_quantity": 1,
+          "product_source": "customer_selection",
+          "shelf_side": "left"
+        },
+        "product_locations": {
+          "SIM-P-001": {
+            "available": true,
+            "product_id": "SIM-P-001",
+            "display_name": "Bananas",
+            "category": "Produce",
+            "shelf_id": "DEMO-SHELF-01",
+            "shelf_section": "Produce",
+            "shelf_level": 2,
+            "shelf_bay": 1,
+            "pickup_node": "N1_1",
+            "pickup_coordinate_m": [
+              5,
+              4
+            ],
+            "shelf_facing_point_m": [
+              5,
+              4.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-002": {
+            "available": true,
+            "product_id": "SIM-P-002",
+            "display_name": "Bread loaf",
+            "category": "Bakery",
+            "shelf_id": "DEMO-SHELF-02",
+            "shelf_section": "Bakery",
+            "shelf_level": 3,
+            "shelf_bay": 2,
+            "pickup_node": "N1_2",
+            "pickup_coordinate_m": [
+              9,
+              4
+            ],
+            "shelf_facing_point_m": [
+              9,
+              4.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-003": {
+            "available": true,
+            "product_id": "SIM-P-003",
+            "display_name": "Milk carton",
+            "category": "Dairy",
+            "shelf_id": "DEMO-SHELF-03",
+            "shelf_section": "Dairy",
+            "shelf_level": 1,
+            "shelf_bay": 1,
+            "pickup_node": "N1_4",
+            "pickup_coordinate_m": [
+              17,
+              4
+            ],
+            "shelf_facing_point_m": [
+              17,
+              4.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-004": {
+            "available": true,
+            "product_id": "SIM-P-004",
+            "display_name": "Pasta",
+            "category": "Pantry",
+            "shelf_id": "DEMO-SHELF-04",
+            "shelf_section": "Pantry",
+            "shelf_level": 2,
+            "shelf_bay": 1,
+            "pickup_node": "N2_1",
+            "pickup_coordinate_m": [
+              5,
+              7
+            ],
+            "shelf_facing_point_m": [
+              5,
+              7.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-005": {
+            "available": true,
+            "product_id": "SIM-P-005",
+            "display_name": "Cereal box",
+            "category": "Cereal",
+            "shelf_id": "DEMO-SHELF-05",
+            "shelf_section": "Cereal",
+            "shelf_level": 4,
+            "shelf_bay": 2,
+            "pickup_node": "N2_2",
+            "pickup_coordinate_m": [
+              9,
+              7
+            ],
+            "shelf_facing_point_m": [
+              9,
+              7.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-006": {
+            "available": true,
+            "product_id": "SIM-P-006",
+            "display_name": "Frozen peas",
+            "category": "Frozen",
+            "shelf_id": "DEMO-SHELF-06",
+            "shelf_section": "Frozen",
+            "shelf_level": 2,
+            "shelf_bay": 3,
+            "pickup_node": "N2_4",
+            "pickup_coordinate_m": [
+              17,
+              7
+            ],
+            "shelf_facing_point_m": [
+              17,
+              7.55
+            ],
+            "unavailable_reason": null
+          }
+        },
+        "remaining_products": [
+          {
+            "product_id": "SIM-P-001",
+            "demo_product_id": "SIM-P-001",
+            "display_name": "Bananas",
+            "name": "Bananas",
+            "category": "Produce",
+            "shelf_id": "DEMO-SHELF-01",
+            "shelf_section": "Produce",
+            "shelf_level": 2,
+            "shelf_bay": 1,
+            "pickup_node": "N1_1",
+            "pickup_node_id": "N1_1",
+            "shelf_facing_point_m": [
+              5,
+              4.55
+            ],
+            "requested_quantity": 1,
+            "collected_quantity": 0,
+            "remaining_quantity": 1
+          },
+          {
+            "product_id": "SIM-P-002",
+            "demo_product_id": "SIM-P-002",
+            "display_name": "Bread loaf",
+            "name": "Bread loaf",
+            "category": "Bakery",
+            "shelf_id": "DEMO-SHELF-02",
+            "shelf_section": "Bakery",
+            "shelf_level": 3,
+            "shelf_bay": 2,
+            "pickup_node": "N1_2",
+            "pickup_node_id": "N1_2",
+            "shelf_facing_point_m": [
+              9,
+              4.55
+            ],
+            "requested_quantity": 1,
+            "collected_quantity": 0,
+            "remaining_quantity": 1
+          }
+        ],
+        "collected_product_ids": [],
+        "selected_product_ids": [
+          "SIM-P-001",
+          "SIM-P-002"
+        ],
+        "shopping_session": {
+          "revision": 0,
+          "items": [
+            {
+              "product_id": "SIM-P-001",
+              "requested_quantity": 1,
+              "collected_quantity": 0,
+              "source": "customer_selection",
+              "remaining_quantity": 1,
+              "collection_status": "remaining",
+              "name": "Bananas",
+              "shelf_id": "DEMO-SHELF-01",
+              "shelf_section": "Produce",
+              "shelf_bay": 1,
+              "shelf_level": 2,
+              "pickup_node_id": "N1_1"
+            },
+            {
+              "product_id": "SIM-P-002",
+              "requested_quantity": 1,
+              "collected_quantity": 0,
+              "source": "customer_selection",
+              "remaining_quantity": 1,
+              "collection_status": "remaining",
+              "name": "Bread loaf",
+              "shelf_id": "DEMO-SHELF-02",
+              "shelf_section": "Bakery",
+              "shelf_bay": 2,
+              "shelf_level": 3,
+              "pickup_node_id": "N1_2"
+            }
+          ],
+          "requested_units": 2,
+          "collected_units": 0,
+          "remaining_units": 2,
+          "events": []
+        },
+        "shopping_list_revision": 0,
+        "recommendations": [
+          {
+            "recommendation_id": "REC-0-83f1d4e3e145",
+            "product_id": "SIM-P-004",
+            "recommendation_source": "association_rules",
+            "model_version": "comp3-phase8b-20261016-association_rules",
+            "score": 0.0779933372525965,
+            "display_explanation": "Associated with bread in training baskets (confidence 0.074, lift 1.053).",
+            "acceptance_status": "pending",
+            "mapping_status": "normalized_name_mapping",
+            "shelf_availability": "available",
+            "shelf_id": "DEMO-SHELF-04",
+            "pickup_node_id": "N2_1",
+            "navigation_eligible": true,
+            "route_detour_cost_m": 14,
+            "shopping_revision": 0,
+            "model_artifact_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+            "product_name": "Pasta",
+            "shelf_section": "Pantry",
+            "shelf_bay": 1,
+            "shelf_level": 2,
+            "experimental_label": "Experimental recommendation"
+          }
+        ],
+        "recommendation_diagnostics": {
+          "model_name": "association_rules",
+          "model_version": "comp3-phase8b-20261016-association_rules",
+          "artifact_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+          "expected_artifact_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+          "inference_ready": true,
+          "error": null,
+          "loaded_once_scope": "backend_process_cached_singleton",
+          "test_labels_loaded": false,
+          "shopping_revision": 0,
+          "normalized_basket_input": [
+            "name:banana",
+            "name:bread"
+          ],
+          "authoritative_basket_quantities": [
+            {
+              "demo_product_id": "SIM-P-001",
+              "normalized_product": "name:banana",
+              "requested_quantity": 1,
+              "remaining_quantity": 1,
+              "collected_quantity": 0
+            },
+            {
+              "demo_product_id": "SIM-P-002",
+              "normalized_product": "name:bread",
+              "requested_quantity": 1,
+              "remaining_quantity": 1,
+              "collected_quantity": 0
+            }
+          ],
+          "selected_demo_product_ids": [
+            "SIM-P-001",
+            "SIM-P-002"
+          ],
+          "collected_demo_product_ids": [],
+          "unmapped_demo_product_ids": [],
+          "candidate_count": 66,
+          "eligible_candidate_count": 2,
+          "filtered_candidate_count": 64,
+          "candidate_ranking": [
+            {
+              "rank": 1,
+              "normalized_product": "name:potato",
+              "mapped_demo_product_id": null,
+              "model_score": 0.21471503516913285,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 2,
+              "normalized_product": "name:spices",
+              "mapped_demo_product_id": null,
+              "model_score": 0.21131674757281552,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 3,
+              "normalized_product": "name:pastry",
+              "mapped_demo_product_id": null,
+              "model_score": 0.18183075050359,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 4,
+              "normalized_product": "name:chips",
+              "mapped_demo_product_id": null,
+              "model_score": 0.1549929746351224,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 5,
+              "normalized_product": "name:cookies",
+              "mapped_demo_product_id": null,
+              "model_score": 0.15354938271604937,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 6,
+              "normalized_product": "name:dishwashing-liquid",
+              "mapped_demo_product_id": null,
+              "model_score": 0.15085553389646955,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 7,
+              "normalized_product": "name:cooking-oil",
+              "mapped_demo_product_id": null,
+              "model_score": 0.1481864447167756,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 8,
+              "normalized_product": "name:soda",
+              "mapped_demo_product_id": null,
+              "model_score": 0.13866988404689096,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 9,
+              "normalized_product": "name:energy-drink",
+              "mapped_demo_product_id": null,
+              "model_score": 0.1337612155850541,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 10,
+              "normalized_product": "name:wheat-flour",
+              "mapped_demo_product_id": null,
+              "model_score": 0.13018651367416798,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 11,
+              "normalized_product": "name:yogurt",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11886567050970873,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 12,
+              "normalized_product": "name:pen",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11824484917627563,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 13,
+              "normalized_product": "name:croissant",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11550154775943397,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 14,
+              "normalized_product": "name:onion",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11516203703703703,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 15,
+              "normalized_product": "name:electric-kettle",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11248385012919895,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 16,
+              "normalized_product": "name:beef",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11058083117410962,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 17,
+              "normalized_product": "name:chocolate",
+              "mapped_demo_product_id": null,
+              "model_score": 0.10857027060730765,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 18,
+              "normalized_product": "name:notebook",
+              "mapped_demo_product_id": null,
+              "model_score": 0.10514794685990338,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 19,
+              "normalized_product": "name:charger",
+              "mapped_demo_product_id": null,
+              "model_score": 0.10291075650118203,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 20,
+              "normalized_product": "name:jeans",
+              "mapped_demo_product_id": null,
+              "model_score": 0.10182748538011695,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 21,
+              "normalized_product": "name:spinach",
+              "mapped_demo_product_id": null,
+              "model_score": 0.1003538037909836,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 22,
+              "normalized_product": "name:shirt",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09554183813443072,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 23,
+              "normalized_product": "name:fish",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09301549145299144,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 24,
+              "normalized_product": "name:orange",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09257948133680557,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 25,
+              "normalized_product": "name:tea",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09212962962962963,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 26,
+              "normalized_product": "name:face-wash",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09126048218029349,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 27,
+              "normalized_product": "name:shampoo",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09040758047767394,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 28,
+              "normalized_product": "name:marker",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08992173000887597,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 29,
+              "normalized_product": "name:carrot",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08957047325102879,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 30,
+              "normalized_product": "name:cake",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08485623781676412,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 31,
+              "normalized_product": "name:salt",
+              "mapped_demo_product_id": null,
+              "model_score": 0.0841183574879227,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 32,
+              "normalized_product": "name:prawns",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08339319923371646,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 33,
+              "normalized_product": "name:eggs",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08218652742746727,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 34,
+              "normalized_product": "name:soap",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08138855502136752,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 35,
+              "normalized_product": "name:pasta",
+              "mapped_demo_product_id": "SIM-P-004",
+              "model_score": 0.0779933372525965,
+              "eligible": true,
+              "filter_reasons": [],
+              "route_detour_cost_m": 14
+            },
+            {
+              "rank": 36,
+              "normalized_product": "name:pain-reliever",
+              "mapped_demo_product_id": null,
+              "model_score": 0.07643347050754458,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 37,
+              "normalized_product": "name:saree",
+              "mapped_demo_product_id": null,
+              "model_score": 0.07210704764862695,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 38,
+              "normalized_product": "name:apple",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06948497318867689,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 39,
+              "normalized_product": "name:belt",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06794824318297657,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 40,
+              "normalized_product": "name:sugar",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06649929074697593,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 41,
+              "normalized_product": "name:rice",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06401654411764707,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 42,
+              "normalized_product": "name:floor-cleaner",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06254489942528736,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 43,
+              "normalized_product": "name:juice",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06254489942528736,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 44,
+              "normalized_product": "name:cheese",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06032925346117403,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 45,
+              "normalized_product": "name:coffee",
+              "mapped_demo_product_id": null,
+              "model_score": 0.05979567307692307,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 46,
+              "normalized_product": "name:phone-cover",
+              "mapped_demo_product_id": null,
+              "model_score": 0.0578873005319149,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 47,
+              "normalized_product": "name:biscuits",
+              "mapped_demo_product_id": null,
+              "model_score": 0.055524553571428575,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 48,
+              "normalized_product": "name:earphones",
+              "mapped_demo_product_id": null,
+              "model_score": 0.055524553571428575,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 49,
+              "normalized_product": "name:toilet-paper",
+              "mapped_demo_product_id": null,
+              "model_score": 0.05520695835598002,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 50,
+              "normalized_product": "name:tissue",
+              "mapped_demo_product_id": null,
+              "model_score": 0.04992115825688074,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 51,
+              "normalized_product": "name:dress",
+              "mapped_demo_product_id": null,
+              "model_score": 0.04622992167795034,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 52,
+              "normalized_product": "name:shoes",
+              "mapped_demo_product_id": null,
+              "model_score": 0.04342810824292305,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 53,
+              "normalized_product": "name:baby-food",
+              "mapped_demo_product_id": null,
+              "model_score": 0.042993827160493825,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 54,
+              "normalized_product": "name:chicken-breast",
+              "mapped_demo_product_id": null,
+              "model_score": 0.042993827160493825,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 55,
+              "normalized_product": "name:milk",
+              "mapped_demo_product_id": "SIM-P-003",
+              "model_score": 0.042993827160493825,
+              "eligible": true,
+              "filter_reasons": [],
+              "route_detour_cost_m": 0
+            },
+            {
+              "rank": 56,
+              "normalized_product": "name:diapers",
+              "mapped_demo_product_id": null,
+              "model_score": 0.0429403902304293,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 57,
+              "normalized_product": "name:mixer-grinder",
+              "mapped_demo_product_id": null,
+              "model_score": 0.03771388347411739,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 58,
+              "normalized_product": "name:fiction-book",
+              "mapped_demo_product_id": null,
+              "model_score": 0.0355438385916781,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 59,
+              "normalized_product": "name:educational-book",
+              "mapped_demo_product_id": null,
+              "model_score": 0.03317424935223289,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 60,
+              "normalized_product": "name:butter",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 61,
+              "normalized_product": "name:lentils",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 62,
+              "normalized_product": "name:vitamins",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 63,
+              "normalized_product": "name:detergent",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 64,
+              "normalized_product": "name:tomato",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 65,
+              "normalized_product": "name:popcorn",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 66,
+              "normalized_product": "name:toothpaste",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            }
+          ],
+          "inference_latency_ms": 0.147458,
+          "eligibility_filtering_latency_ms": 0.448,
+          "end_to_end_latency_ms": 0.629667,
+          "fallback_state": null,
+          "customer_message": null
+        },
+        "recommendation_events": [],
+        "planned_route": [
+          "N0_0",
+          "N1_0",
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N1_4",
+          "N1_5",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "active_route": [
+          "N0_0",
+          "N1_0",
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N1_4",
+          "N1_5",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "route_revision": 0,
+        "previous_planned_route": [],
+        "remaining_route": [
+          "N0_0",
+          "N1_0",
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N1_4",
+          "N1_5",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "route_distance_m": 30,
+        "remaining_distance_m": 30,
+        "distance_to_active_product_m": 7,
+        "navigation_progress": {
+          "collected_products": 0,
+          "total_products": 2,
+          "percent": 0
+        },
+        "travelled_ground_truth": [
+          {
+            "timestamp_s": 0,
+            "x_m": 1,
+            "y_m": 1
+          }
+        ],
+        "travelled_estimate": [
+          {
+            "timestamp_s": 0,
+            "x_m": 1,
+            "y_m": 1
+          }
+        ],
+        "guidance": {
+          "instruction_type": "START",
+          "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+          "distance_to_maneuver_m": 0,
+          "target_node": "N1_1",
+          "target_product_id": "SIM-P-001",
+          "target_shelf_id": "DEMO-SHELF-01",
+          "timestamp": 0,
+          "event_id": "GUIDE-00-0002",
+          "route_revision": 0,
+          "shelf_side": null,
+          "shelf_section": "Produce",
+          "shelf_level": 2,
+          "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+          "maneuver": "Start"
+        },
+        "next_checkpoint": {
+          "checkpoint_id": 202,
+          "node_id": "N4_5",
+          "name": "Checkout"
+        },
+        "current_checkpoint": {
+          "checkpoint_id": 200,
+          "node_id": "N0_0",
+          "name": "Entrance"
+        },
+        "last_confirmed_checkpoint": {
+          "checkpoint_id": 200,
+          "node_id": "N0_0",
+          "timestamp_s": 0,
+          "correction_m": 0,
+          "detection_source": "synthetic_spatial_simulator",
+          "confidence": 1,
+          "simulated_detection": true
+        },
+        "observed_checkpoint": {
+          "tag_id": 200,
+          "timestamp_s": 0,
+          "detection_source": "synthetic_spatial_simulator",
+          "map_id": "comp3-synthetic-supermarket-demo-v1",
+          "confidence": 1,
+          "observed_x_m": null,
+          "observed_y_m": null,
+          "accepted": true,
+          "reason": "accepted",
+          "expected_checkpoint_id": 200,
+          "position_before": {
+            "x_m": 1,
+            "y_m": 1,
+            "heading_rad": 0,
+            "timestamp_s": 0
+          },
+          "position_after": {
+            "x_m": 1,
+            "y_m": 1,
+            "heading_rad": 0,
+            "timestamp_s": 0
+          },
+          "classification": "expected_mapped_checkpoint",
+          "graph_distance_from_last_checkpoint_m": null,
+          "graph_distance_from_estimate_m": null,
+          "reachable_distance_limit_m": null
+        },
+        "checkpoint_observation_history": [
+          {
+            "tag_id": 200,
+            "timestamp_s": 0,
+            "detection_source": "synthetic_spatial_simulator",
+            "map_id": "comp3-synthetic-supermarket-demo-v1",
+            "confidence": 1,
+            "observed_x_m": null,
+            "observed_y_m": null,
+            "accepted": true,
+            "reason": "accepted",
+            "expected_checkpoint_id": 200,
+            "position_before": {
+              "x_m": 1,
+              "y_m": 1,
+              "heading_rad": 0,
+              "timestamp_s": 0
+            },
+            "position_after": {
+              "x_m": 1,
+              "y_m": 1,
+              "heading_rad": 0,
+              "timestamp_s": 0
+            },
+            "classification": "expected_mapped_checkpoint",
+            "graph_distance_from_last_checkpoint_m": null,
+            "graph_distance_from_estimate_m": null,
+            "reachable_distance_limit_m": null
+          }
+        ],
+        "localization_correction_event": {
+          "checkpoint_id": 200,
+          "node_id": "N0_0",
+          "timestamp_s": 0,
+          "correction_m": 0,
+          "detection_source": "synthetic_spatial_simulator",
+          "confidence": 1,
+          "simulated_detection": true
+        },
+        "distance_to_checkpoint_m": 30,
+        "detected_checkpoint_ids": [
+          200
+        ],
+        "active_apriltag_layout": {
+          "layout_id": "comp3-dense-apriltag-layout-v2",
+          "schema_version": "2.0",
+          "mapped_tag_count": 62,
+          "coverage_report": {
+            "edge_count": 37,
+            "tag_count": 62,
+            "unique_ids": true,
+            "all_edges_pass": true,
+            "observed_maximum_spacing_m": 2,
+            "edges": [
+              {
+                "source": "N0_0",
+                "target": "N0_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_0",
+                "target": "N1_0",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N0_1",
+                "target": "N0_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_2",
+                "target": "N0_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_3",
+                "target": "N0_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_3",
+                "target": "N1_3",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N0_4",
+                "target": "N0_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_5",
+                "target": "N1_5",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N1_0",
+                "target": "N1_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_0",
+                "target": "N2_0",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N1_1",
+                "target": "N1_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_2",
+                "target": "N1_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_3",
+                "target": "N1_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_3",
+                "target": "N2_3",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N1_4",
+                "target": "N1_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_5",
+                "target": "N2_5",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N2_0",
+                "target": "N2_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_0",
+                "target": "N3_0",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N2_1",
+                "target": "N2_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_2",
+                "target": "N2_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_3",
+                "target": "N2_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_3",
+                "target": "N3_3",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N2_4",
+                "target": "N2_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_5",
+                "target": "N3_5",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N3_0",
+                "target": "N3_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_0",
+                "target": "N4_0",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N3_1",
+                "target": "N3_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_2",
+                "target": "N3_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_3",
+                "target": "N3_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_3",
+                "target": "N4_3",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N3_4",
+                "target": "N3_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_5",
+                "target": "N4_5",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N4_0",
+                "target": "N4_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N4_1",
+                "target": "N4_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N4_2",
+                "target": "N4_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N4_3",
+                "target": "N4_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N4_4",
+                "target": "N4_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              }
+            ]
+          },
+          "coverage_is_not_detection": true
+        },
+        "localization": {
+          "status": "checkpoint_confirmed",
+          "uncertainty_m": 0.05,
+          "maximum_arrival_uncertainty_m": 0.75,
+          "source": "synthetic_sensor_model_and_checkpoint_observations"
+        },
+        "product_arrival": null,
+        "deviation": null,
+        "reroute_count": 0,
+        "free_walk": {
+          "active": false,
+          "moving": false,
+          "selected_target_node_id": null,
+          "available_edges": []
+        },
+        "route_anchor": null,
+        "last_replanning_reason": null,
+        "adaptive_replan_history": [],
+        "guided_demo": {
+          "active": false,
+          "seed": 6042,
+          "stage": 0,
+          "stage_count": 9,
+          "stage_title": "Manual navigation",
+          "wrong_turn_injected": false,
+          "automatic_pickups": false,
+          "completion_summary": null
+        },
+        "camera_evaluation": {
+          "active": false,
+          "waiting_for_checkpoint": false,
+          "gate": null,
+          "virtual_movement": true,
+          "manual_pickups": true,
+          "camera_frames_uploaded": false
+        },
+        "guidance_events": [
+          {
+            "instruction_type": "CHECKPOINT_CONFIRMED",
+            "instruction_text": "Checkpoint CP200 confirmed; localization updated.",
+            "distance_to_maneuver_m": 0,
+            "target_node": "N0_0",
+            "target_product_id": null,
+            "target_shelf_id": null,
+            "timestamp": 0,
+            "event_id": "GUIDE-00-0001",
+            "route_revision": 0,
+            "shelf_side": null,
+            "shelf_section": null,
+            "shelf_level": null,
+            "instruction": "Checkpoint CP200 confirmed; localization updated.",
+            "maneuver": "Checkpoint Confirmed"
+          },
+          {
+            "instruction_type": "START",
+            "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+            "distance_to_maneuver_m": 0,
+            "target_node": "N1_1",
+            "target_product_id": "SIM-P-001",
+            "target_shelf_id": "DEMO-SHELF-01",
+            "timestamp": 0,
+            "event_id": "GUIDE-00-0002",
+            "route_revision": 0,
+            "shelf_side": null,
+            "shelf_section": "Produce",
+            "shelf_level": 2,
+            "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+            "maneuver": "Start"
+          }
+        ],
+        "reroute_cost_limitation": "Exact partial-edge cost is included; optimization is exact only over the small set of unique remaining demo pickup nodes.",
+        "events": [
+          {
+            "timestamp_s": 0,
+            "event_type": "route_planned",
+            "message": "Route calculated over synthetic walkable lanes using Held-Karp and Dijkstra.",
+            "details": {
+              "route_node_ids": [
+                "N0_0",
+                "N1_0",
+                "N1_1",
+                "N1_2",
+                "N1_3",
+                "N1_4",
+                "N1_5",
+                "N2_5",
+                "N3_5",
+                "N4_5"
+              ]
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "checkpoint_detected",
+            "message": "Simulated checkpoint 200 detected at N0_0; estimate corrected by 0.000 m.",
+            "details": {
+              "checkpoint_id": 200,
+              "node_id": "N0_0",
+              "timestamp_s": 0,
+              "correction_m": 0,
+              "detection_source": "synthetic_spatial_simulator",
+              "confidence": 1,
+              "simulated_detection": true
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Checkpoint CP200 confirmed; localization updated.",
+            "details": {
+              "instruction_type": "CHECKPOINT_CONFIRMED",
+              "instruction_text": "Checkpoint CP200 confirmed; localization updated.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N0_0",
+              "target_product_id": null,
+              "target_shelf_id": null,
+              "timestamp": 0,
+              "event_id": "GUIDE-00-0001",
+              "route_revision": 0,
+              "shelf_side": null,
+              "shelf_section": null,
+              "shelf_level": null,
+              "instruction": "Checkpoint CP200 confirmed; localization updated.",
+              "maneuver": "Checkpoint Confirmed"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Route ready at the entrance. Start navigation toward Bananas.",
+            "details": {
+              "instruction_type": "START",
+              "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N1_1",
+              "target_product_id": "SIM-P-001",
+              "target_shelf_id": "DEMO-SHELF-01",
+              "timestamp": 0,
+              "event_id": "GUIDE-00-0002",
+              "route_revision": 0,
+              "shelf_side": null,
+              "shelf_section": "Produce",
+              "shelf_level": 2,
+              "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+              "maneuver": "Start"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "recommendation_inference",
+            "message": "Frozen Phase 8B inference completed for the current shopping list.",
+            "details": {
+              "candidate_count": 66,
+              "eligible_count": 2,
+              "fallback_state": null
+            }
+          }
+        ],
+        "session_id": "nav-6b6e9b60-a2ed-4343-8b59-8e1bea94ef70",
+        "session_created_at": "2026-10-17T11:45:34.545403+00:00",
+        "map_version": "1.0",
+        "state_revision": 1,
+        "controller_id": null,
+        "controller_lease_timeout_s": 2,
+        "simulation_clock": {
+          "mode": "manual_fixed_step",
+          "fixed_timestep_s": 0.25,
+          "current_time_s": 0,
+          "read_requests_advance_time": false,
+          "autoplay_enabled": false,
+          "autoplay_rate": 1,
+          "owner": "backend_singleton"
+        },
+        "current_shopping_list": [
+          "SIM-P-001",
+          "SIM-P-002"
+        ],
+        "current_estimated_position": {
+          "x_m": 1,
+          "y_m": 1,
+          "heading_rad": 0,
+          "timestamp_s": 0
+        },
+        "simulated_ground_truth_position": {
+          "x_m": 1,
+          "y_m": 1
+        },
+        "position_uncertainty_m": 0.05,
+        "last_verified_checkpoint": {
+          "checkpoint_id": 200,
+          "node_id": "N0_0",
+          "timestamp_s": 0,
+          "correction_m": 0,
+          "detection_source": "synthetic_spatial_simulator",
+          "confidence": 1,
+          "simulated_detection": true
+        },
+        "navigation_status": "ready",
+        "evaluation_event_history": [
+          {
+            "timestamp_s": 0,
+            "event_type": "route_planned",
+            "message": "Route calculated over synthetic walkable lanes using Held-Karp and Dijkstra.",
+            "details": {
+              "route_node_ids": [
+                "N0_0",
+                "N1_0",
+                "N1_1",
+                "N1_2",
+                "N1_3",
+                "N1_4",
+                "N1_5",
+                "N2_5",
+                "N3_5",
+                "N4_5"
+              ]
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "checkpoint_detected",
+            "message": "Simulated checkpoint 200 detected at N0_0; estimate corrected by 0.000 m.",
+            "details": {
+              "checkpoint_id": 200,
+              "node_id": "N0_0",
+              "timestamp_s": 0,
+              "correction_m": 0,
+              "detection_source": "synthetic_spatial_simulator",
+              "confidence": 1,
+              "simulated_detection": true
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Checkpoint CP200 confirmed; localization updated.",
+            "details": {
+              "instruction_type": "CHECKPOINT_CONFIRMED",
+              "instruction_text": "Checkpoint CP200 confirmed; localization updated.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N0_0",
+              "target_product_id": null,
+              "target_shelf_id": null,
+              "timestamp": 0,
+              "event_id": "GUIDE-00-0001",
+              "route_revision": 0,
+              "shelf_side": null,
+              "shelf_section": null,
+              "shelf_level": null,
+              "instruction": "Checkpoint CP200 confirmed; localization updated.",
+              "maneuver": "Checkpoint Confirmed"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Route ready at the entrance. Start navigation toward Bananas.",
+            "details": {
+              "instruction_type": "START",
+              "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N1_1",
+              "target_product_id": "SIM-P-001",
+              "target_shelf_id": "DEMO-SHELF-01",
+              "timestamp": 0,
+              "event_id": "GUIDE-00-0002",
+              "route_revision": 0,
+              "shelf_side": null,
+              "shelf_section": "Produce",
+              "shelf_level": 2,
+              "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+              "maneuver": "Start"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "recommendation_inference",
+            "message": "Frozen Phase 8B inference completed for the current shopping list.",
+            "details": {
+              "candidate_count": 66,
+              "eligible_count": 2,
+              "fallback_state": null
+            }
+          }
+        ],
+        "camera_status": {
+          "connection": "stopped",
+          "camera_index": null,
+          "scanning": false,
+          "detected_tag_id": null,
+          "visible_tag_ids": [],
+          "consistent_frames": 0,
+          "required_consistent_frames": 3,
+          "armed": true,
+          "consecutive_read_failures": 0,
+          "frame_read_recoveries": 0,
+          "last_result": null,
+          "rejection_reason": null,
+          "frames_processed": 0,
+          "error": null,
+          "frame_read": false,
+          "resolution": null,
+          "capture_backend": null,
+          "device_name": null,
+          "preview_available": false,
+          "preview_sequence": 0,
+          "scan_events": []
+        },
+        "last_successful_sync_at": "2026-10-17T11:45:45.110004+00:00",
+        "localization_health": {
+          "status": "CONFIRMED",
+          "warning": false,
+          "warning_key": "CONFIRMED:200:200",
+          "acknowledged": false,
+          "last_accepted_checkpoint_id": 200,
+          "last_accepted_checkpoint_timestamp_s": 0,
+          "current_estimated_position": {
+            "x_m": 1,
+            "y_m": 1,
+            "heading_rad": 0,
+            "timestamp_s": 0
+          },
+          "position_uncertainty_m": 0.05,
+          "camera_state": {
+            "connection": "stopped",
+            "scanning": false,
+            "frame_read": false,
+            "error": null
+          },
+          "candidate_checkpoints": [
+            {
+              "checkpoint_id": 231,
+              "graph_distance_m": 1.5,
+              "anchor": {
+                "type": "edge",
+                "source": "N0_0",
+                "target": "N1_0",
+                "offset_m": 1.5
+              },
+              "purpose": "mid_edge_localization"
+            },
+            {
+              "checkpoint_id": 230,
+              "graph_distance_m": 2,
+              "anchor": {
+                "type": "edge",
+                "source": "N0_0",
+                "target": "N0_1",
+                "offset_m": 2
+              },
+              "purpose": "mid_edge_localization"
+            },
+            {
+              "checkpoint_id": 208,
+              "graph_distance_m": 3,
+              "anchor": {
+                "type": "node",
+                "node_id": "N1_0"
+              },
+              "purpose": "junction"
+            },
+            {
+              "checkpoint_id": 203,
+              "graph_distance_m": 4,
+              "anchor": {
+                "type": "node",
+                "node_id": "N0_1"
+              },
+              "purpose": "junction"
+            },
+            {
+              "checkpoint_id": 238,
+              "graph_distance_m": 4.5,
+              "anchor": {
+                "type": "edge",
+                "source": "N1_0",
+                "target": "N2_0",
+                "offset_m": 1.5
+              },
+              "purpose": "mid_edge_localization"
+            }
+          ],
+          "time_since_last_accepted_s": 0,
+          "distance_since_last_accepted_m": 0,
+          "explanation": "The estimate was recently corrected by an accepted mapped observation.",
+          "recommended_operator_action": "No action required.",
+          "thresholds": {
+            "scan_expected_time_s": 6,
+            "scan_overdue_time_s": 12,
+            "scan_expected_distance_m": 3,
+            "scan_overdue_distance_m": 6,
+            "candidate_graph_radius_m": 4.5
+          },
+          "visibility_claimed": false
+        },
+        "navigation_state": "IDLE",
+        "navigation_state_contract": {
+          "version": "1.0",
+          "states": [
+            "IDLE",
+            "PLANNING",
+            "NAVIGATING",
+            "WAITING_FOR_LOCALIZATION",
+            "ARRIVED_AT_PRODUCT",
+            "AWAITING_CUSTOMER_DECISION",
+            "REPLANNING",
+            "CHECKOUT_READY",
+            "COMPLETED",
+            "PAUSED",
+            "ERROR"
+          ],
+          "allowed_transitions": {
+            "IDLE": [
+              "NAVIGATING",
+              "PLANNING"
+            ],
+            "PLANNING": [
+              "ERROR",
+              "NAVIGATING"
+            ],
+            "NAVIGATING": [
+              "ARRIVED_AT_PRODUCT",
+              "CHECKOUT_READY",
+              "COMPLETED",
+              "ERROR",
+              "PAUSED",
+              "REPLANNING",
+              "WAITING_FOR_LOCALIZATION"
+            ],
+            "WAITING_FOR_LOCALIZATION": [
+              "ERROR",
+              "NAVIGATING",
+              "PAUSED"
+            ],
+            "ARRIVED_AT_PRODUCT": [
+              "AWAITING_CUSTOMER_DECISION"
+            ],
+            "AWAITING_CUSTOMER_DECISION": [
+              "CHECKOUT_READY",
+              "ERROR",
+              "NAVIGATING",
+              "REPLANNING"
+            ],
+            "REPLANNING": [
+              "CHECKOUT_READY",
+              "ERROR",
+              "NAVIGATING"
+            ],
+            "CHECKOUT_READY": [
+              "COMPLETED",
+              "NAVIGATING",
+              "PAUSED"
+            ],
+            "PAUSED": [
+              "IDLE",
+              "NAVIGATING",
+              "WAITING_FOR_LOCALIZATION"
+            ],
+            "ERROR": [
+              "IDLE",
+              "PLANNING"
+            ],
+            "COMPLETED": [
+              "IDLE",
+              "PLANNING"
+            ]
+          }
+        }
+      }
+    },
+    "display": {
+      "session_id": "nav-6b6e9b60-a2ed-4343-8b59-8e1bea94ef70",
+      "shopping_revision": 0,
+      "route_revision": 0,
+      "recommendation": {
+        "recommendation_id": "REC-0-83f1d4e3e145",
+        "product_id": "SIM-P-004",
+        "recommendation_source": "association_rules",
+        "model_version": "comp3-phase8b-20261016-association_rules",
+        "score": 0.0779933372525965,
+        "display_explanation": "Associated with bread in training baskets (confidence 0.074, lift 1.053).",
+        "acceptance_status": "pending",
+        "mapping_status": "normalized_name_mapping",
+        "shelf_availability": "available",
+        "shelf_id": "DEMO-SHELF-04",
+        "pickup_node_id": "N2_1",
+        "navigation_eligible": true,
+        "route_detour_cost_m": 14,
+        "shopping_revision": 0,
+        "model_artifact_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+        "product_name": "Pasta",
+        "shelf_section": "Pantry",
+        "shelf_bay": 1,
+        "shelf_level": 2,
+        "experimental_label": "Experimental recommendation"
+      },
+      "card_text": "Pasta · Pantry, shelf DEMO-SHELF-04 · +14.0 m route＋ AddNo thanks",
+      "scores_exposed": false,
+      "sync_text": "Synced · revision 1"
+    },
+    "operator_before": {
+      "session_id": "nav-6b6e9b60-a2ed-4343-8b59-8e1bea94ef70",
+      "shopping_revision": 0,
+      "route_revision": 0,
+      "model": "association_rules · comp3-phase8b-20261016-association_rules",
+      "checksum": "a1d4c70d26d7…",
+      "input": "name:banana, name:bread",
+      "candidates": "66 ranked · 2 eligible · 64 filtered"
+    },
+    "stale_accept": {
+      "status": 409,
+      "body": {
+        "error": "Stale shopping-list revision 8; recommendation was generated for revision 0"
+      }
+    },
+    "external_mutation": {
+      "status": 200,
+      "body": {
+        "map_id": "comp3-synthetic-supermarket-demo-v1",
+        "data_classification": "synthetic_demonstration_only",
+        "status": "ready",
+        "running": false,
+        "simulation_time_s": 0,
+        "fixed_timestep_s": 0.25,
+        "speed_m_s": 0.8,
+        "current_node_id": "N0_0",
+        "current_location": "N0_0",
+        "ground_truth": {
+          "x_m": 1,
+          "y_m": 1
+        },
+        "estimate": {
+          "x_m": 1,
+          "y_m": 1,
+          "heading_rad": 0,
+          "timestamp_s": 0
+        },
+        "position_error_m": 0,
+        "heading_rad": 0,
+        "heading_deg": 0,
+        "current_aisle": "Mapped intersection N0_0",
+        "active_product": {
+          "available": true,
+          "product_id": "SIM-P-001",
+          "display_name": "Bananas",
+          "category": "Produce",
+          "shelf_id": "DEMO-SHELF-01",
+          "shelf_section": "Produce",
+          "shelf_level": 2,
+          "shelf_bay": 1,
+          "pickup_node": "N1_1",
+          "pickup_coordinate_m": [
+            5,
+            4
+          ],
+          "shelf_facing_point_m": [
+            5,
+            4.55
+          ],
+          "unavailable_reason": null,
+          "demo_product_id": "SIM-P-001",
+          "name": "Bananas",
+          "pickup_node_id": "N1_1",
+          "requested_quantity": 2,
+          "collected_quantity": 0,
+          "remaining_quantity": 2,
+          "product_source": "customer_selection",
+          "shelf_side": "left"
+        },
+        "product_locations": {
+          "SIM-P-001": {
+            "available": true,
+            "product_id": "SIM-P-001",
+            "display_name": "Bananas",
+            "category": "Produce",
+            "shelf_id": "DEMO-SHELF-01",
+            "shelf_section": "Produce",
+            "shelf_level": 2,
+            "shelf_bay": 1,
+            "pickup_node": "N1_1",
+            "pickup_coordinate_m": [
+              5,
+              4
+            ],
+            "shelf_facing_point_m": [
+              5,
+              4.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-002": {
+            "available": true,
+            "product_id": "SIM-P-002",
+            "display_name": "Bread loaf",
+            "category": "Bakery",
+            "shelf_id": "DEMO-SHELF-02",
+            "shelf_section": "Bakery",
+            "shelf_level": 3,
+            "shelf_bay": 2,
+            "pickup_node": "N1_2",
+            "pickup_coordinate_m": [
+              9,
+              4
+            ],
+            "shelf_facing_point_m": [
+              9,
+              4.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-003": {
+            "available": true,
+            "product_id": "SIM-P-003",
+            "display_name": "Milk carton",
+            "category": "Dairy",
+            "shelf_id": "DEMO-SHELF-03",
+            "shelf_section": "Dairy",
+            "shelf_level": 1,
+            "shelf_bay": 1,
+            "pickup_node": "N1_4",
+            "pickup_coordinate_m": [
+              17,
+              4
+            ],
+            "shelf_facing_point_m": [
+              17,
+              4.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-004": {
+            "available": true,
+            "product_id": "SIM-P-004",
+            "display_name": "Pasta",
+            "category": "Pantry",
+            "shelf_id": "DEMO-SHELF-04",
+            "shelf_section": "Pantry",
+            "shelf_level": 2,
+            "shelf_bay": 1,
+            "pickup_node": "N2_1",
+            "pickup_coordinate_m": [
+              5,
+              7
+            ],
+            "shelf_facing_point_m": [
+              5,
+              7.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-005": {
+            "available": true,
+            "product_id": "SIM-P-005",
+            "display_name": "Cereal box",
+            "category": "Cereal",
+            "shelf_id": "DEMO-SHELF-05",
+            "shelf_section": "Cereal",
+            "shelf_level": 4,
+            "shelf_bay": 2,
+            "pickup_node": "N2_2",
+            "pickup_coordinate_m": [
+              9,
+              7
+            ],
+            "shelf_facing_point_m": [
+              9,
+              7.55
+            ],
+            "unavailable_reason": null
+          },
+          "SIM-P-006": {
+            "available": true,
+            "product_id": "SIM-P-006",
+            "display_name": "Frozen peas",
+            "category": "Frozen",
+            "shelf_id": "DEMO-SHELF-06",
+            "shelf_section": "Frozen",
+            "shelf_level": 2,
+            "shelf_bay": 3,
+            "pickup_node": "N2_4",
+            "pickup_coordinate_m": [
+              17,
+              7
+            ],
+            "shelf_facing_point_m": [
+              17,
+              7.55
+            ],
+            "unavailable_reason": null
+          }
+        },
+        "remaining_products": [
+          {
+            "product_id": "SIM-P-001",
+            "demo_product_id": "SIM-P-001",
+            "display_name": "Bananas",
+            "name": "Bananas",
+            "category": "Produce",
+            "shelf_id": "DEMO-SHELF-01",
+            "shelf_section": "Produce",
+            "shelf_level": 2,
+            "shelf_bay": 1,
+            "pickup_node": "N1_1",
+            "pickup_node_id": "N1_1",
+            "shelf_facing_point_m": [
+              5,
+              4.55
+            ],
+            "requested_quantity": 2,
+            "collected_quantity": 0,
+            "remaining_quantity": 2
+          },
+          {
+            "product_id": "SIM-P-002",
+            "demo_product_id": "SIM-P-002",
+            "display_name": "Bread loaf",
+            "name": "Bread loaf",
+            "category": "Bakery",
+            "shelf_id": "DEMO-SHELF-02",
+            "shelf_section": "Bakery",
+            "shelf_level": 3,
+            "shelf_bay": 2,
+            "pickup_node": "N1_2",
+            "pickup_node_id": "N1_2",
+            "shelf_facing_point_m": [
+              9,
+              4.55
+            ],
+            "requested_quantity": 1,
+            "collected_quantity": 0,
+            "remaining_quantity": 1
+          }
+        ],
+        "collected_product_ids": [],
+        "selected_product_ids": [
+          "SIM-P-001",
+          "SIM-P-002"
+        ],
+        "shopping_session": {
+          "revision": 1,
+          "items": [
+            {
+              "product_id": "SIM-P-001",
+              "requested_quantity": 2,
+              "collected_quantity": 0,
+              "source": "customer_selection",
+              "remaining_quantity": 2,
+              "collection_status": "remaining",
+              "name": "Bananas",
+              "shelf_id": "DEMO-SHELF-01",
+              "shelf_section": "Produce",
+              "shelf_bay": 1,
+              "shelf_level": 2,
+              "pickup_node_id": "N1_1"
+            },
+            {
+              "product_id": "SIM-P-002",
+              "requested_quantity": 1,
+              "collected_quantity": 0,
+              "source": "customer_selection",
+              "remaining_quantity": 1,
+              "collection_status": "remaining",
+              "name": "Bread loaf",
+              "shelf_id": "DEMO-SHELF-02",
+              "shelf_section": "Bakery",
+              "shelf_bay": 2,
+              "shelf_level": 3,
+              "pickup_node_id": "N1_2"
+            }
+          ],
+          "requested_units": 3,
+          "collected_units": 0,
+          "remaining_units": 3,
+          "events": [
+            {
+              "shopping_revision": 1,
+              "timestamp_s": 0,
+              "action": "increase",
+              "product_id": "SIM-P-001",
+              "quantity": 1,
+              "source": "customer_selection",
+              "result": {
+                "product_id": "SIM-P-001",
+                "requested_quantity": 2,
+                "collected_quantity": 0,
+                "source": "customer_selection",
+                "remaining_quantity": 2,
+                "collection_status": "remaining"
+              }
+            }
+          ]
+        },
+        "shopping_list_revision": 1,
+        "recommendations": [
+          {
+            "recommendation_id": "REC-1-1ae0248d2812",
+            "product_id": "SIM-P-004",
+            "recommendation_source": "association_rules",
+            "model_version": "comp3-phase8b-20261016-association_rules",
+            "score": 0.0779933372525965,
+            "display_explanation": "Associated with bread in training baskets (confidence 0.074, lift 1.053).",
+            "acceptance_status": "pending",
+            "mapping_status": "normalized_name_mapping",
+            "shelf_availability": "available",
+            "shelf_id": "DEMO-SHELF-04",
+            "pickup_node_id": "N2_1",
+            "navigation_eligible": true,
+            "route_detour_cost_m": 14,
+            "shopping_revision": 1,
+            "model_artifact_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+            "product_name": "Pasta",
+            "shelf_section": "Pantry",
+            "shelf_bay": 1,
+            "shelf_level": 2,
+            "experimental_label": "Experimental recommendation"
+          }
+        ],
+        "recommendation_diagnostics": {
+          "model_name": "association_rules",
+          "model_version": "comp3-phase8b-20261016-association_rules",
+          "artifact_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+          "expected_artifact_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+          "inference_ready": true,
+          "error": null,
+          "loaded_once_scope": "backend_process_cached_singleton",
+          "test_labels_loaded": false,
+          "shopping_revision": 1,
+          "normalized_basket_input": [
+            "name:banana",
+            "name:bread"
+          ],
+          "authoritative_basket_quantities": [
+            {
+              "demo_product_id": "SIM-P-001",
+              "normalized_product": "name:banana",
+              "requested_quantity": 2,
+              "remaining_quantity": 2,
+              "collected_quantity": 0
+            },
+            {
+              "demo_product_id": "SIM-P-002",
+              "normalized_product": "name:bread",
+              "requested_quantity": 1,
+              "remaining_quantity": 1,
+              "collected_quantity": 0
+            }
+          ],
+          "selected_demo_product_ids": [
+            "SIM-P-001",
+            "SIM-P-002"
+          ],
+          "collected_demo_product_ids": [],
+          "unmapped_demo_product_ids": [],
+          "candidate_count": 66,
+          "eligible_candidate_count": 2,
+          "filtered_candidate_count": 64,
+          "candidate_ranking": [
+            {
+              "rank": 1,
+              "normalized_product": "name:potato",
+              "mapped_demo_product_id": null,
+              "model_score": 0.21471503516913285,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 2,
+              "normalized_product": "name:spices",
+              "mapped_demo_product_id": null,
+              "model_score": 0.21131674757281552,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 3,
+              "normalized_product": "name:pastry",
+              "mapped_demo_product_id": null,
+              "model_score": 0.18183075050359,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 4,
+              "normalized_product": "name:chips",
+              "mapped_demo_product_id": null,
+              "model_score": 0.1549929746351224,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 5,
+              "normalized_product": "name:cookies",
+              "mapped_demo_product_id": null,
+              "model_score": 0.15354938271604937,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 6,
+              "normalized_product": "name:dishwashing-liquid",
+              "mapped_demo_product_id": null,
+              "model_score": 0.15085553389646955,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 7,
+              "normalized_product": "name:cooking-oil",
+              "mapped_demo_product_id": null,
+              "model_score": 0.1481864447167756,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 8,
+              "normalized_product": "name:soda",
+              "mapped_demo_product_id": null,
+              "model_score": 0.13866988404689096,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 9,
+              "normalized_product": "name:energy-drink",
+              "mapped_demo_product_id": null,
+              "model_score": 0.1337612155850541,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 10,
+              "normalized_product": "name:wheat-flour",
+              "mapped_demo_product_id": null,
+              "model_score": 0.13018651367416798,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 11,
+              "normalized_product": "name:yogurt",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11886567050970873,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 12,
+              "normalized_product": "name:pen",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11824484917627563,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 13,
+              "normalized_product": "name:croissant",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11550154775943397,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 14,
+              "normalized_product": "name:onion",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11516203703703703,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 15,
+              "normalized_product": "name:electric-kettle",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11248385012919895,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 16,
+              "normalized_product": "name:beef",
+              "mapped_demo_product_id": null,
+              "model_score": 0.11058083117410962,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 17,
+              "normalized_product": "name:chocolate",
+              "mapped_demo_product_id": null,
+              "model_score": 0.10857027060730765,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 18,
+              "normalized_product": "name:notebook",
+              "mapped_demo_product_id": null,
+              "model_score": 0.10514794685990338,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 19,
+              "normalized_product": "name:charger",
+              "mapped_demo_product_id": null,
+              "model_score": 0.10291075650118203,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 20,
+              "normalized_product": "name:jeans",
+              "mapped_demo_product_id": null,
+              "model_score": 0.10182748538011695,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 21,
+              "normalized_product": "name:spinach",
+              "mapped_demo_product_id": null,
+              "model_score": 0.1003538037909836,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 22,
+              "normalized_product": "name:shirt",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09554183813443072,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 23,
+              "normalized_product": "name:fish",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09301549145299144,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 24,
+              "normalized_product": "name:orange",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09257948133680557,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 25,
+              "normalized_product": "name:tea",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09212962962962963,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 26,
+              "normalized_product": "name:face-wash",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09126048218029349,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 27,
+              "normalized_product": "name:shampoo",
+              "mapped_demo_product_id": null,
+              "model_score": 0.09040758047767394,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 28,
+              "normalized_product": "name:marker",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08992173000887597,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 29,
+              "normalized_product": "name:carrot",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08957047325102879,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 30,
+              "normalized_product": "name:cake",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08485623781676412,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 31,
+              "normalized_product": "name:salt",
+              "mapped_demo_product_id": null,
+              "model_score": 0.0841183574879227,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 32,
+              "normalized_product": "name:prawns",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08339319923371646,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 33,
+              "normalized_product": "name:eggs",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08218652742746727,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 34,
+              "normalized_product": "name:soap",
+              "mapped_demo_product_id": null,
+              "model_score": 0.08138855502136752,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 35,
+              "normalized_product": "name:pasta",
+              "mapped_demo_product_id": "SIM-P-004",
+              "model_score": 0.0779933372525965,
+              "eligible": true,
+              "filter_reasons": [],
+              "route_detour_cost_m": 14
+            },
+            {
+              "rank": 36,
+              "normalized_product": "name:pain-reliever",
+              "mapped_demo_product_id": null,
+              "model_score": 0.07643347050754458,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 37,
+              "normalized_product": "name:saree",
+              "mapped_demo_product_id": null,
+              "model_score": 0.07210704764862695,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 38,
+              "normalized_product": "name:apple",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06948497318867689,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 39,
+              "normalized_product": "name:belt",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06794824318297657,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 40,
+              "normalized_product": "name:sugar",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06649929074697593,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 41,
+              "normalized_product": "name:rice",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06401654411764707,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 42,
+              "normalized_product": "name:floor-cleaner",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06254489942528736,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 43,
+              "normalized_product": "name:juice",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06254489942528736,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 44,
+              "normalized_product": "name:cheese",
+              "mapped_demo_product_id": null,
+              "model_score": 0.06032925346117403,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 45,
+              "normalized_product": "name:coffee",
+              "mapped_demo_product_id": null,
+              "model_score": 0.05979567307692307,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 46,
+              "normalized_product": "name:phone-cover",
+              "mapped_demo_product_id": null,
+              "model_score": 0.0578873005319149,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 47,
+              "normalized_product": "name:biscuits",
+              "mapped_demo_product_id": null,
+              "model_score": 0.055524553571428575,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 48,
+              "normalized_product": "name:earphones",
+              "mapped_demo_product_id": null,
+              "model_score": 0.055524553571428575,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 49,
+              "normalized_product": "name:toilet-paper",
+              "mapped_demo_product_id": null,
+              "model_score": 0.05520695835598002,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 50,
+              "normalized_product": "name:tissue",
+              "mapped_demo_product_id": null,
+              "model_score": 0.04992115825688074,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 51,
+              "normalized_product": "name:dress",
+              "mapped_demo_product_id": null,
+              "model_score": 0.04622992167795034,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 52,
+              "normalized_product": "name:shoes",
+              "mapped_demo_product_id": null,
+              "model_score": 0.04342810824292305,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 53,
+              "normalized_product": "name:baby-food",
+              "mapped_demo_product_id": null,
+              "model_score": 0.042993827160493825,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 54,
+              "normalized_product": "name:chicken-breast",
+              "mapped_demo_product_id": null,
+              "model_score": 0.042993827160493825,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 55,
+              "normalized_product": "name:milk",
+              "mapped_demo_product_id": "SIM-P-003",
+              "model_score": 0.042993827160493825,
+              "eligible": true,
+              "filter_reasons": [],
+              "route_detour_cost_m": 0
+            },
+            {
+              "rank": 56,
+              "normalized_product": "name:diapers",
+              "mapped_demo_product_id": null,
+              "model_score": 0.0429403902304293,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 57,
+              "normalized_product": "name:mixer-grinder",
+              "mapped_demo_product_id": null,
+              "model_score": 0.03771388347411739,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 58,
+              "normalized_product": "name:fiction-book",
+              "mapped_demo_product_id": null,
+              "model_score": 0.0355438385916781,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 59,
+              "normalized_product": "name:educational-book",
+              "mapped_demo_product_id": null,
+              "model_score": 0.03317424935223289,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 60,
+              "normalized_product": "name:butter",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 61,
+              "normalized_product": "name:lentils",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 62,
+              "normalized_product": "name:vitamins",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 63,
+              "normalized_product": "name:detergent",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 64,
+              "normalized_product": "name:tomato",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 65,
+              "normalized_product": "name:popcorn",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            },
+            {
+              "rank": 66,
+              "normalized_product": "name:toothpaste",
+              "mapped_demo_product_id": null,
+              "model_score": 0,
+              "eligible": false,
+              "filter_reasons": [
+                "no_verified_navigation_mapping"
+              ],
+              "route_detour_cost_m": null
+            }
+          ],
+          "inference_latency_ms": 0.131833,
+          "eligibility_filtering_latency_ms": 0.385708,
+          "end_to_end_latency_ms": 0.543208,
+          "fallback_state": null,
+          "customer_message": null
+        },
+        "recommendation_events": [],
+        "planned_route": [
+          "N0_0",
+          "N1_0",
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N1_4",
+          "N1_5",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "active_route": [
+          "N0_0",
+          "N1_0",
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N1_4",
+          "N1_5",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "route_revision": 1,
+        "previous_planned_route": [
+          "N0_0",
+          "N1_0",
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N1_4",
+          "N1_5",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "remaining_route": [
+          "N0_0",
+          "N1_0",
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N1_4",
+          "N1_5",
+          "N2_5",
+          "N3_5",
+          "N4_5"
+        ],
+        "route_distance_m": 30,
+        "remaining_distance_m": 30,
+        "distance_to_active_product_m": 7,
+        "navigation_progress": {
+          "collected_products": 0,
+          "total_products": 3,
+          "percent": 0
+        },
+        "travelled_ground_truth": [
+          {
+            "timestamp_s": 0,
+            "x_m": 1,
+            "y_m": 1
+          }
+        ],
+        "travelled_estimate": [
+          {
+            "timestamp_s": 0,
+            "x_m": 1,
+            "y_m": 1
+          }
+        ],
+        "guidance": {
+          "instruction_type": "START",
+          "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+          "distance_to_maneuver_m": 0,
+          "target_node": "N1_1",
+          "target_product_id": "SIM-P-001",
+          "target_shelf_id": "DEMO-SHELF-01",
+          "timestamp": 0,
+          "event_id": "GUIDE-01-0004",
+          "route_revision": 1,
+          "shelf_side": null,
+          "shelf_section": "Produce",
+          "shelf_level": 2,
+          "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+          "maneuver": "Start"
+        },
+        "next_checkpoint": {
+          "checkpoint_id": 202,
+          "node_id": "N4_5",
+          "name": "Checkout"
+        },
+        "current_checkpoint": {
+          "checkpoint_id": 200,
+          "node_id": "N0_0",
+          "name": "Entrance"
+        },
+        "last_confirmed_checkpoint": {
+          "checkpoint_id": 200,
+          "node_id": "N0_0",
+          "timestamp_s": 0,
+          "correction_m": 0,
+          "detection_source": "synthetic_spatial_simulator",
+          "confidence": 1,
+          "simulated_detection": true
+        },
+        "observed_checkpoint": {
+          "tag_id": 200,
+          "timestamp_s": 0,
+          "detection_source": "synthetic_spatial_simulator",
+          "map_id": "comp3-synthetic-supermarket-demo-v1",
+          "confidence": 1,
+          "observed_x_m": null,
+          "observed_y_m": null,
+          "accepted": true,
+          "reason": "accepted",
+          "expected_checkpoint_id": 200,
+          "position_before": {
+            "x_m": 1,
+            "y_m": 1,
+            "heading_rad": 0,
+            "timestamp_s": 0
+          },
+          "position_after": {
+            "x_m": 1,
+            "y_m": 1,
+            "heading_rad": 0,
+            "timestamp_s": 0
+          },
+          "classification": "expected_mapped_checkpoint",
+          "graph_distance_from_last_checkpoint_m": null,
+          "graph_distance_from_estimate_m": null,
+          "reachable_distance_limit_m": null
+        },
+        "checkpoint_observation_history": [
+          {
+            "tag_id": 200,
+            "timestamp_s": 0,
+            "detection_source": "synthetic_spatial_simulator",
+            "map_id": "comp3-synthetic-supermarket-demo-v1",
+            "confidence": 1,
+            "observed_x_m": null,
+            "observed_y_m": null,
+            "accepted": true,
+            "reason": "accepted",
+            "expected_checkpoint_id": 200,
+            "position_before": {
+              "x_m": 1,
+              "y_m": 1,
+              "heading_rad": 0,
+              "timestamp_s": 0
+            },
+            "position_after": {
+              "x_m": 1,
+              "y_m": 1,
+              "heading_rad": 0,
+              "timestamp_s": 0
+            },
+            "classification": "expected_mapped_checkpoint",
+            "graph_distance_from_last_checkpoint_m": null,
+            "graph_distance_from_estimate_m": null,
+            "reachable_distance_limit_m": null
+          }
+        ],
+        "localization_correction_event": {
+          "checkpoint_id": 200,
+          "node_id": "N0_0",
+          "timestamp_s": 0,
+          "correction_m": 0,
+          "detection_source": "synthetic_spatial_simulator",
+          "confidence": 1,
+          "simulated_detection": true
+        },
+        "distance_to_checkpoint_m": 30,
+        "detected_checkpoint_ids": [
+          200
+        ],
+        "active_apriltag_layout": {
+          "layout_id": "comp3-dense-apriltag-layout-v2",
+          "schema_version": "2.0",
+          "mapped_tag_count": 62,
+          "coverage_report": {
+            "edge_count": 37,
+            "tag_count": 62,
+            "unique_ids": true,
+            "all_edges_pass": true,
+            "observed_maximum_spacing_m": 2,
+            "edges": [
+              {
+                "source": "N0_0",
+                "target": "N0_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_0",
+                "target": "N1_0",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N0_1",
+                "target": "N0_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_2",
+                "target": "N0_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_3",
+                "target": "N0_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_3",
+                "target": "N1_3",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N0_4",
+                "target": "N0_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N0_5",
+                "target": "N1_5",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N1_0",
+                "target": "N1_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_0",
+                "target": "N2_0",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N1_1",
+                "target": "N1_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_2",
+                "target": "N1_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_3",
+                "target": "N1_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_3",
+                "target": "N2_3",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N1_4",
+                "target": "N1_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N1_5",
+                "target": "N2_5",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N2_0",
+                "target": "N2_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_0",
+                "target": "N3_0",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N2_1",
+                "target": "N2_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_2",
+                "target": "N2_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_3",
+                "target": "N2_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_3",
+                "target": "N3_3",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N2_4",
+                "target": "N2_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N2_5",
+                "target": "N3_5",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N3_0",
+                "target": "N3_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_0",
+                "target": "N4_0",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N3_1",
+                "target": "N3_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_2",
+                "target": "N3_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_3",
+                "target": "N3_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_3",
+                "target": "N4_3",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N3_4",
+                "target": "N3_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N3_5",
+                "target": "N4_5",
+                "edge_length_m": 3,
+                "opportunity_offsets_m": [
+                  0,
+                  1.5,
+                  3
+                ],
+                "maximum_spacing_m": 1.5,
+                "passes": true
+              },
+              {
+                "source": "N4_0",
+                "target": "N4_1",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N4_1",
+                "target": "N4_2",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N4_2",
+                "target": "N4_3",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N4_3",
+                "target": "N4_4",
+                "edge_length_m": 4,
+                "opportunity_offsets_m": [
+                  0,
+                  2,
+                  4
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              },
+              {
+                "source": "N4_4",
+                "target": "N4_5",
+                "edge_length_m": 2,
+                "opportunity_offsets_m": [
+                  0,
+                  2
+                ],
+                "maximum_spacing_m": 2,
+                "passes": true
+              }
+            ]
+          },
+          "coverage_is_not_detection": true
+        },
+        "localization": {
+          "status": "checkpoint_confirmed",
+          "uncertainty_m": 0.05,
+          "maximum_arrival_uncertainty_m": 0.75,
+          "source": "synthetic_sensor_model_and_checkpoint_observations"
+        },
+        "product_arrival": null,
+        "deviation": null,
+        "reroute_count": 1,
+        "free_walk": {
+          "active": false,
+          "moving": false,
+          "selected_target_node_id": null,
+          "available_edges": []
+        },
+        "route_anchor": {
+          "anchor_type": "node",
+          "node_id": "N0_0",
+          "edge_start_node_id": null,
+          "edge_end_node_id": null,
+          "distance_to_start_m": 0,
+          "distance_to_end_m": 0,
+          "edge_length_m": 0,
+          "projected_x_m": 1,
+          "projected_y_m": 1,
+          "snap_distance_m": 0,
+          "travel_direction": "stopped",
+          "route_revision": 0
+        },
+        "last_replanning_reason": "shopping_increase",
+        "adaptive_replan_history": [
+          {
+            "timestamp_s": 0,
+            "reason": "shopping_increase",
+            "route_revision": 1,
+            "previous_route_node_ids": [
+              "N0_0",
+              "N1_0",
+              "N1_1",
+              "N1_2",
+              "N1_3",
+              "N1_4",
+              "N1_5",
+              "N2_5",
+              "N3_5",
+              "N4_5"
+            ],
+            "route_node_ids": [
+              "N0_0",
+              "N1_0",
+              "N1_1",
+              "N1_2",
+              "N1_3",
+              "N1_4",
+              "N1_5",
+              "N2_5",
+              "N3_5",
+              "N4_5"
+            ],
+            "previous_route_cost_m": 30,
+            "new_route_cost_m": 30,
+            "partial_edge_distance_m": 0,
+            "chosen_endpoint_node_id": "N0_0",
+            "replanning_computation_ms": 0.10383299377281219,
+            "remaining_destinations": [
+              "N1_1",
+              "N1_2"
+            ],
+            "anchor": {
+              "anchor_type": "node",
+              "node_id": "N0_0",
+              "edge_start_node_id": null,
+              "edge_end_node_id": null,
+              "distance_to_start_m": 0,
+              "distance_to_end_m": 0,
+              "edge_length_m": 0,
+              "projected_x_m": 1,
+              "projected_y_m": 1,
+              "snap_distance_m": 0,
+              "travel_direction": "stopped",
+              "route_revision": 0
+            },
+            "shopping_revision": 1,
+            "product_id": "SIM-P-001",
+            "quantity": 1,
+            "product_source": "customer_selection",
+            "recommendation_id": null
+          }
+        ],
+        "guided_demo": {
+          "active": false,
+          "seed": 6042,
+          "stage": 0,
+          "stage_count": 9,
+          "stage_title": "Manual navigation",
+          "wrong_turn_injected": false,
+          "automatic_pickups": false,
+          "completion_summary": null
+        },
+        "camera_evaluation": {
+          "active": false,
+          "waiting_for_checkpoint": false,
+          "gate": null,
+          "virtual_movement": true,
+          "manual_pickups": true,
+          "camera_frames_uploaded": false
+        },
+        "guidance_events": [
+          {
+            "instruction_type": "CHECKPOINT_CONFIRMED",
+            "instruction_text": "Checkpoint CP200 confirmed; localization updated.",
+            "distance_to_maneuver_m": 0,
+            "target_node": "N0_0",
+            "target_product_id": null,
+            "target_shelf_id": null,
+            "timestamp": 0,
+            "event_id": "GUIDE-00-0001",
+            "route_revision": 0,
+            "shelf_side": null,
+            "shelf_section": null,
+            "shelf_level": null,
+            "instruction": "Checkpoint CP200 confirmed; localization updated.",
+            "maneuver": "Checkpoint Confirmed"
+          },
+          {
+            "instruction_type": "START",
+            "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+            "distance_to_maneuver_m": 0,
+            "target_node": "N1_1",
+            "target_product_id": "SIM-P-001",
+            "target_shelf_id": "DEMO-SHELF-01",
+            "timestamp": 0,
+            "event_id": "GUIDE-00-0002",
+            "route_revision": 0,
+            "shelf_side": null,
+            "shelf_section": "Produce",
+            "shelf_level": 2,
+            "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+            "maneuver": "Start"
+          },
+          {
+            "instruction_type": "REROUTING",
+            "instruction_text": "Location confirmed. Route recalculated from your current position.",
+            "distance_to_maneuver_m": 0,
+            "target_node": "N0_0",
+            "target_product_id": "SIM-P-001",
+            "target_shelf_id": "DEMO-SHELF-01",
+            "timestamp": 0,
+            "event_id": "GUIDE-01-0003",
+            "route_revision": 1,
+            "shelf_side": null,
+            "shelf_section": "Produce",
+            "shelf_level": 2,
+            "instruction": "Location confirmed. Route recalculated from your current position.",
+            "maneuver": "Rerouting"
+          },
+          {
+            "instruction_type": "START",
+            "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+            "distance_to_maneuver_m": 0,
+            "target_node": "N1_1",
+            "target_product_id": "SIM-P-001",
+            "target_shelf_id": "DEMO-SHELF-01",
+            "timestamp": 0,
+            "event_id": "GUIDE-01-0004",
+            "route_revision": 1,
+            "shelf_side": null,
+            "shelf_section": "Produce",
+            "shelf_level": 2,
+            "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+            "maneuver": "Start"
+          }
+        ],
+        "reroute_cost_limitation": "Exact partial-edge cost is included; optimization is exact only over the small set of unique remaining demo pickup nodes.",
+        "events": [
+          {
+            "timestamp_s": 0,
+            "event_type": "route_planned",
+            "message": "Route calculated over synthetic walkable lanes using Held-Karp and Dijkstra.",
+            "details": {
+              "route_node_ids": [
+                "N0_0",
+                "N1_0",
+                "N1_1",
+                "N1_2",
+                "N1_3",
+                "N1_4",
+                "N1_5",
+                "N2_5",
+                "N3_5",
+                "N4_5"
+              ]
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "checkpoint_detected",
+            "message": "Simulated checkpoint 200 detected at N0_0; estimate corrected by 0.000 m.",
+            "details": {
+              "checkpoint_id": 200,
+              "node_id": "N0_0",
+              "timestamp_s": 0,
+              "correction_m": 0,
+              "detection_source": "synthetic_spatial_simulator",
+              "confidence": 1,
+              "simulated_detection": true
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Checkpoint CP200 confirmed; localization updated.",
+            "details": {
+              "instruction_type": "CHECKPOINT_CONFIRMED",
+              "instruction_text": "Checkpoint CP200 confirmed; localization updated.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N0_0",
+              "target_product_id": null,
+              "target_shelf_id": null,
+              "timestamp": 0,
+              "event_id": "GUIDE-00-0001",
+              "route_revision": 0,
+              "shelf_side": null,
+              "shelf_section": null,
+              "shelf_level": null,
+              "instruction": "Checkpoint CP200 confirmed; localization updated.",
+              "maneuver": "Checkpoint Confirmed"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Route ready at the entrance. Start navigation toward Bananas.",
+            "details": {
+              "instruction_type": "START",
+              "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N1_1",
+              "target_product_id": "SIM-P-001",
+              "target_shelf_id": "DEMO-SHELF-01",
+              "timestamp": 0,
+              "event_id": "GUIDE-00-0002",
+              "route_revision": 0,
+              "shelf_side": null,
+              "shelf_section": "Produce",
+              "shelf_level": 2,
+              "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+              "maneuver": "Start"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "recommendation_inference",
+            "message": "Frozen Phase 8B inference completed for the current shopping list.",
+            "details": {
+              "candidate_count": 66,
+              "eligible_count": 2,
+              "fallback_state": null
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "adaptive_route_replanned",
+            "message": "Route recalculated from the verified or estimated position: shopping_increase.",
+            "details": {
+              "timestamp_s": 0,
+              "reason": "shopping_increase",
+              "route_revision": 1,
+              "previous_route_node_ids": [
+                "N0_0",
+                "N1_0",
+                "N1_1",
+                "N1_2",
+                "N1_3",
+                "N1_4",
+                "N1_5",
+                "N2_5",
+                "N3_5",
+                "N4_5"
+              ],
+              "route_node_ids": [
+                "N0_0",
+                "N1_0",
+                "N1_1",
+                "N1_2",
+                "N1_3",
+                "N1_4",
+                "N1_5",
+                "N2_5",
+                "N3_5",
+                "N4_5"
+              ],
+              "previous_route_cost_m": 30,
+              "new_route_cost_m": 30,
+              "partial_edge_distance_m": 0,
+              "chosen_endpoint_node_id": "N0_0",
+              "replanning_computation_ms": 0.10383299377281219,
+              "remaining_destinations": [
+                "N1_1",
+                "N1_2"
+              ],
+              "anchor": {
+                "anchor_type": "node",
+                "node_id": "N0_0",
+                "edge_start_node_id": null,
+                "edge_end_node_id": null,
+                "distance_to_start_m": 0,
+                "distance_to_end_m": 0,
+                "edge_length_m": 0,
+                "projected_x_m": 1,
+                "projected_y_m": 1,
+                "snap_distance_m": 0,
+                "travel_direction": "stopped",
+                "route_revision": 0
+              },
+              "shopping_revision": 1,
+              "product_id": "SIM-P-001",
+              "quantity": 1,
+              "product_source": "customer_selection",
+              "recommendation_id": null
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Location confirmed. Route recalculated from your current position.",
+            "details": {
+              "instruction_type": "REROUTING",
+              "instruction_text": "Location confirmed. Route recalculated from your current position.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N0_0",
+              "target_product_id": "SIM-P-001",
+              "target_shelf_id": "DEMO-SHELF-01",
+              "timestamp": 0,
+              "event_id": "GUIDE-01-0003",
+              "route_revision": 1,
+              "shelf_side": null,
+              "shelf_section": "Produce",
+              "shelf_level": 2,
+              "instruction": "Location confirmed. Route recalculated from your current position.",
+              "maneuver": "Rerouting"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "shopping_list_mutated",
+            "message": "Shopping list increase: SIM-P-001 × 1.",
+            "details": {
+              "shopping_revision": 1,
+              "timestamp_s": 0,
+              "action": "increase",
+              "product_id": "SIM-P-001",
+              "quantity": 1,
+              "source": "customer_selection",
+              "result": {
+                "product_id": "SIM-P-001",
+                "requested_quantity": 2,
+                "collected_quantity": 0,
+                "source": "customer_selection",
+                "remaining_quantity": 2,
+                "collection_status": "remaining"
+              }
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Route ready at the entrance. Start navigation toward Bananas.",
+            "details": {
+              "instruction_type": "START",
+              "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N1_1",
+              "target_product_id": "SIM-P-001",
+              "target_shelf_id": "DEMO-SHELF-01",
+              "timestamp": 0,
+              "event_id": "GUIDE-01-0004",
+              "route_revision": 1,
+              "shelf_side": null,
+              "shelf_section": "Produce",
+              "shelf_level": 2,
+              "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+              "maneuver": "Start"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "recommendation_inference",
+            "message": "Frozen Phase 8B inference completed for the current shopping list.",
+            "details": {
+              "candidate_count": 66,
+              "eligible_count": 2,
+              "fallback_state": null
+            }
+          }
+        ],
+        "session_id": "nav-6b6e9b60-a2ed-4343-8b59-8e1bea94ef70",
+        "session_created_at": "2026-10-17T11:45:34.545403+00:00",
+        "map_version": "1.0",
+        "state_revision": 2,
+        "controller_id": null,
+        "controller_lease_timeout_s": 2,
+        "simulation_clock": {
+          "mode": "manual_fixed_step",
+          "fixed_timestep_s": 0.25,
+          "current_time_s": 0,
+          "read_requests_advance_time": false,
+          "autoplay_enabled": false,
+          "autoplay_rate": 1,
+          "owner": "backend_singleton"
+        },
+        "current_shopping_list": [
+          "SIM-P-001",
+          "SIM-P-002"
+        ],
+        "current_estimated_position": {
+          "x_m": 1,
+          "y_m": 1,
+          "heading_rad": 0,
+          "timestamp_s": 0
+        },
+        "simulated_ground_truth_position": {
+          "x_m": 1,
+          "y_m": 1
+        },
+        "position_uncertainty_m": 0.05,
+        "last_verified_checkpoint": {
+          "checkpoint_id": 200,
+          "node_id": "N0_0",
+          "timestamp_s": 0,
+          "correction_m": 0,
+          "detection_source": "synthetic_spatial_simulator",
+          "confidence": 1,
+          "simulated_detection": true
+        },
+        "navigation_status": "ready",
+        "evaluation_event_history": [
+          {
+            "timestamp_s": 0,
+            "event_type": "route_planned",
+            "message": "Route calculated over synthetic walkable lanes using Held-Karp and Dijkstra.",
+            "details": {
+              "route_node_ids": [
+                "N0_0",
+                "N1_0",
+                "N1_1",
+                "N1_2",
+                "N1_3",
+                "N1_4",
+                "N1_5",
+                "N2_5",
+                "N3_5",
+                "N4_5"
+              ]
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "checkpoint_detected",
+            "message": "Simulated checkpoint 200 detected at N0_0; estimate corrected by 0.000 m.",
+            "details": {
+              "checkpoint_id": 200,
+              "node_id": "N0_0",
+              "timestamp_s": 0,
+              "correction_m": 0,
+              "detection_source": "synthetic_spatial_simulator",
+              "confidence": 1,
+              "simulated_detection": true
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Checkpoint CP200 confirmed; localization updated.",
+            "details": {
+              "instruction_type": "CHECKPOINT_CONFIRMED",
+              "instruction_text": "Checkpoint CP200 confirmed; localization updated.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N0_0",
+              "target_product_id": null,
+              "target_shelf_id": null,
+              "timestamp": 0,
+              "event_id": "GUIDE-00-0001",
+              "route_revision": 0,
+              "shelf_side": null,
+              "shelf_section": null,
+              "shelf_level": null,
+              "instruction": "Checkpoint CP200 confirmed; localization updated.",
+              "maneuver": "Checkpoint Confirmed"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Route ready at the entrance. Start navigation toward Bananas.",
+            "details": {
+              "instruction_type": "START",
+              "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N1_1",
+              "target_product_id": "SIM-P-001",
+              "target_shelf_id": "DEMO-SHELF-01",
+              "timestamp": 0,
+              "event_id": "GUIDE-00-0002",
+              "route_revision": 0,
+              "shelf_side": null,
+              "shelf_section": "Produce",
+              "shelf_level": 2,
+              "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+              "maneuver": "Start"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "recommendation_inference",
+            "message": "Frozen Phase 8B inference completed for the current shopping list.",
+            "details": {
+              "candidate_count": 66,
+              "eligible_count": 2,
+              "fallback_state": null
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "adaptive_route_replanned",
+            "message": "Route recalculated from the verified or estimated position: shopping_increase.",
+            "details": {
+              "timestamp_s": 0,
+              "reason": "shopping_increase",
+              "route_revision": 1,
+              "previous_route_node_ids": [
+                "N0_0",
+                "N1_0",
+                "N1_1",
+                "N1_2",
+                "N1_3",
+                "N1_4",
+                "N1_5",
+                "N2_5",
+                "N3_5",
+                "N4_5"
+              ],
+              "route_node_ids": [
+                "N0_0",
+                "N1_0",
+                "N1_1",
+                "N1_2",
+                "N1_3",
+                "N1_4",
+                "N1_5",
+                "N2_5",
+                "N3_5",
+                "N4_5"
+              ],
+              "previous_route_cost_m": 30,
+              "new_route_cost_m": 30,
+              "partial_edge_distance_m": 0,
+              "chosen_endpoint_node_id": "N0_0",
+              "replanning_computation_ms": 0.10383299377281219,
+              "remaining_destinations": [
+                "N1_1",
+                "N1_2"
+              ],
+              "anchor": {
+                "anchor_type": "node",
+                "node_id": "N0_0",
+                "edge_start_node_id": null,
+                "edge_end_node_id": null,
+                "distance_to_start_m": 0,
+                "distance_to_end_m": 0,
+                "edge_length_m": 0,
+                "projected_x_m": 1,
+                "projected_y_m": 1,
+                "snap_distance_m": 0,
+                "travel_direction": "stopped",
+                "route_revision": 0
+              },
+              "shopping_revision": 1,
+              "product_id": "SIM-P-001",
+              "quantity": 1,
+              "product_source": "customer_selection",
+              "recommendation_id": null
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Location confirmed. Route recalculated from your current position.",
+            "details": {
+              "instruction_type": "REROUTING",
+              "instruction_text": "Location confirmed. Route recalculated from your current position.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N0_0",
+              "target_product_id": "SIM-P-001",
+              "target_shelf_id": "DEMO-SHELF-01",
+              "timestamp": 0,
+              "event_id": "GUIDE-01-0003",
+              "route_revision": 1,
+              "shelf_side": null,
+              "shelf_section": "Produce",
+              "shelf_level": 2,
+              "instruction": "Location confirmed. Route recalculated from your current position.",
+              "maneuver": "Rerouting"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "shopping_list_mutated",
+            "message": "Shopping list increase: SIM-P-001 × 1.",
+            "details": {
+              "shopping_revision": 1,
+              "timestamp_s": 0,
+              "action": "increase",
+              "product_id": "SIM-P-001",
+              "quantity": 1,
+              "source": "customer_selection",
+              "result": {
+                "product_id": "SIM-P-001",
+                "requested_quantity": 2,
+                "collected_quantity": 0,
+                "source": "customer_selection",
+                "remaining_quantity": 2,
+                "collection_status": "remaining"
+              }
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "guidance_instruction",
+            "message": "Route ready at the entrance. Start navigation toward Bananas.",
+            "details": {
+              "instruction_type": "START",
+              "instruction_text": "Route ready at the entrance. Start navigation toward Bananas.",
+              "distance_to_maneuver_m": 0,
+              "target_node": "N1_1",
+              "target_product_id": "SIM-P-001",
+              "target_shelf_id": "DEMO-SHELF-01",
+              "timestamp": 0,
+              "event_id": "GUIDE-01-0004",
+              "route_revision": 1,
+              "shelf_side": null,
+              "shelf_section": "Produce",
+              "shelf_level": 2,
+              "instruction": "Route ready at the entrance. Start navigation toward Bananas.",
+              "maneuver": "Start"
+            }
+          },
+          {
+            "timestamp_s": 0,
+            "event_type": "recommendation_inference",
+            "message": "Frozen Phase 8B inference completed for the current shopping list.",
+            "details": {
+              "candidate_count": 66,
+              "eligible_count": 2,
+              "fallback_state": null
+            }
+          }
+        ],
+        "camera_status": {
+          "connection": "stopped",
+          "camera_index": null,
+          "scanning": false,
+          "detected_tag_id": null,
+          "visible_tag_ids": [],
+          "consistent_frames": 0,
+          "required_consistent_frames": 3,
+          "armed": true,
+          "consecutive_read_failures": 0,
+          "frame_read_recoveries": 0,
+          "last_result": null,
+          "rejection_reason": null,
+          "frames_processed": 0,
+          "error": null,
+          "frame_read": false,
+          "resolution": null,
+          "capture_backend": null,
+          "device_name": null,
+          "preview_available": false,
+          "preview_sequence": 0,
+          "scan_events": []
+        },
+        "last_successful_sync_at": "2026-10-17T11:45:46.169837+00:00",
+        "localization_health": {
+          "status": "CONFIRMED",
+          "warning": false,
+          "warning_key": "CONFIRMED:200:200",
+          "acknowledged": false,
+          "last_accepted_checkpoint_id": 200,
+          "last_accepted_checkpoint_timestamp_s": 0,
+          "current_estimated_position": {
+            "x_m": 1,
+            "y_m": 1,
+            "heading_rad": 0,
+            "timestamp_s": 0
+          },
+          "position_uncertainty_m": 0.05,
+          "camera_state": {
+            "connection": "stopped",
+            "scanning": false,
+            "frame_read": false,
+            "error": null
+          },
+          "candidate_checkpoints": [
+            {
+              "checkpoint_id": 231,
+              "graph_distance_m": 1.5,
+              "anchor": {
+                "type": "edge",
+                "source": "N0_0",
+                "target": "N1_0",
+                "offset_m": 1.5
+              },
+              "purpose": "mid_edge_localization"
+            },
+            {
+              "checkpoint_id": 230,
+              "graph_distance_m": 2,
+              "anchor": {
+                "type": "edge",
+                "source": "N0_0",
+                "target": "N0_1",
+                "offset_m": 2
+              },
+              "purpose": "mid_edge_localization"
+            },
+            {
+              "checkpoint_id": 208,
+              "graph_distance_m": 3,
+              "anchor": {
+                "type": "node",
+                "node_id": "N1_0"
+              },
+              "purpose": "junction"
+            },
+            {
+              "checkpoint_id": 203,
+              "graph_distance_m": 4,
+              "anchor": {
+                "type": "node",
+                "node_id": "N0_1"
+              },
+              "purpose": "junction"
+            },
+            {
+              "checkpoint_id": 238,
+              "graph_distance_m": 4.5,
+              "anchor": {
+                "type": "edge",
+                "source": "N1_0",
+                "target": "N2_0",
+                "offset_m": 1.5
+              },
+              "purpose": "mid_edge_localization"
+            }
+          ],
+          "time_since_last_accepted_s": 0,
+          "distance_since_last_accepted_m": 0,
+          "explanation": "The estimate was recently corrected by an accepted mapped observation.",
+          "recommended_operator_action": "No action required.",
+          "thresholds": {
+            "scan_expected_time_s": 6,
+            "scan_overdue_time_s": 12,
+            "scan_expected_distance_m": 3,
+            "scan_overdue_distance_m": 6,
+            "candidate_graph_radius_m": 4.5
+          },
+          "visibility_claimed": false
+        },
+        "navigation_state": "IDLE",
+        "navigation_state_contract": {
+          "version": "1.0",
+          "states": [
+            "IDLE",
+            "PLANNING",
+            "NAVIGATING",
+            "WAITING_FOR_LOCALIZATION",
+            "ARRIVED_AT_PRODUCT",
+            "AWAITING_CUSTOMER_DECISION",
+            "REPLANNING",
+            "CHECKOUT_READY",
+            "COMPLETED",
+            "PAUSED",
+            "ERROR"
+          ],
+          "allowed_transitions": {
+            "IDLE": [
+              "NAVIGATING",
+              "PLANNING"
+            ],
+            "PLANNING": [
+              "ERROR",
+              "NAVIGATING"
+            ],
+            "NAVIGATING": [
+              "ARRIVED_AT_PRODUCT",
+              "CHECKOUT_READY",
+              "COMPLETED",
+              "ERROR",
+              "PAUSED",
+              "REPLANNING",
+              "WAITING_FOR_LOCALIZATION"
+            ],
+            "WAITING_FOR_LOCALIZATION": [
+              "ERROR",
+              "NAVIGATING",
+              "PAUSED"
+            ],
+            "ARRIVED_AT_PRODUCT": [
+              "AWAITING_CUSTOMER_DECISION"
+            ],
+            "AWAITING_CUSTOMER_DECISION": [
+              "CHECKOUT_READY",
+              "ERROR",
+              "NAVIGATING",
+              "REPLANNING"
+            ],
+            "REPLANNING": [
+              "CHECKOUT_READY",
+              "ERROR",
+              "NAVIGATING"
+            ],
+            "CHECKOUT_READY": [
+              "COMPLETED",
+              "NAVIGATING",
+              "PAUSED"
+            ],
+            "PAUSED": [
+              "IDLE",
+              "NAVIGATING",
+              "WAITING_FOR_LOCALIZATION"
+            ],
+            "ERROR": [
+              "IDLE",
+              "PLANNING"
+            ],
+            "COMPLETED": [
+              "IDLE",
+              "PLANNING"
+            ]
+          }
+        }
+      }
+    },
+    "before_accept": {
+      "shopping_revision": 1,
+      "route_revision": 1,
+      "state_revision": 5,
+      "route_anchor": {
+        "anchor_type": "node",
+        "node_id": "N0_0",
+        "edge_start_node_id": null,
+        "edge_end_node_id": null,
+        "distance_to_start_m": 0,
+        "distance_to_end_m": 0,
+        "edge_length_m": 0,
+        "projected_x_m": 1,
+        "projected_y_m": 1,
+        "snap_distance_m": 0,
+        "travel_direction": "stopped",
+        "route_revision": 0
+      },
+      "recommendation": {
+        "recommendation_id": "REC-1-1ae0248d2812",
+        "product_id": "SIM-P-004",
+        "recommendation_source": "association_rules",
+        "model_version": "comp3-phase8b-20261016-association_rules",
+        "score": 0.0779933372525965,
+        "display_explanation": "Associated with bread in training baskets (confidence 0.074, lift 1.053).",
+        "acceptance_status": "pending",
+        "mapping_status": "normalized_name_mapping",
+        "shelf_availability": "available",
+        "shelf_id": "DEMO-SHELF-04",
+        "pickup_node_id": "N2_1",
+        "navigation_eligible": true,
+        "route_detour_cost_m": 14,
+        "shopping_revision": 1,
+        "model_artifact_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+        "product_name": "Pasta",
+        "shelf_section": "Pantry",
+        "shelf_bay": 1,
+        "shelf_level": 2,
+        "experimental_label": "Experimental recommendation"
+      },
+      "session_id": "nav-6b6e9b60-a2ed-4343-8b59-8e1bea94ef70"
+    },
+    "accept": {
+      "shopping_revision": 2,
+      "route_revision": 2,
+      "state_revision": 6,
+      "route_anchor": {
+        "anchor_type": "node",
+        "node_id": "N0_0",
+        "edge_start_node_id": null,
+        "edge_end_node_id": null,
+        "distance_to_start_m": 0,
+        "distance_to_end_m": 0,
+        "edge_length_m": 0,
+        "projected_x_m": 1,
+        "projected_y_m": 1,
+        "snap_distance_m": 0,
+        "travel_direction": "stopped",
+        "route_revision": 1
+      },
+      "selected_product_ids": [
+        "SIM-P-001",
+        "SIM-P-002",
+        "SIM-P-004"
+      ],
+      "latest_event": {
+        "event_type": "accepted",
+        "recommendation_id": "REC-1-1ae0248d2812",
+        "product_id": "SIM-P-004",
+        "model_version": "comp3-phase8b-20261016-association_rules",
+        "model_artifact_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+        "shopping_revision_before": 1,
+        "shopping_revision_after": 2,
+        "previous_route_revision": 1,
+        "new_route_revision": 2,
+        "previous_remaining_route_cost_m": 30,
+        "new_remaining_route_cost_m": 44,
+        "reroute_latency_ms": 0.6495
+      },
+      "session_id": "nav-6b6e9b60-a2ed-4343-8b59-8e1bea94ef70"
+    },
+    "operator_after_accept": {
+      "shopping_revision": "2",
+      "route_revision": "2",
+      "latest_event": "accepted · REC-1-1ae0248d2812",
+      "model": "association_rules · comp3-phase8b-20261016-association_rules",
+      "checksum": "a1d4c70d26d7…"
+    },
+    "dismiss": {
+      "shopping_revision": 2,
+      "route_revision": 2,
+      "latest_event": {
+        "event_type": "dismissed",
+        "recommendation_id": "REC-2-5d4ee9988abe",
+        "product_id": "SIM-P-003",
+        "model_version": "comp3-phase8b-20261016-association_rules",
+        "shopping_revision": 2
+      },
+      "current_recommendation_id": null,
+      "current_product_id": null
+    },
+    "before_dismiss": {
+      "shopping_revision": 2,
+      "route_revision": 2,
+      "recommendation_id": "REC-2-5d4ee9988abe",
+      "product_id": "SIM-P-003"
+    },
+    "no_eligible_setup": {
+      "status": 400,
+      "body": {
+        "error": "Products can only be changed before navigation starts or after reset"
+      }
+    },
+    "no_eligible": {
+      "recommendation_count": 0,
+      "fallback_state": "no_eligible_candidate",
+      "customer_message": "No eligible experimental recommendation is available right now.",
+      "navigation_status": "paused"
+    },
+    "shared_sync": {
+      "session_id": "nav-6b6e9b60-a2ed-4343-8b59-8e1bea94ef70",
+      "state_revision": 7,
+      "shopping_revision": 2,
+      "route_revision": 2
+    },
+    "operator_sync": {
+      "session_id": "nav-6b6e9b60-a2ed-4343-8b59-8e1bea94ef70",
+      "state_revision": 7,
+      "shopping_revision": 2,
+      "route_revision": 2
+    }
+  },
+  "display_screenshot": "/private/tmp/component3-phase8d.TKgf62/recommendation-display.png",
+  "accept_customer_screenshot": "/private/tmp/component3-phase8d.TKgf62/recommendation-accepted-customer.png",
+  "accept_operator_screenshot": "/private/tmp/component3-phase8d.TKgf62/recommendation-accepted-operator.png",
+  "no_eligible_screenshot": "/private/tmp/component3-phase8d.TKgf62/recommendation-no-eligible.png",
+  "browser_errors": {
+    "customer": [
+      {
+        "kind": "log",
+        "detail": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+      },
+      {
+        "kind": "log",
+        "detail": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+      }
+    ],
+    "operator": [
+      {
+        "kind": "log",
+        "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+    ]
+  },
+  "assertions": {
+    "tablet_no_horizontal_overflow": true,
+    "recommendation_displayed": false,
+    "no_scores_exposed": true,
+    "operator_customer_same_session": true,
+    "stale_revision_rejected": true,
+    "acceptance_incremented_once": true,
+    "route_replanned_once": true,
+    "accepted_product_selected": true,
+    "accepted_event_recorded": true,
+    "dismiss_did_not_mutate_list": true,
+    "dismiss_did_not_replan": true,
+    "dismissed_item_suppressed": true,
+    "dismissed_event_recorded": true,
+    "no_eligible_fallback": true,
+    "final_shared_state_equal": true,
+    "no_browser_errors": false
+  },
+  "passed": false
+}

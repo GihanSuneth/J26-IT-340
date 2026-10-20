@@ -1,0 +1,38 @@
+{
+  "category_popularity": {
+    "bootstrap_95_ci": [
+      0.001102515334969761,
+      0.056352663658048266
+    ],
+    "mean_ndcg@5_difference": 0.02829426326661183,
+    "paired_baskets": 297,
+    "statistical_significance_claimed": false
+  },
+  "global_popularity": {
+    "bootstrap_95_ci": [
+      0.0028247536274927263,
+      0.05535522386015246
+    ],
+    "mean_ndcg@5_difference": 0.02876108779137012,
+    "paired_baskets": 297,
+    "statistical_significance_claimed": false
+  },
+  "item_item_cosine": {
+    "bootstrap_95_ci": [
+      -0.017641254497254007,
+      0.02662022597410783
+    ],
+    "mean_ndcg@5_difference": 0.003915513121495425,
+    "paired_baskets": 297,
+    "statistical_significance_claimed": false
+  },
+  "linear_basket_softmax": {
+    "bootstrap_95_ci": [
+      -0.010465958688578846,
+      0.04979751582259702
+    ],
+    "mean_ndcg@5_difference": 0.018865683120325518,
+    "paired_baskets": 297,
+    "statistical_significance_claimed": false
+  }
+}

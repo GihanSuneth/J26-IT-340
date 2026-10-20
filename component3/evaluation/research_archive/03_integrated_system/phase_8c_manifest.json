@@ -1,0 +1,18 @@
+{
+  "phase": "8C",
+  "model": "association_rules",
+  "model_version": "comp3-phase8b-20261016-association_rules",
+  "selected_model_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+  "expected_phase8b_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+  "model_checksum_verified": true,
+  "model_retrained": false,
+  "model_reselected": false,
+  "test_labels_loaded_by_live_service": false,
+  "validated_maps_modified": false,
+  "dashboard_integration": "experimental_guarded",
+  "artifacts": {
+    "phase_8c_raw_scenario_results.json": "1bb1fe61be92e97f44ca97f276f2818dabe0f455c8ce6f02ce4a0de81423f7c0",
+    "phase_8c_aggregated_metrics.json": "75446f049002a5788e95e958c7935e011b1fa3d3d5e04e12e560c4681931f7d9",
+    "phase_8c_availability_scenarios.csv": "665112dafbdfe1b8ac114132022aa6884665db4c903e98751fd0a275f0e7f3e9"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "viewports": {
+    "1366x768": {
+      "horizontal_overflow": false,
+      "required_sections": 5,
+      "screenshot": "component3/docs/research_evidence/04_navigation_algorithms/screenshots/C3-DASH-7B2-1366x768.png"
+    },
+    "1920x1080": {
+      "horizontal_overflow": false,
+      "required_sections": 5,
+      "screenshot": "component3/docs/research_evidence/04_navigation_algorithms/screenshots/C3-DASH-7B2-1920x1080.png"
+    },
+    "mobile_390x844": {
+      "horizontal_overflow": false,
+      "required_sections": 5,
+      "screenshot": "component3/docs/research_evidence/04_navigation_algorithms/screenshots/C3-DASH-7B2-mobile_390x844.png"
+    }
+  },
+  "console_errors": [],
+  "page_errors": [],
+  "voice": {
+    "first_event_spoken": true,
+    "duplicate_event_spoken": false,
+    "calls_after_duplicate": [
+      "Turn left"
+    ],
+    "disabled_event_spoken": false
+  },
+  "manual_navigation": "passed",
+  "guided_navigation": "passed",
+  "camera_assisted_navigation": {
+    "status": "awaiting_checkpoint",
+    "expected_checkpoint": 200
+  }
+}

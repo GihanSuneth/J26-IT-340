@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:j26-it-340:component3:trolley-event:1.0",
+  "title": "Component 3 future trolley event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "event_type", "occurred_at", "source", "session_id", "payload"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "event_id": {"type": "string", "minLength": 1},
+    "event_type": {
+      "enum": ["motion_sample", "apriltag_observation", "product_decision", "navigation_command", "hardware_fault"]
+    },
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "source": {"enum": ["demo_backend", "future_trolley_gateway", "camera_scanner", "customer_display"]},
+    "session_id": {"type": "string", "minLength": 1},
+    "sequence": {"type": ["integer", "null"], "minimum": 0},
+    "payload": {"type": "object"}
+  }
+}

@@ -22,6 +22,20 @@ work or results; mark them `Pending` or `Not applicable`.
 
 ## Verified entries
 
+### 2026-10-15 — Phase 7C shared session and synchronized views
+
+- **Development phase:** Phase 7C — Adaptive Navigation Architecture and Research Evidence Pipeline foundation.
+- **Objective:** Give customer and research views one authoritative deterministic session without implementing the deferred adaptive movement, off-route acceptance, active-journey list mutation, or recommendation training.
+- **Work completed:** Added session identity/revisions, idempotent commands, a renewable single-controller step lease, complete session snapshots, checkpoint history, a customer view, research-view session integration, adaptive design/evaluation notes, archive, and handoff documents.
+- **Files created or modified:** See `component3/evaluation/research_archive/00_project_overview/development_provenance.md`; historical maps, raw POS data, CNN images, weights, and earlier evidence were not moved or overwritten.
+- **Tools and technologies used:** Existing Dijkstra, Held–Karp, dead reckoning, deviation, route manager, checkpoint processor, guidance, Python HTTP server, pytest, Playwright Chromium, and Node syntax checks.
+- **Implementation decisions and reasons:** Wrapped existing algorithms rather than rewriting them; kept GET pure; used command IDs for retry safety and a two-second monotonic lease so one tab controls time and another can continue after closure.
+- **Problems encountered:** Sandbox initially denied localhost tests; the project venv lacked Playwright; customer polling prevented Playwright `networkidle`; an initial permanent lease design would have blocked post-close continuation.
+- **Solutions attempted:** Reran with localhost approval; used already-installed system Playwright; waited on authoritative DOM state; changed control to a renewable lease; added two-tab acceptance.
+- **Test results:** 222/222 full tests passed; three JavaScript syntax checks, four Python compile checks, 15/15 map checks, evidence validation, and Git whitespace check passed. Phase 7B.2 browser regression passed 3/3 viewports with zero browser errors. Phase 7C two-view acceptance passed and recorded 0.25 s before controller close and 0.5 s after takeover. Physical camera/tag evaluation was NOT MEASURED in Phase 7C.
+- **Evidence references:** `C3-INT-001`, `C3-INT-002`, and `component3/evaluation/research_archive/README.md`.
+- **Next planned action:** Review this milestone, then implement the documented position-anchor, free-walk, plausible checkpoint, and dynamic remaining-destination design under a preregistered evaluation protocol.
+
 ### 2026-10-14 12:38 +0530 — Phase 6C one-click spatial guided demonstration
 
 - **Development phase:** Phase 6C — One-Click Panel Guided Demonstration
@@ -244,3 +258,163 @@ work or results; mark them `Pending` or `Not applicable`.
 - **Limitations:** All geometry, products, sensors, checkpoint observations, and pickups remain synthetic. This phase does not establish live camera localization, physical trolley accuracy, real-store navigation, customer usability, or real POS integration.
 - **Final validation:** All 109 backend navigation tests and all 74 dashboard/simulator tests passed, including 19 focused Phase 7A tests. The store-map validator passed 15/15 checks; the evidence validator accepted 99 unique indexed artifacts; both JavaScript files passed syntax checks; JSON exports parsed; all 13 new screenshots were nonempty; and `git diff --check` passed.
 - **Next action:** Stop after the verified Phase 7A implementation and await review. Do not commit or push.
+
+## 2026-10-15 — Phase 7D free walk and adaptive AprilTag localization
+
+- **Objective:** Extend planned navigation with lane-constrained free walk, exact
+  mid-edge routing and safe plausible off-route checkpoint correction/replanning.
+- **Implementation:** Added node/edge route anchors, deterministic junction controls,
+  online graph/time/uncertainty plausibility, non-teleporting correction, state-preserving
+  Held–Karp replanning, synchronized customer/research controls and diagnostics.
+- **Evaluation:** Seed 6042 scenarios A–J completed. The single accepted CP202 case
+  reduced synthetic truth-referenced error from 0.572 m to 0.000 m; route cost remained
+  54.0 m. Unknown, duplicate and implausible observations were rejected. One trial per
+  scenario is functional evidence, not a physical accuracy estimate.
+- **Browser:** Two tabs shared free walk and a mid-edge navigation request with one
+  clock controller and zero console/page errors.
+- **Evidence:** `C3-INT-003`, `C3-INT-004`, and `C3-NAV-012`; detailed method and
+  threats are in the Phase 7D research-archive report.
+- **Physical testing:** Camera and trolley hardware were **NOT MEASURED**.
+- **Next action:** Stop after Phase 7D validation; do not commit or push.
+
+## 2026-10-15 — Phase 7E dynamic shopping sessions
+
+- **Objective:** Support changing shopping intentions without resetting position,
+  losing confirmed pickup state or bypassing exact anchored route optimization.
+- **Implementation:** Added requested/collected/remaining quantities, shopping
+  revisions and events; atomic add/remove/increase/decrease and one-unit pickup;
+  forward-constrained mid-edge reoptimization; independent current-shelf arrival;
+  synchronized customer/research UI; and an inert recommendation acceptance contract.
+- **Evaluation:** Fixed and dynamic synthetic runs both completed 3/3 final units over
+  38.0 m. Under the controlled equal-demand mid-edge comparison, naive and optimized
+  remaining routes both cost 37.715 m—a retained zero-improvement result. Thirty local
+  optimizations had median 0.119 ms and nearest-rank p95 0.135 ms.
+- **Transactions:** Three-view Chromium accepted three unique mutations, applied a
+  duplicated command once, rejected a stale edit with 409, preserved refresh state,
+  and reported zero browser errors.
+- **Validation:** 249/249 tests passed, including 13/13 focused dynamic-shopping,
+  idempotency and camera-concurrency tests;
+  Phase 7B.2/7C/7D browser regressions passed. Physical camera/trolley testing was
+  **NOT MEASURED**, and no recommendation model was trained.
+- **Next action:** Stop after Phase 7E review; do not commit or push.
+
+## 2026-10-15 — Phase 7F navigation research evaluation
+
+- **Objective:** Evaluate rather than rewrite adaptive navigation through reproducible
+  paired baselines, labeled localization scenarios, complete journeys, performance
+  scaling, browser regression and explicit physical-camera acceptance boundaries.
+- **Method:** Fixed five seeds; 20 route comparisons over node/mid-edge anchors; 50
+  labeled checkpoint decisions; exhaustive small-instance route oracles; 35 benchmark
+  cells with 10 warmups and 100 measurements; five complete journey groups; and three
+  maintained Chromium flows.
+- **Results:** Route trials produced 10 improvements and 10 ties with 20/20 oracle
+  matches. Localization produced TP=20, TN=30, FP=0, FN=0; precision and recall were
+  1.0 with denominator 20. All five journeys and all four browser flows passed; the
+  latter had zero console/page errors. These are synthetic/software results.
+- **Physical testing:** A protocol and blank template were created. No physical camera
+  or trolley was used, so physical acceptance is **PENDING**.
+- **Implementation:** Added only Phase 7F evaluation/browser runners, runner tests and
+  evidence/documentation. No engine correction was required; maps, POS data, CNN
+  images, and prior evidence were not modified.
+- **Evidence:** `C3-NAV-014`, `C3-INT-007`, `C3-INT-008`, and the linked Phase 7F
+  research-archive set.
+- **Next action:** Stop after Phase 7F; do not commit or push.
+
+## 2026-10-16 — Phase 7G practical smart-trolley demonstration
+
+- **Customer display:** Reworked `/customer` as a fixed tablet dashboard with the
+  route centered, concise turn guidance, next product/shelf, trip progress, and only
+  shopper decisions. Pickup and Skip stop navigation; Skip branches to keep for later
+  or remove remaining quantity.
+- **Playback:** Removed browser-owned stepping. One backend timer now owns autoplay,
+  with explicit start, pause, resume, stop and rate commands. GET polling is pure and
+  multiple tabs observe the same clock.
+- **Localization:** Added an optional v2 layout with 62 unique AprilTag 36h11 IDs,
+  retained CP200/201/202, all 37 graph edges at no more than 2.0 m nominal opportunity
+  spacing, and nine smaller decode-verified practical cards. Coverage is not a camera
+  detection claim; implausible tag jumps remain rejected.
+- **Integration:** Published workflow, trolley-event and recommendation contracts.
+  Recommendations are marked DEMO / NOT TRAINED and support accept/reject.
+- **Validation:** 122/122 dashboard tests passed; both JavaScript files passed syntax
+  checks; the dense generator and practical cards passed uniqueness, spacing and decode
+  checks; a 1024×768 headless Chrome capture verified the final customer layout.
+  Python Playwright was unavailable, so the optional new interaction harness was not run.
+- **Boundaries:** No physical trolley movement, surveyed store geometry, physical tag
+  range benchmark, or trained recommender is claimed. No commit or push was performed.
+- **Customer-display refinement:** Replaced the cropped dark map with a complete-route
+  light map, exposed the shared backend revision in both views, prevented poll/action
+  races, and made voice activation speak immediately with visible speaking/error state
+  plus a Repeat control. A follow-up stability pass removed the repeatedly restarting
+  route animation, changed polling to 500 ms, added slow/comfort/normal playback,
+  queued voice announcements, kept pickup visible until its shelf unlocks it, and made
+  shopping-list editing available from the fixed panel. Headless Chrome verified both
+  the ready and validated-arrival states at 1024×768. The revised dashboard suite passed
+  124/124 tests; the component backend suite passed 136/136 tests in its project venv.
+
+## 2026-10-16 — Phase 7G.1 reliability fixes
+
+- **Shopping defect:** Reproduced the customer editor's local-only checkbox state and
+  separate reset-oriented Update Route path. Replaced it with immediate revision-safe
+  shopping mutations and automatic anchored replanning; closing the editor is now UI
+  only and cannot reset navigation.
+- **Localization health:** Added backend-derived confirmed/estimated/scan
+  expected/overdue/rejected/camera-unavailable status, graph-distance candidate tags,
+  configurable thresholds, persistent acknowledgeable warnings, and synchronized
+  operator diagnostics.
+- **Camera pipeline:** Regression-tested accepted dense CP231 correction and route
+  revision plus implausible CP217 rejection without estimated-position movement or a
+  last-confirmed change. Synthetic ground truth remained unchanged.
+- **Layout/artifacts:** Preserved CP200/201/202 and the versioned 62-tag layout; generated
+  and decoded all 62 cards, full printable sheets, manifest, and placement CSV. All 37
+  graph edges remain within the nominal 2.00 m opportunity target.
+- **Views:** Added finite customer correction feedback and an optional tag overlay;
+  reorganized the operator view around warnings, camera, localization, full tag overlay,
+  routes, and events while retaining controls in a secondary collapsible panel.
+- **Validation:** 128/128 dashboard tests and 136/136 backend tests passed. Store-map,
+  evidence, Python compilation, JavaScript syntax, whitespace, three-product API, shared
+  revision, and 1024×768 Chrome checks passed. Physical camera/trolley acceptance remains
+  **PENDING**; Playwright interaction automation was unavailable.
+- **Evidence:** `C3-NAV-017`, `C3-INT-010`, and the Phase 7G.1 report/test record in the
+  navigation research archive. No recommendation model was trained; no commit or push.
+
+## 2026-10-17 — Phase 8B.1 recommendation generalization and catalog audit
+
+- **Generalization:** Preserved association validation NDCG@5 0.05807 and frozen-test
+  NDCG@5 0.02320 as the primary result. Retrospective evaluation found a similar decline
+  for item-item cosine, but improvement for global/category popularity and linear
+  softmax; no new model was selected or fitted.
+- **Diagnostics:** Basket sizes, vocabulary coverage, candidates, pair novelty and rule
+  fallback were stable. Hidden-target distribution changed substantially between
+  validation and test. This is descriptive evidence, not a causal attribution.
+- **Integrity:** Chronology, transaction/signature separation, target construction,
+  observed exclusion, vocabulary, denominators, diversity execution, artifact hashes,
+  and 1,784 stored prediction records reproduced. The two conservatively purged records
+  remain excluded despite appearing to be legitimate repeated purchases.
+- **Catalog:** Rechecked all 68 names against the active six-product demo catalog and
+  graph. Four mappings pass; coverage remains 4/68. No map was modified and no SKU or
+  location was fabricated.
+- **Integration boundary:** Defined experimental labeling, explicit per-suggestion
+  acceptance, eligibility filtering, atomic list mutation, current-position replanning,
+  reject/no-mutation behavior, and a no-suggestion fallback. Dashboard integration was
+  not started.
+- **Evidence:** `C3-REC-001` through `C3-REC-003` and the Phase 8B.1 recommendation
+  archive. Work was AI-assisted and requires independent research review. No commit or
+  push was performed.
+
+## 2026-10-17 — Phase 8C live recommendation integration
+
+- Loaded the unchanged selected association artifact once after verifying SHA-256
+  `a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb`.
+- Replaced the hardcoded suggestion with current-list inference, verified mapping and
+  graph filters, revision-bound IDs, neutral fallbacks and graph-based detour costs.
+- Acceptance uses the existing atomic add and anchored replan; dismissal is non-mutating.
+  Both dashboards share model decisions and operator diagnostics.
+- A Bananas + Bread scenario naturally suggested Pasta, changed list/route revisions
+  once, added 14.0 m, collected the product and completed checkout. Fourteen of 16
+  defined mapped-product subsets had a navigable suggestion.
+- Recommendation/integration tests passed 30/30; backend 157/157; non-network dashboard
+  121/121; store map 15/15; three JavaScript checks, compilation and whitespace passed.
+  Sixteen localhost tests and new browser automation remain PENDING because sandbox
+  network permission was not granted and Playwright is unavailable. Physical camera is
+  also PENDING.
+- Evidence: `C3-INT-011` through `C3-INT-013`. No retraining, commit or push occurred.

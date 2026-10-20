@@ -1,0 +1,22 @@
+{
+  "basket_distinct_items": {
+    "maximum": 7,
+    "mean": 4.872425916624811,
+    "minimum": 2
+  },
+  "basket_exclusions": [],
+  "distinct_model_items": 68,
+  "excluded_baskets": 0,
+  "input_valid_lines": 10000,
+  "reconstructed_baskets": 1991,
+  "row_rejects": 0,
+  "source_lines_aggregated": 299,
+  "transformations": [
+    "Strict schema and value parsing; invalid rows are rejected with a reason.",
+    "Orders must have one source user ID and one timestamp.",
+    "Normalized product name is the model item key because source product_id is unstable.",
+    "Repeated order/name lines are quantity-summed; source IDs and line counts remain traceable.",
+    "Raw source user IDs are not copied into the derived JSONL.",
+    "No category is excluded and no refund/cancellation inference is made."
+  ]
+}

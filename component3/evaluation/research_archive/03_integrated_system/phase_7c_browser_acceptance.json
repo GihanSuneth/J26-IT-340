@@ -1,0 +1,14 @@
+{
+  "console_errors": [],
+  "page_errors": [],
+  "session_id": "nav-b149cf92-77a6-4086-ac6f-b48c96fc6d63",
+  "refresh_preserved_session": true,
+  "refresh_advanced_time": false,
+  "shared_session_visible_in_both_views": true,
+  "initial_controller": "customer-8afc43db-c1cf-4541-a97c-0e6864bcbced",
+  "takeover_controller": "research-f9d541e2-3c3f-410d-a338-491c941509ec",
+  "time_before_controller_close_s": 0.25,
+  "time_after_takeover_s": 0.5,
+  "controller_lease_timeout_s": 2.0,
+  "customer_view_required_fields": true
+}

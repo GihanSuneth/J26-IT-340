@@ -1,0 +1,20 @@
+Component 3 Phase 7B.1 Mac camera availability probe
+Date: 2026-10-14 (Asia/Colombo)
+Camera index: 0
+Backend requested by OpenCV: default macOS video backend
+
+Command:
+component3/.venv/bin/python -c '<OpenCV VideoCapture(0), one-frame read, release>'
+
+Actual output:
+OpenCV: not authorized to capture video (status 0), requesting...
+OpenCV: camera failed to properly initialize!
+[ WARN:0@0.146] global cap_ffmpeg_impl.hpp:1240 open VIDEOIO/FFMPEG: Failed list devices for backend avfoundation
+opened=False
+frame_read=False
+frame_shape=None
+
+Result: PENDING / NOT ACCEPTED
+The camera did not open. No frame was read and no physical AprilTag was detected.
+Grant macOS Camera permission to the launching Terminal/Python host and rerun the
+standalone smoke test interactively before claiming real-camera acceptance.

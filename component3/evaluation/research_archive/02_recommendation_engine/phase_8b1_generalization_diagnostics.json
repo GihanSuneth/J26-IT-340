@@ -1,0 +1,557 @@
+{
+  "association_rule_coverage": {
+    "test": {
+      "basket_count": 299,
+      "fallback_only_frequency": 0.0,
+      "fallback_only_sessions": 0,
+      "hidden_target_supported_by_rule_count": 292,
+      "hidden_target_supported_by_rule_rate": 0.9765886287625418,
+      "mean_rule_candidate_count": 62.95986622073578,
+      "median_rule_candidate_count": 63,
+      "rule_candidate_coverage_rate": 1.0,
+      "sessions_with_rule_candidates": 299,
+      "top_hit_targets": [
+        [
+          "name:shirt",
+          1
+        ],
+        [
+          "name:chips",
+          1
+        ],
+        [
+          "name:baby-food",
+          1
+        ],
+        [
+          "name:sugar",
+          1
+        ],
+        [
+          "name:pastry",
+          1
+        ],
+        [
+          "name:vitamins",
+          1
+        ],
+        [
+          "name:cheese",
+          1
+        ],
+        [
+          "name:energy-drink",
+          1
+        ],
+        [
+          "name:wheat-flour",
+          1
+        ],
+        [
+          "name:eggs",
+          1
+        ]
+      ],
+      "top_missed_targets": [
+        [
+          "name:tissue",
+          10
+        ],
+        [
+          "name:onion",
+          9
+        ],
+        [
+          "name:diapers",
+          8
+        ],
+        [
+          "name:dishwashing-liquid",
+          7
+        ],
+        [
+          "name:toothpaste",
+          7
+        ],
+        [
+          "name:banana",
+          7
+        ],
+        [
+          "name:shoes",
+          7
+        ],
+        [
+          "name:beef",
+          7
+        ],
+        [
+          "name:cooking-oil",
+          6
+        ],
+        [
+          "name:bread",
+          6
+        ]
+      ]
+    },
+    "validation": {
+      "basket_count": 297,
+      "fallback_only_frequency": 0.0,
+      "fallback_only_sessions": 0,
+      "hidden_target_supported_by_rule_count": 289,
+      "hidden_target_supported_by_rule_rate": 0.9730639730639731,
+      "mean_rule_candidate_count": 62.83501683501684,
+      "median_rule_candidate_count": 63,
+      "rule_candidate_coverage_rate": 1.0,
+      "sessions_with_rule_candidates": 297,
+      "top_hit_targets": [
+        [
+          "name:milk",
+          4
+        ],
+        [
+          "name:spices",
+          3
+        ],
+        [
+          "name:cookies",
+          2
+        ],
+        [
+          "name:pen",
+          2
+        ],
+        [
+          "name:biscuits",
+          2
+        ],
+        [
+          "name:baby-food",
+          1
+        ],
+        [
+          "name:butter",
+          1
+        ],
+        [
+          "name:floor-cleaner",
+          1
+        ],
+        [
+          "name:potato",
+          1
+        ],
+        [
+          "name:soap",
+          1
+        ]
+      ],
+      "top_missed_targets": [
+        [
+          "name:biscuits",
+          9
+        ],
+        [
+          "name:notebook",
+          9
+        ],
+        [
+          "name:dishwashing-liquid",
+          8
+        ],
+        [
+          "name:toothpaste",
+          8
+        ],
+        [
+          "name:potato",
+          8
+        ],
+        [
+          "name:jeans",
+          7
+        ],
+        [
+          "name:saree",
+          7
+        ],
+        [
+          "name:shirt",
+          7
+        ],
+        [
+          "name:detergent",
+          6
+        ],
+        [
+          "name:fish",
+          6
+        ]
+      ]
+    }
+  },
+  "basket_item_frequency_drift": {
+    "train_to_test": {
+      "jensen_shannon_divergence_bits": 0.010051028250358293,
+      "largest_absolute_share_changes": [
+        {
+          "absolute_share_change": 0.008149239077074131,
+          "item_key": "name:phone-cover",
+          "left_share": 0.013843888070692194,
+          "right_share": 0.021993127147766325
+        },
+        {
+          "absolute_share_change": 0.0068728522336769775,
+          "item_key": "name:onion",
+          "left_share": 0.012371134020618556,
+          "right_share": 0.019243986254295534
+        },
+        {
+          "absolute_share_change": 0.006872852233676976,
+          "item_key": "name:cookies",
+          "left_share": 0.016494845360824743,
+          "right_share": 0.009621993127147767
+        },
+        {
+          "absolute_share_change": 0.006725576828669613,
+          "item_key": "name:shoes",
+          "left_share": 0.014580265095729013,
+          "right_share": 0.021305841924398626
+        },
+        {
+          "absolute_share_change": 0.006480117820324005,
+          "item_key": "name:mixer-grinder",
+          "left_share": 0.01678939617083947,
+          "right_share": 0.010309278350515464
+        },
+        {
+          "absolute_share_change": 0.005891016200294551,
+          "item_key": "name:milk",
+          "left_share": 0.014727540500736377,
+          "right_share": 0.020618556701030927
+        },
+        {
+          "absolute_share_change": 0.005694648993618065,
+          "item_key": "name:fish",
+          "left_share": 0.015316642120765831,
+          "right_share": 0.009621993127147767
+        },
+        {
+          "absolute_share_change": 0.005645557191948945,
+          "item_key": "name:marker",
+          "left_share": 0.012518409425625921,
+          "right_share": 0.006872852233676976
+        },
+        {
+          "absolute_share_change": 0.0055964653902798225,
+          "item_key": "name:spinach",
+          "left_share": 0.01796759941089838,
+          "right_share": 0.012371134020618556
+        },
+        {
+          "absolute_share_change": 0.004909180166912124,
+          "item_key": "name:diapers",
+          "left_share": 0.012960235640648013,
+          "right_share": 0.017869415807560136
+        }
+      ],
+      "pearson_correlation": 0.0038665096438327924,
+      "total_variation_distance": 0.09607265586647026
+    },
+    "train_to_validation": {
+      "jensen_shannon_divergence_bits": 0.013023949619227886,
+      "largest_absolute_share_changes": [
+        {
+          "absolute_share_change": 0.008312426997105275,
+          "item_key": "name:spinach",
+          "left_share": 0.01796759941089838,
+          "right_share": 0.009655172413793104
+        },
+        {
+          "absolute_share_change": 0.007582144126758417,
+          "item_key": "name:popcorn",
+          "left_share": 0.013107511045655376,
+          "right_share": 0.020689655172413793
+        },
+        {
+          "absolute_share_change": 0.007047889898938601,
+          "item_key": "name:educational-book",
+          "left_share": 0.013254786450662739,
+          "right_share": 0.006206896551724138
+        },
+        {
+          "absolute_share_change": 0.007039764359351988,
+          "item_key": "name:diapers",
+          "left_share": 0.012960235640648013,
+          "right_share": 0.02
+        },
+        {
+          "absolute_share_change": 0.006845767101721599,
+          "item_key": "name:phone-cover",
+          "left_share": 0.013843888070692194,
+          "right_share": 0.020689655172413793
+        },
+        {
+          "absolute_share_change": 0.006250571327002182,
+          "item_key": "name:beef",
+          "left_share": 0.015905743740795286,
+          "right_share": 0.009655172413793104
+        },
+        {
+          "absolute_share_change": 0.005902188817226144,
+          "item_key": "name:salt",
+          "left_share": 0.016936671575846832,
+          "right_share": 0.011034482758620689
+        },
+        {
+          "absolute_share_change": 0.00585546696460312,
+          "item_key": "name:chocolate",
+          "left_share": 0.016200294550810016,
+          "right_share": 0.010344827586206896
+        },
+        {
+          "absolute_share_change": 0.005762023259357067,
+          "item_key": "name:pain-reliever",
+          "left_share": 0.014727540500736377,
+          "right_share": 0.00896551724137931
+        },
+        {
+          "absolute_share_change": 0.00575491341221878,
+          "item_key": "name:mixer-grinder",
+          "left_share": 0.01678939617083947,
+          "right_share": 0.011034482758620689
+        }
+      ],
+      "pearson_correlation": -0.39847800828422136,
+      "total_variation_distance": 0.11259966482149206
+    },
+    "validation_to_test": {
+      "jensen_shannon_divergence_bits": 0.015447024367693529,
+      "largest_absolute_share_changes": [
+        {
+          "absolute_share_change": 0.00969309159853063,
+          "item_key": "name:popcorn",
+          "left_share": 0.020689655172413793,
+          "right_share": 0.010996563573883162
+        },
+        {
+          "absolute_share_change": 0.00967887190425406,
+          "item_key": "name:marker",
+          "left_share": 0.016551724137931035,
+          "right_share": 0.006872852233676976
+        },
+        {
+          "absolute_share_change": 0.009001066477070744,
+          "item_key": "name:potato",
+          "left_share": 0.019310344827586208,
+          "right_share": 0.010309278350515464
+        },
+        {
+          "absolute_share_change": 0.008211873444720939,
+          "item_key": "name:lentils",
+          "left_share": 0.010344827586206896,
+          "right_share": 0.018556701030927835
+        },
+        {
+          "absolute_share_change": 0.007529328119445433,
+          "item_key": "name:pain-reliever",
+          "left_share": 0.00896551724137931,
+          "right_share": 0.016494845360824743
+        },
+        {
+          "absolute_share_change": 0.006929731010783268,
+          "item_key": "name:fish",
+          "left_share": 0.016551724137931035,
+          "right_share": 0.009621993127147767
+        },
+        {
+          "absolute_share_change": 0.006837302997985545,
+          "item_key": "name:chocolate",
+          "left_share": 0.010344827586206896,
+          "right_share": 0.01718213058419244
+        },
+        {
+          "absolute_share_change": 0.006244815736461665,
+          "item_key": "name:fiction-book",
+          "left_share": 0.017241379310344827,
+          "right_share": 0.010996563573883162
+        },
+        {
+          "absolute_share_change": 0.006242445787415571,
+          "item_key": "name:spices",
+          "left_share": 0.016551724137931035,
+          "right_share": 0.010309278350515464
+        },
+        {
+          "absolute_share_change": 0.0061642374688944184,
+          "item_key": "name:educational-book",
+          "left_share": 0.006206896551724138,
+          "right_share": 0.012371134020618556
+        }
+      ],
+      "pearson_correlation": 0.07682991384860292,
+      "total_variation_distance": 0.11530039104159259
+    }
+  },
+  "basket_size_by_split": {
+    "test": {
+      "count": 299,
+      "maximum": 7,
+      "mean": 4.866220735785953,
+      "median": 5.0,
+      "minimum": 2,
+      "p25": 4.0,
+      "p75": 6.0
+    },
+    "train": {
+      "count": 1393,
+      "maximum": 7,
+      "mean": 4.874371859296482,
+      "median": 5.0,
+      "minimum": 2,
+      "p25": 4.0,
+      "p75": 6.0
+    },
+    "validation": {
+      "count": 297,
+      "maximum": 7,
+      "mean": 4.882154882154882,
+      "median": 5.0,
+      "minimum": 2,
+      "p25": 4.0,
+      "p75": 6.0
+    }
+  },
+  "candidate_availability": {
+    "test": {
+      "count": 299,
+      "maximum": 67,
+      "mean": 64.13377926421404,
+      "median": 64.0,
+      "minimum": 62,
+      "p25": 63.0,
+      "p75": 65.0
+    },
+    "validation": {
+      "count": 297,
+      "maximum": 67,
+      "mean": 64.11784511784512,
+      "median": 64.0,
+      "minimum": 62,
+      "p25": 63.0,
+      "p75": 65.0
+    }
+  },
+  "hidden_target_distribution_drift": {
+    "validation_to_test": {
+      "jensen_shannon_divergence_bits": 0.10938641521937605,
+      "largest_absolute_share_changes": [
+        {
+          "absolute_share_change": 0.03007781268650834,
+          "item_key": "name:tissue",
+          "left_share": 0.003367003367003367,
+          "right_share": 0.033444816053511704
+        },
+        {
+          "absolute_share_change": 0.020314629010281183,
+          "item_key": "name:biscuits",
+          "left_share": 0.037037037037037035,
+          "right_share": 0.016722408026755852
+        },
+        {
+          "absolute_share_change": 0.020269585486976792,
+          "item_key": "name:notebook",
+          "left_share": 0.030303030303030304,
+          "right_share": 0.010033444816053512
+        },
+        {
+          "absolute_share_change": 0.020269585486976792,
+          "item_key": "name:potato",
+          "left_share": 0.030303030303030304,
+          "right_share": 0.010033444816053512
+        },
+        {
+          "absolute_share_change": 0.020247063725324595,
+          "item_key": "name:jeans",
+          "left_share": 0.026936026936026935,
+          "right_share": 0.006688963210702341
+        },
+        {
+          "absolute_share_change": 0.020247063725324595,
+          "item_key": "name:milk",
+          "left_share": 0.026936026936026935,
+          "right_share": 0.006688963210702341
+        },
+        {
+          "absolute_share_change": 0.020247063725324595,
+          "item_key": "name:saree",
+          "left_share": 0.026936026936026935,
+          "right_share": 0.006688963210702341
+        },
+        {
+          "absolute_share_change": 0.020247063725324595,
+          "item_key": "name:spices",
+          "left_share": 0.026936026936026935,
+          "right_share": 0.006688963210702341
+        },
+        {
+          "absolute_share_change": 0.020066889632107024,
+          "item_key": "name:spinach",
+          "left_share": 0.0,
+          "right_share": 0.020066889632107024
+        },
+        {
+          "absolute_share_change": 0.020044367870454827,
+          "item_key": "name:wheat-flour",
+          "left_share": 0.003367003367003367,
+          "right_share": 0.023411371237458192
+        }
+      ],
+      "pearson_correlation": -0.14941392993479735,
+      "total_variation_distance": 0.282614326092587
+    }
+  },
+  "item_presence": {
+    "test": {
+      "absent_items": [],
+      "present_count": 68
+    },
+    "train": {
+      "absent_items": [],
+      "present_count": 68
+    },
+    "validation": {
+      "absent_items": [],
+      "present_count": 68
+    }
+  },
+  "new_and_disappearing_items": {
+    "test_not_train": [],
+    "test_not_validation": [],
+    "validation_not_test": [],
+    "validation_not_train": []
+  },
+  "unseen_pairs": {
+    "test": {
+      "evaluation_pair_occurrences": 3080,
+      "observed_to_target_pair_occurrences": 1156,
+      "training_unique_pair_count": 2274,
+      "unique_unseen_observed_to_target_pairs": 1,
+      "unseen_evaluation_pair_occurrences": 3,
+      "unseen_evaluation_pair_rate": 0.000974025974025974,
+      "unseen_observed_to_target_pair_occurrences": 1,
+      "unseen_observed_to_target_pair_rate": 0.0008650519031141869
+    },
+    "validation": {
+      "evaluation_pair_occurrences": 3088,
+      "observed_to_target_pair_occurrences": 1153,
+      "training_unique_pair_count": 2274,
+      "unique_unseen_observed_to_target_pairs": 3,
+      "unseen_evaluation_pair_occurrences": 6,
+      "unseen_evaluation_pair_rate": 0.0019430051813471502,
+      "unseen_observed_to_target_pair_occurrences": 3,
+      "unseen_observed_to_target_pair_rate": 0.0026019080659150044
+    }
+  }
+}

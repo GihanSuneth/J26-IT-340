@@ -1,0 +1,37 @@
+{
+  "milestone": "C3-P7G",
+  "executed_on": "2026-10-16",
+  "result": "passed_with_documented_browser_harness_limit",
+  "automated_regression": {
+    "tests_run": 124,
+    "tests_passed": 124,
+    "failures": 0,
+    "errors": 0
+  },
+  "javascript_syntax": {
+    "customer_js": "passed",
+    "spatial_js": "passed"
+  },
+  "dense_apriltag_layout": {
+    "unique_tags": 62,
+    "graph_edges_checked": 37,
+    "all_edges_pass": true,
+    "maximum_opportunity_spacing_m": 2.0,
+    "retained_ids": [200, 201, 202],
+    "practical_subset_cards": 9,
+    "practical_subset_decode_verified": true,
+    "coverage_is_not_detection": true
+  },
+  "tablet_visual_check": {
+    "browser": "installed Google Chrome headless",
+    "viewport": [1024, 768],
+    "screenshot": "component3/docs/research_evidence/04_navigation_algorithms/screenshots/C3-DASH-7G-customer-tablet.png",
+    "observed": "The light customer display fits the complete store route, maneuver, next item, shopping list, shared revision, visible voice state, recommendation decision, pickup, skip and stop controls within the viewport without page scrolling."
+  },
+  "limitations": [
+    "Python Playwright is not installed, so the new optional Phase 7G interaction harness was not executed in this environment.",
+    "No physical trolley movement was tested or claimed.",
+    "No physical AprilTag detection-distance or lighting benchmark was performed.",
+    "The recommendation is demonstration-only and no model was trained."
+  ]
+}

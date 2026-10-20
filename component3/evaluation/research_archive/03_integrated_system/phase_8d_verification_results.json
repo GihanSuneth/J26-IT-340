@@ -1,0 +1,120 @@
+{
+  "phase": "8D",
+  "date": "2026-10-17",
+  "scope": "verification_only",
+  "production_or_historical_files_modified": false,
+  "verification_run_context": "The production_or_historical_files_modified field describes the original Phase 8D verification run. Later preservation and evidence-quality correction of Phase 8D evidence files are excluded from that statement.",
+  "execution_provenance": {
+    "result_source": "Counts and timings are attributed to the executed Codex verification session; raw terminal output was not preserved as a repository artifact.",
+    "commands": {
+      "loopback_collection": "PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/simulations/navigation_dashboard/tests/test_simulation.py::NavigationSimulationApiTests component3/simulations/navigation_dashboard/tests/test_spatial_simulation.py::SpatialApiTests --collect-only -q",
+      "loopback_execution": "PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/simulations/navigation_dashboard/tests/test_simulation.py::NavigationSimulationApiTests component3/simulations/navigation_dashboard/tests/test_spatial_simulation.py::SpatialApiTests -q",
+      "regression_execution": "PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests -q",
+      "javascript_syntax": [
+        "node --check component3/simulations/navigation_dashboard/static/app.js",
+        "node --check component3/simulations/navigation_dashboard/static/customer.js",
+        "node --check component3/simulations/navigation_dashboard/static/spatial.js"
+      ],
+      "model_checksum": "shasum -a 256 component3/ml/models/comp3/recommendation_phase8b/selected_model.json component3/ml/models/comp3/recommendation_phase8b/association_rules.json",
+      "evidence_validation": "PYTHONDONTWRITEBYTECODE=1 python3 -B component3/docs/research_evidence/tools/validate_evidence.py",
+      "diff_check": "git diff --check -- component3",
+      "dashboard_launch": "PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -B -m component3.simulations.navigation_dashboard.dashboard --host 127.0.0.1 --port 8765"
+    }
+  },
+  "loopback_collection": {
+    "collected": 16,
+    "expected": 16,
+    "passed": true
+  },
+  "authorized_loopback_tests": {
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 8.48
+  },
+  "backend_dashboard_regression": {
+    "passed": 295,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 11.25
+  },
+  "javascript_syntax": {
+    "passed": 3,
+    "failed": 0,
+    "files": [
+      "component3/simulations/navigation_dashboard/static/app.js",
+      "component3/simulations/navigation_dashboard/static/customer.js",
+      "component3/simulations/navigation_dashboard/static/spatial.js"
+    ]
+  },
+  "evidence_validation": {
+    "passed": true,
+    "indexed_artifacts": 121
+  },
+  "git_diff_check": true,
+  "browser_acceptance": {
+    "raw_verifier_exit_code": 1,
+    "raw_verifier_passed": false,
+    "raw_verifier_false_assertions": [
+      "recommendation_displayed",
+      "no_browser_errors"
+    ],
+    "overall_status": "PARTIAL_WITH_SUCCESSFUL_CORE_SCENARIOS",
+    "successful_observations": [
+      "tablet viewport had no page overflow",
+      "experimental recommendation displayed without customer-facing scores",
+      "customer and operator used the same shared session",
+      "current recommendation with stale revision returned HTTP 409",
+      "valid acceptance incremented shopping and route revisions once",
+      "accepted product was added and route cost was recalculated",
+      "operator diagnostics synchronized model, checksum, revisions and decision",
+      "dismissal left shopping and route revisions unchanged",
+      "dismissed recommendation was suppressed",
+      "no-eligible fallback was displayed after recommendation dismissal",
+      "final customer and operator state matched"
+    ],
+    "verifier_findings": [
+      "recommendation heading assertion used an incorrect DOM selector although the heading was visually present",
+      "HTTP 409 was an intentional stale-revision response",
+      "an attempted shopping-list replacement returned the expected HTTP 400 because navigation was paused; the no-eligible fallback was reached separately through dismissal",
+      "HTTP 404 was a cosmetic missing favicon response",
+      "no JavaScript exceptions were captured"
+    ],
+    "screenshot_path_mappings": [
+      {
+        "raw_capture_path": "/private/tmp/component3-phase8d.TKgf62/recommendation-display.png",
+        "repository_path": "component3/docs/research_evidence/04_navigation_algorithms/screenshots/C3-PHASE-8D-recommendation-display.png"
+      },
+      {
+        "raw_capture_path": "/private/tmp/component3-phase8d.TKgf62/recommendation-accepted-customer.png",
+        "repository_path": "component3/docs/research_evidence/04_navigation_algorithms/screenshots/C3-PHASE-8D-recommendation-accepted-customer.png"
+      },
+      {
+        "raw_capture_path": "/private/tmp/component3-phase8d.TKgf62/recommendation-accepted-operator.png",
+        "repository_path": "component3/docs/research_evidence/04_navigation_algorithms/screenshots/C3-PHASE-8D-recommendation-accepted-operator.png"
+      },
+      {
+        "raw_capture_path": "/private/tmp/component3-phase8d.TKgf62/recommendation-no-eligible.png",
+        "repository_path": "component3/docs/research_evidence/04_navigation_algorithms/screenshots/C3-PHASE-8D-no-eligible-fallback.png"
+      }
+    ],
+    "pending": [
+      "browser mid-edge acceptance and replanning",
+      "voice navigation acceptance",
+      "physical camera and AprilTag validation",
+      "real trolley validation"
+    ]
+  },
+  "frozen_model": {
+    "model_name": "association_rules",
+    "model_version": "comp3-phase8b-20261016-association_rules",
+    "selected_model_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+    "association_rules_sha256": "a1d4c70d26d7b816dc447b7478538e47791541b8dad346ec04391f53e58850cb",
+    "validation_ndcg_at_5": 0.05807,
+    "frozen_test_ndcg_at_5": 0.02320,
+    "retrained": false,
+    "reselected": false,
+    "artifacts_modified": false
+  },
+  "hardware_validation": "PENDING"
+}

@@ -1,0 +1,83 @@
+{
+  "milestone_id": "C3-P7C-FOUNDATION",
+  "date": "2026-10-15",
+  "timezone": "Asia/Colombo",
+  "branch": "Comp3_Arun",
+  "head": "4cc31bc7d113088ee2e0234a313889671c485fd3",
+  "working_tree": "dirty; pre-existing Phase 7B work preserved; no commit or push",
+  "environment": {
+    "python": "3.14.0",
+    "map_id": "comp3-synthetic-supermarket-demo-v1",
+    "map_schema_version": "1.0",
+    "simulation_fixed_timestep_s": 0.25
+  },
+  "tests": {
+    "focused_pytest": {
+      "command": "component3/.venv/bin/python -m pytest component3/simulations/navigation_dashboard/tests/test_spatial_simulation.py component3/simulations/navigation_dashboard/tests/test_phase7b2_dashboard.py -q",
+      "passed": 44,
+      "failed": 0,
+      "duration_s": 5.47,
+      "note": "Initial sandboxed attempt had 34 passes and 10 localhost-bind PermissionError failures; approved localhost rerun passed 44/44."
+    },
+    "full_pytest": {
+      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests -q",
+      "passed": 222,
+      "failed": 0,
+      "duration_s": 8.15
+    },
+    "javascript_syntax": {
+      "files": ["app.js", "spatial.js", "customer.js"],
+      "passed": 3,
+      "failed": 0
+    },
+    "python_compile": {
+      "files": ["shared_session.py", "dashboard.py", "spatial_simulation.py", "phase7c_browser_acceptance.py"],
+      "passed": 4,
+      "failed": 0
+    },
+    "store_map_validation": {
+      "checks_passed": 15,
+      "checks_failed": 0,
+      "result": "PASS"
+    },
+    "evidence_validation": {
+      "indexed_artifacts_validated": 101,
+      "result": "PASS"
+    },
+    "git_diff_check": {
+      "result": "PASS"
+    }
+  },
+  "browser_acceptance": {
+    "phase7b2_regression": {
+      "interpreter": "system Python 3.14 because project venv did not contain Playwright",
+      "viewports_passed": 3,
+      "viewports_total": 3,
+      "console_errors": 0,
+      "page_errors": 0,
+      "manual_navigation": "passed",
+      "guided_navigation": "passed",
+      "voice_deduplication": "passed",
+      "camera_gate_start": "passed; awaiting CP200; no physical tag observation performed"
+    },
+    "phase7c_two_view": {
+      "artifact": "component3/evaluation/research_archive/03_integrated_system/phase_7c_browser_acceptance.json",
+      "shared_session": true,
+      "refresh_preserved_session": true,
+      "refresh_advanced_time": false,
+      "controller_takeover_after_close": true,
+      "time_before_close_s": 0.25,
+      "time_after_takeover_s": 0.5,
+      "console_errors": 0,
+      "page_errors": 0
+    }
+  },
+  "camera_acceptance": {
+    "phase7c_physical_camera_run": "NOT MEASURED",
+    "historical_phase7b2_evidence": "component3/evaluation/camera_assisted/phase7b2_real_preview_2026-10-15.json",
+    "historical_result": "Real index-0 MacBook camera opened and preview loaded; two frames processed; no tag detected; no frame saved.",
+    "physical_trolley_movement": "NOT MEASURED"
+  },
+  "navigation_accuracy_in_phase7c": "NOT MEASURED",
+  "recommendation_model_performance": "PENDING"
+}

@@ -1,0 +1,20 @@
+{
+  "audit_is_posthoc": true,
+  "dashboard_integration_performed": false,
+  "models_refit": false,
+  "outputs": {
+    "phase_8b1_baseline_posthoc_test_comparison.csv": "a926c7dc9b60804dff152410027bae6ecd00811c57af787748b95865163b526e",
+    "phase_8b1_baseline_posthoc_test_results.json": "49c19d3817769a4d5a1b3c08fa26f1ada6e32f0cdd80e650ab9af7feeb4b7255",
+    "phase_8b1_catalog_mapping_audit.csv": "f5e5441b98259f3969fc5b915856358edd8d9f31873e9569883eaf690eb673d2",
+    "phase_8b1_catalog_mapping_summary.json": "0fec0e470d133f602c2a18f889505e02bccd997d8b36da088f1c2b9c8b9174fe",
+    "phase_8b1_distribution_comparison.csv": "46bce102612fd810512a556335f05df7d7b5732a7aab3ff7db7c8c3303bb2181",
+    "phase_8b1_evaluation_integrity.json": "10b5b679f05118c50ed23ecd5e8d9ef1339123cd6205a9d3eef5bf059c432a4c",
+    "phase_8b1_generalization_diagnostics.json": "f3c012e423f5d2604fa3517473cd4243275dda0822c0b563dfda88102c128d80"
+  },
+  "phase": "8B.1",
+  "phase8b_model_artifact_hashes_unchanged": true,
+  "seed": 3408,
+  "selection_changed": false,
+  "test_labels_used_for_tuning": false,
+  "validated_research_maps_modified": false
+}

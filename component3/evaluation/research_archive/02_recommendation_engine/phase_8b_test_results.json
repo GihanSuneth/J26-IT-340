@@ -1,0 +1,55 @@
+{
+  "phase": "8B",
+  "date": "2026-10-16",
+  "branch": "Comp3_Arun",
+  "results": [
+    {
+      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8a.py component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8b.py -q",
+      "result": "PASS",
+      "detail": "17 passed in 0.11s"
+    },
+    {
+      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests -q",
+      "result": "PASS",
+      "detail": "153 passed in 1.75s"
+    },
+    {
+      "command": "component3/.venv/bin/python -m pytest component3/simulations/navigation_dashboard/tests -q",
+      "result": "PASS",
+      "detail": "128 passed in 8.82s with ephemeral localhost socket permission"
+    },
+    {
+      "command": "component3/.venv/bin/python component3/docs/research_evidence/tools/validate_evidence.py",
+      "result": "PASS",
+      "detail": "115 indexed artifacts valid"
+    },
+    {
+      "command": "component3/.venv/bin/python component3/evaluation/research_archive/validate_archive.py",
+      "result": "PASS",
+      "detail": "37 indexed artifacts valid after this result was indexed"
+    },
+    {
+      "command": "component3/.venv/bin/python -m compileall -q component3/backend/comp3_reco_navigation component3/simulations/navigation_dashboard",
+      "result": "PASS",
+      "detail": "No output"
+    },
+    {
+      "command": "json.tool for every JSON under Phase 8 evidence, model artifacts and contracts",
+      "result": "PASS",
+      "detail": "All JSON parsed"
+    },
+    {
+      "command": "node --check for app.js, spatial.js and customer.js",
+      "result": "PASS",
+      "detail": "All JavaScript syntax checks passed"
+    },
+    {
+      "command": "git diff --check -- component3",
+      "result": "PASS",
+      "detail": "No output"
+    }
+  ],
+  "raw_dataset_sha256": "0cd3a4d7d66dec3e7ce6fb1031b095740fb180b9e5fa46ce8bbb9f26f763ae57",
+  "dashboard_prediction_integration": false,
+  "claim_boundary": "Offline unknown-provenance basket completion only; no customer-behavior, deployment, or physical-system claim."
+}

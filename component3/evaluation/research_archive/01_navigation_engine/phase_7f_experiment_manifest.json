@@ -1,0 +1,45 @@
+{
+  "milestone": "C3-P7F",
+  "data_classification": "deterministic_synthetic_experiment_configuration",
+  "generated_at_utc": "2026-10-15T12:46:14.470778+00:00",
+  "seeds": [
+    6042,
+    7127,
+    8209,
+    9311,
+    104729
+  ],
+  "map_id": "comp3-synthetic-supermarket-demo-v1",
+  "map_schema_version": "1.0",
+  "product_ids": [
+    "SIM-P-001",
+    "SIM-P-002",
+    "SIM-P-003",
+    "SIM-P-004",
+    "SIM-P-005",
+    "SIM-P-006"
+  ],
+  "checkpoint_ids": [
+    200,
+    201,
+    202
+  ],
+  "fixed_timestep_s": 0.25,
+  "speed_m_s": 1.6,
+  "benchmark": {
+    "clock": "time.perf_counter_ns",
+    "warmup_repetitions": 10,
+    "measured_repetitions": 100,
+    "unit": "ms"
+  },
+  "host": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "processor": "arm",
+    "python": "3.14.0",
+    "logical_cpu_count": 10
+  },
+  "ground_truth_policy": "Independent simulated truth is used only for scoring, never as a hidden localization input.",
+  "physical_camera_used": false,
+  "physical_trolley_used": false
+}

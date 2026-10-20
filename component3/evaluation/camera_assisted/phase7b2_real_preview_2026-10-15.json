@@ -1,0 +1,40 @@
+{
+  "camera_index": 0,
+  "real_camera": true,
+  "frame_saved": false,
+  "preview_loaded": true,
+  "preview_dimensions": [
+    960,
+    540
+  ],
+  "selector_options": [
+    "MacBook Air Camera \u00b7 1920\u00d71080 \u00b7 AVFOUNDATION"
+  ],
+  "scanner_state": {
+    "connection": "connected",
+    "camera_index": 0,
+    "scanning": true,
+    "detected_tag_id": null,
+    "visible_tag_ids": [],
+    "consistent_frames": 0,
+    "required_consistent_frames": 3,
+    "armed": true,
+    "consecutive_read_failures": 0,
+    "frame_read_recoveries": 0,
+    "last_result": null,
+    "rejection_reason": null,
+    "frames_processed": 2,
+    "error": null,
+    "frame_read": true,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "capture_backend": "AVFOUNDATION",
+    "device_name": "MacBook Air Camera",
+    "preview_available": true,
+    "preview_sequence": 1,
+    "scan_events": []
+  },
+  "error": null
+}

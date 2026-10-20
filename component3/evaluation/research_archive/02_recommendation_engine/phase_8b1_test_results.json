@@ -1,0 +1,48 @@
+{
+  "phase": "8B.1",
+  "date": "2026-10-17",
+  "recommendation_tests": {
+    "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8a.py component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8b.py component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8b1.py -q",
+    "passed": 21,
+    "failed": 0
+  },
+  "backend_regression": {
+    "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests -q",
+    "passed": 157,
+    "failed": 0
+  },
+  "dashboard_regression": {
+    "command": "component3/.venv/bin/python -m pytest component3/simulations/navigation_dashboard/tests -q",
+    "passed": 128,
+    "failed": 0,
+    "note": "The sandboxed attempt passed 113 tests and blocked 15 localhost socket fixtures with PermissionError. The same suite passed outside the socket-restricted sandbox."
+  },
+  "active_demo_graph_mapping_validation": {
+    "source_products_checked": 68,
+    "verified_navigation_mappings": 4,
+    "invalid_references": 0,
+    "passed": true
+  },
+  "python_compilation": {
+    "command": "component3/.venv/bin/python -m compileall -q component3",
+    "passed": true
+  },
+  "deterministic_audit_rerun": {
+    "baseline_results_sha256": "49c19d3817769a4d5a1b3c08fa26f1ada6e32f0cdd80e650ab9af7feeb4b7255",
+    "manifest_sha256": "b8ca7daeb404bc3708646f462852ee191df8c4ab890f5be66a049b81f0442334",
+    "identical_across_two_runs": true
+  },
+  "evidence_validation": {
+    "command": "python3 -B component3/docs/research_evidence/tools/validate_evidence.py",
+    "passed": true,
+    "indexed_artifacts": 118
+  },
+  "git_diff_check": {
+    "command": "git diff --check -- component3",
+    "passed": true
+  },
+  "model_refit": false,
+  "model_selection_changed": false,
+  "dashboard_integration_performed": false,
+  "commit_or_push_performed": false
+}

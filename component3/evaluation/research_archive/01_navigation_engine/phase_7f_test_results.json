@@ -1,0 +1,71 @@
+{
+  "milestone": "C3-P7F",
+  "executed_date": "2026-10-15",
+  "branch": "Comp3_Arun",
+  "head": "4cc31bc7d113088ee2e0234a313889671c485fd3",
+  "working_tree_policy": "Preserved pre-existing Phase 7B-7E changes; Phase 7F remained inside component3; no commit or push.",
+  "results": {
+    "phase_7f_focused_pytest": {
+      "command": "component3/.venv/bin/python -m pytest -q component3/simulations/navigation_dashboard/tests/test_phase7f_evaluation.py",
+      "passed": 4,
+      "failed": 0
+    },
+    "full_navigation_regression": {
+      "command": "component3/.venv/bin/python -m pytest -q component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests",
+      "passed": 253,
+      "failed": 0,
+      "duration_s": 10.21
+    },
+    "browser_acceptance": {
+      "command": "python3 -B -m component3.simulations.navigation_dashboard.phase7f_browser_acceptance",
+      "flows_passed": 4,
+      "flows_failed": 0,
+      "viewports_passed": 3,
+      "console_errors": 0,
+      "page_errors": 0,
+      "manual_mode": true,
+      "guided_mode": true,
+      "camera_assisted_gate": true,
+      "customer_research_synchronization": true
+    },
+    "store_map_validation": {
+      "command": "python3 -B component3/data/store_map/validate_store_map.py --output /private/tmp/phase7f_store_map_validation.txt",
+      "passed": 15,
+      "failed": 0
+    },
+    "evidence_validation": {
+      "command": "python3 -B component3/docs/research_evidence/tools/validate_evidence.py",
+      "indexed_artifacts": 110,
+      "failed": 0
+    },
+    "python_compileall": {
+      "command": "component3/.venv/bin/python -m compileall -q component3/backend/comp3_reco_navigation component3/simulations/navigation_dashboard",
+      "files_checked": 81,
+      "errors": 0
+    },
+    "javascript_syntax": {
+      "files_checked": 3,
+      "errors": 0
+    },
+    "phase_7f_json_parse": {
+      "files_checked": 5,
+      "errors": 0
+    },
+    "phase_7f_csv_parse": {
+      "files_checked": 4,
+      "errors": 0
+    },
+    "git_diff_check": {
+      "command": "git diff --check -- component3",
+      "passed": true
+    }
+  },
+  "claim_boundaries": {
+    "synthetic_experiments": "executed",
+    "local_browser_acceptance": "executed",
+    "unit_and_integration_testing": "executed",
+    "physical_camera_acceptance": "PENDING",
+    "physical_trolley_evaluation": "PENDING",
+    "recommendation_training": "not performed"
+  }
+}

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="CartPath customer shopping navigation — real-time indoor route guidance">
+  <title>CartPath · Shopping Navigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/customer.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/customer" aria-label="CartPath navigation">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </span>
+      <span><strong>CartPath</strong><small>Smart Shopping Navigation</small></span>
+    </a>
+    <div class="top-actions">
+      <span id="sync-status" class="sync-status">Syncing…</span>
+      <span id="connection" class="connection"><i></i> Connecting</span>
+      <label class="speed-control" for="demo-speed">
+        <span>Speed</span>
+        <select id="demo-speed" aria-label="Navigation demo speed">
+          <option value="0.5" selected>Slow</option>
+          <option value="0.75">Comfort</option>
+          <option value="1">Normal</option>
+        </select>
+      </label>
+      <button id="voice-button" class="icon-button" type="button" aria-label="Toggle spoken directions" aria-pressed="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      </button>
+      <span id="voice-status" class="voice-status" aria-live="polite">Voice off</span>
+      <button id="voice-repeat" class="voice-repeat" type="button" disabled>Repeat</button>
+      <label class="sr-only"><input id="voice" type="checkbox"> Speak directions</label>
+    </div>
+  </header>
+
+  <main class="main-layout">
+    <!-- LEFT: Map & Navigation -->
+    <section class="navigation-stage" aria-label="Live indoor navigation">
+      <div id="map" class="map-canvas" role="img" aria-label="Indoor store map with current route"></div>
+
+      <section class="direction-card" aria-live="polite">
+        <div id="direction-icon" class="direction-icon" aria-hidden="true">↑</div>
+        <div class="direction-copy">
+          <span id="instruction-type" class="eyebrow">START</span>
+          <h1 id="instruction">Preparing your route…</h1>
+          <p><strong id="maneuver-distance">—</strong><span id="instruction-context"> to the next turn</span></p>
+        </div>
+      </section>
+
+      <section class="next-item-card" aria-labelledby="next-heading">
+        <div class="next-item-top">
+          <span class="eyebrow">NEXT ITEM</span>
+          <strong id="product-distance">—</strong>
+        </div>
+        <h2 id="next-heading"><span id="product">Choose your products</span></h2>
+        <p id="product-category">Your next stop will appear here.</p>
+        <dl class="location-grid">
+          <div><dt>Aisle</dt><dd id="aisle">—</dd></div>
+          <div><dt>Bay</dt><dd id="bay">—</dd></div>
+          <div><dt>Shelf</dt><dd id="level">—</dd></div>
+        </dl>
+        <p id="shelf" class="sr-only">—</p>
+        <p id="product-quantity" class="quantity">—</p>
+        <div class="product-actions" aria-label="Product pickup action">
+          <button id="confirm" class="button pickup" type="button" disabled>Pick up at shelf</button>
+          <button id="skip" class="button secondary" type="button" disabled>Skip</button>
+        </div>
+      </section>
+
+      <div class="map-tools" aria-label="Map controls">
+        <button id="toggle-checkpoints" type="button" aria-pressed="false" aria-label="Show AprilTag checkpoints">Tags</button>
+        <button id="recenter" type="button" aria-label="Fit the complete route on the map">Fit</button>
+        <button id="zoom-in" type="button" aria-label="Zoom in">+</button>
+        <button id="zoom-out" type="button" aria-label="Zoom out">−</button>
+      </div>
+
+      <div id="map-notice" class="map-notice" hidden></div>
+
+      <!-- Action bar within map area -->
+      <section class="action-bar" aria-label="Current shopping action">
+        <div class="action-bar-left">
+          <div class="location-info">
+            <span id="scanner-dot" class="scanner-dot" aria-hidden="true"></span>
+            <div><small>LOCATION</small><strong id="location">Entrance</strong></div>
+          </div>
+          <div class="checkpoint-info">
+            <small>NEXT CHECK</small><strong id="checkpoint">—</strong>
+          </div>
+          <span id="checkpoint-status" class="checkpoint-state">Route protected</span>
+        </div>
+        <div class="action-bar-center">
+          <div class="progress-info">
+            <span id="progress-copy">—</span>
+            <strong id="distance">—</strong>
+          </div>
+          <div class="progress-track"><i id="progress"></i></div>
+        </div>
+        <div class="action-bar-right">
+          <button id="start" class="button primary" type="button">▶ Start</button>
+          <button id="pause" class="button secondary" type="button">⏸ Pause</button>
+          <button id="resume" class="button secondary" type="button">▶ Resume</button>
+          <button id="stop" class="button secondary" type="button">■ Stop</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- RIGHT: Product List Panel (always visible) -->
+    <aside class="products-panel" aria-labelledby="shopping-heading">
+      <div class="panel-header">
+        <div>
+          <span class="eyebrow">YOUR SHOPPING TRIP</span>
+          <h2 id="shopping-heading">My Items <span id="item-count" class="item-badge">0</span></h2>
+        </div>
+        <button id="edit-items-button" class="edit-items-button" type="button" aria-controls="edit-shopping" aria-expanded="false">Edit items</button>
+      </div>
+
+      <div class="panel-scroll">
+        <!-- Upcoming Stops -->
+        <section class="stops-section">
+          <div class="section-title">
+            <h3>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Upcoming Stops
+            </h3>
+            <span id="route-summary" class="route-badge">—</span>
+          </div>
+          <ol id="remaining-items" class="stop-list"></ol>
+
+          <button class="collapse-toggle" type="button" aria-expanded="false" data-toggle="collected-items">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Collected
+            <span class="chevron">⌄</span>
+          </button>
+          <ul id="collected-items" class="collected-list" hidden></ul>
+        </section>
+
+        <!-- Recommendations -->
+        <section class="recommendations-section" id="recommendations-section" hidden>
+          <h3>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Experimental recommendation
+          </h3>
+          <div id="recommendations" class="recommendation-list"></div>
+        </section>
+
+        <!-- Edit shopping list -->
+        <details id="edit-shopping" class="edit-list">
+          <summary>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit shopping list
+          </summary>
+          <label class="search-field">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="catalog-search" type="search" placeholder="Search products…">
+          </label>
+          <p id="shopping-update-status" class="shopping-update-status" role="status">Changes save automatically.</p>
+          <form id="products" class="catalog"></form>
+          <p id="list-note" class="helper"></p>
+        </details>
+      </div>
+    </aside>
+  </main>
+
+  <dialog id="skip-dialog" class="decision-dialog" aria-labelledby="skip-title">
+    <form method="dialog">
+      <span class="eyebrow">SKIP THIS ITEM</span>
+      <h2 id="skip-title">What should happen next?</h2>
+      <p>Keep it on your list for a later stop, or remove the remaining quantity.</p>
+      <button id="skip-later" class="button primary full" type="button">Keep for later</button>
+      <button id="skip-remove" class="button secondary full" type="button">Remove remaining</button>
+      <button class="button secondary full" value="cancel">Cancel</button>
+    </form>
+  </dialog>
+
+  <!-- Hidden support elements -->
+  <div class="support-only" aria-hidden="true">
+    <button id="items-button" type="button"></button>
+    <button id="drawer-close" type="button"></button>
+    <button id="drawer-backdrop" type="button"></button>
+    <button id="overview-button" type="button">Overview</button>
+    <button id="camera-navigation" type="button">Camera navigation</button>
+    <button id="enter-free-walk" type="button">Explore</button>
+    <button id="free-walk-stop" type="button">Stop</button>
+    <button id="free-walk-resume" type="button">Resume</button>
+    <button id="request-navigation" type="button">Navigate</button>
+    <div id="free-walk-options"></div>
+    <p id="replanning"></p><ol id="checkpoint-timeline"></ol><span id="checkpoint-count"></span>
+    <p id="checkpoint-explanation"></p><ol id="route"></ol>
+    <span id="session"></span><span id="revision"></span><span id="shopping-revision"></span>
+  </div>
+  <p id="error" class="error-toast" role="alert" hidden></p>
+  <script src="/customer.js"></script>
+</body>
+</html>

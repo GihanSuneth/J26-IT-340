@@ -1,0 +1,21 @@
+{
+  "layout_id": "comp3-dense-apriltag-layout-v2",
+  "subset": "practical",
+  "card_size_mm": [
+    90,
+    100
+  ],
+  "tag_ids": [
+    200,
+    201,
+    202,
+    209,
+    210,
+    212,
+    215,
+    216,
+    217
+  ],
+  "decode_verified": true,
+  "print_instruction": "Print at 100% / Actual Size."
+}
