@@ -20,7 +20,7 @@ data/store_map/                 Store graph, AprilTag layout, and validators
 docs/                           Component design and reproducible evidence
 evaluation/                     Component 3 logs, metrics, and test results
 firmware/                       Component-owned ESP32 motion task
-frontend/navigation/            Trolley-display navigation feature
+frontend/navigation/            Component 3 trolley-display navigation feature
 ml/                             Colab notebook, configs, models, and experiments
 simulations/                    Component 3 simulations and offline dashboard
 ```
@@ -31,6 +31,10 @@ Owner: comp3. Population-level POS data only (no individual customer data); reco
 ## Important files
 
 - `backend/comp3_reco_navigation/requirements.txt` — Python dependencies.
+- `frontend/navigation/comp3_map_view.jsx` — store map and trolley position view.
+- `frontend/navigation/comp3_route_overlay.jsx` — route overlay and next-stop highlight.
+- `frontend/navigation/comp3_to_buy_list.jsx` — session to-buy list view.
+- `frontend/navigation/comp3_suggestion_card.jsx` — recommendation card requiring customer confirmation.
 - `backend/comp3_reco_navigation/cnn/train.py` — CNN training entry point.
 - `backend/comp3_reco_navigation/cnn/infer.py` — CNN inference entry point.
 - `ml/colab/comp3_cnn_train.ipynb` — Google Colab launcher.

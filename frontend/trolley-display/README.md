@@ -9,10 +9,24 @@ React + Vite app shown on the trolley screen. The application shell and other co
 package.json, public/, src/ (app, api, components, features).
 
 ## Rules
-The shared shell (`app/`, `api/`, and `components/`) is develop-owned. Component 3 navigation views are maintained under `../../component3/frontend/navigation/`.
+The shared shell (`app/`, `api/`, and `components/`) is develop-owned. Component 3 navigation views (`comp3_map_view.jsx`, `comp3_route_overlay.jsx`, `comp3_to_buy_list.jsx`, and `comp3_suggestion_card.jsx`) are maintained under `../../component3/frontend/navigation/`.
+
+## Getting started
+
+Requires Node.js 20 or newer.
+
+```sh
+npm install
+npm run dev
+```
+
+Create a production build with `npm run build`, or preview it locally with
+`npm run preview`.
 
 ## Files in this folder
 - `package.json` - Frontend dependencies and scripts (React + Vite).
+- `vite.config.js` - Vite configuration and React plugin.
+- `index.html` - Vite application entry document.
 
 ## Subfolders
 - `public/`

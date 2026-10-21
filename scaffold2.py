@@ -216,10 +216,10 @@ F = {
     "frontend/trolley-display/src/api/client.js": "Single fetch/WebSocket client to the gateway; all components call the backend through it.",
     "frontend/trolley-display/src/features/validation/ValidationPanel.jsx": "Shows item-validation status (accepted/rejected) from Component 1.",
     "frontend/trolley-display/src/features/cart/CartPanel.jsx": "Live cart list with add/remove confirmation from Component 2.",
-    "component3/frontend/navigation/MapView.jsx": "Draws the store map and the trolley's current position.",
-    "component3/frontend/navigation/RouteOverlay.jsx": "Draws the Held-Karp route and highlights the next stop.",
-    "component3/frontend/navigation/ToBuyList.jsx": "Session to-buy list with check-off and add/remove.",
-    "component3/frontend/navigation/SuggestionCard.jsx": "Shows a recommendation with detour cost; customer must confirm before it joins the route.",
+    "component3/frontend/navigation/comp3_map_view.jsx": "Draws the store map and the trolley's current position.",
+    "component3/frontend/navigation/comp3_route_overlay.jsx": "Draws the Held-Karp route and highlights the next stop.",
+    "component3/frontend/navigation/comp3_to_buy_list.jsx": "Session to-buy list with check-off and add/remove.",
+    "component3/frontend/navigation/comp3_suggestion_card.jsx": "Shows a recommendation with detour cost; customer must confirm before it joins the route.",
     "frontend/trolley-display/src/features/billing/BillingPanel.jsx": "Checkout summary and bill from Component 4.",
     # firmware
     "firmware/trolley_esp32/platformio.ini": "PlatformIO build config: ESP32 board, Arduino framework, libs (HX711, IMU), serial 115200.",
@@ -496,7 +496,7 @@ d("frontend/trolley-display/src/features/cart", "Component 2 UI.",
   "Owner: comp2.",
   "Build CartPanel: live list of recognised items with quantity, a confirm/remove control, and total item count updating from cart_updated events.")
 d("component3/frontend/navigation", "Component 3 UI: map, route, to-buy list, suggestions.",
-  "MapView, RouteOverlay, ToBuyList, SuggestionCard.",
+  "comp3_map_view.jsx, comp3_route_overlay.jsx, comp3_to_buy_list.jsx, comp3_suggestion_card.jsx.",
   "Owner: comp3. A suggestion must be confirmed by the customer before it is added to the route.",
   "Build MapView (SVG store map from store_graph.json with the trolley marker), RouteOverlay (polyline of the Held-Karp path, highlight next stop), ToBuyList (check-off, add/remove), SuggestionCard (shows item, aisle and detour metres with Accept/Dismiss).")
 d("frontend/trolley-display/src/features/billing", "Component 4 UI.",

@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap");
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #18251f;
+  background: #f4f7f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 88px;
+  padding: 0 clamp(24px, 7vw, 104px);
+  background: #fff;
+  border-bottom: 1px solid #e8eeea;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 13px;
+  background: #176b4d;
+  color: #fff;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.brand strong,
+.brand small {
+  display: block;
+}
+
+.brand strong {
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+}
+
+.brand small {
+  margin-top: 2px;
+  color: #718078;
+  font-size: 12px;
+}
+
+.primary-nav {
+  display: flex;
+  align-self: stretch;
+  gap: 32px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  color: #66736c;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #176b4d;
+}
+
+.nav-link.active {
+  border-bottom-color: #176b4d;
+}
+
+.screen {
+  width: min(100% - 48px, 960px);
+  margin: 0 auto;
+  padding: clamp(56px, 10vh, 100px) 0;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #287957;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+h1,
+h2 {
+  font-family: "Manrope", sans-serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(36px, 5vw, 52px);
+  letter-spacing: -0.045em;
+}
+
+.screen-description {
+  max-width: 520px;
+  margin: 14px 0 40px;
+  color: #65736b;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.feature-placeholder {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  max-width: 680px;
+  padding: 28px;
+  border: 1px solid #e5ece7;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 32px rgb(24 37 31 / 4%);
+}
+
+.placeholder-icon {
+  display: grid;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 13px;
+  background: #eaf4ee;
+  color: #176b4d;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.feature-placeholder h2 {
+  margin: 2px 0 6px;
+  font-size: 17px;
+}
+
+.feature-placeholder p {
+  margin: 0;
+  color: #718078;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+  .app-header {
+    min-height: 76px;
+    padding: 0 20px;
+  }
+
+  .primary-nav {
+    gap: 18px;
+  }
+
+  .screen {
+    width: min(100% - 40px, 960px);
+  }
+
+  .feature-placeholder {
+    padding: 22px;
+  }
+}
