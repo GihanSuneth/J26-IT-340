@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 MODEL = ROOT / 'product model' / 'test' / 'models' / 'best.pt'
 PRICES = ROOT / 'data' / 'product_recognition' / 'product_prices.xlsx'
 CONFIDENCE = 0.70
-HOLD_SECONDS = 2.5
+HOLD_SECONDS = 1.5
 MISSING_GRACE_SECONDS = 0.35
 CAMERA_INDEX = 0
 
