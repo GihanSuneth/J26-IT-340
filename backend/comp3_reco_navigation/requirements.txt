@@ -1,0 +1,2 @@
+# requirements.txt - Python dependencies for Component 3 (fastapi, scikit-learn, pandas, numpy, networkx/scipy, opencv-contrib-python, pyserial).
+# Owner: comp3

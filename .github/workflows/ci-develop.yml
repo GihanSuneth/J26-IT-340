@@ -1,0 +1,2 @@
+# ci-develop.yml - CI on PR to develop: lint, per-component unit tests, contract tests, frontend build.
+# Owner: develop (shared - all four members review)
