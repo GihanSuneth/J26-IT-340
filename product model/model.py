@@ -1,17 +1,13 @@
 from ultralytics import YOLO
 import cv2
 
-# ---------------------------------------------------
 # 1. Load the YOLO model
-# ---------------------------------------------------
 # YOLO will automatically download the model
 # the first time you run the program.
 model = YOLO("yolo11n.pt")
 
 
-# ---------------------------------------------------
 # 2. Load the image
-# ---------------------------------------------------
 image_path = "test.jpg"
 
 image = cv2.imread(image_path)
@@ -21,15 +17,11 @@ if image is None:
     exit()
 
 
-# ---------------------------------------------------
 # 3. Run YOLO object detection
-# ---------------------------------------------------
 results = model(image)
 
 
-# ---------------------------------------------------
 # 4. Process detection results
-# ---------------------------------------------------
 for result in results:
 
     # Bounding boxes
@@ -60,9 +52,7 @@ for result in results:
             f"| Confidence: {confidence:.2f}"
         )
 
-        # ------------------------------------------------
         # Draw bounding box
-        # ------------------------------------------------
         cv2.rectangle(
             image,
             (x1, y1),
@@ -71,9 +61,7 @@ for result in results:
             2
         )
 
-        # ------------------------------------------------
         # Draw object name and confidence
-        # ------------------------------------------------
         label = f"{object_name} {confidence:.2f}"
 
         cv2.putText(
@@ -87,18 +75,14 @@ for result in results:
         )
 
 
-# ---------------------------------------------------
 # 5. Display the result
-# ---------------------------------------------------
 cv2.imshow("YOLO Object Detection", image)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 
-# ---------------------------------------------------
 # 6. Save the detected image
-# ---------------------------------------------------
 cv2.imwrite("detected_result.jpg", image)
 
 print("Detection completed.")
