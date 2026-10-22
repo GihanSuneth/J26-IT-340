@@ -1,0 +1,1 @@
+Copy sample product images (JPG/PNG) into this folder for testing.
