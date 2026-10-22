@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+openpyxl
+pyserial
+opencv-python
+ultralytics
