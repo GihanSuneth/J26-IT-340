@@ -1,0 +1,26 @@
+/* Login-only refinements. Shared layout and controls live in AuthShared.css. */
+.auth-card--login {
+  max-width: 490px;
+}
+
+.auth-card--login .auth-card-brand {
+  margin-bottom: 17px;
+}
+
+.auth-card--login .auth-heading {
+  margin-bottom: 12px;
+}
+
+
+.auth-success {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border: 1px solid #c7ead3;
+  border-radius: 10px;
+  background: #effaf2;
+  color: #08794d;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+

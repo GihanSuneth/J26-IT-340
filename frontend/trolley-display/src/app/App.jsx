@@ -1,359 +1,197 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 
-// Backend origin only; endpoint paths are defined in loadData().
-const API_BASE = "http://127.0.0.1:8001";
+const API = "http://127.0.0.1:8001";
+const CATEGORIES = [
+  ["Rice & Grains","🌾","photo-1586201375761-83865001e31c"],
+  ["Fresh Produce","🥬","photo-1540420773420-3366772f4999"],
+  ["Dairy - Liquid & Yogurt","🥛","photo-1563636619-e9143da7973b"],
+  ["Biscuits","🍪","photo-1558961363-fa8fdf82db35"],
+  ["Cooking Oil & Fats","🫒","photo-1474979266404-7eaacbcd87c5"],
+  ["Beverages - Malt & Coffee","☕","photo-1512568400610-62da28bc8a13"],
+  ["Beverages - Soft Drinks","🥤","photo-1581636625402-29b2a704ef13"],
+  ["Beverages - Tea","🍵","photo-1544787219-7f47ccb76574"],
+  ["Canned & Preserved Food","🥫","photo-1584269600464-37b1b58a9fe7"],
+  ["Chocolate & Confectionery","🍫","photo-1548907040-4d42c2e2d4c8"],
+  ["Dairy - Milk Powder","🥛","photo-1628088062854-d1870b4553da"],
+  ["Flour & Baking","🥣","photo-1627485937980-221c88ac04f9"],
+  ["Household - Cleaning","🧽","photo-1585421514738-01798e348b17"],
+  ["Household - Laundry","🧺","photo-1517677208171-0bc6725a3e60"],
+  ["Noodles & Pasta","🍝","photo-1551183053-bf91a1d81141"],
+  ["Personal Care - Bath & Soap","🧼","photo-1608248543803-ba4f8c70ae0b"],
+  ["Personal Care - Hair Care","🧴","photo-1527799820374-dcf8d9d4a388"],
+  ["Personal Care - Oral Care","🪥","photo-1609840114035-3c981b782dfe"],
+  ["Sauces & Condiments","🫙","photo-1472476443507-c7a5948772fc"],
+  ["Spices & Curry Powder","🌶️","photo-1532336414038-cf19250c5757"],
+  ["Sugar & Sweeteners","🍯","photo-1581441363689-1f3c3c414635"],
+].map(([name, icon, photo]) => ({ name, icon, image: `https://images.unsplash.com/${photo}?auto=format&fit=crop&w=500&q=85` }));
 
-function getStoredUser() {
-  try {
-    return JSON.parse(localStorage.getItem("user") || "null");
-  } catch {
-    return null;
-  }
+function readUser() {
+  try { return JSON.parse(localStorage.getItem("user") || "null"); }
+  catch { return null; }
 }
+function normalizeProduct(item) {
+  const stock = item.stock_status ?? item.Stock_Status ?? (item.available ? "Available" : "Unknown");
+  const price = item.price ?? item.price_lkr ?? item.Price_LKR ?? null;
+  return {
+    id: String(item.id ?? item.product_id ?? item.Item_ID ?? ""),
+    name: item.name ?? item.item_name ?? item.Item_Name ?? "Unnamed product",
+    category: item.category ?? item.Category ?? "Uncategorized",
+    price: price == null || price === "" ? null : Number(price),
+    stock_status: stock,
+    available: typeof item.available === "boolean" ? item.available : String(stock).toLowerCase() === "available",
+  };
+}
+const money = (n) => `LKR ${Number(n).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-function App() {
-  const storedUser = getStoredUser();
-  const loggedInCustomerId = storedUser?.customer_id || "";
-
-  const [products, setProducts] = useState([]);
-  const [customerIdInput, setCustomerIdInput] = useState(loggedInCustomerId);
-  const [customerId, setCustomerId] = useState(loggedInCustomerId);
+export default function App() {
+  const navigate = useNavigate();
+  const [user] = useState(readUser);
   const [catalogue, setCatalogue] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [recommendationStatus, setRecommendationStatus] = useState("loading");
-  const [catalogueStatus, setCatalogueStatus] = useState("loading");
-  const [cart, setCart] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedProductId, setSelectedProductId] = useState("");
+  const [activeCategory, setActiveCategory] = useState("");
+  const [search, setSearch] = useState("");
+  const [selectedId, setSelectedId] = useState("");
   const [quantity, setQuantity] = useState("1");
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const [showProductDropdown, setShowProductDropdown] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
-
-    async function loadData() {
-      setRecommendationStatus("loading");
-      setCatalogueStatus("loading");
-      setMessage("");
-
+    const ctrl = new AbortController();
+    (async () => {
       try {
-        const [recommendationResponse, categoryResponse, catalogueResponse] =
-          await Promise.all([
-            customerId
-              ? fetch(`${API_BASE}/c4/recommendations/${encodeURIComponent(customerId)}`, {
-                  signal: controller.signal,
-                })
-              : Promise.resolve(null),
-            fetch(`${API_BASE}/c4/catalog/categories`, { signal: controller.signal }),
-            fetch(`${API_BASE}/c4/catalog/products`, { signal: controller.signal }),
-          ]);
-
-        if (recommendationResponse && !recommendationResponse.ok) {
-          throw new Error(`Recommendations request failed (HTTP ${recommendationResponse.status}).`);
-        }
-        if (!categoryResponse.ok) {
-          throw new Error(`Categories request failed (HTTP ${categoryResponse.status}).`);
-        }
-        if (!catalogueResponse.ok) {
-          throw new Error(`Catalogue request failed (HTTP ${catalogueResponse.status}).`);
-        }
-
-        const [recommendationData, categoryData, catalogueData] = await Promise.all([
-          recommendationResponse
-            ? recommendationResponse.json()
-            : Promise.resolve({ recommendations: [] }),
-          categoryResponse.json(),
-          catalogueResponse.json(),
+        const [cr, pr] = await Promise.all([
+          fetch(`${API}/c4/catalog/categories`, { signal: ctrl.signal }),
+          fetch(`${API}/c4/catalog/products`, { signal: ctrl.signal }),
         ]);
+        if (!cr.ok) throw new Error(`Categories request failed (${cr.status}).`);
+        if (!pr.ok) throw new Error(`Products request failed (${pr.status}).`);
+        const [cd, pd] = await Promise.all([cr.json(), pr.json()]);
+        const raw = Array.isArray(pd) ? pd : pd.products || [];
+        const normalized = raw.map(normalizeProduct).filter((x) => x.id);
+        const rawCategories = Array.isArray(cd) ? cd : cd.categories || [];
+        const cats = rawCategories.map((cat) =>
+          typeof cat === "string" ? cat : cat.name ?? cat.category ?? cat.category_name ?? ""
+        ).filter(Boolean);
+        setCatalogue(normalized);
+        const finalCategories = cats.length ? cats : [...new Set(normalized.map((x) => x.category))];
+        setCategories(finalCategories);
+        setActiveCategory(finalCategories[0] || normalized[0]?.category || "");
+      } catch (e) {
+        if (e.name !== "AbortError") setError(`${e.message || "Catalogue could not load."} Ensure the backend is running at ${API}.`);
+      } finally { setLoading(false); }
+    })();
+    return () => ctrl.abort();
+  }, []);
 
-        const rawItems = Array.isArray(catalogueData)
-          ? catalogueData
-          : catalogueData.products || [];
-        const normalizeId = (value) => String(value ?? "").trim();
-        const normalizeProduct = (item) => {
-          const stockStatus = item.stock_status ?? item.Stock_Status ??
-            (item.available === true ? "Available" : "Unknown");
-          const rawPrice = item.price ?? item.price_lkr ?? item.Price_LKR ?? null;
-          return {
-            id: normalizeId(item.id ?? item.product_id ?? item.Item_ID),
-            name: item.name ?? item.item_name ?? item.Item_Name ?? "Unnamed product",
-            category: item.category ?? item.Category ?? "Uncategorized",
-            price: rawPrice == null || rawPrice === "" ? null : Number(rawPrice),
-            stock_status: stockStatus,
-            available: typeof item.available === "boolean"
-              ? item.available
-              : String(stockStatus).toLowerCase() === "available",
-          };
-        };
-        const normalizedCatalogue = rawItems.map(normalizeProduct);
-        const catalogueById = new Map(normalizedCatalogue.map((item) => [item.id, item]));
+  useEffect(() => {
+    if (!user) navigate("/login", { replace: true });
+  }, [user, navigate]);
 
-        const recommendationItems = recommendationData.recommendations || [];
-        const mappedRecommendations = recommendationItems.map((item) => {
-          const id = normalizeId(item.product_id ?? item.id);
-          const catalogItem = catalogueById.get(id);
-          return {
-            id,
-            name: catalogItem?.name ?? item.product_name ?? id,
-            category: catalogItem?.category ?? item.category ?? "Uncategorized",
-            price: catalogItem?.price ?? null,
-            available: catalogItem?.available ?? false,
-            stock_status: catalogItem?.stock_status ?? "Unknown",
-            score: item.score,
-            pastPurchaseCount: item.past_purchase_count,
-            daysSinceLastPurchase: item.days_since_last_purchase,
-          };
-        });
-
-        setCatalogue(normalizedCatalogue);
-        setCategories(Array.isArray(categoryData) ? categoryData : categoryData.categories || []);
-        setProducts(mappedRecommendations);
-        setRecommendationStatus("success");
-        setCatalogueStatus("success");
-      } catch (error) {
-        if (error.name === "AbortError") return;
-        console.error("SmartTrolley data loading failed:", error);
-        setRecommendationStatus("error");
-        setCatalogueStatus("error");
-        setMessage(error.message || "Could not connect to the backend.");
-      }
-    }
-
-    loadData();
-    return () => controller.abort();
-  }, [customerId]);
-
-  const loadCustomerRecommendations = (event) => {
-    event.preventDefault();
-    const cleanedId = customerIdInput.trim();
-    if (!cleanedId) {
-      setMessage("Please enter a customer ID.");
-      return;
-    }
-    setMessage("");
-    setCustomerId(cleanedId);
+  const products = useMemo(() => catalogue.filter((x) =>
+    (!activeCategory || x.category === activeCategory) &&
+    (!search.trim() || `${x.name} ${x.category} ${x.id}`.toLowerCase().includes(search.trim().toLowerCase()))
+  ), [catalogue, activeCategory, search]);
+  const selected = catalogue.find((x) => x.id === selectedId);
+  const suggestions = catalogue.filter((x) =>
+    x.category === activeCategory && search.trim() &&
+    x.name.toLowerCase().includes(search.trim().toLowerCase())
+  ).slice(0, 7);
+  const itemCount = cart.reduce((sum, x) => sum + x.quantity, 0);
+  const total = cart.reduce((sum, x) => sum + Number(x.price) * x.quantity, 0);
+  const categoryInfo = (name) => {
+    const normalized = String(name || "").trim().toLowerCase().replace(/\s+/g, " ");
+    const exact = CATEGORIES.find((x) => x.name.trim().toLowerCase().replace(/\s+/g, " ") === normalized);
+    if (exact) return exact;
+    if (normalized.includes("malt") || normalized.includes("coffee")) return CATEGORIES.find((x) => x.name === "Beverages - Malt & Coffee");
+    if (normalized.includes("soft drink")) return CATEGORIES.find((x) => x.name === "Beverages - Soft Drinks");
+    if (normalized.includes("tea")) return CATEGORIES.find((x) => x.name === "Beverages - Tea");
+    return CATEGORIES.find((x) => normalized.includes(x.name.split(" ")[0].toLowerCase())) || CATEGORIES[0];
   };
 
-  const productsInCategory = useMemo(() => {
-    if (!selectedCategory) return [];
-    return catalogue.filter((item) => item.category === selectedCategory);
-  }, [catalogue, selectedCategory]);
-
-  const selectedProduct = useMemo(
-    () => catalogue.find((item) => item.id === selectedProductId) || null,
-    [catalogue, selectedProductId]
-  );
-
-  const formatLKR = (amount) =>
-    `LKR ${Number(amount).toLocaleString("en-LK", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })}`;
-
-  const addToCart = (product) => {
-    if (product.price == null || !Number.isFinite(Number(product.price))) {
-      setMessage(`A catalogue price is not available for ${product.name}. It was not added.`);
-      return;
-    }
-    if (!product.available) {
-      setMessage(`${product.name} is not marked as available in the catalogue.`);
-      return;
-    }
-    setCart((current) => {
-      const existing = current.find((item) => item.id === product.id);
-      if (existing) {
-        return current.map((item) => item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item);
-      }
-      return [...current, { ...product, quantity: 1 }];
+  function add(product, qty = 1) {
+    if (!product || product.price == null || !Number.isFinite(product.price)) { setMessage("A valid catalogue price is unavailable."); return; }
+    if (!product.available) { setMessage(`${product.name} is marked unavailable.`); return; }
+    setCart((old) => {
+      const found = old.find((x) => x.id === product.id);
+      return found ? old.map((x) => x.id === product.id ? { ...x, quantity: x.quantity + qty } : x) : [...old, { ...product, quantity: qty }];
     });
     setMessage(`${product.name} added to your bill.`);
-  };
+  }
+  function addSelected(e) {
+    e.preventDefault();
+    const qty = Number(quantity);
+    if (!selected) { setMessage("Select a product first."); return; }
+    if (!Number.isInteger(qty) || qty < 1) { setMessage("Enter a quantity of at least 1."); return; }
+    add(selected, qty); setSelectedId(""); setSearch(""); setQuantity("1"); setShowProductDropdown(false);
+  }
+  function changeQty(id, change) {
+    setCart((old) => old.map((x) => x.id === id ? { ...x, quantity: x.quantity + change } : x).filter((x) => x.quantity > 0));
+  }
 
-  const updateQuantity = (id, change) => {
-    setCart((current) => current
-      .map((item) => item.id === id ? { ...item, quantity: item.quantity + change } : item)
-      .filter((item) => item.quantity > 0));
-  };
-
-  const removeFromCart = (id) => {
-    const item = cart.find((product) => product.id === id);
-    setCart((current) => current.filter((product) => product.id !== id));
-    if (item) setMessage(`${item.name} removed from your bill.`);
-  };
-
-  const addManualProduct = (event) => {
-    event.preventDefault();
-    const itemQuantity = Number(quantity);
-    if (!selectedProduct) {
-      setMessage("Please select a product from the catalogue.");
-      return;
-    }
-    if (!Number.isInteger(itemQuantity) || itemQuantity < 1) {
-      setMessage("Please enter a valid quantity of at least 1.");
-      return;
-    }
-    if (selectedProduct.price == null || !Number.isFinite(selectedProduct.price)) {
-      setMessage("This product does not have a catalogue price, so it cannot be added.");
-      return;
-    }
-    if (!selectedProduct.available) {
-      setMessage("This product is not marked as available in the catalogue.");
-      return;
-    }
-    setCart((current) => {
-      const existing = current.find((item) => item.id === selectedProduct.id);
-      if (existing) {
-        return current.map((item) => item.id === selectedProduct.id
-          ? { ...item, quantity: item.quantity + itemQuantity }
-          : item);
-      }
-      return [...current, { ...selectedProduct, quantity: itemQuantity }];
-    });
-    setMessage(`${selectedProduct.name} added to your bill.`);
-    setSelectedProductId("");
-    setSelectedCategory("");
-    setQuantity("1");
-  };
-
-  const total = useMemo(
-    () => cart.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0),
-    [cart]
-  );
-  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  return (
-    <div className="trolley-app">
-      <header className="topbar">
-        <div className="brand">
-          <div className="brand-icon">S</div>
-          <div><h1>SmartTrolley</h1><p>Personalized shopping assistant</p></div>
-        </div>
-        {storedUser && (
-          <div className="account-summary">
-            <span>{storedUser.full_name || storedUser.email}</span>
-            <span className="product-id">Customer ID: {storedUser.customer_id}</span>
-          </div>
-        )}
-      </header>
-
-      <main className="dashboard">
-        <section className="welcome">
-          <div>
-            <p className="eyebrow">YOUR SMART SHOPPING EXPERIENCE</p>
-            <h2>Welcome to your trolley</h2>
-            <p className="welcome-description">Discover your recommendations and manage your shopping bill in one place.</p>
-          </div>
-          <div className="welcome-icon">🛒</div>
-        </section>
-
-        <section className="customer-selector panel">
-          <form onSubmit={loadCustomerRecommendations} className="form-row">
-            <label>Customer ID
-              <input type="text" value={customerIdInput}
-                onChange={(event) => setCustomerIdInput(event.target.value)}
-                placeholder="Your customer ID" required />
-            </label>
-            <button className="primary-button" type="submit" disabled={recommendationStatus === "loading"}>
-              {recommendationStatus === "loading" ? "Loading..." : "Load recommendations"}
-            </button>
-          </form>
-          <p className="product-id">Showing recommendations for customer: <strong>{customerId || "Not selected"}</strong></p>
-        </section>
-
-        <section className="section-heading">
-          <div><p className="eyebrow">PERSONALIZED FOR YOU</p><h2>Recommended products</h2><p>Products ranked by your recommendation model.</p></div>
-          <span className="product-count">{products.length} products</span>
-        </section>
-
-        {recommendationStatus === "loading" && <p className="recommendation-status" role="status">Loading personalized recommendations...</p>}
-        {recommendationStatus === "error" && <div className="recommendation-status error" role="alert">Could not load recommendations. Check that the backend is running and review the browser Console for the exact error.</div>}
-        {catalogueStatus === "error" && <p className="recommendation-status error">The catalogue could not be loaded. Manual product selection is unavailable.</p>}
-        {recommendationStatus === "success" && products.length === 0 && <p className="recommendation-status">No recommendations are available for this customer yet.</p>}
-
-        <section className="product-grid">
-          {products.map((product) => (
-            <article className="product-card" key={product.id}>
-              <div className="product-visual">🛍️</div>
-              <div className="product-details">
-                <span className="category-label">{product.category}</span>
-                <h3>{product.name}</h3>
-                <p className="product-id">{product.id}</p>
-                {typeof product.daysSinceLastPurchase === "number" && <p className="product-id">Last purchased {product.daysSinceLastPurchase} days ago</p>}
-                <div className="product-card-bottom">
-                  <div>{product.price != null ? <strong>{formatLKR(product.price)}</strong> : <span>Price unavailable</span>}</div>
-                  <button type="button" className="primary-button" onClick={() => addToCart(product)} disabled={product.price == null || !product.available}>
-                    {product.price == null ? "Price unavailable" : !product.available ? "Unavailable" : "+ Add"}
-                  </button>
-                </div>
-              </div>
-            </article>
-          ))}
-        </section>
-
-        <div className="main-columns">
-          <section className="panel manual-panel">
-            <div className="panel-heading"><div className="panel-icon">＋</div><div><h2>Add a product manually</h2><p>Select a product from the grocery catalogue.</p></div></div>
-            <form onSubmit={addManualProduct} className="manual-form">
-              <label>Category
-                <select value={selectedCategory} onChange={(event) => { setSelectedCategory(event.target.value); setSelectedProductId(""); }} required>
-                  <option value="">Select a category</option>
-                  {categories.map((item) => <option value={item} key={item}>{item}</option>)}
-                </select>
-              </label>
-              <label>Product
-                <select value={selectedProductId} onChange={(event) => setSelectedProductId(event.target.value)} disabled={!selectedCategory || catalogueStatus !== "success"} required>
-                  <option value="">{!selectedCategory ? "Select a category first" : "Select a product"}</option>
-                  {productsInCategory.map((item) => <option value={item.id} key={item.id}>{item.name} ({item.id})</option>)}
-                </select>
-              </label>
-              <div className="form-row">
-                <label>Unit price (LKR)
-                  <input type="text" value={selectedProduct?.price != null ? Number(selectedProduct.price).toLocaleString("en-LK") : ""} placeholder="Auto-filled from catalogue" readOnly />
-                </label>
-                <label>Quantity
-                  <input type="number" min="1" step="1" value={quantity} onChange={(event) => setQuantity(event.target.value)} required />
-                </label>
-              </div>
-              {selectedProduct && <p className="product-id">Stock status: {selectedProduct.stock_status}. A catalogue-listed price may not be the current in-store price.</p>}
-              <button className="primary-button full-button" type="submit" disabled={!selectedProduct || !selectedProduct.available || selectedProduct.price == null}>Add product to bill</button>
-            </form>
+  return <div className="shopping-kiosk">
+    <header className="shop-topbar">
+      <div className="shop-brand"><span className="shop-logo">🛒</span><div><strong>SmartTrolley</strong><small>SMART SHOPPING, SMARTER CHOICES</small></div></div>
+      <div className="shop-header-right">
+        <div className="shop-customer"><span className="shop-avatar">●</span><div><strong>{user?.full_name || user?.name || "Shopper"}</strong><small>{user?.customer_id ? `Customer ID: ${user.customer_id}` : user?.email || "Personalized shopping"}</small></div></div>
+        <button className="shop-nav-button" onClick={() => navigate("/recommendations")} type="button">✦ Recommendations</button>
+      </div>
+    </header>
+    <main className="shop-main">
+      <section className="shop-welcome"><div><span className="shop-eyebrow">YOUR SMART SHOPPING EXPERIENCE</span><h1>Shop your way, <em>smarter.</em></h1><p>Choose a category, select your groceries, and watch your bill update instantly.</p></div><div className="shop-welcome-art" aria-hidden="true">🥬 🍅 🥕</div></section>
+      <div className="shop-workspace">
+        <aside className="shop-category-sidebar" aria-label="Grocery categories">
+          <div className="shop-sidebar-heading"><span className="shop-eyebrow">CATEGORIES</span><strong>Shop by aisle</strong></div>
+          <div className="shop-category-list">{categories.map((cat) => { const info = categoryInfo(cat); return <button key={cat} type="button" className={`shop-category-row ${activeCategory === cat ? "active" : ""}`} onClick={() => { setActiveCategory(cat); setSearch(""); setSelectedId(""); }}><img src={info.image} alt="" loading="lazy" /><span className="shop-category-row-icon">{info.icon}</span><span>{cat}</span><span className="shop-category-chevron">›</span></button>; })}</div>
+        </aside>
+        <section className="shop-catalogue shop-product-workspace">
+          <div className="shop-middle-heading"><div><span className="shop-eyebrow">STEP 1 · CHOOSE ITEMS</span><h2>Find your groceries</h2><p>Choose a category on the left, then search for a product.</p></div><span className="shop-middle-count">{catalogue.filter((x) => x.category === activeCategory).length} products</span></div>
+          <section className="shop-category-feature">
+            <img src={categoryInfo(activeCategory).image} alt="" />
+            <div><span className="shop-eyebrow">SELECTED CATEGORY</span><h3>{activeCategory || "Choose a category"}</h3><p>Search results will only include products from this category.</p></div>
+            <span className="shop-feature-icon">{categoryInfo(activeCategory).icon}</span>
           </section>
-
-          <section className="panel bill-panel">
-            <div className="bill-heading"><div><p className="eyebrow">YOUR PURCHASE</p><h2>Shopping bill</h2></div><span className="cart-count">{itemCount} items</span></div>
-            {cart.length === 0 ? (
-              <div className="empty-cart"><div className="empty-cart-icon">🛒</div><h3>Your trolley is empty</h3><p>Add a recommended or catalogue product to get started.</p></div>
-            ) : (
-              <div className="cart-list">
-                {cart.map((item) => (
-                  <div className="cart-item" key={item.id}>
-                    <div className="cart-item-info">
-                      <h3>{item.name}</h3><p>{formatLKR(item.price)} each</p>
-                      <div className="quantity-controls">
-                        <button type="button" aria-label={`Decrease ${item.name} quantity`} onClick={() => updateQuantity(item.id, -1)} disabled={item.quantity <= 1}>−</button>
-                        <span>{item.quantity}</span>
-                        <button type="button" aria-label={`Increase ${item.name} quantity`} onClick={() => updateQuantity(item.id, 1)}>+</button>
-                      </div>
-                      <button type="button" className="remove-item-button" onClick={() => removeFromCart(item.id)}>Remove</button>
-                    </div>
-                    <strong>{formatLKR(item.price * item.quantity)}</strong>
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="bill-summary">
-              <div className="summary-line"><span>Total units</span><span>{itemCount}</span></div>
-              <div className="grand-total"><span>Grand total</span><strong>{formatLKR(total)}</strong></div>
+          <section className="shop-manual-panel shop-quick-add-panel">
+            <div className="shop-manual-heading"><span>＋</span><div><h3>Add to your trolley</h3><p>{loading ? "Loading store catalogue…" : "Search, select a match, set quantity, and add it to your bill."}</p></div></div>
+            {error && <div className="shop-state shop-error" role="alert">{error}</div>}
+            <form onSubmit={addSelected} className="shop-manual-form">
+              <label className="shop-product-select">Search or choose product
+                <div className="shop-search-control">
+                  <input autoComplete="off" value={search} onFocus={() => setShowProductDropdown(true)} onChange={(e) => { setSearch(e.target.value); setSelectedId(""); setShowProductDropdown(true); }} placeholder={`Search ${activeCategory || "products"}…`} required aria-label="Search products in selected category" />
+                  <button type="button" className="shop-browse-products" aria-label="Show products in this category" aria-expanded={showProductDropdown} onClick={() => setShowProductDropdown((open) => !open)}>▾</button>
+                </div>
+                {showProductDropdown && <div className="shop-product-suggestions" role="listbox" aria-label="Products in selected category">
+                  {(search.trim() ? suggestions : catalogue.filter((product) => product.category === activeCategory).slice(0, 30)).map((product) => <button type="button" role="option" aria-selected={selectedId === product.id} key={product.id} onClick={() => { setSelectedId(product.id); setSearch(product.name); setShowProductDropdown(false); setMessage(""); }}>
+                    <span className="shop-suggestion-image"><img src={categoryInfo(product.category).image} alt="" /></span><span className="shop-suggestion-copy"><strong>{product.name}</strong><small>{product.available ? "Available" : "Unavailable"}</small></span><strong className="shop-suggestion-price">{product.price != null ? money(product.price) : "Price N/A"}</strong>
+                  </button>)}
+                  {!loading && (search.trim() ? suggestions.length === 0 : catalogue.filter((product) => product.category === activeCategory).length === 0) && <p className="shop-no-suggestions">No products found in this category.</p>}
+                </div>}
+              </label>
+              <label className="shop-qty-input">Quantity<input type="number" min="1" step="1" value={quantity} onChange={(e) => setQuantity(e.target.value)} required /></label>
+              <button className="shop-add-button" type="submit" disabled={!selected || !selected.available || selected.price == null}>Add to bill</button>
+            </form>
+            {message && <p className="shop-picker-hint" role="status">{message}</p>}
+          </section>
+          <section className="shop-smart-options" aria-label="Explore recommendations">
+            <div className="shop-smart-options-copy"><span className="shop-smart-sparkle">✦</span><div><strong>Make your shopping smarter</strong><p>Explore personalized picks or discover meal ideas anytime.</p></div></div>
+            <div className="shop-smart-option-actions">
+              <button type="button" className="shop-smart-option" onClick={() => navigate("/recommendations")}><span>✦</span><span><strong>For you</strong><small>Based on your purchases</small></span><b>→</b></button>
+              <button type="button" className="shop-smart-option recipe" onClick={() => setMessage("Recipe ideas will be available when the recipe recommendation component is connected.")}><span>🍲</span><span><strong>Recipe ideas</strong><small>Meals and ingredients</small></span><b>→</b></button>
             </div>
           </section>
-        </div>
-        {message && <p className="message" role="status">{message}</p>}
-      </main>
-    </div>
-  );
+        </section>
+        <aside className="shop-bill-panel">
+          <div className="shop-bill-header"><div><span className="shop-eyebrow">YOUR PURCHASE</span><h2>Shopping bill</h2><p>Review your selected items</p></div><span className="shop-item-count">{itemCount} items</span></div>
+          <div className="shop-bill-scroll">{cart.length === 0 ? <div className="shop-empty-bill"><span>🛒</span><h3>Your trolley is empty</h3><p>Add products from the middle panel to begin shopping.</p></div> : cart.map((item) => { const info = categoryInfo(item.category); return <div className="shop-bill-item" key={item.id}><img src={info.image} alt="" /><div className="shop-bill-item-copy"><strong>{item.name}</strong><small>{money(item.price)} each</small><div className="shop-quantity"><button type="button" aria-label={`Decrease ${item.name}`} disabled={item.quantity <= 1} onClick={() => changeQty(item.id, -1)}>−</button><span>{item.quantity}</span><button type="button" aria-label={`Increase ${item.name}`} onClick={() => changeQty(item.id, 1)}>＋</button></div></div><div className="shop-bill-item-total"><strong>{money(item.price * item.quantity)}</strong><button type="button" className="shop-remove" onClick={() => setCart((old) => old.filter((x) => x.id !== item.id))} aria-label={`Remove ${item.name}`}>×</button></div></div>; })}</div>
+          <div className="shop-bill-footer"><div className="shop-bill-summary"><span>Items</span><strong>{itemCount}</strong></div><div className="shop-bill-total"><span>Grand total</span><strong>{money(total)}</strong></div><div className="shop-bill-actions"><button className="shop-clear-button" type="button" disabled={!cart.length} onClick={() => { setCart([]); setMessage("Shopping bill cleared."); }}>Clear bill</button><button className="shop-checkout-button" type="button" disabled={!cart.length} onClick={() => setMessage("Checkout can be connected later.")}>Review bill →</button></div><p className="shop-bill-note">Prices are shown from the store catalogue.</p></div>
+        </aside>
+      </div>
+      {message && <div className="shop-message" role="status"><span>{message}</span><button type="button" onClick={() => setMessage("")} aria-label="Dismiss">×</button></div>}
+    </main>
+    <footer className="shop-footer"><strong>🛒 SmartTrolley</strong><span>Personalized choices · Easier shopping</span><button type="button" onClick={() => navigate("/recommendations")}>Recommendations →</button></footer>
+  </div>;
 }
-
-export default App;

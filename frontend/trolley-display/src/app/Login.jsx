@@ -1,16 +1,21 @@
-
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./AuthShared.css";
+import "./Login.css";
 
 const API_URL = "http://127.0.0.1:8001";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState(() => location.state?.email || "");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
+  const registrationSuccess = location.state?.registered === true;
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,20 +25,35 @@ export default function Login() {
     try {
       const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim(), password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+          password,
+        }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.detail || "Login failed.");
+        throw new Error(
+          typeof data.detail === "string"
+            ? data.detail
+            : "Login failed. Please check your email and password."
+        );
       }
 
+      if (!data.access_token || !data.user) {
+        throw new Error("The server did not return the expected login details.");
+      }
+
+      // Store the authenticated customer's session.
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      navigate("/shopping");
+      // Clear the registration message and enter the shopping page.
+      navigate("/shopping", { replace: true });
     } catch (err) {
       setError(err.message || "Cannot connect to the server.");
     } finally {
@@ -43,7 +63,7 @@ export default function Login() {
 
   return (
     <main className="auth-screen">
-      <div className="auth-background" />
+      <div className="auth-background" aria-hidden="true" />
 
       <section className="auth-layout">
         <aside className="auth-intro">
@@ -57,11 +77,13 @@ export default function Login() {
 
           <div className="auth-intro-copy">
             <span className="auth-kicker">SMART RETAIL TECHNOLOGY</span>
+
             <h1>
               Your Smart
               <br />
               <span>Shopping Partner</span>
             </h1>
+
             <p>
               Experience a smarter shopping journey with
               personalized recommendations and convenient
@@ -76,6 +98,7 @@ export default function Login() {
                   <small>Products tailored to your preferences</small>
                 </span>
               </div>
+
               <div>
                 <span className="benefit-icon">▣</span>
                 <span>
@@ -83,6 +106,7 @@ export default function Login() {
                   <small>A more convenient checkout experience</small>
                 </span>
               </div>
+
               <div>
                 <span className="benefit-icon">↗</span>
                 <span>
@@ -99,7 +123,10 @@ export default function Login() {
         </aside>
 
         <section className="auth-card-wrap">
-          <form className="auth-card" onSubmit={handleSubmit}>
+          <form
+            className="auth-card auth-card--login"
+            onSubmit={handleSubmit}
+          >
             <div className="auth-card-brand">
               <span className="auth-card-logo">S</span>
               <strong>
@@ -115,6 +142,12 @@ export default function Login() {
                 your personalized shopping experience.
               </p>
             </div>
+
+            {registrationSuccess && (
+              <p className="auth-success" role="status">
+                Account created successfully! Please sign in to continue.
+              </p>
+            )}
 
             <label htmlFor="login-email">Email address</label>
             <div className="auth-input-wrap">
@@ -142,6 +175,7 @@ export default function Login() {
                 onChange={(event) => setPassword(event.target.value)}
                 required
               />
+
               <button
                 className="password-toggle"
                 type="button"
