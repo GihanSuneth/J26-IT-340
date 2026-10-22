@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "models" / "best.pt"
 
 # Camera settings
-CAMERA_INDEX = 0
+CAMERA_INDEX = 1
 CONFIDENCE = 0.50
 IMAGE_SIZE = 640
 

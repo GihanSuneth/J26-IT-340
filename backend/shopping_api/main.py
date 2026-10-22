@@ -15,7 +15,7 @@ PRICES = ROOT / 'data' / 'product_recognition' / 'product_prices.xlsx'
 CONFIDENCE = 0.70
 HOLD_SECONDS = 1.5
 MISSING_GRACE_SECONDS = 0.35
-CAMERA_INDEX = 0
+CAMERA_INDEX = 1
 
 app = FastAPI(title='SmartCart Automatic YOLO API')
 app.add_middleware(CORSMiddleware, allow_origins=['http://localhost:5173','http://127.0.0.1:5173'], allow_methods=['*'], allow_headers=['*'])
