@@ -21,10 +21,10 @@ claim was inferred.
 
 ```bash
 component3/.venv/bin/python -m component3.simulations.navigation_dashboard.phase8c_evaluation
-component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests -q
+component3/.venv/bin/python -m pytest component3/backend component3/simulations/navigation_dashboard/tests -q
 python3 -B component3/docs/research_evidence/tools/validate_evidence.py
-node --check component3/simulations/navigation_dashboard/static/customer.js
-node --check component3/simulations/navigation_dashboard/static/spatial.js
+node --check component3/frontend/navigation/dashboard/customer.js
+node --check component3/frontend/navigation/dashboard/spatial.js
 component3/.venv/bin/python -m compileall -q component3
 git diff --check -- component3
 ```

@@ -6,10 +6,10 @@ from dataclasses import asdict, dataclass
 import math
 from typing import Any, Mapping, Sequence
 
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import (
+from component3.backend.navigation.dead_reckoning import (
     normalize_heading,
 )
-from component3.backend.comp3_reco_navigation.navigation.store_graph import StoreGraph
+from component3.backend.navigation.store_graph import StoreGraph
 
 
 STRAIGHT_TOLERANCE_DEG = 35.0
@@ -24,6 +24,7 @@ MAX_ARRIVAL_UNCERTAINTY_M = 0.75
 
 INSTRUCTION_TYPES = frozenset(
     {
+        "IDLE",
         "START",
         "STRAIGHT",
         "TURN_LEFT",

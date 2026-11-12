@@ -31,8 +31,8 @@ before and after preparation is
 From the repository root with CPython 3.14.0:
 
 ```bash
-component3/.venv/bin/python -m component3.backend.comp3_reco_navigation.recommendation.prepare_phase8a
-component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8a.py -q
+component3/.venv/bin/python -m component3.backend.recommendation.prepare_phase8a
+component3/.venv/bin/python -m pytest component3/backend/test_recommendation_phase8a.py -q
 ```
 
 Seed `3408` controls deterministic hidden-target selection. The preparation code and

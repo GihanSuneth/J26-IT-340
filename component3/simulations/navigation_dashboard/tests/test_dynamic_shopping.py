@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import (
+from component3.backend.navigation.dead_reckoning import (
     DeadReckoner,
     PositionEstimate,
 )

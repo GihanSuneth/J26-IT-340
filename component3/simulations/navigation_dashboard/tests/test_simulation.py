@@ -10,14 +10,14 @@ import unittest
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import (
+from component3.backend.navigation.dead_reckoning import (
     MotionMeasurement,
     PositionEstimate,
 )
-from component3.backend.comp3_reco_navigation.navigation.deviation import (
+from component3.backend.navigation.deviation import (
     RouteDeviationMonitor,
 )
-from component3.backend.comp3_reco_navigation.navigation.held_karp import (
+from component3.backend.navigation.held_karp import (
     held_karp_route,
 )
 from component3.simulations.navigation_dashboard.dashboard import make_handler

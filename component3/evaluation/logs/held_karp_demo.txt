@@ -2,7 +2,7 @@ Component 3 Held-Karp Multi-Stop Demonstration
 ================================================
 Executed: 2026-10-14T00:11:50+05:30
 Python: 3.14.0
-Command: python3 -B -m component3.backend.comp3_reco_navigation.navigation.held_karp_demo
+Command: python3 -B -m component3.backend.navigation.held_karp_demo
 Graph: /Users/arun/Documents/Research Project/R1/J26-IT-340/component3/data/store_map/store_graph.json
 Start: ENT — Entrance
 Checkout: CHK — Checkout

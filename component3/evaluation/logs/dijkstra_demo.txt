@@ -2,7 +2,7 @@ Component 3 Dijkstra Routing Demonstration
 ==========================================
 Executed: 2026-10-13T23:10:31+05:30
 Python: 3.14.0
-Command: python3 -B -m backend.comp3_reco_navigation.navigation.dijkstra_demo --output evaluation/comp3/logs/dijkstra_demo.txt
+Command: python3 -B -m component3.backend.navigation.dijkstra_demo --output component3/evaluation/logs/dijkstra_demo.txt
 Graph: /Users/arun/Documents/Research Project/R1/J26-IT-340/data/store_map/store_graph.json
 
 [Entrance to Checkout]

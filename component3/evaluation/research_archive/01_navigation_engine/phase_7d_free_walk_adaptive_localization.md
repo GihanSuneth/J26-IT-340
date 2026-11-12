@@ -100,10 +100,10 @@ From the repository root:
 ```bash
 component3/.venv/bin/python -B -m component3.simulations.navigation_dashboard.phase7d_evaluation
 python3 -B -m component3.simulations.navigation_dashboard.phase7d_browser_acceptance
-component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests -q
-python3 -m compileall -q component3/backend/comp3_reco_navigation component3/simulations/navigation_dashboard
-node --check component3/simulations/navigation_dashboard/static/spatial.js
-node --check component3/simulations/navigation_dashboard/static/customer.js
+component3/.venv/bin/python -m pytest component3/backend component3/simulations/navigation_dashboard/tests -q
+python3 -m compileall -q component3/backend component3/simulations/navigation_dashboard
+node --check component3/frontend/navigation/dashboard/spatial.js
+node --check component3/frontend/navigation/dashboard/customer.js
 git diff --check -- component3
 ```
 

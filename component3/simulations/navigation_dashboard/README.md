@@ -24,7 +24,9 @@ python3 -B -m component3.simulations.navigation_dashboard.dashboard --port 8766
 
 The server accepts only `127.0.0.1` or `localhost`. Python's standard library
 and the existing Component 3 navigation modules are used; no package install
-or API key is required. Static files are bundled in `static/`. If the server
+or API key is required. Browser assets are grouped under
+`component3/frontend/navigation/dashboard/` and
+`component3/frontend/recommendation/dashboard/`. If the server
 stops, the browser displays the local launch command and retries state
 synchronization until the server is available again.
 
@@ -96,7 +98,7 @@ Before dashboard evaluation, probe available indices without opening GUI windows
 
 ```bash
 component3/.venv/bin/python -B -m \
-  component3.backend.comp3_reco_navigation.navigation.apriltag_camera_smoke_test \
+  component3.backend.navigation.apriltag_camera_smoke_test \
   --probe-cameras
 ```
 
@@ -111,7 +113,7 @@ observations, run:
 
 ```bash
 component3/.venv/bin/python -B -m \
-  component3.backend.comp3_reco_navigation.navigation.apriltag_camera_smoke_test \
+  component3.backend.navigation.apriltag_camera_smoke_test \
   --camera-index 0 --no-preview
 ```
 

@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 import unittest
 
+from component3.simulations.navigation_dashboard.dashboard import make_handler
+from component3.simulations.navigation_dashboard.config import (
+    NAVIGATION_FRONTEND_ROOT,
+    RECOMMENDATION_FRONTEND_ROOT,
+)
 
-STATIC = Path(__file__).resolve().parents[1] / "static"
+
+STATIC = NAVIGATION_FRONTEND_ROOT
 
 
 class DashboardContractTests(unittest.TestCase):
@@ -67,7 +72,24 @@ class DashboardContractTests(unittest.TestCase):
         self.assertIn("setInterval(poll, 500)", javascript)
         self.assertNotIn('id="apply"', customer)
         self.assertIn('id="shopping-update-status"', customer)
-        self.assertIn('"shopping_add" : "shopping_remove"', javascript)
+        self.assertIn('"wishlist_remove" : "wishlist_add"', javascript)
+        self.assertIn('control("plan_navigation_route")', javascript)
+
+    def test_customer_can_add_items_before_selecting_navigation(self) -> None:
+        """The wishlist action must remain visible while the basket is empty."""
+        css = (STATIC / "customer.css").read_text(encoding="utf-8")
+        javascript = (STATIC / "customer.js").read_text(encoding="utf-8")
+        self.assertIn('"Add to wishlist"', javascript)
+        self.assertNotIn(
+            '.catalog[data-mode="planning"] .quantity-controls { display: none; }',
+            css,
+        )
+
+    def test_customer_map_uses_live_position_not_a_static_road_illustration(self) -> None:
+        javascript = (STATIC / "customer.js").read_text(encoding="utf-8")
+        self.assertIn('"YOU ARE HERE"', javascript)
+        self.assertIn('class: "route-line"', javascript)
+        self.assertNotIn("Front-facing route preview", javascript)
 
     def test_operator_exposes_localization_health_and_active_layout_overlay(self) -> None:
         for element_id in (
@@ -123,6 +145,48 @@ class DashboardContractTests(unittest.TestCase):
         self.assertIn("@media (min-width: 721px) and (max-width: 1180px)", self.css)
         self.assertIn("@media (max-width: 720px)", self.css)
         self.assertIn("overflow-x: hidden", self.css)
+
+    def test_recommendation_subcomponent_separates_policy_and_analysis(self) -> None:
+        html = (RECOMMENDATION_FRONTEND_ROOT / "recommendations.html").read_text(encoding="utf-8")
+        javascript = (RECOMMENDATION_FRONTEND_ROOT / "recommendations.js").read_text(encoding="utf-8")
+        self.assertIn("Backend Analysis", html)
+        self.assertIn('id="gate-message"', html)
+        self.assertIn("unmapped items were excluded", javascript)
+        self.assertIn("candidate_ranking", javascript)
+        self.assertIn("standalone_accept_recommendation", javascript)
+        self.assertIn("reject_recommendation", javascript)
+
+    def test_navigation_view_exposes_one_clear_reset_demo_action(self) -> None:
+        customer = (STATIC / "customer.html").read_text(encoding="utf-8")
+        javascript = (STATIC / "customer.js").read_text(encoding="utf-8")
+        self.assertEqual(customer.count('id="reset-demo"'), 1)
+        self.assertIn(">Reset Demo</button>", customer)
+        self.assertIn('control("reset_demo")', javascript)
+        self.assertIn('id="reset-status"', customer)
+
+    def test_dashboard_modes_own_independent_sessions_and_navigation_starts_idle(self) -> None:
+        navigation = make_handler(mode="navigation")
+        recommendation = make_handler(mode="recommendation")
+        try:
+            navigation_state = navigation.shared_session.snapshot()
+            recommendation_before = recommendation.shared_session.snapshot()
+            self.assertEqual(navigation_state["status"], "idle")
+            self.assertEqual(navigation_state["selected_product_ids"], [])
+            navigation.shared_session.reset_demo()
+            recommendation_after = recommendation.shared_session.snapshot()
+            self.assertEqual(
+                recommendation_after["shopping_session"],
+                recommendation_before["shopping_session"],
+            )
+            self.assertEqual(
+                recommendation_after["recommendations"],
+                recommendation_before["recommendations"],
+            )
+        finally:
+            navigation.camera_scanner.stop()
+            recommendation.camera_scanner.stop()
+            navigation.stop_background()
+            recommendation.stop_background()
 
 
 if __name__ == "__main__":

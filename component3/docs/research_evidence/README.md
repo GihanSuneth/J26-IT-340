@@ -47,7 +47,7 @@ baskets and TF-IDF/KNN-based methods.
      --title "Held-Karp known-graph test" \
      --description "Terminal capture and saved test output for a known graph" \
      --file-path component3/docs/research_evidence/04_navigation_algorithms/screenshots/held_karp_known_graph_2026-10-13.png \
-     --related-code component3/backend/comp3_reco_navigation/navigation/held_karp.py \
+     --related-code component3/backend/navigation/held_karp.py \
      --test-result component3/evaluation/test_results/held_karp_known_graph.json \
      --capture-method "Manual screenshot after running the recorded command" \
      --status verified

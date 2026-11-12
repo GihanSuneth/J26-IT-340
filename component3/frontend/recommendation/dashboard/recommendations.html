@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light">
+  <title>CartPath · Recommendation Research Demo</title><link rel="stylesheet" href="/recommendations.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/recommendations"><span class="mark">C</span><span><strong>CartPath</strong><small>Recommendation research demo</small></span></a><span id="sync" class="status">Connecting…</span><button id="reset-demo" class="secondary" type="button">Reset Demo</button></header>
+  <main>
+    <section class="hero"><p class="eyebrow">FROZEN PHASE 8B MODEL · OFFLINE · POLICY-GUARDED</p><h1>Smart basket suggestions</h1><p id="evidence" class="evidence">Loading preserved evaluation evidence…</p></section>
+    <nav class="tabs" aria-label="Recommendation dashboard views"><button class="tab active" data-tab="customer" type="button">Customer View</button><button class="tab" data-tab="backend" type="button">Backend Analysis</button></nav>
+    <section id="customer-tab" class="tab-panel"><div class="workspace">
+      <article class="panel"><p class="eyebrow">SIMULATED CONFIRMATION INPUT</p><h2>Physical-cart contents</h2><p>Choose a verified demo product, then emit a simulated confirmed cart event.</p><label class="picker-label" for="product-picker">Verified demo product</label><div class="picker"><select id="product-picker" aria-describedby="picker-hint"></select><button id="confirm-cart" class="primary" type="button" disabled>Add confirmed product</button></div><p id="picker-hint" class="picker-hint" role="status">Loading verified products…</p><ul id="confirmed-cart" class="item-list"></ul></article>
+      <article class="panel suggestion-panel"><div class="panel-heading"><div><p class="eyebrow">CUSTOMER-FACING POLICY</p><h2>Passive suggestion</h2></div><span id="gate-state" class="pill">Checking</span></div><p id="gate-message" class="gate-message"></p><p id="mapping-summary" class="mapping-summary"></p><div id="suggestion" class="suggestion-empty">No customer card is displayed while the gate is closed.</div><h3>Recommendation wishlist</h3><ul id="recommendation-wishlist" class="item-list"></ul></article>
+    </div></section>
+    <section id="backend-tab" class="tab-panel" hidden><article class="panel analysis">
+      <div class="panel-heading"><div><p class="eyebrow">ACTUAL PROCESSING FLOW</p><h2>Backend Analysis</h2></div><span id="model-state" class="pill">Loading</span></div>
+      <ol class="pipeline"><li>Confirmed cart event</li><li>Product mapping</li><li>Trigger policy</li><li>Model input</li><li>Frozen-model inference</li><li>Candidate ranking</li><li>Eligibility filtering</li><li>Customer suggestion</li></ol>
+      <dl class="diagnostics"><div><dt>Confirmed events</dt><dd id="diag-events">—</dd></div><div><dt>Mapped model input</dt><dd id="diag-input">—</dd></div><div><dt>Excluded unmapped products</dt><dd id="diag-excluded">—</dd></div><div><dt>Trigger / debounce</dt><dd id="diag-policy">—</dd></div><div><dt>Pending pickup decision</dt><dd id="diag-pending">—</dd></div><div><dt>Selected customer candidate</dt><dd id="diag-selected">—</dd></div></dl>
+      <div class="table-wrap"><table><thead><tr><th>Rank</th><th>Product</th><th>Actual score</th><th>Eligible</th><th>Filter reason</th><th>Detour</th></tr></thead><tbody id="ranking"></tbody></table></div><p id="model-identity" class="identity"></p><p class="availability">Scoring components not exposed by the frozen service are unavailable; none are inferred or fabricated.</p>
+    </article></section>
+  </main>
+  <p id="action-status" class="action-status" role="status"></p><div id="error" class="error" role="alert" hidden></div><script src="/recommendations.js"></script>
+</body></html>

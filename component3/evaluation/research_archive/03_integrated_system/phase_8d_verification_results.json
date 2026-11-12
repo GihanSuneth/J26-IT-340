@@ -9,13 +9,13 @@
     "commands": {
       "loopback_collection": "PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/simulations/navigation_dashboard/tests/test_simulation.py::NavigationSimulationApiTests component3/simulations/navigation_dashboard/tests/test_spatial_simulation.py::SpatialApiTests --collect-only -q",
       "loopback_execution": "PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/simulations/navigation_dashboard/tests/test_simulation.py::NavigationSimulationApiTests component3/simulations/navigation_dashboard/tests/test_spatial_simulation.py::SpatialApiTests -q",
-      "regression_execution": "PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests -q",
+      "regression_execution": "PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/backend component3/simulations/navigation_dashboard/tests -q",
       "javascript_syntax": [
-        "node --check component3/simulations/navigation_dashboard/static/app.js",
-        "node --check component3/simulations/navigation_dashboard/static/customer.js",
-        "node --check component3/simulations/navigation_dashboard/static/spatial.js"
+        "node --check component3/frontend/navigation/dashboard/app.js",
+        "node --check component3/frontend/navigation/dashboard/customer.js",
+        "node --check component3/frontend/navigation/dashboard/spatial.js"
       ],
-      "model_checksum": "shasum -a 256 component3/ml/models/comp3/recommendation_phase8b/selected_model.json component3/ml/models/comp3/recommendation_phase8b/association_rules.json",
+      "model_checksum": "shasum -a 256 component3/ml/models/recommendation/phase8b/selected_model.json component3/ml/models/recommendation/phase8b/association_rules.json",
       "evidence_validation": "PYTHONDONTWRITEBYTECODE=1 python3 -B component3/docs/research_evidence/tools/validate_evidence.py",
       "diff_check": "git diff --check -- component3",
       "dashboard_launch": "PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -B -m component3.simulations.navigation_dashboard.dashboard --host 127.0.0.1 --port 8765"
@@ -42,9 +42,9 @@
     "passed": 3,
     "failed": 0,
     "files": [
-      "component3/simulations/navigation_dashboard/static/app.js",
-      "component3/simulations/navigation_dashboard/static/customer.js",
-      "component3/simulations/navigation_dashboard/static/spatial.js"
+      "component3/frontend/navigation/dashboard/app.js",
+      "component3/frontend/navigation/dashboard/customer.js",
+      "component3/frontend/navigation/dashboard/spatial.js"
     ]
   },
   "evidence_validation": {

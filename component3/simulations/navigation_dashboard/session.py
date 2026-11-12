@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Sequence
 
-from component3.backend.comp3_reco_navigation.navigation.store_graph import StoreGraph
+from component3.backend.navigation.store_graph import StoreGraph
 
 from .adapter import RoutePlan, calculate_dashboard_route
 from .config import DEFAULT_DESTINATION_IDS

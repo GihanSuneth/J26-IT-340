@@ -24,12 +24,13 @@ From the repository root:
 git branch --show-current
 git rev-parse HEAD
 git status --short --branch
-component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests -q
-component3/.venv/bin/python -m component3.backend.comp3_reco_navigation.recommendation.prepare_phase8a
-component3/.venv/bin/python -m component3.backend.comp3_reco_navigation.recommendation.phase8b_experiment
-node --check component3/simulations/navigation_dashboard/static/app.js
-node --check component3/simulations/navigation_dashboard/static/spatial.js
-node --check component3/simulations/navigation_dashboard/static/customer.js
+component3/.venv/bin/python -m pytest component3/backend component3/simulations/navigation_dashboard/tests -q
+component3/.venv/bin/python -m component3.backend.recommendation.prepare_phase8a
+component3/.venv/bin/python -m component3.backend.recommendation.phase8b_experiment
+node --check component3/frontend/navigation/dashboard/app.js
+node --check component3/frontend/navigation/dashboard/spatial.js
+node --check component3/frontend/navigation/dashboard/customer.js
+node --check component3/frontend/recommendation/dashboard/recommendations.js
 git diff --check -- component3
 component3/.venv/bin/python -B -m component3.simulations.navigation_dashboard.dashboard
 ```
@@ -59,7 +60,7 @@ Open `http://127.0.0.1:8765/customer` for the Customer View,
 - Phase 8A derived baskets, crosswalk and split assignments:
   `component3/data/derived/recommendation_phase8a/`.
 - Phase 8B fitted/reloadable JSON models:
-  `component3/ml/models/comp3/recommendation_phase8b/`.
+  `component3/ml/models/recommendation/phase8b/`.
 - Phase 8B protocol, validation, selection, frozen test, per-basket records, figure,
   negative results and validity analysis: recommendation-engine archive above.
 

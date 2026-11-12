@@ -9,29 +9,29 @@ from pathlib import Path
 import time
 from typing import Any, Sequence
 
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import (
+from component3.backend.navigation.dead_reckoning import (
     DeadReckoner,
     MotionMeasurement,
     PositionEstimate,
     normalize_heading,
 )
-from component3.backend.comp3_reco_navigation.navigation.deviation import (
+from component3.backend.navigation.deviation import (
     RouteDeviationMonitor,
 )
-from component3.backend.comp3_reco_navigation.navigation.dijkstra import (
+from component3.backend.navigation.dijkstra import (
     dijkstra_shortest_path,
 )
-from component3.backend.comp3_reco_navigation.navigation.route_manager import (
+from component3.backend.navigation.route_manager import (
     RouteManager,
 )
-from component3.backend.comp3_reco_navigation.navigation.route_anchor import (
+from component3.backend.navigation.route_anchor import (
     AnchoredRoutePlan,
     RouteAnchor,
     held_karp_route_from_anchor,
     node_route_anchor,
     route_anchor_from_position,
 )
-from component3.backend.comp3_reco_navigation.recommendation.live_service import (
+from component3.backend.recommendation.live_service import (
     LiveRecommendationService,
     get_live_recommendation_service,
 )
@@ -51,6 +51,11 @@ from .guidance import (
     classify_turn,
     product_shelf_side,
     resolve_product_location,
+)
+from .reco_policy import (
+    RecommendationPolicyConfig,
+    count_distinct_requested_items,
+    evaluate_recommendation_policy,
 )
 from .sensors import SensorConfig, SimulatedSensorGenerator
 from .shopping_session import (
@@ -114,6 +119,8 @@ class SpatialNavigationSimulation:
         speed_m_s: float = 0.8,
         max_snapping_distance_m: float = 1.0,
         recommendation_service: LiveRecommendationService | None = None,
+        recommendation_policy: RecommendationPolicyConfig | None = None,
+        recommendations_enabled: bool = True,
     ) -> None:
         """Load the separately versioned synthetic map and initialize state."""
         self.store = store or load_demo_store()
@@ -127,10 +134,18 @@ class SpatialNavigationSimulation:
         self._recommendation_service = (
             recommendation_service or get_live_recommendation_service()
         )
+        self._recommendation_policy = (
+            recommendation_policy or RecommendationPolicyConfig.from_environment()
+        )
+        self.recommendations_enabled = bool(recommendations_enabled)
         self._dismissed_recommendation_products: set[str] = set()
+        self._offered_recommendation_products: set[str] = set()
         self._recommendation_events: list[dict[str, Any]] = []
         self._recommendation_diagnostics: dict[str, Any] = {}
         self._last_recommendation_signature: tuple[object, ...] | None = None
+        self._last_cart_edit_monotonic_s: float | None = None
+        self._recommendation_debounce_until_s = 0.0
+        self._recommendation_refresh_pending = False
         self.entrance_node_id = self.data["terminals"]["entrance_node_id"]
         self.checkout_node_id = self.data["terminals"]["checkout_node_id"]
         self.products_by_id = {
@@ -206,7 +221,7 @@ class SpatialNavigationSimulation:
 
     def set_products(self, product_ids: Sequence[str]) -> dict[str, Any]:
         """Replan a not-yet-started session for selected synthetic products."""
-        if self.status not in {"ready", "complete"}:
+        if self.status not in {"idle", "ready", "complete"}:
             raise ValueError("Products can only be changed before navigation starts or after reset")
         selected_products = tuple(dict.fromkeys(product_ids))
         self._product_nodes(selected_products)
@@ -214,16 +229,22 @@ class SpatialNavigationSimulation:
             tuple(self.products_by_id), selected_products
         )
         self._dismissed_recommendation_products.clear()
+        self._offered_recommendation_products.clear()
         self._recommendation_events.clear()
+        self._last_cart_edit_monotonic_s = None
+        self._recommendation_debounce_until_s = 0.0
+        self._recommendation_refresh_pending = False
         self._sync_legacy_shopping_state()
         self._initialize()
         return self.snapshot()
 
-    def _initialize(self, *, simulate_entrance_checkpoint: bool = True) -> None:
+    def _initialize(
+        self, *, simulate_entrance_checkpoint: bool = True, idle: bool = False
+    ) -> None:
         """Reset navigation, estimator, collection, and event state atomically."""
         self._sync_legacy_shopping_state()
         self.simulation_time_s = 0.0
-        self.status = "ready"
+        self.status = "idle" if idle else "ready"
         self.running = False
         self.current_node_id = self.entrance_node_id
         entrance = self.graph.node(self.entrance_node_id)
@@ -292,24 +313,46 @@ class SpatialNavigationSimulation:
             self.checkout_node_id,
             max_snapping_distance_m=self.max_snapping_distance_m,
         )
+        if idle:
+            self.route_manager.original_shopping_destinations = ()
+            self.route_manager.remaining_destinations = ()
+            self.route_manager.visited_destinations.clear()
+            self.route_manager.current_planned_route = ()
+            self.route_manager.current_route_distance_m = 0.0
+            self.route_manager.rerouting_history.clear()
         self._active_route = tuple(self.route_manager.current_planned_route)
-        self.deviation_monitor = self._new_deviation_monitor(self._active_route)
-        self._record_event(
-            "route_planned",
-            "Route calculated over synthetic walkable lanes using Held-Karp and Dijkstra.",
-            {"route_node_ids": list(self._active_route)},
+        self.deviation_monitor = self._new_deviation_monitor(
+            self._active_route if self._active_route else (self.entrance_node_id,)
         )
-        if simulate_entrance_checkpoint:
+        if not idle:
+            self._record_event(
+                "route_planned",
+                "Route calculated over synthetic walkable lanes using Held-Karp and Dijkstra.",
+                {"route_node_ids": list(self._active_route)},
+            )
+        if simulate_entrance_checkpoint and not idle:
             self._detect_checkpoint(self.current_node_id)
-        self._record_sample()
+        if not idle:
+            self._record_sample()
         self._refresh_guidance()
-        self._refresh_live_recommendations()
+        if idle:
+            self._recommendations = {}
+            self._recommendation_diagnostics = {}
+        elif self.recommendations_enabled:
+            self._refresh_live_recommendations()
+        else:
+            self._recommendations = {}
+            self._recommendation_diagnostics = {
+                "enabled": False,
+                "reason": "standalone_navigation_mode",
+            }
 
     def _refresh_live_recommendations(self) -> None:
         """Infer from authoritative shopping state and expose one verified action."""
         started = time.perf_counter_ns()
         service = self._recommendation_service
         selected_demo = set(self.shopping_session.requested_product_ids)
+        distinct_items = count_distinct_requested_items(self.shopping_session.lines)
         reverse_mapping = {
             row["demo_product_id"]: source
             for source, row in (service.inference.mappings.items() if service.inference else ())
@@ -365,9 +408,33 @@ class SpatialNavigationSimulation:
                 "route_detour_cost_m": detour,
             })
         filter_ms = (time.perf_counter_ns() - filter_started) / 1_000_000.0
+        active_product_ids = {
+            recommendation.product_id
+            for recommendation in self._recommendations.values()
+            if recommendation.acceptance_status == "pending"
+            and recommendation.shopping_revision == self.shopping_session.revision
+        }
+        candidate, detour = actionable[0] if actionable else (None, None)
+        candidate_demo_id = (
+            str(candidate["mapped_demo_product_id"]) if candidate is not None else None
+        )
+        now = time.monotonic()
+        debounce_active = now < self._recommendation_debounce_until_s
+        policy = evaluate_recommendation_policy(
+            self._recommendation_policy,
+            distinct_items=distinct_items,
+            candidate_product_id=candidate_demo_id,
+            dismissed_product_ids=self._dismissed_recommendation_products,
+            suggestions_shown=len(self._offered_recommendation_products),
+            candidate_previously_offered=(
+                candidate_demo_id in self._offered_recommendation_products
+            ),
+            product_arrival_pending=self.status == "awaiting_product_confirmation",
+            active_suggestion=bool(active_product_ids - {candidate_demo_id}),
+            debounce_active=debounce_active,
+        )
         self._recommendations = {}
-        if actionable:
-            candidate, detour = actionable[0]
+        if policy.allowed and candidate is not None and detour is not None:
             demo_id = str(candidate["mapped_demo_product_id"])
             product = self.products_by_id[demo_id]
             recommendation_id = service.recommendation_id(
@@ -389,11 +456,23 @@ class SpatialNavigationSimulation:
                 shopping_revision=self.shopping_session.revision,
                 model_artifact_sha256=service.artifact_sha256,
             )
+            self._offered_recommendation_products.add(demo_id)
+        policy_diagnostics = policy.to_dict()
+        policy_diagnostics["suggestions_shown"] = len(
+            self._offered_recommendation_products
+        )
+        policy_diagnostics["debounce_active"] = debounce_active
+        policy_diagnostics["product_arrival_pending"] = (
+            self.status == "awaiting_product_confirmation"
+        )
+        policy_diagnostics["active_suggestion"] = bool(active_product_ids)
+        self._recommendation_refresh_pending = debounce_active
         fallback = (
             "model_unavailable" if not service.ready else
             "empty_shopping_list" if not self.shopping_session.lines else
             "no_mapped_basket_input" if not observed else
-            "no_eligible_candidate" if not actionable else None
+            "no_eligible_candidate" if not actionable else
+            "policy_blocked" if not policy.allowed else None
         )
         total_ms = (time.perf_counter_ns() - started) / 1_000_000.0
         self._recommendation_diagnostics = {
@@ -413,17 +492,21 @@ class SpatialNavigationSimulation:
             "selected_demo_product_ids": sorted(selected_demo),
             "collected_demo_product_ids": sorted(self.shopping_session.collected_product_ids),
             "unmapped_demo_product_ids": sorted(selected_demo - set(reverse_mapping)),
+            "distinct_cart_item_count": distinct_items,
+            "mapped_model_input_count": len(observed),
+            "unmapped_items_count_toward_gate": True,
             "candidate_count": len(ranked),
             "eligible_candidate_count": len(actionable),
             "filtered_candidate_count": len(ranked) - len(actionable),
             "candidate_ranking": candidate_audit,
+            "policy": policy_diagnostics,
             "inference_latency_ms": inference_ms,
             "eligibility_filtering_latency_ms": filter_ms,
             "end_to_end_latency_ms": total_ms,
             "fallback_state": fallback,
             "customer_message": (
                 "No eligible experimental recommendation is available right now."
-                if not actionable else None
+                if not actionable else policy.gate_message if not policy.allowed else None
             ),
         }
         signature = (self.shopping_session.revision, tuple(self._recommendations), fallback)
@@ -435,6 +518,19 @@ class SpatialNavigationSimulation:
                  "fallback_state": fallback},
             )
             self._last_recommendation_signature = signature
+
+    def _note_cart_edit_for_recommendation_policy(self) -> None:
+        """Debounce a burst while allowing the first deliberate cart edit."""
+        now = time.monotonic()
+        if (
+            self._last_cart_edit_monotonic_s is not None
+            and now - self._last_cart_edit_monotonic_s
+            < self._recommendation_policy.debounce_seconds
+        ):
+            self._recommendation_debounce_until_s = (
+                now + self._recommendation_policy.debounce_seconds
+            )
+        self._last_cart_edit_monotonic_s = now
 
     def _new_deviation_monitor(
         self, route: Sequence[str], *, initially_deviated: bool = False
@@ -508,6 +604,13 @@ class SpatialNavigationSimulation:
     def _refresh_guidance(self) -> None:
         """Refresh live distance while emitting only meaningful instruction changes."""
         product = self._active_product_location()
+        if self.status == "idle":
+            self._publish_guidance(
+                "IDLE",
+                "Navigation demo is idle. Add products to prepare a new route.",
+                target_node=self.entrance_node_id,
+            )
+            return
         if self._free_walk_mode:
             if self.status == "free_walking" and self._edge_target:
                 text = f"Free walk active toward {self._edge_target}."
@@ -937,6 +1040,7 @@ class SpatialNavigationSimulation:
         computation_ms = (time.perf_counter() - started) * 1000.0
         was_complete = self.status == "complete"
         self.shopping_session.commit(mutation, self.simulation_time_s)
+        self._note_cart_edit_for_recommendation_policy()
         self._sync_legacy_shopping_state()
         reason = f"shopping_{action}"
         self._activate_anchored_plan(
@@ -958,6 +1062,12 @@ class SpatialNavigationSimulation:
             f"Shopping list {action}: {mutation.product_id} × {mutation.quantity}.",
             self.shopping_session.events[-1],
         )
+        if self.status == "idle" and self._selected_products:
+            self.status = "ready"
+            self._record_event(
+                "navigation_route_ready",
+                "Wishlist updated; the navigation route is ready to start.",
+            )
         if was_complete and self._selected_products:
             self.status = "ready"
             self.running = False
@@ -975,7 +1085,7 @@ class SpatialNavigationSimulation:
             self.running = not self._free_walk_mode
         self._offer_current_shelf_pickup()
         self._refresh_guidance()
-        if refresh_recommendations:
+        if refresh_recommendations and self.recommendations_enabled:
             self._refresh_live_recommendations()
         return self.snapshot()
 
@@ -983,6 +1093,8 @@ class SpatialNavigationSimulation:
         self, recommendation_id: object, expected_shopping_revision: object
     ) -> dict[str, Any]:
         """Accept one revision-bound model suggestion through the atomic mutation path."""
+        if self.status == "awaiting_product_confirmation":
+            raise ValueError("Resolve the pending product arrival before accepting a recommendation")
         if not isinstance(recommendation_id, str) or recommendation_id not in self._recommendations:
             raise ValueError("Unknown recommendation ID")
         recommendation = self._recommendations[recommendation_id]
@@ -1038,6 +1150,7 @@ class SpatialNavigationSimulation:
                 f"Stale shopping-list revision {expected_shopping_revision}; recommendation was generated for revision {recommendation.shopping_revision}"
             )
         self._dismissed_recommendation_products.add(recommendation.product_id)
+        self._recommendations = {}
         event = {
             "event_type": "dismissed", "recommendation_id": recommendation_id,
             "product_id": recommendation.product_id,
@@ -1051,6 +1164,42 @@ class SpatialNavigationSimulation:
         )
         self._refresh_live_recommendations()
         return self.snapshot()
+
+    def resolve_standalone_recommendation(
+        self,
+        recommendation_id: object,
+        expected_shopping_revision: object,
+        decision: str,
+    ) -> tuple[dict[str, Any], str]:
+        """Resolve a standalone suggestion without claiming physical collection."""
+        if decision not in {"accepted", "wishlist"}:
+            raise ValueError("Standalone recommendation decision is invalid")
+        if not isinstance(recommendation_id, str) or recommendation_id not in self._recommendations:
+            raise ValueError("Unknown recommendation ID")
+        recommendation = self._recommendations[recommendation_id]
+        if expected_shopping_revision != recommendation.shopping_revision:
+            raise ShoppingRevisionConflictError(
+                f"Stale shopping-list revision {expected_shopping_revision}; recommendation was generated for revision {recommendation.shopping_revision}"
+            )
+        product_id = recommendation.product_id
+        self._dismissed_recommendation_products.add(product_id)
+        self._recommendations = {}
+        event = {
+            "event_type": decision,
+            "recommendation_id": recommendation_id,
+            "product_id": product_id,
+            "model_version": recommendation.model_version,
+            "shopping_revision": self.shopping_session.revision,
+            "physical_collection_confirmed": False,
+        }
+        self._recommendation_events.append(event)
+        self._record_event(
+            "recommendation_decision",
+            "Experimental recommendation saved without changing confirmed cart contents.",
+            event,
+        )
+        self._refresh_live_recommendations()
+        return self.snapshot(), product_id
 
     def start_camera_evaluation(self) -> dict[str, Any]:
         """Start virtual navigation gated by genuine external camera observations."""
@@ -1561,6 +1710,36 @@ class SpatialNavigationSimulation:
         )
         self._sync_legacy_shopping_state()
         self._initialize()
+        return self.snapshot()
+
+    def reset_navigation_demo(self) -> dict[str, Any]:
+        """Return the standalone navigation demonstration to an empty IDLE state."""
+        self.shopping_session = ShoppingSession(tuple(self.products_by_id), ())
+        self._dismissed_recommendation_products.clear()
+        self._offered_recommendation_products.clear()
+        self._recommendation_events.clear()
+        self._last_cart_edit_monotonic_s = None
+        self._recommendation_debounce_until_s = 0.0
+        self._recommendation_refresh_pending = False
+        self._sync_legacy_shopping_state()
+        self._initialize(simulate_entrance_checkpoint=False, idle=True)
+        return self.snapshot()
+
+    def reset_recommendation_demo(self) -> dict[str, Any]:
+        """Start a new empty standalone recommendation trip."""
+        self.shopping_session = ShoppingSession(
+            tuple(self.products_by_id), ()
+        )
+        self._dismissed_recommendation_products.clear()
+        self._offered_recommendation_products.clear()
+        self._recommendation_events.clear()
+        self._last_cart_edit_monotonic_s = None
+        self._recommendation_debounce_until_s = 0.0
+        self._recommendation_refresh_pending = False
+        self._sync_legacy_shopping_state()
+        self._initialize(simulate_entrance_checkpoint=False, idle=True)
+        if self.recommendations_enabled:
+            self._refresh_live_recommendations()
         return self.snapshot()
 
     def pause(self) -> dict[str, Any]:
@@ -2519,6 +2698,12 @@ class SpatialNavigationSimulation:
 
     def snapshot(self) -> dict[str, Any]:
         """Return complete browser-safe spatial, product, checkpoint, and route state."""
+        if (
+            self._recommendation_refresh_pending
+            and time.monotonic() >= self._recommendation_debounce_until_s
+        ):
+            self._recommendation_refresh_pending = False
+            self._refresh_live_recommendations()
         selected_products = [
             {
                 **self.products_by_id[product_id],
@@ -2551,6 +2736,18 @@ class SpatialNavigationSimulation:
         shopping_state = self.shopping_session.snapshot(self.products_by_id)
         total_products = int(shopping_state["requested_units"])
         collected_count = int(shopping_state["collected_units"])
+        recommendation_diagnostics = dict(self._recommendation_diagnostics)
+        if self.status == "awaiting_product_confirmation":
+            policy_snapshot = dict(recommendation_diagnostics.get("policy", {}))
+            reasons = list(policy_snapshot.get("reasons", []))
+            if "product_arrival_decision_pending" not in reasons:
+                reasons.append("product_arrival_decision_pending")
+            policy_snapshot.update({"allowed": False, "reasons": reasons})
+            recommendation_diagnostics.update({
+                "policy": policy_snapshot,
+                "fallback_state": "policy_blocked",
+                "customer_message": "Resolve the pending product pickup before suggestions resume.",
+            })
         return {
             "map_id": self.data["map_id"],
             "data_classification": self.data["data_classification"],
@@ -2591,8 +2788,8 @@ class SpatialNavigationSimulation:
                     "experimental_label": "Experimental recommendation",
                 }
                 for recommendation in self._recommendations.values()
-            ],
-            "recommendation_diagnostics": dict(self._recommendation_diagnostics),
+            ] if self.status != "awaiting_product_confirmation" else [],
+            "recommendation_diagnostics": recommendation_diagnostics,
             "recommendation_events": list(self._recommendation_events[-100:]),
             "planned_route": route,
             "active_route": route,
@@ -2602,7 +2799,7 @@ class SpatialNavigationSimulation:
             "route_distance_m": self.route_manager.current_route_distance_m,
             "remaining_distance_m": self._distance_to_route_node(
                 self.checkout_node_id
-            ),
+            ) if self.status != "idle" else 0.0,
             "distance_to_active_product_m": product_distance,
             "navigation_progress": {
                 "collected_products": collected_count,

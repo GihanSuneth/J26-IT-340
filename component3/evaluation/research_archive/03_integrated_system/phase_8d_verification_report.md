@@ -18,11 +18,11 @@ The repository does not contain preserved raw terminal transcripts for these com
 ```text
 PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/simulations/navigation_dashboard/tests/test_simulation.py::NavigationSimulationApiTests component3/simulations/navigation_dashboard/tests/test_spatial_simulation.py::SpatialApiTests --collect-only -q
 PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/simulations/navigation_dashboard/tests/test_simulation.py::NavigationSimulationApiTests component3/simulations/navigation_dashboard/tests/test_spatial_simulation.py::SpatialApiTests -q
-PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests -q
-node --check component3/simulations/navigation_dashboard/static/app.js
-node --check component3/simulations/navigation_dashboard/static/customer.js
-node --check component3/simulations/navigation_dashboard/static/spatial.js
-shasum -a 256 component3/ml/models/comp3/recommendation_phase8b/selected_model.json component3/ml/models/comp3/recommendation_phase8b/association_rules.json
+PYTHONDONTWRITEBYTECODE=1 component3/.venv/bin/python -m pytest -p no:cacheprovider component3/backend component3/simulations/navigation_dashboard/tests -q
+node --check component3/frontend/navigation/dashboard/app.js
+node --check component3/frontend/navigation/dashboard/customer.js
+node --check component3/frontend/navigation/dashboard/spatial.js
+shasum -a 256 component3/ml/models/recommendation/phase8b/selected_model.json component3/ml/models/recommendation/phase8b/association_rules.json
 PYTHONDONTWRITEBYTECODE=1 python3 -B component3/docs/research_evidence/tools/validate_evidence.py
 git diff --check -- component3
 ```

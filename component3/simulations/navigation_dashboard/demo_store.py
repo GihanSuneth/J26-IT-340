@@ -8,10 +8,10 @@ import math
 from pathlib import Path
 from typing import Any, Mapping
 
-from component3.backend.comp3_reco_navigation.navigation.apriltag import (
+from component3.backend.navigation.apriltag import (
     AprilTagLayout,
 )
-from component3.backend.comp3_reco_navigation.navigation.store_graph import (
+from component3.backend.navigation.store_graph import (
     GraphValidationError,
     StoreGraph,
 )

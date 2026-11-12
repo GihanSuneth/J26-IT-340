@@ -23,17 +23,17 @@ import sys
 import time
 from typing import Any, Callable, Iterable, Sequence
 
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import (
+from component3.backend.navigation.dead_reckoning import (
     PositionEstimate,
 )
-from component3.backend.comp3_reco_navigation.navigation.dijkstra import (
+from component3.backend.navigation.dijkstra import (
     dijkstra_shortest_path,
 )
-from component3.backend.comp3_reco_navigation.navigation.held_karp import (
+from component3.backend.navigation.held_karp import (
     held_karp_route,
     route_for_stop_order,
 )
-from component3.backend.comp3_reco_navigation.navigation.route_anchor import (
+from component3.backend.navigation.route_anchor import (
     RouteAnchor,
     edge_route_anchor,
     held_karp_route_from_anchor,
@@ -527,9 +527,13 @@ def _journey_trials() -> list[dict[str, Any]]:
     second_pickup = adaptive.confirm_product(expected_shopping_revision=3)
     removed_candidate = adaptive.mutate_shopping_list("add", "SIM-P-002", 1, 4)
     removed = adaptive.mutate_shopping_list("remove", "SIM-P-002", 1, 5)
+    # The recommendation policy deliberately stays quiet while the remaining
+    # banana pickup decision is pending. Complete that explicit decision first.
+    third_pickup = adaptive.confirm_product(expected_shopping_revision=6)
+    adaptive._refresh_live_recommendations()
     offered_recommendation = adaptive.snapshot()["recommendations"][0]
     recommendation = adaptive.accept_recommendation(
-        offered_recommendation["recommendation_id"], 6
+        offered_recommendation["recommendation_id"], 7
     )
     resumed = adaptive.request_navigation_from_current_location()
     final = _complete(adaptive)
@@ -542,6 +546,7 @@ def _journey_trials() -> list[dict[str, Any]]:
         "first_pickup_explicit": first_pickup["shopping_session"]["collected_units"] == 1,
         "quantity_increased": increased["shopping_list_revision"] == 3,
         "second_pickup_explicit": second_pickup["shopping_session"]["collected_units"] == 2,
+        "third_pickup_explicit": third_pickup["shopping_session"]["collected_units"] == 3,
         "remove_was_applied": "SIM-P-002" not in removed["selected_product_ids"],
         "recommendation_label": offered_recommendation["recommendation_source"],
         "recommendation_score": offered_recommendation["score"],

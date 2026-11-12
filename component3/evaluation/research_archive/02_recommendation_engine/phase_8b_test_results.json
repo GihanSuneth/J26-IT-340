@@ -4,12 +4,12 @@
   "branch": "Comp3_Arun",
   "results": [
     {
-      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8a.py component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8b.py -q",
+      "command": "component3/.venv/bin/python -m pytest component3/backend/test_recommendation_phase8a.py component3/backend/test_recommendation_phase8b.py -q",
       "result": "PASS",
       "detail": "17 passed in 0.11s"
     },
     {
-      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests -q",
+      "command": "component3/.venv/bin/python -m pytest component3/backend -q",
       "result": "PASS",
       "detail": "153 passed in 1.75s"
     },
@@ -29,7 +29,7 @@
       "detail": "37 indexed artifacts valid after this result was indexed"
     },
     {
-      "command": "component3/.venv/bin/python -m compileall -q component3/backend/comp3_reco_navigation component3/simulations/navigation_dashboard",
+      "command": "component3/.venv/bin/python -m compileall -q component3/backend component3/simulations/navigation_dashboard",
       "result": "PASS",
       "detail": "No output"
     },

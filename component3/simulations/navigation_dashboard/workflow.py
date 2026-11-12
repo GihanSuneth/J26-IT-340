@@ -56,7 +56,7 @@ ALLOWED_TRANSITIONS = {
 
 def public_state(status: str, *, has_remaining_products: bool) -> NavigationState:
     """Translate legacy engine status into the stable client-facing state machine."""
-    if status == "ready":
+    if status in {"idle", "ready"}:
         return NavigationState.IDLE
     if status in {"awaiting_checkpoint", "camera_stopped", "localization_uncertain"}:
         return NavigationState.WAITING_FOR_LOCALIZATION

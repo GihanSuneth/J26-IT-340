@@ -2,12 +2,12 @@
   "phase": "8B.1",
   "date": "2026-10-17",
   "recommendation_tests": {
-    "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8a.py component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8b.py component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8b1.py -q",
+    "command": "component3/.venv/bin/python -m pytest component3/backend/test_recommendation_phase8a.py component3/backend/test_recommendation_phase8b.py component3/backend/test_recommendation_phase8b1.py -q",
     "passed": 21,
     "failed": 0
   },
   "backend_regression": {
-    "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests -q",
+    "command": "component3/.venv/bin/python -m pytest component3/backend -q",
     "passed": 157,
     "failed": 0
   },

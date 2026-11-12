@@ -47,6 +47,7 @@ class SharedNavigationSession:
     def __init__(self, simulation: SpatialNavigationSimulation | None = None) -> None:
         self.simulation = simulation or SpatialNavigationSimulation()
         self.session_id = f"nav-{uuid4()}"
+        self.session_generation = 0
         self.created_at = datetime.now(timezone.utc).isoformat()
         self.state_revision = 0
         self.controller_id: str | None = None
@@ -55,6 +56,20 @@ class SharedNavigationSession:
         self.autoplay_enabled = False
         self.autoplay_rate = 1.0
         self._next_autoplay_tick = time.monotonic()
+        self.voice_preference: dict[str, object] = {
+            "enabled": False, "voice_name": None, "volume": 0.8,
+        }
+
+    def set_voice_preference(self, enabled: object, voice_name: object, volume: object) -> dict[str, object]:
+        """Store a browser-safe shared preference; synthesis remains browser local."""
+        if not isinstance(enabled, bool):
+            raise ValueError("voice enabled must be boolean")
+        if voice_name is not None and (not isinstance(voice_name, str) or len(voice_name) > 160):
+            raise ValueError("voice name must be null or a short string")
+        if isinstance(volume, bool) or not isinstance(volume, (int, float)) or not 0 <= float(volume) <= 1:
+            raise ValueError("voice volume must be between 0 and 1")
+        self.voice_preference = {"enabled": enabled, "voice_name": voice_name, "volume": float(volume)}
+        return dict(self.voice_preference)
 
     def set_autoplay(self, enabled: bool, rate: object | None = None) -> None:
         """Configure the single server-owned deterministic playback clock."""
@@ -140,6 +155,14 @@ class SharedNavigationSession:
         prior = self._command_results.get(command_id)
         if prior is not None:
             return deepcopy(prior)
+        expected_generation = payload.get("session_generation")
+        if (
+            expected_generation is not None
+            and expected_generation != self.session_generation
+        ):
+            raise SessionConflictError(
+                f"Stale session generation {expected_generation!r}; current generation is {self.session_generation}"
+            )
         expected_revision = payload.get("expected_revision")
         if expected_revision is not None and expected_revision != self.state_revision:
             raise SessionConflictError(
@@ -168,9 +191,57 @@ class SharedNavigationSession:
             self._command_results.popitem(last=False)
         return enriched
 
-    def external_mutation(self) -> None:
+    def external_mutation(self, expected_generation: int | None = None) -> bool:
         """Record a validated camera callback mutation under the server lock."""
+        if (
+            expected_generation is not None
+            and expected_generation != self.session_generation
+        ):
+            return False
         self.state_revision += 1
+        return True
+
+    def apply_external_mutation(
+        self,
+        expected_generation: int,
+        mutator: Callable[[], dict[str, Any]],
+    ) -> tuple[bool, dict[str, Any]]:
+        """Apply a camera mutation only to the generation that started it."""
+        if expected_generation != self.session_generation:
+            return False, self.snapshot()
+        result = mutator()
+        self.state_revision += 1
+        return True, result
+
+    def reset_demo(self) -> dict[str, Any]:
+        """Atomically begin a new empty navigation demonstration."""
+        self.simulation.reset_navigation_demo()
+        self.session_generation += 1
+        self.session_id = f"nav-{uuid4()}"
+        self.created_at = datetime.now(timezone.utc).isoformat()
+        self.state_revision = 0
+        self.controller_id = None
+        self._controller_last_step_monotonic = None
+        self._command_results.clear()
+        self.autoplay_enabled = False
+        self.autoplay_rate = 1.0
+        self._next_autoplay_tick = time.monotonic()
+        return self.snapshot()
+
+    def reset_recommendation_demo(self) -> dict[str, Any]:
+        """Atomically begin a new empty standalone recommendation trip."""
+        self.simulation.reset_recommendation_demo()
+        self.session_generation += 1
+        self.session_id = f"reco-{uuid4()}"
+        self.created_at = datetime.now(timezone.utc).isoformat()
+        self.state_revision = 0
+        self.controller_id = None
+        self._controller_last_step_monotonic = None
+        self._command_results.clear()
+        self.autoplay_enabled = False
+        self.autoplay_rate = 1.0
+        self._next_autoplay_tick = time.monotonic()
+        return self.snapshot()
 
     def snapshot(
         self, base: dict[str, Any] | None = None, *, camera_status: dict[str, Any] | None = None
@@ -180,6 +251,7 @@ class SharedNavigationSession:
         state.update(
             {
                 "session_id": self.session_id,
+                "session_generation": self.session_generation,
                 "session_created_at": self.created_at,
                 "map_version": self.simulation.data.get("schema_version", "UNKNOWN"),
                 "state_revision": self.state_revision,
@@ -203,6 +275,7 @@ class SharedNavigationSession:
                 "evaluation_event_history": list(state["events"]),
                 "camera_status": camera_status,
                 "last_successful_sync_at": datetime.now(timezone.utc).isoformat(),
+                "voice_preference": dict(self.voice_preference),
             }
         )
         state["localization_health"] = self.simulation.localization_health(camera_status)

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 import math
 import random
 
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import (
+from component3.backend.navigation.dead_reckoning import (
     MotionMeasurement,
 )
 

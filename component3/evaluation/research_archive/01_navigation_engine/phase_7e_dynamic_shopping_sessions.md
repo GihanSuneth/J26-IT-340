@@ -123,13 +123,13 @@ training, or large-catalog scalability experiment occurred.
 ```bash
 component3/.venv/bin/python -B -m component3.simulations.navigation_dashboard.phase7e_evaluation
 python3 -B -m component3.simulations.navigation_dashboard.phase7e_browser_acceptance
-component3/.venv/bin/python -m pytest -q component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests
+component3/.venv/bin/python -m pytest -q component3/backend component3/simulations/navigation_dashboard/tests
 python3 -B component3/data/store_map/validate_store_map.py
 python3 -B component3/docs/research_evidence/tools/validate_evidence.py
-python3 -m compileall -q component3/backend/comp3_reco_navigation component3/simulations/navigation_dashboard
-node --check component3/simulations/navigation_dashboard/static/app.js
-node --check component3/simulations/navigation_dashboard/static/spatial.js
-node --check component3/simulations/navigation_dashboard/static/customer.js
+python3 -m compileall -q component3/backend component3/simulations/navigation_dashboard
+node --check component3/frontend/navigation/dashboard/app.js
+node --check component3/frontend/navigation/dashboard/spatial.js
+node --check component3/frontend/navigation/dashboard/customer.js
 git diff --check -- component3
 ```
 

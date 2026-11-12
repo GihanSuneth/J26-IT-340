@@ -7,28 +7,28 @@ import json
 import math
 from typing import Any, Sequence
 
-from component3.backend.comp3_reco_navigation.navigation.apriltag import (
+from component3.backend.navigation.apriltag import (
     AprilTagLayout,
     DEFAULT_APRILTAG_LAYOUT_PATH,
 )
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import (
+from component3.backend.navigation.dead_reckoning import (
     DeadReckoner,
     PositionEstimate,
     SimulatedCheckpointObservation,
     correct_to_checkpoint,
     normalize_heading,
 )
-from component3.backend.comp3_reco_navigation.navigation.deviation import (
+from component3.backend.navigation.deviation import (
     DeviationState,
     RouteDeviationMonitor,
 )
-from component3.backend.comp3_reco_navigation.navigation.dijkstra import (
+from component3.backend.navigation.dijkstra import (
     dijkstra_shortest_path,
 )
-from component3.backend.comp3_reco_navigation.navigation.route_manager import (
+from component3.backend.navigation.route_manager import (
     RouteManager,
 )
-from component3.backend.comp3_reco_navigation.navigation.store_graph import (
+from component3.backend.navigation.store_graph import (
     load_store_graph,
 )
 

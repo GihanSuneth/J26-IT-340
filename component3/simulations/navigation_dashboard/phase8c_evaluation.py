@@ -9,7 +9,7 @@ from pathlib import Path
 from statistics import mean
 import time
 
-from component3.backend.comp3_reco_navigation.recommendation.live_service import LiveRecommendationService
+from component3.backend.recommendation.live_service import LiveRecommendationService
 from component3.simulations.navigation_dashboard.shared_session import SharedNavigationSession
 from component3.simulations.navigation_dashboard.spatial_simulation import SpatialNavigationSimulation
 

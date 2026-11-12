@@ -2,7 +2,7 @@ Component 3 Held-Karp Test Execution
 =====================================
 Executed: 2026-10-14T00:11:50+05:30
 Python: 3.14.0
-Command: python3 -B -m component3.backend.comp3_reco_navigation.tests.test_held_karp --output component3/evaluation/test_results/held_karp_tests.txt
+Command: python3 -B -m component3.backend.navigation.tests.test_held_karp --output component3/evaluation/test_results/held_karp_tests.txt
 Framework: Python standard-library unittest
 
 test_checkout_included_as_stop (__main__.HeldKarpTests.test_checkout_included_as_stop) ... ok

@@ -126,7 +126,7 @@ state-transition paths passed.
 
 - `simulations/navigation_dashboard/spatial_simulation.py`, `shared_session.py`,
   `dashboard.py`
-- `simulations/navigation_dashboard/static/customer.*`, `static/spatial.*`
+- `frontend/navigation/dashboard/customer.*`, `frontend/navigation/dashboard/spatial.*`
 - `simulations/navigation_dashboard/tests/test_phase7g.py`,
   `tests/test_phase7b2_dashboard.py`
 - `data/apriltag_cards/generate_dense_cards.py` and generated full-layout artifacts

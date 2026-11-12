@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import unittest
 
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import PositionEstimate
-from component3.backend.comp3_reco_navigation.navigation.route_anchor import node_route_anchor
+from component3.backend.navigation.dead_reckoning import PositionEstimate
+from component3.backend.navigation.route_anchor import node_route_anchor
 from component3.simulations.navigation_dashboard.checkpoint_observations import (
     CheckpointObservation,
     CheckpointObservationProcessor,

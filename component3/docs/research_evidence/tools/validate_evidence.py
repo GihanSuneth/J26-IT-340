@@ -49,7 +49,8 @@ def main() -> int:
 
     for phase in PHASES:
         required_files.append(EVIDENCE_ROOT / phase / "notes.md")
-        required_directories.append(EVIDENCE_ROOT / phase / "screenshots")
+        # Screenshot directories are created only when that phase has screenshot
+        # evidence. Every indexed screenshot is still checked below as a real file.
 
     for path in required_files:
         if not path.is_file():

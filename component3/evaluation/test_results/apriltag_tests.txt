@@ -4,7 +4,7 @@ Executed: 2026-10-14T00:51:09+05:30
 Python: 3.14.0
 OpenCV available: True
 Required detector: cv2.aruco.DICT_APRILTAG_36h11
-Command: /Users/arun/Documents/Research Project/R1/J26-IT-340/component3/.venv/bin/python -B -m component3.backend.comp3_reco_navigation.tests.test_apriltag --output component3/evaluation/test_results/apriltag_tests.txt
+Command: /Users/arun/Documents/Research Project/R1/J26-IT-340/component3/.venv/bin/python -B -m component3.backend.navigation.tests.test_apriltag --output component3/evaluation/test_results/apriltag_tests.txt
 Framework: Python standard-library unittest
 
 test_01_valid_layout_loading (__main__.CheckpointMappingTests.test_01_valid_layout_loading) ... ok

@@ -84,7 +84,7 @@ paper and measure the marker's black outer boundary; it must be 160 mm square.
 
    ```bash
    component3/.venv/bin/python -B -m \
-     component3.backend.comp3_reco_navigation.navigation.apriltag_camera_smoke_test \
+     component3.backend.navigation.apriltag_camera_smoke_test \
      --probe-cameras
    ```
 
@@ -92,7 +92,7 @@ paper and measure the marker's black outer boundary; it must be 160 mm square.
 
    ```bash
    component3/.venv/bin/python -B -m \
-     component3.backend.comp3_reco_navigation.navigation.apriltag_camera_smoke_test \
+     component3.backend.navigation.apriltag_camera_smoke_test \
      --camera-index 0 --no-preview
    ```
 

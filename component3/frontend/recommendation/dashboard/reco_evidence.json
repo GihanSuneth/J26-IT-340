@@ -1,0 +1,27 @@
+{
+  "offline_test": {
+    "basket_count": 299,
+    "hit_rate_at_5": 0.046822742474916385,
+    "hit_rate_at_5_bootstrap_95_ci": [
+      0.023411371237458192,
+      0.07023411371237458
+    ]
+  },
+  "posthoc_test_comparison": {
+    "association_rules_hit_rate_at_5": 0.046822742474916385,
+    "diagnostic_only": true,
+    "eligible_for_model_selection": false,
+    "global_popularity_hit_rate_at_5": 0.10367892976588629
+  },
+  "selected_model": "association_rules",
+  "selection_frozen_before_test": true,
+  "sources": [
+    "component3/evaluation/research_archive/02_recommendation_engine/phase_8b_frozen_test_results.json",
+    "component3/evaluation/research_archive/02_recommendation_engine/phase_8b_validation_results.json",
+    "component3/evaluation/research_archive/02_recommendation_engine/phase_8b1_baseline_posthoc_test_comparison.csv"
+  ],
+  "validation": {
+    "hit_rate_at_5": 0.09427609427609428
+  },
+  "wording": "Experimental baseline; offline HitRate@5 4.7% (CI ~2-7%) on 299 held-out baskets; validation 9.4%; popularity baseline scored higher on test"
+}

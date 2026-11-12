@@ -20,7 +20,7 @@
       "note": "Initial sandboxed attempt had 34 passes and 10 localhost-bind PermissionError failures; approved localhost rerun passed 44/44."
     },
     "full_pytest": {
-      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests -q",
+      "command": "component3/.venv/bin/python -m pytest component3/backend component3/simulations/navigation_dashboard/tests -q",
       "passed": 222,
       "failed": 0,
       "duration_s": 8.15

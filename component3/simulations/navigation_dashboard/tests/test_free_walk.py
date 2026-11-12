@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import unittest
 
-from component3.backend.comp3_reco_navigation.navigation.dijkstra import dijkstra_shortest_path
-from component3.backend.comp3_reco_navigation.navigation.held_karp import held_karp_route
+from component3.backend.navigation.dijkstra import dijkstra_shortest_path
+from component3.backend.navigation.held_karp import held_karp_route
 from component3.simulations.navigation_dashboard.spatial_simulation import (
     SpatialNavigationSimulation,
 )

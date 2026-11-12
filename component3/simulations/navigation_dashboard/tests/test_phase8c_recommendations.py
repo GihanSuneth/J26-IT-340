@@ -6,13 +6,18 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from component3.backend.comp3_reco_navigation.recommendation.live_service import (
+from component3.backend.recommendation.live_service import (
     EXPECTED_SELECTED_SHA256,
     LiveRecommendationService,
     get_live_recommendation_service,
 )
 from component3.simulations.navigation_dashboard.shared_session import SharedNavigationSession
+from component3.simulations.navigation_dashboard.reco_policy import RecommendationPolicyConfig
 from component3.simulations.navigation_dashboard.spatial_simulation import SpatialNavigationSimulation
+from component3.simulations.navigation_dashboard.config import (
+    NAVIGATION_FRONTEND_ROOT,
+    RECOMMENDATION_FRONTEND_ROOT,
+)
 
 
 class Phase8CLiveRecommendationTests(unittest.TestCase):
@@ -114,18 +119,67 @@ class Phase8CLiveRecommendationTests(unittest.TestCase):
         self.assertEqual(before["recommendations"], after["recommendations"])
 
     def test_customer_and_operator_assets_expose_guarded_contract(self) -> None:
-        static = Path(__file__).resolve().parents[1] / "static"
-        customer_html = (static / "customer.html").read_text(encoding="utf-8")
-        customer_js = (static / "customer.js").read_text(encoding="utf-8")
-        operator_html = (static / "spatial.html").read_text(encoding="utf-8")
-        operator_js = (static / "spatial.js").read_text(encoding="utf-8")
-        self.assertIn("Experimental recommendation", customer_html)
-        self.assertIn("route_detour_cost_m", customer_js)
-        self.assertIn("expected_shopping_revision", customer_js)
+        customer_html = (NAVIGATION_FRONTEND_ROOT / "customer.html").read_text(encoding="utf-8")
+        customer_js = (NAVIGATION_FRONTEND_ROOT / "customer.js").read_text(encoding="utf-8")
+        operator_html = (NAVIGATION_FRONTEND_ROOT / "spatial.html").read_text(encoding="utf-8")
+        operator_js = (NAVIGATION_FRONTEND_ROOT / "spatial.js").read_text(encoding="utf-8")
+        recommendation_html = (RECOMMENDATION_FRONTEND_ROOT / "recommendations.html").read_text(encoding="utf-8")
+        recommendation_js = (RECOMMENDATION_FRONTEND_ROOT / "recommendations.js").read_text(encoding="utf-8")
+        self.assertNotIn("Experimental recommendation", customer_html)
+        self.assertIn("Passive suggestion", recommendation_html)
+        self.assertIn("standalone_accept_recommendation", recommendation_js)
+        self.assertIn("expected_shopping_revision", recommendation_js)
         self.assertNotIn("purchase probability", customer_js.lower())
         self.assertIn("recommendation-diagnostics-heading", operator_html)
         self.assertIn("candidate_ranking", operator_js)
         self.assertIn("filter_reasons", operator_js)
+
+    def test_three_item_demo_gate_offers_milk(self) -> None:
+        simulation = SpatialNavigationSimulation(
+            recommendation_policy=RecommendationPolicyConfig(min_distinct_items=3)
+        )
+        state = simulation.set_products(("SIM-P-001", "SIM-P-002", "SIM-P-004"))
+        self.assertEqual(state["recommendations"][0]["product_id"], "SIM-P-003")
+        self.assertEqual(state["recommendation_diagnostics"]["distinct_cart_item_count"], 3)
+
+    def test_unmapped_items_count_for_five_item_gate_but_not_model_input(self) -> None:
+        simulation = SpatialNavigationSimulation(
+            recommendation_policy=RecommendationPolicyConfig(min_distinct_items=5)
+        )
+        state = simulation.set_products(
+            ("SIM-P-001", "SIM-P-002", "SIM-P-004", "SIM-P-005", "SIM-P-006")
+        )
+        diagnostics = state["recommendation_diagnostics"]
+        self.assertEqual(state["recommendations"][0]["product_id"], "SIM-P-003")
+        self.assertEqual(diagnostics["distinct_cart_item_count"], 5)
+        self.assertEqual(diagnostics["mapped_model_input_count"], 3)
+        self.assertEqual(diagnostics["unmapped_demo_product_ids"], ["SIM-P-005", "SIM-P-006"])
+
+    def test_below_gate_has_no_customer_card_and_keeps_analysis(self) -> None:
+        simulation = SpatialNavigationSimulation(
+            recommendation_policy=RecommendationPolicyConfig(min_distinct_items=3)
+        )
+        state = simulation.set_products(("SIM-P-001", "SIM-P-002"))
+        self.assertEqual(state["recommendations"], [])
+        self.assertEqual(
+            state["recommendation_diagnostics"]["policy"]["reasons"],
+            ["below_minimum_distinct_items"],
+        )
+        self.assertGreater(len(state["recommendation_diagnostics"]["candidate_ranking"]), 0)
+
+    def test_two_suggestion_trip_limit_and_dismissal_memory(self) -> None:
+        first = self.sim.snapshot()["recommendations"][0]
+        second_state = self.sim.reject_recommendation(first["recommendation_id"], 0)
+        second = second_state["recommendations"][0]
+        self.assertNotEqual(second["product_id"], first["product_id"])
+        stable = self.sim.snapshot()
+        self.assertEqual(stable["recommendations"][0]["product_id"], second["product_id"])
+        final = self.sim.reject_recommendation(second["recommendation_id"], 0)
+        self.assertEqual(final["recommendations"], [])
+        self.assertIn(
+            "max_suggestions_per_trip_reached",
+            final["recommendation_diagnostics"]["policy"]["reasons"],
+        )
 
 
 if __name__ == "__main__":

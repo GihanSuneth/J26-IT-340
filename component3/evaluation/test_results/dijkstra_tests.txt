@@ -2,7 +2,7 @@ Component 3 Dijkstra Test Execution
 ===================================
 Executed: 2026-10-13T23:14:48+0530
 Python: 3.14.0
-Command: python3 -B -m unittest -v backend.comp3_reco_navigation.tests.test_dijkstra
+Command: python3 -B -m unittest -v backend.navigation.tests.test_dijkstra
 Framework: Python standard-library unittest
 Environment note: pytest was unavailable (`No module named pytest`); no dependency was installed.
 

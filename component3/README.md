@@ -11,7 +11,14 @@ classifies the current aisle using a CNN.
 ## Workspace structure
 
 ```text
-backend/comp3_reco_navigation/  API, recommendation, navigation, CNN, and tests
+backend/navigation/             Navigation algorithms, camera integration, and tests
+backend/recommendation/         Recommendation runtime, experiments, and tests
+backend/shared/                 Shared API contracts and shopping-session support
+frontend/navigation/            Navigation JSX and browser dashboard assets
+frontend/recommendation/        Recommendation JSX and browser dashboard assets
+frontend/shared/                Browser assets shared by both frontends
+ml/training/                    CNN code, notebooks, and model configurations
+ml/models/                      Frozen recommendation model artifacts
 data/raw/                       Local population-level POS CSV
 data/processed/                 Reproducible recommendation outputs
 data/derived/                   Audited Phase 8A basket and split artifacts
@@ -20,8 +27,6 @@ data/store_map/                 Store graph, AprilTag layout, and validators
 docs/                           Component design and reproducible evidence
 evaluation/                     Component 3 logs, metrics, and test results
 firmware/                       Component-owned ESP32 motion task
-frontend/navigation/            Component 3 trolley-display navigation feature
-ml/                             Colab notebook, configs, models, and experiments
 simulations/                    Component 3 simulations and offline dashboard
 ```
 
@@ -30,24 +35,24 @@ Owner: comp3. Population-level POS data only (no individual customer data); reco
 
 ## Important files
 
-- `backend/comp3_reco_navigation/requirements.txt` — Python dependencies.
+- `backend/requirements.txt` — Python dependencies.
 - `frontend/navigation/comp3_map_view.jsx` — store map and trolley position view.
 - `frontend/navigation/comp3_route_overlay.jsx` — route overlay and next-stop highlight.
 - `frontend/navigation/comp3_to_buy_list.jsx` — session to-buy list view.
-- `frontend/navigation/comp3_suggestion_card.jsx` — recommendation card requiring customer confirmation.
-- `backend/comp3_reco_navigation/cnn/train.py` — CNN training entry point.
-- `backend/comp3_reco_navigation/cnn/infer.py` — CNN inference entry point.
-- `ml/colab/comp3_cnn_train.ipynb` — Google Colab launcher.
-- `ml/configs/comp3_cnn.yaml` — CNN configuration.
-- `ml/configs/comp3_reco.yaml` — recommendation configuration.
+- `frontend/recommendation/comp3_suggestion_card.jsx` — recommendation card requiring customer confirmation.
+- `ml/training/cnn/train.py` — CNN training entry point.
+- `ml/training/cnn/infer.py` — CNN inference entry point.
+- `ml/training/notebooks/comp3_cnn_train.ipynb` — Google Colab launcher.
+- `ml/training/configs/comp3_cnn.yaml` — CNN configuration.
+- `ml/training/configs/comp3_reco.yaml` — recommendation configuration.
 - `data/raw/Retail_pos_basket_data.csv` — ignored local POS dataset.
-- `backend/comp3_reco_navigation/navigation/position_tracking_simulation.py` —
+- `backend/navigation/position_tracking_simulation.py` —
   deterministic synthetic encoder/IMU evaluation and report figure generator.
 - `simulations/navigation_dashboard/` — local-only interactive navigation
   dashboard, map/route adapter, and adapter tests.
 - `data/apriltag_cards/` — locally generated and detector-verified demo
   checkpoint cards for Mac-camera evaluation.
-- `backend/comp3_reco_navigation/navigation/route_anchor.py` — exact node/mid-edge
+- `backend/navigation/route_anchor.py` — exact node/mid-edge
   route-start composition over the existing Dijkstra and Held–Karp algorithms.
 
 ## Phase 7D — adaptive free-walk navigation
@@ -93,12 +98,12 @@ Four fitted statistical baselines and a regularized NumPy linear ranker use only
 frozen training split. Association rules were selected by validation NDCG@5 and then
 evaluated on the held-out test split. Test NDCG@5 was 0.0232 and HitRate@5 0.0468;
 these weak unknown-provenance results are research evidence, not deployment validation.
-Reloadable JSON artifacts are under `ml/models/comp3/recommendation_phase8b/`. No model
+Reloadable JSON artifacts are under `ml/models/recommendation/phase8b/`. No model
 prediction was integrated into the customer dashboard.
 
 ## Phase 4A — simulated position tracking
 
-`python -B -m component3.backend.comp3_reco_navigation.navigation.position_tracking_simulation`
+`python -B -m component3.backend.navigation.position_tracking_simulation`
 replays the Dijkstra/Held-Karp route through the existing metric store map and
 writes deterministic ground truth, ideal/noisy sensor streams, checkpoint
 events, aggregate metrics, a reproducibility log, and plots. Motion uses east
@@ -117,7 +122,7 @@ method and observed results.
 
 ## Phase 5A — route-deviation detection
 
-`python -B -m component3.backend.comp3_reco_navigation.navigation.deviation_simulation`
+`python -B -m component3.backend.navigation.deviation_simulation`
 evaluates a planned Held-Karp route against synthetic position estimates using
 the existing graph-node coordinates. `navigation/deviation.py` projects each
 estimate onto the nearest clamped route segment and reports its distance,
@@ -147,7 +152,7 @@ position-tracking research notes for methodology and limitations.
 
 ## Phase 5B — route recalculation after confirmed deviation
 
-`python -B -m component3.backend.comp3_reco_navigation.navigation.route_recalculation_simulation`
+`python -B -m component3.backend.navigation.route_recalculation_simulation`
 evaluates automatic route recalculation after the Phase 5A detector enters a
 confirmed deviated state. `navigation/route_manager.py` projects the position
 estimate onto the nearest valid graph edge, applies deterministic edge and
@@ -354,32 +359,32 @@ Run commands from the repository root:
 ```bash
 python3.14 -m venv component3/.venv
 component3/.venv/bin/python -m pip install --only-binary=:all: \
-  -r component3/backend/comp3_reco_navigation/requirements.txt
+  -r component3/backend/requirements.txt
 component3/.venv/bin/python -B \
   component3/data/store_map/generate_apriltag_test_images.py
 component3/.venv/bin/python -B -m \
-  component3.backend.comp3_reco_navigation.navigation.apriltag_offline_evaluation
+  component3.backend.navigation.apriltag_offline_evaluation
 python3 -B -m unittest -v \
-  component3.backend.comp3_reco_navigation.tests.test_dijkstra
-python3 -B -m component3.backend.comp3_reco_navigation.tests.test_held_karp \
+  component3.backend.navigation.tests.test_dijkstra
+python3 -B -m component3.backend.navigation.tests.test_held_karp \
   --output component3/evaluation/test_results/held_karp_tests.txt
 component3/.venv/bin/python -B -m \
-  component3.backend.comp3_reco_navigation.tests.test_apriltag \
+  component3.backend.navigation.tests.test_apriltag \
   --output component3/evaluation/test_results/apriltag_tests.txt
 component3/.venv/bin/python -B -m unittest -v \
-  component3.backend.comp3_reco_navigation.tests.test_dead_reckoning
+  component3.backend.navigation.tests.test_dead_reckoning
 component3/.venv/bin/python -B -m unittest -v \
-  component3.backend.comp3_reco_navigation.tests.test_deviation
+  component3.backend.navigation.tests.test_deviation
 component3/.venv/bin/python -B -m unittest -v \
-  component3.backend.comp3_reco_navigation.tests.test_route_manager
+  component3.backend.navigation.tests.test_route_manager
 component3/.venv/bin/python -B -m \
-  component3.backend.comp3_reco_navigation.navigation.position_tracking_simulation
+  component3.backend.navigation.position_tracking_simulation
 component3/.venv/bin/python -B -m \
-  component3.backend.comp3_reco_navigation.navigation.deviation_simulation
+  component3.backend.navigation.deviation_simulation
 component3/.venv/bin/python -B -m \
-  component3.backend.comp3_reco_navigation.navigation.route_recalculation_simulation
+  component3.backend.navigation.route_recalculation_simulation
 python3 -B -m \
-  component3.backend.comp3_reco_navigation.navigation.held_karp_demo
+  component3.backend.navigation.held_karp_demo
 python3 -B component3/data/store_map/validate_store_map.py
 python3 -B component3/docs/research_evidence/tools/validate_evidence.py
 ```

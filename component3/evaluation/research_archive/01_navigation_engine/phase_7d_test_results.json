@@ -10,7 +10,7 @@
     "full_pytest": {
       "passed": 236,
       "failed": 0,
-      "command": "component3/.venv/bin/python -m pytest -q component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests"
+      "command": "component3/.venv/bin/python -m pytest -q component3/backend component3/simulations/navigation_dashboard/tests"
     },
     "phase_7d_focused_pytest": {
       "passed": 12,

@@ -8,7 +8,7 @@ import math
 from pathlib import Path
 from typing import Any
 
-from component3.backend.comp3_reco_navigation.navigation.dijkstra import (
+from component3.backend.navigation.dijkstra import (
     dijkstra_shortest_path,
 )
 

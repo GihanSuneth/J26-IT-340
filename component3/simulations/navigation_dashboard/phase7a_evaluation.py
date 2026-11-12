@@ -9,7 +9,7 @@ import math
 from pathlib import Path
 from typing import Any
 
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import PositionEstimate
+from component3.backend.navigation.dead_reckoning import PositionEstimate
 
 from .checkpoint_observations import CheckpointObservation, CheckpointObservationProcessor
 from .demo_store import load_demo_store

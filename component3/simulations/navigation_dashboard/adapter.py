@@ -8,19 +8,19 @@ import math
 from pathlib import Path
 from typing import Any, Sequence
 
-from component3.backend.comp3_reco_navigation.navigation.dijkstra import (
+from component3.backend.navigation.dijkstra import (
     ShortestPath,
     UnknownNodeError,
     UnreachablePathError,
     dijkstra_shortest_path,
 )
-from component3.backend.comp3_reco_navigation.navigation.held_karp import (
+from component3.backend.navigation.held_karp import (
     HeldKarpRoute,
     StopLimitExceededError,
     UnreachableLocationError,
     held_karp_route,
 )
-from component3.backend.comp3_reco_navigation.navigation.store_graph import (
+from component3.backend.navigation.store_graph import (
     StoreGraph,
     load_store_graph,
 )

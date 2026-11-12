@@ -1,0 +1,2 @@
+# .pre-commit-config.yaml - Pre-commit hooks: ruff, black, nbstripout (strip notebook output), eslint, detect-secrets.
+# Owner: develop (shared - all four members review)

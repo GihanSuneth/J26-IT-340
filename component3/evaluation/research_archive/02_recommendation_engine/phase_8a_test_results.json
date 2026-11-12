@@ -5,12 +5,12 @@
   "final_model_trained": false,
   "results": [
     {
-      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8a.py -q",
+      "command": "component3/.venv/bin/python -m pytest component3/backend/test_recommendation_phase8a.py -q",
       "result": "PASS",
       "detail": "8 passed in 0.02s"
     },
     {
-      "command": "component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests -q",
+      "command": "component3/.venv/bin/python -m pytest component3/backend -q",
       "result": "PASS",
       "detail": "144 passed in 1.58s"
     },
@@ -30,7 +30,7 @@
       "detail": "26 indexed artifacts valid before adding this result record; final rerun recorded separately in terminal"
     },
     {
-      "command": "component3/.venv/bin/python -m compileall -q component3/backend/comp3_reco_navigation component3/simulations/navigation_dashboard",
+      "command": "component3/.venv/bin/python -m compileall -q component3/backend component3/simulations/navigation_dashboard",
       "result": "PASS",
       "detail": "No output"
     },

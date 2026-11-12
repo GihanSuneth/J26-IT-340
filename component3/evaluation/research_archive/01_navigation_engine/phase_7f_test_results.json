@@ -11,7 +11,7 @@
       "failed": 0
     },
     "full_navigation_regression": {
-      "command": "component3/.venv/bin/python -m pytest -q component3/backend/comp3_reco_navigation/tests component3/simulations/navigation_dashboard/tests",
+      "command": "component3/.venv/bin/python -m pytest -q component3/backend component3/simulations/navigation_dashboard/tests",
       "passed": 253,
       "failed": 0,
       "duration_s": 10.21
@@ -39,7 +39,7 @@
       "failed": 0
     },
     "python_compileall": {
-      "command": "component3/.venv/bin/python -m compileall -q component3/backend/comp3_reco_navigation component3/simulations/navigation_dashboard",
+      "command": "component3/.venv/bin/python -m compileall -q component3/backend component3/simulations/navigation_dashboard",
       "files_checked": 81,
       "errors": 0
     },

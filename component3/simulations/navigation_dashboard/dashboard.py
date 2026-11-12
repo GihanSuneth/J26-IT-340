@@ -17,12 +17,13 @@ from .adapter import (
     calculate_dashboard_route,
     load_dashboard_data,
 )
-from .config import DEFAULT_HOST, DEFAULT_PORT, STATIC_ROOT
+from .config import DEFAULT_HOST, DEFAULT_PORT, FRONTEND_ROOT
 from .engine import NavigationSimulation
 from .shared_session import SharedNavigationSession, SessionConflictError
 from .shopping_session import ShoppingRevisionConflictError
 from .spatial_simulation import SpatialNavigationSimulation
-from component3.backend.comp3_reco_navigation.navigation.camera_scanner import (
+from .standalone_workflows import StandaloneDemoWorkflow
+from component3.backend.navigation.camera_scanner import (
     CameraScanner,
     enumerate_camera_devices,
 )
@@ -31,15 +32,21 @@ from component3.backend.comp3_reco_navigation.navigation.camera_scanner import (
 LOGGER = logging.getLogger("component3.navigation_dashboard")
 MAX_REQUEST_BYTES = 64 * 1024
 STATIC_FILES = {
-    "/": ("spatial.html", "text/html; charset=utf-8"),
-    "/customer": ("customer.html", "text/html; charset=utf-8"),
-    "/research": ("index.html", "text/html; charset=utf-8"),
-    "/app.js": ("app.js", "text/javascript; charset=utf-8"),
-    "/app.css": ("app.css", "text/css; charset=utf-8"),
-    "/spatial.js": ("spatial.js", "text/javascript; charset=utf-8"),
-    "/spatial.css": ("spatial.css", "text/css; charset=utf-8"),
-    "/customer.js": ("customer.js", "text/javascript; charset=utf-8"),
-    "/customer.css": ("customer.css", "text/css; charset=utf-8"),
+    "/": ("navigation/dashboard/spatial.html", "text/html; charset=utf-8"),
+    "/operator": ("navigation/dashboard/spatial.html", "text/html; charset=utf-8"),
+    "/customer": ("navigation/dashboard/customer.html", "text/html; charset=utf-8"),
+    "/recommendations": ("recommendation/dashboard/recommendations.html", "text/html; charset=utf-8"),
+    "/research": ("navigation/dashboard/index.html", "text/html; charset=utf-8"),
+    "/app.js": ("navigation/dashboard/app.js", "text/javascript; charset=utf-8"),
+    "/app.css": ("navigation/dashboard/app.css", "text/css; charset=utf-8"),
+    "/spatial.js": ("navigation/dashboard/spatial.js", "text/javascript; charset=utf-8"),
+    "/spatial.css": ("navigation/dashboard/spatial.css", "text/css; charset=utf-8"),
+    "/customer.js": ("navigation/dashboard/customer.js", "text/javascript; charset=utf-8"),
+    "/customer.css": ("navigation/dashboard/customer.css", "text/css; charset=utf-8"),
+    "/recommendations.js": ("recommendation/dashboard/recommendations.js", "text/javascript; charset=utf-8"),
+    "/recommendations.css": ("recommendation/dashboard/recommendations.css", "text/css; charset=utf-8"),
+    "/mode_nav.js": ("shared/mode_nav.js", "text/javascript; charset=utf-8"),
+    "/reco_evidence.json": ("recommendation/dashboard/reco_evidence.json", "application/json; charset=utf-8"),
 }
 
 
@@ -63,12 +70,29 @@ def _json_route(plan: RoutePlan) -> dict[str, Any]:
 def make_handler(
     simulation: NavigationSimulation | None = None,
     spatial_simulation: SpatialNavigationSimulation | None = None,
+    mode: str = "navigation",
 ) -> type[BaseHTTPRequestHandler]:
     """Create an HTTP handler bound to validated map data for this server."""
+    if mode not in {"navigation", "recommendation"}:
+        raise ValueError("mode must be 'navigation' or 'recommendation'")
     map_data = load_dashboard_data()
     simulator = simulation or NavigationSimulation()
-    spatial_simulator = spatial_simulation or SpatialNavigationSimulation()
+    standalone_enabled = spatial_simulation is None
+    spatial_simulator = spatial_simulation or SpatialNavigationSimulation(
+        recommendations_enabled=mode != "navigation"
+    )
+    if spatial_simulation is None:
+        if mode == "navigation":
+            spatial_simulator.reset_navigation_demo()
+        else:
+            spatial_simulator.reset_recommendation_demo()
     shared_session = SharedNavigationSession(spatial_simulator)
+    standalone_workflow = StandaloneDemoWorkflow(mode, shared_session)
+
+    def enrich_standalone(state: dict[str, Any]) -> dict[str, Any]:
+        """Preserve legacy injected-simulation contracts used by integration tests."""
+        return standalone_workflow.enrich(state) if standalone_enabled else state
+    camera_session_generation = {"value": shared_session.session_generation}
     spatial_map_data = dict(spatial_simulator.data)
     spatial_map_data["apriltag_layouts"] = [
         spatial_simulator.dense_apriltag_layout
@@ -93,14 +117,22 @@ def make_handler(
 
     def submit_camera_observation(tag_id: int, timestamp_s: float) -> dict[str, Any]:
         with simulation_lock:
-            result = spatial_simulator.observe_camera_detection(tag_id, timestamp_s)
-            shared_session.external_mutation()
+            accepted, result = shared_session.apply_external_mutation(
+                camera_session_generation["value"],
+                lambda: spatial_simulator.observe_camera_detection(
+                    tag_id, timestamp_s
+                ),
+            )
+            if not accepted:
+                return result
             return shared_session.snapshot(result)
 
     def camera_disconnected() -> None:
         with simulation_lock:
+            if camera_session_generation["value"] != shared_session.session_generation:
+                return
             spatial_simulator.camera_stopped()
-            shared_session.external_mutation()
+            shared_session.external_mutation(shared_session.session_generation)
 
     camera_scanner = CameraScanner(
         callback=submit_camera_observation,
@@ -111,6 +143,22 @@ def make_handler(
         action: str, payload: dict[str, Any]
     ) -> dict[str, Any]:
         """Map validated session commands to the existing simulation methods."""
+        if action in {
+            "wishlist_add", "wishlist_remove", "navigation_basket_add",
+            "navigation_basket_remove", "navigation_basket_set",
+            "plan_navigation_route",
+        }:
+            return standalone_workflow.navigation_action(action, payload)
+        if action in {
+            "confirmed_cart_add", "confirmed_cart_remove",
+            "standalone_accept_recommendation", "recommendation_add_wishlist",
+        }:
+            return standalone_workflow.recommendation_action(action, payload)
+        if action == "voice_preference":
+            shared_session.set_voice_preference(
+                payload.get("enabled"), payload.get("voice_name"), payload.get("volume", 0.8)
+            )
+            return spatial_simulator.snapshot()
         if action == "start":
             return spatial_simulator.start()
         if action == "autoplay_start":
@@ -194,6 +242,10 @@ def make_handler(
                 payload.get("expected_shopping_revision"),
             )
         if action == "accept_recommendation":
+            if mode == "recommendation":
+                return standalone_workflow.recommendation_action(
+                    "standalone_accept_recommendation", payload
+                )
             return spatial_simulator.accept_recommendation(
                 payload.get("recommendation_id"),
                 payload.get("expected_shopping_revision"),
@@ -229,25 +281,43 @@ def make_handler(
         def do_GET(self) -> None:
             """Return dashboard assets or actual store-map metadata."""
             parsed_path = urlparse(self.path)
+            if parsed_path.path == "/api/dashboard/config":
+                navigation = (
+                    [
+                        {"label": "Navigation Dashboard", "path": "/"},
+                        {"label": "Operator Console", "path": "/operator"},
+                    ]
+                    if mode == "navigation"
+                    else [
+                        {"label": "Customer View", "path": "/recommendations#customer"},
+                        {"label": "Backend Analysis", "path": "/recommendations#backend"},
+                    ]
+                )
+                self._send_json(200, {"mode": mode, "navigation": navigation})
+                return
             if parsed_path.path == "/api/spatial/map":
                 self._send_json(200, spatial_map_data)
                 return
             if parsed_path.path == "/api/spatial/state":
                 with simulation_lock:
+                    payload = enrich_standalone(shared_session.snapshot(
+                        camera_status=camera_scanner.snapshot()
+                    ))
+                    payload["dashboard_mode"] = mode
                     self._send_json(
                         200,
-                        shared_session.snapshot(
-                            camera_status=camera_scanner.snapshot()
-                        ),
+                        payload,
                     )
                 return
             if parsed_path.path == "/api/session/state":
                 with simulation_lock:
+                    payload = enrich_standalone(shared_session.snapshot(
+                        camera_status=camera_scanner.snapshot()
+                    ))
+                    payload["dashboard_mode"] = mode
                     self._send_json(
                         200,
-                        shared_session.snapshot(
-                            camera_status=camera_scanner.snapshot()
-                        ),
+                        payload,
                     )
                 return
             if parsed_path.path == "/api/camera/state":
@@ -336,13 +406,19 @@ def make_handler(
                 self.end_headers()
                 self.wfile.write(body)
                 return
-            asset = STATIC_FILES.get(parsed_path.path)
+            asset = (
+                ("navigation/dashboard/customer.html", "text/html; charset=utf-8")
+                if parsed_path.path == "/" and mode == "navigation"
+                else ("recommendation/dashboard/recommendations.html", "text/html; charset=utf-8")
+                if mode == "recommendation" and parsed_path.path in {"/", "/customer", "/operator"}
+                else STATIC_FILES.get(parsed_path.path)
+            )
             if asset is None:
                 self._send_json(404, {"error": "Not found"})
                 return
             filename, content_type = asset
             try:
-                body = (STATIC_ROOT / filename).read_bytes()
+                body = (FRONTEND_ROOT / filename).read_bytes()
             except OSError as exc:
                 LOGGER.exception("Dashboard asset could not be read: %s", filename)
                 self._send_json(500, {"error": f"Dashboard asset unavailable: {exc}"})
@@ -412,8 +488,13 @@ def make_handler(
                                 )
                             if result.get("connection") == "connected":
                                 with simulation_lock:
+                                    camera_session_generation["value"] = (
+                                        shared_session.session_generation
+                                    )
                                     spatial_simulator.camera_reconnected()
-                                    shared_session.external_mutation()
+                                    shared_session.external_mutation(
+                                        shared_session.session_generation
+                                    )
                         elif action == "stop":
                             result = camera_scanner.stop()
                             with simulation_lock:
@@ -432,6 +513,33 @@ def make_handler(
                 if payload is None:
                     return
                 action = payload.get("action")
+                if action == "reset_demo":
+                    if mode == "navigation":
+                        with camera_control_lock:
+                            camera_result = camera_scanner.reset()
+                        if camera_result["scanning"]:
+                            self._send_json(
+                                409,
+                                {"error": "Camera is still stopping; reset was not applied."},
+                            )
+                            return
+                    else:
+                        camera_result = camera_scanner.snapshot()
+                    with simulation_lock:
+                        result = enrich_standalone(
+                            standalone_workflow.reset()
+                            if standalone_enabled
+                            else shared_session.reset_demo()
+                        )
+                        if mode == "navigation":
+                            camera_session_generation["value"] = -1
+                        result["camera_status"] = camera_result
+                        result["dashboard_mode"] = mode
+                        result["localization_health"] = (
+                            spatial_simulator.localization_health(camera_result)
+                        )
+                    self._send_json(200, result)
+                    return
                 try:
                     with simulation_lock:
                         if action == "claim_control":
@@ -440,7 +548,9 @@ def make_handler(
                             result = shared_session.release_control(payload.get("client_id"))
                         else:
                             result = shared_session.apply(payload, dispatch_spatial_action)
+                        result = enrich_standalone(result)
                         result["camera_status"] = camera_scanner.snapshot()
+                        result["dashboard_mode"] = mode
                         result["localization_health"] = spatial_simulator.localization_health(
                             result["camera_status"]
                         )
@@ -563,15 +673,27 @@ def make_handler(
 
     DashboardHandler.camera_scanner = camera_scanner  # type: ignore[attr-defined]
     DashboardHandler.shared_session = shared_session  # type: ignore[attr-defined]
+    DashboardHandler.standalone_workflow = standalone_workflow  # type: ignore[attr-defined]
     DashboardHandler.stop_background = autoplay_shutdown.set  # type: ignore[attr-defined]
     return DashboardHandler
 
 
-def serve(host: str = DEFAULT_HOST, port: int = DEFAULT_PORT) -> None:
+def serve(
+    host: str = DEFAULT_HOST, port: int = DEFAULT_PORT, mode: str = "navigation"
+) -> None:
     """Start the local-only dashboard server."""
-    handler = make_handler()
-    server = ThreadingHTTPServer((host, port), handler)
-    LOGGER.info("Serving dashboard at http://%s:%d", host, port)
+    handler = make_handler(mode=mode)
+    try:
+        server = ThreadingHTTPServer((host, port), handler)
+    except OSError as error:
+        if getattr(error, "errno", None) == 48 or "Address already in use" in str(error):
+            LOGGER.error(
+                "Port %d is already in use. A Component 3 dashboard instance is likely already running on http://%s:%d.",
+                port, host, port,
+            )
+            raise SystemExit(1)
+        raise
+    LOGGER.info("Serving %s dashboard at http://%s:%d", mode, host, port)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
@@ -589,13 +711,16 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--host", default=DEFAULT_HOST)
     parser.add_argument("--port", default=DEFAULT_PORT, type=int)
+    parser.add_argument(
+        "--mode", choices=("navigation", "recommendation"), default="navigation"
+    )
     arguments = parser.parse_args()
     if arguments.host not in {"127.0.0.1", "localhost"}:
         parser.error("The offline dashboard may only bind to localhost")
     if not 1 <= arguments.port <= 65535:
         parser.error("port must be between 1 and 65535")
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
-    serve(arguments.host, arguments.port)
+    serve(arguments.host, arguments.port, arguments.mode)
 
 
 if __name__ == "__main__":

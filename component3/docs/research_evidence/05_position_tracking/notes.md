@@ -166,9 +166,9 @@ Run from the repository root:
 
 ```bash
 component3/.venv/bin/python -B -m \
-  component3.backend.comp3_reco_navigation.navigation.deviation_simulation
+  component3.backend.navigation.deviation_simulation
 component3/.venv/bin/python -B -m unittest -v \
-  component3.backend.comp3_reco_navigation.tests.test_deviation
+  component3.backend.navigation.tests.test_deviation
 ```
 
 The evaluator constructs the `ENT -> B4 -> B3 -> B2 -> B1 -> B2 -> B3 ->
@@ -303,9 +303,9 @@ Run the reproducible evaluation and test suite from the repository root:
 
 ```bash
 component3/.venv/bin/python -B -m \
-  component3.backend.comp3_reco_navigation.navigation.route_recalculation_simulation
+  component3.backend.navigation.route_recalculation_simulation
 component3/.venv/bin/python -B -m unittest -v \
-  component3.backend.comp3_reco_navigation.tests.test_route_manager
+  component3.backend.navigation.tests.test_route_manager
 ```
 
 The simulation uses seed `5052`, a 0.5 s sample interval, 1.2 m synthetic

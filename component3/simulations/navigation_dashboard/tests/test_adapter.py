@@ -6,7 +6,7 @@ from pathlib import Path
 import unittest
 from unittest.mock import patch
 
-from component3.backend.comp3_reco_navigation.navigation.store_graph import (
+from component3.backend.navigation.store_graph import (
     StoreGraph,
     load_store_graph,
 )

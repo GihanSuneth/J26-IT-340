@@ -9,13 +9,13 @@ import statistics
 import time
 from typing import Any, Sequence
 
-from component3.backend.comp3_reco_navigation.navigation.held_karp import (
+from component3.backend.navigation.held_karp import (
     route_for_stop_order,
 )
-from component3.backend.comp3_reco_navigation.navigation.dijkstra import (
+from component3.backend.navigation.dijkstra import (
     dijkstra_shortest_path,
 )
-from component3.backend.comp3_reco_navigation.navigation.route_anchor import (
+from component3.backend.navigation.route_anchor import (
     RouteAnchor,
     held_karp_route_from_anchor,
 )

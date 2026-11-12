@@ -1,6 +1,6 @@
 {
   "commands": [
-    "component3/.venv/bin/python -m component3.backend.comp3_reco_navigation.recommendation.prepare_phase8a"
+    "component3/.venv/bin/python -m component3.backend.recommendation.prepare_phase8a"
   ],
   "final_model_trained": false,
   "generated_at_utc": "2026-10-16T16:49:16.004113+00:00",

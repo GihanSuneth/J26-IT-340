@@ -1,0 +1,2 @@
+# ci-test.yml - CI on PR to test: docker-compose.test.yml up, run tests/integration and tests/e2e.
+# Owner: develop (shared - all four members review)

@@ -3,8 +3,8 @@
 From the repository root:
 
 ```bash
-component3/.venv/bin/python -m component3.backend.comp3_reco_navigation.recommendation.phase8b_experiment
-component3/.venv/bin/python -m pytest component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8a.py component3/backend/comp3_reco_navigation/tests/test_recommendation_phase8b.py -q
+component3/.venv/bin/python -m component3.backend.recommendation.phase8b_experiment
+component3/.venv/bin/python -m pytest component3/backend/test_recommendation_phase8a.py component3/backend/test_recommendation_phase8b.py -q
 ```
 
 The experiment verifies inputs before fitting, writes safe JSON model artifacts, saves

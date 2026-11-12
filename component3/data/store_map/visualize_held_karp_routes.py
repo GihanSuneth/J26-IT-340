@@ -12,11 +12,11 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
-from component3.backend.comp3_reco_navigation.navigation.held_karp_demo import (  # noqa: E402
+from component3.backend.navigation.held_karp_demo import (  # noqa: E402
     SessionComparison,
     compare_sessions,
 )
-from component3.backend.comp3_reco_navigation.navigation.store_graph import (  # noqa: E402
+from component3.backend.navigation.store_graph import (  # noqa: E402
     StoreGraph,
     load_store_graph,
 )

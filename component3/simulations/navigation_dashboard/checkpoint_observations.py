@@ -6,16 +6,16 @@ from dataclasses import asdict, dataclass
 import math
 from typing import Any
 
-from component3.backend.comp3_reco_navigation.navigation.apriltag import AprilTagLayout
-from component3.backend.comp3_reco_navigation.navigation.dead_reckoning import (
+from component3.backend.navigation.apriltag import AprilTagLayout
+from component3.backend.navigation.dead_reckoning import (
     PositionEstimate,
     correct_to_checkpoint,
 )
-from component3.backend.comp3_reco_navigation.navigation.dijkstra import (
+from component3.backend.navigation.dijkstra import (
     dijkstra_shortest_path,
 )
-from component3.backend.comp3_reco_navigation.navigation.route_anchor import RouteAnchor
-from component3.backend.comp3_reco_navigation.navigation.store_graph import StoreGraph
+from component3.backend.navigation.route_anchor import RouteAnchor
+from component3.backend.navigation.store_graph import StoreGraph
 
 
 MIN_CHECKPOINT_CONFIDENCE = 0.5

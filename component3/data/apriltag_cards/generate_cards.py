@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from component3.backend.comp3_reco_navigation.navigation.apriltag import (  # noqa: E402
+from component3.backend.navigation.apriltag import (  # noqa: E402
     detect_apriltags_frame,
 )
 
